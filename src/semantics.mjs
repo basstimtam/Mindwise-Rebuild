@@ -1,11 +1,12 @@
 import { createHash } from 'node:crypto';
+import { numericDependencies } from './number-links.mjs';
 
 const hash = value => createHash('sha256').update(JSON.stringify(value)).digest('hex');
 const compare = (a, b) => String(a).localeCompare(String(b), 'en');
 const sorted = values => [...values].sort(compare);
 const mapOf = state => new Map((state.nodes || []).map(node => [node.id, node]));
 const application = link => link.type === 'applies_to' || link.type === 'applies';
-const contentFields = ['title', 'body', 'specs', 'kind', 'unit', 'value', 'formula', 'artifact', 'criteria', 'source', 'scope', 'sourceRefs'];
+const contentFields = ['title', 'body', 'specs', 'kind', 'unit', 'value', 'formula', 'artifact', 'criteria', 'source', 'scope', 'sourceRefs', 'metricInputs','metricSource','metricFreshness'];
 
 // Iterative DFS keeps a valid, very deep map from exhausting the JS call stack.
 function walkGraph(startIds, adjacency) {
@@ -135,6 +136,10 @@ export function analyzeChange(before, after) {
     if (application(link)) { if (!graph.has(link.from)) graph.set(link.from, []); graph.get(link.from).push({ to: link.to, dependency: false }); }
     const pair = dependencyPair(link);
     if (pair) { if (!graph.has(pair[0])) graph.set(pair[0], []); graph.get(pair[0]).push({ to: pair[1], dependency: true }); }
+  }
+  for(const edge of [...numericDependencies(before),...numericDependencies(after)]) {
+    if(!graph.has(edge.from))graph.set(edge.from,[]);
+    graph.get(edge.from).push({to:edge.to,dependency:true});
   }
   const oldLinks = new Map((before.links || []).map(link => [link.id, link])), newLinks = new Map((after.links || []).map(link => [link.id, link]));
   const linkSeeds = new Set(), unknownSeeds = new Set();

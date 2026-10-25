@@ -1,4 +1,5 @@
 import {createSourcesUi} from './sources.js';
+import {createNumbersUi} from './numbers.js';
 const $ = (q, parent = document) => parent.querySelector(q);
 const $$ = (q, parent = document) => [...parent.querySelectorAll(q)];
 const el = (tag, cls, text) => { const e = document.createElement(tag); if (cls) e.className = cls; if (text !== undefined) e.textContent = text; return e; };
@@ -11,6 +12,7 @@ let camera = { x: 20, y: 30, scale: 1 }, toastTimer, aiEvents = [], aiRun = null
 const freshConversationTargets = new Set();
 const detailDrafts = new Map(), relationDrafts = new Map();
 const sourcesUi=createSourcesUi({api,getNode:node,change,toast});
+const numbersUi=createNumbersUi({el,button,field,getState:()=>state,getAnalysis:currentAnalysis,getSelected:()=>selected,choose});
 let analysis = null, analysisTarget = null, analysisSequence = 0, analysisFetch = null, analysisAt = 0, analysisError = '', reviewedArtifact = null, verificationPending = false;
 function currentAnalysis() { return analysis?.revision === state.revision && analysisTarget === (selected || '') ? analysis : null; }
 function verificationText(id) { return ({verified:'現物確認済み',stale:'変更後の再確認が必要',missing:'成果物が見つかりません',conflict:'仕様の衝突を解決してください',unverified:'受入は未確認'})[currentAnalysis()?.verificationById?.[id]?.status] || '現物との照合待ち'; }
@@ -23,11 +25,11 @@ async function refreshAnalysis() {
    const result = await api(`/api/analysis${targetId ? '?targetId=' + encodeURIComponent(targetId) : ''}`);
    if (sequence !== analysisSequence || targetId !== (selected || '') || revision !== state.revision || result.revision !== state.revision) return;
    analysis = result; analysisTarget = targetId; analysisAt = Date.now(); analysisError = '';
-   renderSpecification(); renderVerification(); renderProgress(); renderAiTarget(); updateVerificationLabels();
+   renderSpecification(); renderVerification(); renderProgress(); renderAiTarget(); updateVerificationLabels();renderNumbers();
   } catch (error) {
    if (sequence !== analysisSequence) return;
    analysisError = error.message; analysis = null;
-   renderSpecification(); renderVerification(); renderProgress(); renderAiTarget(); updateVerificationLabels();
+   renderSpecification(); renderVerification(); renderProgress(); renderAiTarget(); updateVerificationLabels();renderNumbers();
   } finally { if (analysisFetch?.sequence === sequence) analysisFetch = null; }
  })();
  analysisFetch = {key,sequence,promise};
@@ -110,7 +112,8 @@ function drawLanes() { const wrap = content('完成に必要な領域を、並�
 function drawTasks() { const wrap = content('作業の状態と、成果の確認を分ける', '「作業完了」でも、受入条件と現物の確認が済むまでは確認済み成果にはなりません。'), board = el('div', 'board'); for (const [status, label] of Object.entries(statuses)) { const col = el('div', 'board-column'), list = nodes().filter(n => (n.status || 'planned') === status), h = el('h3', '', label); h.append(el('span', '', String(list.length))); col.append(h); list.forEach(n => col.append(nodeCard(n))); board.append(col); } wrap.append(board); }
 function drawProcess() { const wrap = content('工程の前後と、意味のある依存', '工程関係を明示してつなぎます。並びや親子だけから順序を推定しません。'), visible = new Set(nodes().map(n => n.id)), links = state.links.filter(l => ['precedes', 'depends_on'].includes(l.type) && visible.has(l.from) && visible.has(l.to)); if (!links.length) wrap.append(el('div', 'no-process', '工程関係はまだありません。枝の詳細から「工程の前にある」または「依存する」をつなげてください。')); const connected = new Set(); for (const l of links) { connected.add(l.from); connected.add(l.to); const row = el('div', 'process-chain'); row.append(nodeCard(node(l.from)), el('span', 'process-arrow', l.type === 'precedes' ? '→' : '⇢'), nodeCard(node(l.to)), el('span', 'muted', relations[l.type])); wrap.append(row); } const free = nodes().filter(n => !connected.has(n.id)); if (free.length) { wrap.append(el('h3', 'section-title', '工程未設定の対象')); const row = el('div', 'process-chain'); free.forEach(n => row.append(nodeCard(n))); wrap.append(row); } }
 function drawGantt() { const wrap = content('日付を持つ仕事の見通し', '予定と確認済み成果は別です。バーを選ぶと、同じ対象の詳細へ戻れます。'), ns = nodes(), dates = ns.flatMap(n => [n.start, n.due]).filter(Boolean).map(d => Date.parse(d)).filter(Number.isFinite), min = dates.length ? Math.min(...dates) : Date.now(), max = dates.length ? Math.max(...dates) : min + 7 * 864e5, span = Math.max(max - min, 864e5), header = el('div', 'gantt-header'); header.append(el('span', '', new Date(min).toLocaleDateString('ja-JP')), el('span', '', new Date(min + span).toLocaleDateString('ja-JP'))); wrap.append(header); ns.forEach(n => { const row = el('div', `gantt-row ${n.id === selected ? 'selected' : ''}`), track = el('div', 'gantt-track'); row.append(el('div', '', n.title), track); const start = Date.parse(n.start), due = Date.parse(n.due); if (Number.isFinite(start) && Number.isFinite(due)) { const bar = el('div', 'gantt-bar'); bar.style.left = `${Math.max(0, (start - min) / span * 94)}%`; bar.style.width = `${Math.max(1, (due - start) / span * 94)}%`; bar.title = `${n.start} → ${n.due}`; track.append(bar); } else track.append(el('div', 'gantt-undated', n.due ? `期限 ${n.due} / 開始未定` : n.start ? `開始 ${n.start} / 期限未定` : '日程未定')); row.addEventListener('click', () => choose(n.id)); wrap.append(row); }); }
-function drawNumbers() { const wrap = content('値・単位・式を、対象につなぐ', '空欄は未定義です。計算結果が提供されていない式は「未計算」と表示します。'), table = el('table', 'data-table'), head = el('thead'), hr = el('tr'); ['対象', '入力値', '単位', '式', '計算結果 / 鮮度'].forEach(t => hr.append(el('th', '', t))); head.append(hr); table.append(head); const body = el('tbody'); nodes().forEach(n => { const row = el('tr', n.id === selected ? 'selected' : ''); for (const value of [n.title, n.value ?? '未定義', n.unit || '—', n.formula || '—', n.formula ? (n.computedValue ?? '未計算') : '入力値']) row.append(el('td', '', String(value))); row.addEventListener('click', () => choose(n.id)); body.append(row); }); table.append(body); wrap.append(table); }
+function drawNumbers() {const wrap=content('値・単位・式を、対象につなぐ','保存済みの入力と出所から再計算します。欠損・循環・単位違い・古い入力は未解決です。'),host=el('div');host.id='numberTable';wrap.append(host);numbersUi.drawTable(host,nodes());}
+function renderNumbers() {const host=$('#numberTable');if(host)numbersUi.drawTable(host,nodes());const box=$('#numberDetails'),n=node();if(box&&n)box.replaceWith(numbersUi.details(n,currentAnalysis()?.numbers?.byId[n.id]));}
 function checkField(label, name, checked) {
  const holder = el('label','check-field'), input = el('input'); input.type = 'checkbox'; input.name = name; input.checked = Boolean(checked); holder.append(input,el('span','',label)); return holder;
 }
@@ -142,6 +145,8 @@ function renderInspector() {
  const weightInput = $('[name="weight"]',form);weightInput.min = '0.000001';weightInput.step = 'any';
  form.append(el('div','section-title','数値・式'));
  const row4 = el('div','field-row');row4.append(field('入力値','value',n.value,'number'),field('単位','unit',n.unit));form.append(row4,field('式','formula',n.formula));
+ $('[name="value"]',row4).step='any';
+ form.append(numbersUi.editor(n,detailDrafts.get(n.id)?.values));
  const save = el('button','primary','変更を保存');save.type = 'submit';const actions = el('div','button-row');actions.append(save,button('子の枝を追加',()=>addNode(true)));form.append(actions);
  form.addEventListener('submit',async event=>{
   event.preventDefault();
@@ -151,6 +156,7 @@ function renderInspector() {
    for(const [rawKey,raw] of Object.entries(data)) {
     let key = rawKey, value = raw;
     if(key === 'specsText'){key = 'specs';value = parseSpecs(raw);}
+    if(key === 'metricInputsJson'){key='metricInputs';value=JSON.parse(raw);}
     if(['depth','progress','value','weight'].includes(key))value = raw === '' ? null : Number(raw);
     if(key === 'weight' && value !== null && (!Number.isFinite(value) || value <= 0))throw new Error('重みは正の数、または未定の空欄にしてください。');
     if(key === 'parentId')value = raw || null;
@@ -168,7 +174,7 @@ function renderInspector() {
  const draft = detailDrafts.get(n.id);
  if(draft){for(const input of $$('[name]',form))if(input.name in draft.values){if(input.type==='checkbox')input.checked = Boolean(draft.values[input.name]);else input.value = draft.values[input.name];}box.append(el('p','small-note',draft.baseVersion===n.version?'未保存の入力を保持しています。':'別の更新があります。未保存の入力は保持しています。保存前に最新内容を確認してください。'));}
  form.addEventListener('input',()=>detailDrafts.set(n.id,{baseVersion:detailDrafts.get(n.id)?.baseVersion ?? n.version,values:formValues(form)}));
- box.append(sourcesUi.renderTarget(n),form);
+ box.append(sourcesUi.renderTarget(n),form,numbersUi.details(n,currentAnalysis()?.numbers?.byId[n.id]));
  const specificationBox = el('section','analysis-section');specificationBox.id = 'specificationDetails';box.append(specificationBox);
  const verificationBox = el('section','analysis-section');verificationBox.id = 'verificationDetails';box.append(verificationBox);
  const actions2 = el('div','button-row');actions2.append(button('入力を取り消して最新へ',()=>{if(!detailDrafts.has(n.id)||confirm('未保存の入力を取り消し、最新の保存内容を表示しますか？')){detailDrafts.delete(n.id);renderInspector();renderSpecification();renderVerification();}}),button('切り離す',()=>change([{type:'update',id:n.id,patch:{parentId:null}}])),button('枝を削除',async()=>{if(confirm(`「${n.title}」を削除します。モデルの変更は取り消せます。`))await change([{type:'delete',id:n.id}]);},'danger'));box.append(actions2);renderRelations(box,n);renderSpecification();renderVerification();
@@ -245,10 +251,14 @@ const activeRunStatuses = new Set(['connecting','running','applying','inProgress
 function renderAiTarget() {
  const n = node(), executing = activeRunStatuses.has(aiRun?.status);
  $('#aiTarget').textContent = executing ? `実行対象：${title(aiRun.targetId)} · 開始時の版 ${aiRun.targetVersion} / 選択中：${n?.title || '未選択'}` : n ? `${n.title} · 版 ${n.version ?? '—'}` : '対象を選択してください';
- const unresolved = !currentAnalysis() || ($('#aiMode').value!=='settings' && currentAnalysis()?.specification?.status === 'conflict');
+ const analysisNow=currentAnalysis(), numberIds=new Set([selected,...(analysisNow?.specification?.sources||[]).map(s=>s.id)]);
+ for(const link of state.links)if(link.from===selected||link.to===selected){numberIds.add(link.from);numberIds.add(link.to);}
+ const numbersUnresolved=[...numberIds].some(id=>analysisNow?.numbers?.byId[id]?.status==='unresolved');
+ const unresolved = !analysisNow || ($('#aiMode').value!=='settings' && (analysisNow?.specification?.status === 'conflict'||numbersUnresolved));
  $('#sendAi').disabled = !n || executing || aiRequestPending || unresolved;
  $('#aiSpecStatus').textContent = !n ? '制作対象を選択してください。' : !currentAnalysis() ? '制作前に現在の設定を照合しています。' : unresolved ? '仕様が未解決です。詳細で衝突・例外・循環を確認してください。' : '現在の有効設定と出所を使って制作します。';
  $('#interrupt').disabled = !executing;
+ if(numbersUnresolved&&$('#aiMode').value!=='settings')$('#aiSpecStatus').textContent='関連する数値が未解決です。数値表示で欠損・単位・出所・鮮度を確認してください。';
  if($('#aiMode').value==='settings'&&!unresolved)$('#aiSpecStatus').textContent='選択中の本文と設定から案を作ります。差分と影響を確認してから採用できます。';
  if (aiRun) $('#aiStatus').textContent = `${title(aiRun.targetId)} · ` + ({connecting:'Codexへ接続中',running:'制作中',applying:'制作結果を保存中',completed:'制作結果を保存しました。内容の受入は未確認です。',failed:'制作に失敗しました',interrupted:'前回の制作は中断しています。自動再送していません。',needs_review:'対象が更新されたため、元の版への提案として保存しています。',partial:'部分結果があります。自動再送していません。'}[aiRun.status] || aiRun.status) + (aiRun.error ? `：${aiRun.error}` : '');
  if(aiRun?.status==='proposed')$('#aiStatus').textContent=`${title(aiRun.targetId)} · 設定案は未採用です。差分と影響を確認できます。`;
@@ -276,8 +286,8 @@ async function openNodeArtifact(targetId) {
  try {
   const artifact = await api(`/api/artifact?nodeId=${encodeURIComponent(targetId)}`), target = node(targetId);
   if(!target)throw new Error('確認する対象が見つかりません。');
-  const review = {baseRevision:artifact.revision ?? state.revision,targetId,targetVersion:artifact.targetVersion,artifactHash:artifact.sha256,criteria:artifact.criteria,sourceHash:artifact.sourceHash};
-  const ready = Boolean(artifact.criteria?.trim()) && artifact.sourceStatus==='current' && artifact.specificationStatus === 'resolved' && selected === targetId && Boolean(currentAnalysis()) && currentAnalysis().specification?.status !== 'conflict';
+ const review = {baseRevision:artifact.revision ?? state.revision,targetId,targetVersion:artifact.targetVersion,artifactHash:artifact.sha256,criteria:artifact.criteria,sourceHash:artifact.sourceHash,numberHash:artifact.numberHash};
+  const ready = Boolean(artifact.criteria?.trim()) && artifact.sourceStatus==='current' && artifact.numberStatus==='current' && artifact.specificationStatus === 'resolved' && selected === targetId && Boolean(currentAnalysis()) && currentAnalysis().specification?.status !== 'conflict';
   showArtifactText({path:artifact.path,text:artifact.text,criteria:artifact.criteria,message:ready?`確認対象：${target.title}。現物と受入条件を読み、満たしている場合に記録します。保存後は現物・条件・有効設定の変更を照合します。`:'受入条件の定義と仕様の照合が必要です。内容は読めますが、確認済みの記録はまだできません。',review:ready?review:null});
  }catch(error){toast(error.message,true);}
 }

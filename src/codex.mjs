@@ -6,6 +6,7 @@ import path from 'node:path';
 import { promisify } from 'node:util';
 import { resolveSpecifications } from './semantics.mjs';
 import { contractContext } from './contracts.mjs';
+import { calculateNumbers, numberContext } from './numbers.mjs';
 
 const hash = value => createHash('sha256').update(typeof value === 'string' ? value : JSON.stringify(value)).digest('hex');
 const now = () => new Date().toISOString();
@@ -32,16 +33,21 @@ function contextFor(state,targetId,root,mode='production') {
   while(parent&&ids.size<20&&!ids.has(parent)){ids.add(parent);parent=state.nodes.find(n=>n.id===parent)?.parentId;}
   for(const source of specification.sources)ids.add(source.id);
   for(const l of state.links)if(l.to===targetId||l.from===targetId){ids.add(l.from);ids.add(l.to);}
+  const calculations=calculateNumbers(state,{root}),numbers=numberContext(calculations,ids);
+  for(const result of numbers){
+    ids.add(result.id);for(const source of result.specification?.sources||[])ids.add(source.id);
+    for(const link of state.links)if(link.from===result.id||link.to===result.id){ids.add(link.from);ids.add(link.to);}
+  }
   const withoutRawSpecs=n=>{if(!n)return n;const {specs,...rest}=n;return rest;};
   if(ids.size>80)throw new Error('関連する対象が一度の制作上限（80件）を超えています。制作範囲を整理してください');
   const related=[target,...state.nodes.filter(n=>n.id!==targetId&&ids.has(n.id))].filter(Boolean).map(withoutRawSpecs);
   const refs=[...new Map(related.flatMap(n=>n.sourceRefs||[]).map(ref=>[JSON.stringify(ref),ref])).values()];
   if(refs.length>100)throw new Error('契約への参照が一度の制作上限（100件）を超えています。制作範囲を整理してください');
-  return {target:withoutRawSpecs(target),related,specification,links:state.links.filter(l=>ids.has(l.from)&&ids.has(l.to)),revision:state.revision,contracts:contractContext(root,refs),...(mode==='settings'?{settingsEditing:{targetId,currentLocalSpecs:target.specs||[]}}:{})};
+  return {target:withoutRawSpecs(target),related,specification,numbers,links:state.links.filter(l=>ids.has(l.from)&&ids.has(l.to)),revision:state.revision,contracts:contractContext(root,refs),...(mode==='settings'?{settingsEditing:{targetId,currentLocalSpecs:target.specs||[]}}:{})};
 }
 function contextFingerprint(context) {
   const semantic=n=>{if(!n)return null;const {x,y,version,verified,evidence,...rest}=n;return rest;};
-  return hash({target:semantic(context.target),related:context.related.map(semantic),links:context.links,specification:context.specification.fingerprint,contracts:context.contracts,settingsEditing:context.settingsEditing});
+  return hash({target:semantic(context.target),related:context.related.map(semantic),links:context.links,specification:context.specification.fingerprint,numbers:context.numbers.map(n=>({id:n.id,fingerprint:n.fingerprint})),contracts:context.contracts,settingsEditing:context.settingsEditing});
 }
 const outputSchema = {
   type: 'object', additionalProperties: false,
@@ -259,10 +265,11 @@ export function createCodexService({ store, root, spawnProcess = spawn, resolveM
       const initialContext=contextFor(state,targetId,root,mode);
       if(JSON.stringify(initialContext).length>400000)throw new Error('対象と出所の文脈が一度の制作上限（40万文字）を超えています。参照する節や制作範囲を絞ってください');
       if(mode==='production'&&initialContext.specification.status!=='resolved')throw new Error('適用する設定に衝突または循環があります。この対象の設定を解決してから制作してください');
+      if(mode==='production'&&initialContext.numbers.some(n=>n.status==='unresolved'))throw new Error('関連する数値が未解決です。欠損・循環・単位・出所・鮮度を確認してから制作してください');
       if(initialContext.contracts.references.some(ref=>ref.status!=='current'||!['approved','record'].includes(ref.documentStatus)))throw new Error('参照した契約の版・原文・承認状態を確認してください。古い参照や未承認・不明な出所では開始できません');
       if (threadId && !state.runs.some(r => r.threadId === threadId && r.targetId === targetId)) throw new Error('別対象・未登録の会話は再開できません');
       active = true; starting = true; buffer = []; lastError = null;
-      run = { id: randomUUID(), projectId:state.projectId, targetId, targetVersion: target.version, baseRevision: state.revision, status: 'connecting', startedAt: now(), prompt,mode,sourceRefs:initialContext.contracts.references,inputs:initialContext.related.map(n=>({id:n.id,title:n.title,version:n.version,body:n.body,specs:state.nodes.find(row=>row.id===n.id)?.specs||[],sourceRefs:n.sourceRefs||[]})), artifacts: [] }; persist();
+      run = { id: randomUUID(), projectId:state.projectId, targetId, targetVersion: target.version, baseRevision: state.revision, status: 'connecting', startedAt: now(), prompt,mode,sourceRefs:initialContext.contracts.references,inputs:initialContext.related.map(n=>({id:n.id,title:n.title,version:n.version,body:n.body,specs:state.nodes.find(row=>row.id===n.id)?.specs||[],sourceRefs:n.sourceRefs||[],number:initialContext.numbers.find(row=>row.id===n.id)||null})), artifacts: [] }; persist();
       const thisRun=run;
       const checkCurrent=()=>{if(run!==thisRun||!active||thisRun.cancelRequested||closing)throw new Error('制作は中断されました');};
       try {

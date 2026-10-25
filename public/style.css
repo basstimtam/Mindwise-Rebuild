@@ -46,3 +46,5 @@
 .provenance-entry>small{display:block;color:#7a8a91;font-size:10px;margin:6px 0}
 .provenance-entry details{margin-top:12px}.source-summary{margin-bottom:20px}
 @media(max-width:760px){#contractsButton{display:block;font-size:10px;width:auto;margin:0}.source-text{max-height:40vh}}
+.metric-reference{display:grid;grid-template-columns:1fr 1.5fr;gap:6px;margin:9px 0;padding:9px;background:#f3f6f5;border-radius:6px}.metric-reference input,.metric-reference select{width:100%;font-size:11px}.metric-reference button{grid-column:1/-1;font-size:10px}.number-result{font-size:11px;font-weight:500;color:#376f66;display:block;overflow-wrap:anywhere}.number-result.unresolved{color:#8d682f}.number-result.empty{color:#8b979f;min-height:0;padding:0;display:block;text-align:left}.number-table{min-width:500px}.number-table small{display:block;max-width:250px;font-size:10px;line-height:1.7;color:#947743;margin-top:6px}.number-table td{overflow-wrap:anywhere}.metric-inputs .small-note{margin-top:9px}
+@media(max-width:760px){.top-actions{flex-wrap:wrap;justify-content:flex-end}.top-actions #undo{display:block}.topbar>div:first-child{min-width:0}.eyebrow{overflow-wrap:anywhere}}

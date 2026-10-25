@@ -3,6 +3,7 @@ import { resolve, relative, isAbsolute, extname } from 'node:path';
 import { createHash } from 'node:crypto';
 import { resolveSpecifications } from './semantics.mjs';
 import { contractContext } from './contracts.mjs';
+import { calculateNumbers, assessNumbers } from './numbers.mjs';
 
 const maxArtifactBytes = 2 * 1024 * 1024;
 const textExtensions = new Set('.md .txt .json .csv .html .css .js .mjs .py .svg .xml .ts .tsx .jsx .yaml .yml .toml'.split(' '));
@@ -63,7 +64,7 @@ export function assessSources(root,state,node,specification=resolveSpecification
   const context=contractContext(root,refs,catalog);
   return {status:context.references.every(r=>r.status==='current'&&['approved','record'].includes(r.documentStatus))?'current':'unresolved',fingerprint:fingerprint(JSON.stringify(context.references)),count:refs.length};
 }
-export function evaluateVerification(root, state, node, { specification, artifact, catalog } = {}) {
+export function evaluateVerification(root, state, node, { specification, artifact, catalog, calculations } = {}) {
   const checkedAt = new Date().toISOString();
   if (!node?.artifact) return { status: 'unverified', reason: '成果物が未設定です。', checkedAt };
   let current;
@@ -85,6 +86,8 @@ export function evaluateVerification(root, state, node, { specification, artifac
   if (spec.status !== 'resolved') return { ...common, status: 'conflict', reason: '適用仕様に未解決の衝突または循環があります。' };
   const sources=assessSources(root,state,node,spec,catalog);
   if(sources.status!=='current')return {...common,status:'stale',reason:'参照した契約の原文・版・承認状態を再確認してください。'};
+  const numbers=assessNumbers(state,node.id,calculations||calculateNumbers(state,{root,catalog}),spec.sources.map(s=>s.id));
+  if(numbers.status!=='current')return {...common,status:'stale',reason:'関連する数値に欠損・単位違い・古い入力等があります。計算根拠を再確認してください。'};
   const proof = node.verified;
   if (!proof || typeof proof !== 'object') return { ...common, status: 'unverified', reason: '受入確認はまだ記録されていません。' };
   if (proof.result !== 'passed' || typeof proof.method !== 'string' || !proof.method.trim() || !Number.isInteger(proof.targetVersion) || proof.targetVersion < 1 || typeof proof.at !== 'string' || Number.isNaN(Date.parse(proof.at))) {
@@ -95,6 +98,7 @@ export function evaluateVerification(root, state, node, { specification, artifac
   if (!node.criteria?.trim() || proof.criteria !== node.criteria) changed.push('受入条件');
   if (proof.specHash !== spec.fingerprint) changed.push('有効な仕様');
   if ((proof.sourceHash??null) !== sources.fingerprint) changed.push('契約の出所');
+  if ((proof.numberHash??null) !== numbers.fingerprint) changed.push('数値の根拠');
   if (changed.length) return { ...common, status: 'stale', reason: `${changed.join('・')}が確認時から変わっています。`, recordedAt: proof.at };
   return { ...common, status: 'verified', reason: '現物・受入条件・有効仕様が確認証拠と一致しています。', recordedAt: proof.at, method: proof.method };
 }

@@ -1,0 +1,144 @@
+Browser tab: 1, Title: "Mindwise — 制作の地図", URL: "http://127.0.0.1:4316/".
+1 AXWebArea Mindwise — 制作の地図, URL: 127.0.0.1:4316/
+	2 container provenanceDialog
+		3 heading 試験：短編の見積り合計 · 判断と変更の出所, Value: 2, ID: provenanceTitle
+			4 text 試験：短編の見積り合計 · 判断と変更の出所
+		5 button 閉じる, ID: closeProvenance
+		6 container provenanceList
+			7 heading 契約への参照, Value: 3
+				8 text 契約への参照
+			9 text 契約への参照は未登録です。
+			10 heading 採用された変更と理由, Value: 3
+				11 text 採用された変更と理由
+			12 text 保存版 29 · Codex
+			13 text 2026-10-25T21:08:23.414Z · ai-3fcbed02-3e29-47de-b396-b5a2252ecb1d
+			14 text 理由：hoursの数値は4時間（v5）ですが、出所文には「試験仮定3時間」とあります。合計には提供されたnumbersの再計算結果を採用し、この不一致を明記しました。
+			32 container
+				33 button (expanded) 変更前後と参照した入力, Secondary Actions: Collapse
+					34 text 変更前後と参照した入力
+				35 text artifact
+変更前：""
+変更後："artifacts/3fcbed02-3e29-47de-b396-b5a2252ecb1d/numbers-check.md" 入力：試験：短編の見積り合計 · 版 3
+ 制作時の数値・式・参照元・鮮度
+{
+  "id": "fa2f7bcf-ef72-4b39-af97-9c68b0c25e84",
+  "status": "calculated",
+  "value": 4800,
+  "unit": "円",
+  "formula": "hours * rate",
+  "formulaHash": "367a13a5f186baef6234a37d73128f607b24e7e031a75522d333792f68f069e1",
+  "fingerprint": "7eb1ccc1a4e0bd4adf1e83098e6f7817f6eb9c8b8bc39a4cdbf4a850b155f4d3",
+  "issues": [],
+  "inputs": [
+    {
+      "name": "hours",
+      "nodeId": "10492290-2234-4555-94f1-83f5e60bbff3",
+      "title": "試験：見積り時間",
+      "version": 5,
+      "status": "input",
+      "value": 4,
+      "unit": "時間",
+      "fingerprint": "898f0a03d2af07f67beb9b9fd1ba3d51a2f3e7b9058bbfb029252e1ac433d3e2"
+    },
+    {
+      "name": "rate",
+      "nodeId": "971a7b19-9a2e-4f39-8758-1327a1968678",
+      "title": "試験：時間あたり見積り",
+      "version": 3,
+      "status": "input",
+      "value": 1200,
+      "unit": "円/時間",
+      "fingerprint": "e6505747abfb160291b976b413b3051d5aa717458e1d48765e05731238121631"
+    }
+  ],
+  "source": {
+    "text": "試験の時間×単価を計算。実案件の予算承認ではない。",
+    "freshness": "unknown",
+    "sourceRefs": []
+  },
+  "specification": {
+    "status": "resolved",
+    "fingerprint": "c05dadc38ab5969835828fec87797619df57e2a15a78cb6beade93af65acb9a2",
+    "sources": []
+  },
+  "version": 3,
+  "atRevision": 28
+} 入力：架空ゲーム完成（接続検証） · 版 3
+機能の接続を検証する架空案件。実案件の受入ではありません。 入力：琥珀の時計塔（出所・設定の接続検証） · 版 6
+架空の短編の構想。舞台は琥珀の時計塔、案内役はミオ、語り口は穏やかにする。実案件の承認ではなく機能検証用。 入力：試験：見積り時間 · 版 5
+ 制作時の数値・式・参照元・鮮度
+{
+  "id": "10492290-2234-4555-94f1-83f5e60bbff3",
+  "status": "input",
+  "value": 4,
+  "unit": "時間",
+  "formula": "",
+  "formulaHash": "277cdc4fc77352ad60c07f96771d484d80f6cd8c1d1a1916e25237791ec738f5",
+  "fingerprint": "898f0a03d2af07f67beb9b9fd1ba3d51a2f3e7b9058bbfb029252e1ac433d3e2",
+  "issues": [],
+  "inputs": [],
+  "source": {
+    "text": "架空短編の接続検証用。試験仮定3時間。実案件の予算ではない。",
+    "freshness": "current",
+    "sourceRefs": []
+  },
+  "specification": {
+    "status": "resolved",
+    "fingerprint": "c05dadc38ab5969835828fec87797619df57e2a15a78cb6beade93af65acb9a2",
+    "sources": []
+  },
+  "version": 5,
+  "atRevision": 28
+} 入力：試験：時間あたり見積り · 版 3
+ 制作時の数値・式・参照元・鮮度
+{
+  "id": "971a7b19-9a2e-4f39-8758-1327a1968678",
+  "status": "input",
+  "value": 1200,
+  "unit": "円/時間",
+  "formula": "",
+  "formulaHash": "5a0c8e6769e809a91e478a92e18fc0b1062e7f7331f113a47bbaf342234c8b27",
+  "fingerprint": "e6505747abfb160291b976b413b3051d5aa717458e1d48765e05731238121631",
+  "issues": [],
+  "inputs": [],
+  "source": {
+    "text": "接続検証の架空単価。1200円/時間。実取引なし。",
+    "freshness": "current",
+    "sourceRefs": []
+  },
+  "specification": {
+    "status": "resolved",
+    "fingerprint": "c05dadc38ab5969835828fec87797619df57e2a15a78cb6beade93af65acb9a2",
+    "sources": []
+  },
+  "version": 3,
+  "atRevision": 28
+} 実行時の参照記録：goal · Mindwise Rebuild Rev 2 · a79eb266a618f3ac1a4d59643a1a955cb4ea207c098d4d5358ac1d5d29ae076f
+## 1. 最終到達点
+
+人とCodexが、構想・設計・プロセス・タスク・進捗・成果物を、同じ地図から扱える汎用の制作・開発空間を完成させる。
+
+Mindwise自身の作業画面で全体を考え、枝を自由に増やし、切り離し、付け替え、関係を結ぶ。全体から個別の仕事へ降り、対象を選んでAIと相談・設計・制作を進める。同じ仕事を地図、領域別のレーン、構想から現物への具体化、工程、タスク一覧、数値から見られ、変更と制作結果が共有する地図へ戻る。表示やセッションを替えても、何を扱っているかと、なぜそうしたかが途切れない。
+
+航海が進むにつれて、探索した設計、判断、資料、現物、検証が主題ごとにつながり、海図が充実する。枝数は完成度ではない。できた部分、未探索、変更の影響、未反映、判断待ちを見分け、完成までの位置を把握できることが価値である。
+
+利用者はオーナー本人、自宅Windows環境を対象とする。ゲーム、取引システム、本などで共通の仕組みを使い、用途に応じて内容と表示を変える。MindManagerの外観や本体の常時使用には固定しない。既存データ・有用な機能や設計の知見は活かす。
+
+Goal Forgeは戦略契約を形成し、オーナーは重要な価値・戦略・権限を決める。Codexはその範囲で制作を担い、Mindwiseは共通の作業空間と持続する文脈を担う。
+			17 text 保存版 25 · 直接操作
+			18 text 2026-10-25T21:05:17.795Z · 3f2947fa-c216-47c1-b181-7eb176c353a5
+			19 text 理由：記録なし・不明（操作差分から理由を推測しません）
+			20 button (collapsed) 変更前後と参照した入力, Secondary Actions: Expand
+				21 text 変更前後と参照した入力
+			22 text 保存版 24 · 直接操作
+			23 text 2026-10-25T21:05:10.495Z · 97691005-a07d-4464-8eb5-f0785cdfa8da
+			24 text 理由：記録なし・不明（操作差分から理由を推測しません）
+			25 button (collapsed) 変更前後と参照した入力, Secondary Actions: Expand
+				26 text 変更前後と参照した入力
+			27 heading 制作・未採用の提案, Value: 3
+				28 text 制作・未採用の提案
+			29 text 2026-10-25T21:08:12.335Z · 制作終了・受入は別 · 開始時の版 3
+			30 text 依頼：これは架空素材による数値接続の検証です。numbersにある計算機の再計算結果と参照元を使い、hours、rate、合計、単位、出所、保存時の対象版を短い日本語のnumbers-check.mdへ記してください。実案件の予算承認や受入とは書かないでください。本文や子の枝は変更せず、updatedBody=null、children=[]、settings=null。資料を実行せず、ファイル内容をartifactsに返してください。
+			31 text 判断理由：hoursの数値は4時間（v5）ですが、出所文には「試験仮定3時間」とあります。合計には提供されたnumbersの再計算結果を採用し、この不一致を明記しました。
+
+The focused UI element is 33 button (expanded) 変更前後と参照した入力, Secondary Actions: Collapse

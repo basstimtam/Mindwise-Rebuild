@@ -66,7 +66,7 @@ export function createSourcesUi({api,getNode,change,toast}) {
    const details=el('details');details.append(el('summary','','変更前後と参照した入力'));
    for(const item of entry.changes)details.append(el('pre','source-excerpt',`${item.field}\n変更前：${JSON.stringify(item.before,null,2)}\n変更後：${JSON.stringify(item.after,null,2)}`));
    if(entry.relations)details.append(el('pre','source-excerpt',JSON.stringify(entry.relations,null,2)));
-   for(const input of entry.inputs)details.append(el('pre','source-excerpt',`入力：${input.title} · 版 ${input.version}\n${input.body||''}`));
+   for(const input of entry.inputs){details.append(el('pre','source-excerpt',`入力：${input.title} · 版 ${input.version}\n${input.body||''}`));if(input.number)details.append(el('pre','source-excerpt',`制作時の数値・式・参照元・鮮度\n${JSON.stringify(input.number,null,2)}`));}
    for(const ref of entry.sourceRefs)if(ref.text)details.append(el('pre','source-excerpt',`実行時の参照記録：${ref.documentId} · ${ref.revision} · ${ref.sha256}\n${ref.text}`));
    row.append(details);host.append(row);
   }

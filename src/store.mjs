@@ -4,15 +4,16 @@ import { resolve, join } from 'node:path';
 import { createHash, randomUUID } from 'node:crypto';
 import { homedir } from 'node:os';
 import { analyzeChange } from './semantics.mjs';
+import { validMetricName, hasNumber } from './numbers.mjs';
 
 export class StoreError extends Error {
   constructor(message, status = 400, details = undefined) { super(message); this.status = status; this.details = details; }
 }
 const clone = value => structuredClone(value);
 const hash = value => createHash('sha256').update(typeof value === 'string' ? value : JSON.stringify(value)).digest('hex');
-const nodeFields = new Set('id parentId title body domain depth status progress start due x y kind unit value formula artifact criteria verified version evidence source scope specs required weight sourceRefs'.split(' '));
+const nodeFields = new Set('id parentId title body domain depth status progress start due x y kind unit value formula artifact criteria verified version evidence source scope specs required weight sourceRefs metricInputs metricSource metricFreshness'.split(' '));
 const linkFields = new Set(['id', 'from', 'to', 'type', 'reason']);
-const meaningfulFields = new Set(['title','body','kind','unit','value','formula','artifact','criteria','scope','specs','sourceRefs']);
+const meaningfulFields = new Set(['title','body','kind','unit','value','formula','artifact','criteria','scope','specs','sourceRefs','metricInputs','metricSource','metricFreshness']);
 const assert = (condition, message, status = 400) => { if (!condition) throw new StoreError(message, status); };
 function identifier(value) { return typeof value === 'string' && /^[\p{L}\p{N}_:.-]{1,160}$/u.test(value); }
 function object(value) { return value && typeof value === 'object' && !Array.isArray(value); }
@@ -20,7 +21,7 @@ function node(input) {
   assert(object(input), '枝の入力がオブジェクトではありません。');
   const unknown = Object.keys(input).filter(key => !nodeFields.has(key));
   assert(!unknown.length, `未対応の枝属性: ${unknown.join(', ')}`);
-  const n = { id: randomUUID(), parentId:null,title:'新しい枝',body:'',domain:'',depth:0,status:'planned',progress:0,start:'',due:'',x:0,y:0,kind:'concept',unit:'',value:null,formula:'',artifact:'',criteria:'',verified:false,version:1,specs:[],required:false,weight:null,sourceRefs:[],...input };
+  const n = { id: randomUUID(), parentId:null,title:'新しい枝',body:'',domain:'',depth:0,status:'planned',progress:0,start:'',due:'',x:0,y:0,kind:'concept',unit:'',value:null,formula:'',artifact:'',criteria:'',verified:false,version:1,specs:[],required:false,weight:null,sourceRefs:[],metricInputs:[],metricSource:'',metricFreshness:'unknown',...input };
   assert(identifier(n.id), '枝IDが不正です。');
   assert(n.parentId === null || identifier(n.parentId), '親IDが不正です。');
   for (const key of ['title','body','domain','status','start','due','kind','unit','formula','artifact','criteria']) assert(typeof n[key] === 'string' && n[key].length <= 100000, `${key} は文字列（10万文字以内）にしてください。`);
@@ -29,6 +30,14 @@ function node(input) {
   assert(Number.isInteger(n.depth) && n.depth >= 0 && Number.isInteger(n.version) && n.version > 0, '深さ・版は有効な整数にしてください。');
   assert(n.progress >= 0 && n.progress <= 100, '計画進捗は0〜100です。');
   assert(n.value === null || Number.isFinite(n.value), '数値は有限値または未入力にしてください。');
+  assert(typeof n.metricSource==='string'&&n.metricSource.length<=10000,'数値の出所は1万文字以内にしてください。');
+  assert(['unknown','current','stale'].includes(n.metricFreshness),'数値の鮮度が不正です。');
+  assert(Array.isArray(n.metricInputs)&&n.metricInputs.length<=50,'式の参照は50件以内にしてください。');
+  const metricNames=new Set();
+  for(const ref of n.metricInputs) {
+    assert(object(ref)&&Object.keys(ref).every(k=>['name','nodeId'].includes(k))&&validMetricName(ref.name)&&identifier(ref.nodeId),'式の参照名と対象を確認してください。');
+    assert(!metricNames.has(ref.name),'式の参照名が重複しています。');metricNames.add(ref.name);
+  }
   assert(typeof n.required === 'boolean', '必要な成果の指定は真偽値にしてください。');
   assert(n.weight === null || Number.isFinite(n.weight) && n.weight > 0, '成果の重みは正の数、未見積りは空欄にしてください。');
   assert(Array.isArray(n.specs) && n.specs.length <= 100, '設定は100件以内にしてください。');
@@ -165,7 +174,11 @@ export function createStore({ root = process.cwd(), dataDir } = {}) {
     }
     validate(state);
     const impact=analyzeChange(before,state), invalidate=new Set([...impact.affected,...impact.unknown]);
-    state.nodes=state.nodes.map(n=>invalidate.has(n.id)&&n.verified?{...n,verified:false,version:n.version+1}:n);
+    const numericEdits=new Set(ops.filter(op=>op.type==='add'||op.type==='update'&&Object.keys(op.patch).some(key=>['value','unit','formula','metricInputs','metricSource','metricFreshness'].includes(key))).map(op=>op.id||op.node?.id));
+    state.nodes=state.nodes.map(n=>{
+      const affected=invalidate.has(n.id),stale=affected&&hasNumber(n)&&!n.formula.trim()&&n.metricFreshness==='current'&&!numericEdits.has(n.id);
+      return affected&&n.verified||stale?{...n,verified:false,...(stale?{metricFreshness:'stale'}:{}),version:n.version+1}:n;
+    });
     return {state,impact};
   }
   function preview(payload) {

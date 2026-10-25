@@ -1,0 +1,1580 @@
+{
+  "observedAt": "2026-10-25T21:09:37.516Z",
+  "scope": "架空素材・試験操作者による検証。実案件の予算承認/受入ではない。",
+  "independentExpectations": {
+    "initial": "3 時間 * 1200 円/時間 = 3600 円",
+    "changed": "4 時間 * 1200 円/時間 = 4800 円",
+    "staleInput": "結果なし・未解決",
+    "undo": "4800 円へ復元"
+  },
+  "limitations": [
+    "出所メモの文章の意味と入力値の一致は計算器が証明しない。実Codexは残存する3時間のメモと4時間入力の不一致を明記した。",
+    "計算は有限の四則と単位記号の照合。単位換算、厳密な十進会計、外部資料の自動観測は提供しない。"
+  ],
+  "state": {
+    "revision": 29,
+    "nodes": [
+      {
+        "id": "10492290-2234-4555-94f1-83f5e60bbff3",
+        "parentId": "4d1ee4db-8747-45cc-8d91-b4785ec6b608",
+        "title": "試験：見積り時間",
+        "body": "",
+        "domain": "数値の接続検証",
+        "depth": 2,
+        "status": "planned",
+        "progress": 0,
+        "start": "",
+        "due": "",
+        "x": 530,
+        "y": 450,
+        "kind": "concept",
+        "unit": "時間",
+        "value": 4,
+        "formula": "",
+        "artifact": "",
+        "criteria": "",
+        "verified": false,
+        "version": 5,
+        "specs": [],
+        "required": false,
+        "weight": null,
+        "sourceRefs": [],
+        "metricInputs": [],
+        "metricSource": "架空短編の接続検証用。試験仮定3時間。実案件の予算ではない。",
+        "metricFreshness": "current"
+      },
+      {
+        "id": "971a7b19-9a2e-4f39-8758-1327a1968678",
+        "parentId": "10492290-2234-4555-94f1-83f5e60bbff3",
+        "title": "試験：時間あたり見積り",
+        "body": "",
+        "domain": "数値の接続検証",
+        "depth": 3,
+        "status": "planned",
+        "progress": 0,
+        "start": "",
+        "due": "",
+        "x": 775,
+        "y": 550,
+        "kind": "concept",
+        "unit": "円/時間",
+        "value": 1200,
+        "formula": "",
+        "artifact": "",
+        "criteria": "",
+        "verified": false,
+        "version": 3,
+        "specs": [],
+        "required": false,
+        "weight": null,
+        "sourceRefs": [],
+        "metricInputs": [],
+        "metricSource": "接続検証の架空単価。1200円/時間。実取引なし。",
+        "metricFreshness": "current"
+      },
+      {
+        "id": "fa2f7bcf-ef72-4b39-af97-9c68b0c25e84",
+        "parentId": "971a7b19-9a2e-4f39-8758-1327a1968678",
+        "title": "試験：短編の見積り合計",
+        "body": "",
+        "domain": "数値の接続検証",
+        "depth": 4,
+        "status": "planned",
+        "progress": 0,
+        "start": "",
+        "due": "",
+        "x": 1020,
+        "y": 650,
+        "kind": "concept",
+        "unit": "円",
+        "value": null,
+        "formula": "hours * rate",
+        "artifact": "artifacts/3fcbed02-3e29-47de-b396-b5a2252ecb1d/numbers-check.md",
+        "criteria": "",
+        "verified": false,
+        "version": 4,
+        "specs": [],
+        "required": false,
+        "weight": null,
+        "sourceRefs": [],
+        "metricInputs": [
+          {
+            "name": "hours",
+            "nodeId": "10492290-2234-4555-94f1-83f5e60bbff3"
+          },
+          {
+            "name": "rate",
+            "nodeId": "971a7b19-9a2e-4f39-8758-1327a1968678"
+          }
+        ],
+        "metricSource": "試験の時間×単価を計算。実案件の予算承認ではない。",
+        "metricFreshness": "unknown"
+      }
+    ],
+    "links": [
+      {
+        "id": "shared-regular",
+        "from": "shared",
+        "to": "regular",
+        "type": "applies_to"
+      },
+      {
+        "id": "shared-local",
+        "from": "shared",
+        "to": "local",
+        "type": "applies_to"
+      },
+      {
+        "id": "local-rule",
+        "from": "local",
+        "to": "shared",
+        "type": "exception_to",
+        "reason": "この登場人物だけ赤の衣装を使う"
+      },
+      {
+        "id": "shared-alias",
+        "from": "shared",
+        "to": "alias",
+        "type": "applies_to"
+      }
+    ]
+  },
+  "run": {
+    "id": "3fcbed02-3e29-47de-b396-b5a2252ecb1d",
+    "projectId": "92fe2aeb0b38f2193f45",
+    "targetId": "fa2f7bcf-ef72-4b39-af97-9c68b0c25e84",
+    "targetVersion": 3,
+    "baseRevision": 28,
+    "status": "completed",
+    "startedAt": "2026-10-25T21:08:12.335Z",
+    "prompt": "これは架空素材による数値接続の検証です。numbersにある計算機の再計算結果と参照元を使い、hours、rate、合計、単位、出所、保存時の対象版を短い日本語のnumbers-check.mdへ記してください。実案件の予算承認や受入とは書かないでください。本文や子の枝は変更せず、updatedBody=null、children=[]、settings=null。資料を実行せず、ファイル内容をartifactsに返してください。",
+    "mode": "production",
+    "sourceRefs": [
+      {
+        "documentId": "goal",
+        "section": "1. 最終到達点",
+        "sha256": "a79eb266a618f3ac1a4d59643a1a955cb4ea207c098d4d5358ac1d5d29ae076f",
+        "revision": "Mindwise Rebuild Rev 2",
+        "status": "current",
+        "text": "## 1. 最終到達点\n\n人とCodexが、構想・設計・プロセス・タスク・進捗・成果物を、同じ地図から扱える汎用の制作・開発空間を完成させる。\n\nMindwise自身の作業画面で全体を考え、枝を自由に増やし、切り離し、付け替え、関係を結ぶ。全体から個別の仕事へ降り、対象を選んでAIと相談・設計・制作を進める。同じ仕事を地図、領域別のレーン、構想から現物への具体化、工程、タスク一覧、数値から見られ、変更と制作結果が共有する地図へ戻る。表示やセッションを替えても、何を扱っているかと、なぜそうしたかが途切れない。\n\n航海が進むにつれて、探索した設計、判断、資料、現物、検証が主題ごとにつながり、海図が充実する。枝数は完成度ではない。できた部分、未探索、変更の影響、未反映、判断待ちを見分け、完成までの位置を把握できることが価値である。\n\n利用者はオーナー本人、自宅Windows環境を対象とする。ゲーム、取引システム、本などで共通の仕組みを使い、用途に応じて内容と表示を変える。MindManagerの外観や本体の常時使用には固定しない。既存データ・有用な機能や設計の知見は活かす。\n\nGoal Forgeは戦略契約を形成し、オーナーは重要な価値・戦略・権限を決める。Codexはその範囲で制作を担い、Mindwiseは共通の作業空間と持続する文脈を担う。",
+        "documentStatus": "approved",
+        "currentSha256": "a79eb266a618f3ac1a4d59643a1a955cb4ea207c098d4d5358ac1d5d29ae076f",
+        "currentRevision": "Mindwise Rebuild Rev 2"
+      }
+    ],
+    "inputs": [
+      {
+        "id": "fa2f7bcf-ef72-4b39-af97-9c68b0c25e84",
+        "title": "試験：短編の見積り合計",
+        "version": 3,
+        "body": "",
+        "specs": [],
+        "sourceRefs": [],
+        "number": {
+          "id": "fa2f7bcf-ef72-4b39-af97-9c68b0c25e84",
+          "status": "calculated",
+          "value": 4800,
+          "unit": "円",
+          "formula": "hours * rate",
+          "formulaHash": "367a13a5f186baef6234a37d73128f607b24e7e031a75522d333792f68f069e1",
+          "fingerprint": "7eb1ccc1a4e0bd4adf1e83098e6f7817f6eb9c8b8bc39a4cdbf4a850b155f4d3",
+          "issues": [],
+          "inputs": [
+            {
+              "name": "hours",
+              "nodeId": "10492290-2234-4555-94f1-83f5e60bbff3",
+              "title": "試験：見積り時間",
+              "version": 5,
+              "status": "input",
+              "value": 4,
+              "unit": "時間",
+              "fingerprint": "898f0a03d2af07f67beb9b9fd1ba3d51a2f3e7b9058bbfb029252e1ac433d3e2"
+            },
+            {
+              "name": "rate",
+              "nodeId": "971a7b19-9a2e-4f39-8758-1327a1968678",
+              "title": "試験：時間あたり見積り",
+              "version": 3,
+              "status": "input",
+              "value": 1200,
+              "unit": "円/時間",
+              "fingerprint": "e6505747abfb160291b976b413b3051d5aa717458e1d48765e05731238121631"
+            }
+          ],
+          "source": {
+            "text": "試験の時間×単価を計算。実案件の予算承認ではない。",
+            "freshness": "unknown",
+            "sourceRefs": []
+          },
+          "specification": {
+            "status": "resolved",
+            "fingerprint": "c05dadc38ab5969835828fec87797619df57e2a15a78cb6beade93af65acb9a2",
+            "sources": []
+          },
+          "version": 3,
+          "atRevision": 28
+        }
+      },
+      {
+        "id": "goal",
+        "title": "架空ゲーム完成（接続検証）",
+        "version": 3,
+        "body": "機能の接続を検証する架空案件。実案件の受入ではありません。",
+        "specs": [],
+        "sourceRefs": [],
+        "number": null
+      },
+      {
+        "id": "4d1ee4db-8747-45cc-8d91-b4785ec6b608",
+        "title": "琥珀の時計塔（出所・設定の接続検証）",
+        "version": 6,
+        "body": "架空の短編の構想。舞台は琥珀の時計塔、案内役はミオ、語り口は穏やかにする。実案件の承認ではなく機能検証用。",
+        "specs": [
+          {
+            "key": "舞台",
+            "value": "琥珀の時計塔"
+          },
+          {
+            "key": "案内役",
+            "value": "ミオ"
+          },
+          {
+            "key": "語り口",
+            "value": "穏やか"
+          }
+        ],
+        "sourceRefs": [
+          {
+            "documentId": "goal",
+            "section": "1. 最終到達点",
+            "sha256": "a79eb266a618f3ac1a4d59643a1a955cb4ea207c098d4d5358ac1d5d29ae076f",
+            "revision": "Mindwise Rebuild Rev 2"
+          }
+        ],
+        "number": null
+      },
+      {
+        "id": "10492290-2234-4555-94f1-83f5e60bbff3",
+        "title": "試験：見積り時間",
+        "version": 5,
+        "body": "",
+        "specs": [],
+        "sourceRefs": [],
+        "number": {
+          "id": "10492290-2234-4555-94f1-83f5e60bbff3",
+          "status": "input",
+          "value": 4,
+          "unit": "時間",
+          "formula": "",
+          "formulaHash": "277cdc4fc77352ad60c07f96771d484d80f6cd8c1d1a1916e25237791ec738f5",
+          "fingerprint": "898f0a03d2af07f67beb9b9fd1ba3d51a2f3e7b9058bbfb029252e1ac433d3e2",
+          "issues": [],
+          "inputs": [],
+          "source": {
+            "text": "架空短編の接続検証用。試験仮定3時間。実案件の予算ではない。",
+            "freshness": "current",
+            "sourceRefs": []
+          },
+          "specification": {
+            "status": "resolved",
+            "fingerprint": "c05dadc38ab5969835828fec87797619df57e2a15a78cb6beade93af65acb9a2",
+            "sources": []
+          },
+          "version": 5,
+          "atRevision": 28
+        }
+      },
+      {
+        "id": "971a7b19-9a2e-4f39-8758-1327a1968678",
+        "title": "試験：時間あたり見積り",
+        "version": 3,
+        "body": "",
+        "specs": [],
+        "sourceRefs": [],
+        "number": {
+          "id": "971a7b19-9a2e-4f39-8758-1327a1968678",
+          "status": "input",
+          "value": 1200,
+          "unit": "円/時間",
+          "formula": "",
+          "formulaHash": "5a0c8e6769e809a91e478a92e18fc0b1062e7f7331f113a47bbaf342234c8b27",
+          "fingerprint": "e6505747abfb160291b976b413b3051d5aa717458e1d48765e05731238121631",
+          "issues": [],
+          "inputs": [],
+          "source": {
+            "text": "接続検証の架空単価。1200円/時間。実取引なし。",
+            "freshness": "current",
+            "sourceRefs": []
+          },
+          "specification": {
+            "status": "resolved",
+            "fingerprint": "c05dadc38ab5969835828fec87797619df57e2a15a78cb6beade93af65acb9a2",
+            "sources": []
+          },
+          "version": 3,
+          "atRevision": 28
+        }
+      }
+    ],
+    "artifacts": [
+      {
+        "path": "artifacts/3fcbed02-3e29-47de-b396-b5a2252ecb1d/numbers-check.md",
+        "sha256": "8cd9650051d851cb3f8c3fd270fa78c5a0b6269bd895b3daee37608ae8869edf",
+        "bytes": 857
+      }
+    ],
+    "events": [
+      {
+        "type": "delta",
+        "text": "記",
+        "time": "2026-10-25T21:08:22.438Z"
+      },
+      {
+        "type": "delta",
+        "text": "載",
+        "time": "2026-10-25T21:08:22.438Z"
+      },
+      {
+        "type": "delta",
+        "text": "によ",
+        "time": "2026-10-25T21:08:22.438Z"
+      },
+      {
+        "type": "delta",
+        "text": "る",
+        "time": "2026-10-25T21:08:22.438Z"
+      },
+      {
+        "type": "delta",
+        "text": "も",
+        "time": "2026-10-25T21:08:22.438Z"
+      },
+      {
+        "type": "delta",
+        "text": "ので",
+        "time": "2026-10-25T21:08:22.545Z"
+      },
+      {
+        "type": "delta",
+        "text": "、",
+        "time": "2026-10-25T21:08:22.545Z"
+      },
+      {
+        "type": "delta",
+        "text": "数",
+        "time": "2026-10-25T21:08:22.545Z"
+      },
+      {
+        "type": "delta",
+        "text": "値",
+        "time": "2026-10-25T21:08:22.545Z"
+      },
+      {
+        "type": "delta",
+        "text": "の",
+        "time": "2026-10-25T21:08:22.545Z"
+      },
+      {
+        "type": "delta",
+        "text": "参",
+        "time": "2026-10-25T21:08:22.545Z"
+      },
+      {
+        "type": "delta",
+        "text": "照",
+        "time": "2026-10-25T21:08:22.545Z"
+      },
+      {
+        "type": "delta",
+        "text": "文",
+        "time": "2026-10-25T21:08:22.545Z"
+      },
+      {
+        "type": "delta",
+        "text": "書",
+        "time": "2026-10-25T21:08:22.545Z"
+      },
+      {
+        "type": "delta",
+        "text": "（",
+        "time": "2026-10-25T21:08:22.546Z"
+      },
+      {
+        "type": "delta",
+        "text": "source",
+        "time": "2026-10-25T21:08:22.546Z"
+      },
+      {
+        "type": "delta",
+        "text": "Refs",
+        "time": "2026-10-25T21:08:22.546Z"
+      },
+      {
+        "type": "delta",
+        "text": "）は",
+        "time": "2026-10-25T21:08:22.546Z"
+      },
+      {
+        "type": "delta",
+        "text": "ありません",
+        "time": "2026-10-25T21:08:22.546Z"
+      },
+      {
+        "type": "delta",
+        "text": "。\\",
+        "time": "2026-10-25T21:08:22.546Z"
+      },
+      {
+        "type": "delta",
+        "text": "n",
+        "time": "2026-10-25T21:08:22.546Z"
+      },
+      {
+        "type": "delta",
+        "text": "-",
+        "time": "2026-10-25T21:08:22.683Z"
+      },
+      {
+        "type": "delta",
+        "text": " 注意",
+        "time": "2026-10-25T21:08:22.683Z"
+      },
+      {
+        "type": "delta",
+        "text": "：",
+        "time": "2026-10-25T21:08:22.683Z"
+      },
+      {
+        "type": "delta",
+        "text": "hours",
+        "time": "2026-10-25T21:08:22.683Z"
+      },
+      {
+        "type": "delta",
+        "text": " の",
+        "time": "2026-10-25T21:08:22.683Z"
+      },
+      {
+        "type": "delta",
+        "text": "出",
+        "time": "2026-10-25T21:08:22.683Z"
+      },
+      {
+        "type": "delta",
+        "text": "所",
+        "time": "2026-10-25T21:08:22.683Z"
+      },
+      {
+        "type": "delta",
+        "text": "文",
+        "time": "2026-10-25T21:08:22.683Z"
+      },
+      {
+        "type": "delta",
+        "text": "には",
+        "time": "2026-10-25T21:08:22.684Z"
+      },
+      {
+        "type": "delta",
+        "text": "「",
+        "time": "2026-10-25T21:08:22.684Z"
+      },
+      {
+        "type": "delta",
+        "text": "試",
+        "time": "2026-10-25T21:08:22.684Z"
+      },
+      {
+        "type": "delta",
+        "text": "験",
+        "time": "2026-10-25T21:08:22.684Z"
+      },
+      {
+        "type": "delta",
+        "text": "仮",
+        "time": "2026-10-25T21:08:22.806Z"
+      },
+      {
+        "type": "delta",
+        "text": "定",
+        "time": "2026-10-25T21:08:22.806Z"
+      },
+      {
+        "type": "delta",
+        "text": "3",
+        "time": "2026-10-25T21:08:22.806Z"
+      },
+      {
+        "type": "delta",
+        "text": "時間",
+        "time": "2026-10-25T21:08:22.806Z"
+      },
+      {
+        "type": "delta",
+        "text": "」と",
+        "time": "2026-10-25T21:08:22.806Z"
+      },
+      {
+        "type": "delta",
+        "text": "あり",
+        "time": "2026-10-25T21:08:22.806Z"
+      },
+      {
+        "type": "delta",
+        "text": "、",
+        "time": "2026-10-25T21:08:22.806Z"
+      },
+      {
+        "type": "delta",
+        "text": "入力",
+        "time": "2026-10-25T21:08:22.806Z"
+      },
+      {
+        "type": "delta",
+        "text": "値",
+        "time": "2026-10-25T21:08:22.806Z"
+      },
+      {
+        "type": "delta",
+        "text": "4",
+        "time": "2026-10-25T21:08:22.806Z"
+      },
+      {
+        "type": "delta",
+        "text": "時間",
+        "time": "2026-10-25T21:08:22.807Z"
+      },
+      {
+        "type": "delta",
+        "text": "と",
+        "time": "2026-10-25T21:08:22.807Z"
+      },
+      {
+        "type": "delta",
+        "text": "一致",
+        "time": "2026-10-25T21:08:22.807Z"
+      },
+      {
+        "type": "delta",
+        "text": "し",
+        "time": "2026-10-25T21:08:22.807Z"
+      },
+      {
+        "type": "delta",
+        "text": "ません",
+        "time": "2026-10-25T21:08:22.807Z"
+      },
+      {
+        "type": "delta",
+        "text": "。",
+        "time": "2026-10-25T21:08:22.807Z"
+      },
+      {
+        "type": "delta",
+        "text": "合",
+        "time": "2026-10-25T21:08:22.807Z"
+      },
+      {
+        "type": "delta",
+        "text": "計",
+        "time": "2026-10-25T21:08:22.807Z"
+      },
+      {
+        "type": "delta",
+        "text": "の",
+        "time": "2026-10-25T21:08:22.807Z"
+      },
+      {
+        "type": "delta",
+        "text": "出",
+        "time": "2026-10-25T21:08:22.807Z"
+      },
+      {
+        "type": "delta",
+        "text": "所",
+        "time": "2026-10-25T21:08:22.818Z"
+      },
+      {
+        "type": "delta",
+        "text": "の",
+        "time": "2026-10-25T21:08:22.946Z"
+      },
+      {
+        "type": "delta",
+        "text": "鮮",
+        "time": "2026-10-25T21:08:22.946Z"
+      },
+      {
+        "type": "delta",
+        "text": "度",
+        "time": "2026-10-25T21:08:22.946Z"
+      },
+      {
+        "type": "delta",
+        "text": "は",
+        "time": "2026-10-25T21:08:22.946Z"
+      },
+      {
+        "type": "delta",
+        "text": " `",
+        "time": "2026-10-25T21:08:22.946Z"
+      },
+      {
+        "type": "delta",
+        "text": "unknown",
+        "time": "2026-10-25T21:08:22.946Z"
+      },
+      {
+        "type": "delta",
+        "text": "`",
+        "time": "2026-10-25T21:08:22.946Z"
+      },
+      {
+        "type": "delta",
+        "text": " ",
+        "time": "2026-10-25T21:08:22.946Z"
+      },
+      {
+        "type": "delta",
+        "text": "です",
+        "time": "2026-10-25T21:08:22.946Z"
+      },
+      {
+        "type": "delta",
+        "text": "。\\",
+        "time": "2026-10-25T21:08:22.946Z"
+      },
+      {
+        "type": "delta",
+        "text": "n",
+        "time": "2026-10-25T21:08:22.946Z"
+      },
+      {
+        "type": "delta",
+        "text": "\\n",
+        "time": "2026-10-25T21:08:22.946Z"
+      },
+      {
+        "type": "delta",
+        "text": "これは",
+        "time": "2026-10-25T21:08:22.946Z"
+      },
+      {
+        "type": "delta",
+        "text": "架",
+        "time": "2026-10-25T21:08:22.946Z"
+      },
+      {
+        "type": "delta",
+        "text": "空",
+        "time": "2026-10-25T21:08:22.946Z"
+      },
+      {
+        "type": "delta",
+        "text": "素材",
+        "time": "2026-10-25T21:08:23.053Z"
+      },
+      {
+        "type": "delta",
+        "text": "の",
+        "time": "2026-10-25T21:08:23.053Z"
+      },
+      {
+        "type": "delta",
+        "text": "接",
+        "time": "2026-10-25T21:08:23.053Z"
+      },
+      {
+        "type": "delta",
+        "text": "続",
+        "time": "2026-10-25T21:08:23.169Z"
+      },
+      {
+        "type": "delta",
+        "text": "検",
+        "time": "2026-10-25T21:08:23.169Z"
+      },
+      {
+        "type": "delta",
+        "text": "証",
+        "time": "2026-10-25T21:08:23.169Z"
+      },
+      {
+        "type": "delta",
+        "text": "記",
+        "time": "2026-10-25T21:08:23.169Z"
+      },
+      {
+        "type": "delta",
+        "text": "録",
+        "time": "2026-10-25T21:08:23.169Z"
+      },
+      {
+        "type": "delta",
+        "text": "で",
+        "time": "2026-10-25T21:08:23.169Z"
+      },
+      {
+        "type": "delta",
+        "text": "あり",
+        "time": "2026-10-25T21:08:23.169Z"
+      },
+      {
+        "type": "delta",
+        "text": "、",
+        "time": "2026-10-25T21:08:23.169Z"
+      },
+      {
+        "type": "delta",
+        "text": "実",
+        "time": "2026-10-25T21:08:23.170Z"
+      },
+      {
+        "type": "delta",
+        "text": "案件",
+        "time": "2026-10-25T21:08:23.170Z"
+      },
+      {
+        "type": "delta",
+        "text": "の",
+        "time": "2026-10-25T21:08:23.170Z"
+      },
+      {
+        "type": "delta",
+        "text": "予",
+        "time": "2026-10-25T21:08:23.170Z"
+      },
+      {
+        "type": "delta",
+        "text": "算",
+        "time": "2026-10-25T21:08:23.277Z"
+      },
+      {
+        "type": "delta",
+        "text": "承",
+        "time": "2026-10-25T21:08:23.277Z"
+      },
+      {
+        "type": "delta",
+        "text": "認",
+        "time": "2026-10-25T21:08:23.277Z"
+      },
+      {
+        "type": "delta",
+        "text": "や",
+        "time": "2026-10-25T21:08:23.277Z"
+      },
+      {
+        "type": "delta",
+        "text": "受",
+        "time": "2026-10-25T21:08:23.277Z"
+      },
+      {
+        "type": "delta",
+        "text": "入",
+        "time": "2026-10-25T21:08:23.277Z"
+      },
+      {
+        "type": "delta",
+        "text": "を",
+        "time": "2026-10-25T21:08:23.277Z"
+      },
+      {
+        "type": "delta",
+        "text": "示",
+        "time": "2026-10-25T21:08:23.277Z"
+      },
+      {
+        "type": "delta",
+        "text": "し",
+        "time": "2026-10-25T21:08:23.277Z"
+      },
+      {
+        "type": "delta",
+        "text": "ません",
+        "time": "2026-10-25T21:08:23.343Z"
+      },
+      {
+        "type": "delta",
+        "text": "。\\",
+        "time": "2026-10-25T21:08:23.343Z"
+      },
+      {
+        "type": "delta",
+        "text": "n",
+        "time": "2026-10-25T21:08:23.343Z"
+      },
+      {
+        "type": "delta",
+        "text": "\"}",
+        "time": "2026-10-25T21:08:23.343Z"
+      },
+      {
+        "type": "delta",
+        "text": "]}",
+        "time": "2026-10-25T21:08:23.343Z"
+      },
+      {
+        "type": "message",
+        "text": "提供された計算機の再計算結果と参照元を、架空素材の数値接続チェックとしてまとめました。",
+        "time": "2026-10-25T21:08:23.419Z"
+      },
+      {
+        "type": "status",
+        "text": "制作結果を接続しました。受入確認は別です",
+        "time": "2026-10-25T21:08:23.419Z"
+      }
+    ],
+    "updatedAt": "2026-10-25T21:08:23.420Z",
+    "threadId": "01a174e4-7b1a-7532-a2fe-ea6d3d010b62",
+    "contextHash": "03ca31797fcf70fea543d544555a356909d6342cba4b00ab92bc9137e6e1ba89",
+    "contextFingerprint": "d5e8b3b7f2ed452b3bf559b948c8abc32110a374bce1cca4f3d806a31f3cc385",
+    "turnId": "01a174e4-7b7e-7171-a332-d34ec382a311",
+    "output": "{\"reply\":\"提供された計算機の再計算結果と参照元を、架空素材の数値接続チェックとしてまとめました。\",\"updatedBody\":null,\"decisionReason\":\"hoursの数値は4時間（v5）ですが、出所文には「試験仮定3時間」とあります。合計には提供されたnumbersの再計算結果を採用し、この不一致を明記しました。\",\"settings\":null,\"children\":[],\"artifacts\":[{\"name\":\"numbers-check.md\",\"content\":\"# 数値接続チェック（架空素材）\\n\\n- 保存時の対象版：試験：短編の見積り合計 v3（提供データの revision 28）。入力は hours v5、rate v3。\\n- 計算機の再計算結果：hours 4時間 × rate 1,200円/時間 = 合計 4,800円。式は `hours * rate`、合計の単位は円。\\n- 出所：hours は「架空短編の接続検証用」、rate は「接続検証の架空単価」、合計は「試験の時間×単価を計算」。いずれも提供データの記載によるもので、数値の参照文書（sourceRefs）はありません。\\n- 注意：hours の出所文には「試験仮定3時間」とあり、入力値4時間と一致しません。合計の出所の鮮度は `unknown` です。\\n\\nこれは架空素材の接続検証記録であり、実案件の予算承認や受入を示しません。\\n\"}]}",
+    "reply": "提供された計算機の再計算結果と参照元を、架空素材の数値接続チェックとしてまとめました。",
+    "decisionReason": "hoursの数値は4時間（v5）ですが、出所文には「試験仮定3時間」とあります。合計には提供されたnumbersの再計算結果を採用し、この不一致を明記しました。",
+    "proposal": {
+      "reply": "提供された計算機の再計算結果と参照元を、架空素材の数値接続チェックとしてまとめました。",
+      "updatedBody": null,
+      "decisionReason": "hoursの数値は4時間（v5）ですが、出所文には「試験仮定3時間」とあります。合計には提供されたnumbersの再計算結果を採用し、この不一致を明記しました。",
+      "settings": null,
+      "children": [],
+      "artifacts": [
+        {
+          "name": "numbers-check.md",
+          "content": "# 数値接続チェック（架空素材）\n\n- 保存時の対象版：試験：短編の見積り合計 v3（提供データの revision 28）。入力は hours v5、rate v3。\n- 計算機の再計算結果：hours 4時間 × rate 1,200円/時間 = 合計 4,800円。式は `hours * rate`、合計の単位は円。\n- 出所：hours は「架空短編の接続検証用」、rate は「接続検証の架空単価」、合計は「試験の時間×単価を計算」。いずれも提供データの記載によるもので、数値の参照文書（sourceRefs）はありません。\n- 注意：hours の出所文には「試験仮定3時間」とあり、入力値4時間と一致しません。合計の出所の鮮度は `unknown` です。\n\nこれは架空素材の接続検証記録であり、実案件の予算承認や受入を示しません。\n"
+        }
+      ]
+    },
+    "finishedAt": "2026-10-25T21:08:23.419Z"
+  },
+  "calculation": {
+    "revision": 29,
+    "checkedAt": "2026-10-25T21:09:37.493Z",
+    "byId": {
+      "goal": {
+        "id": "goal",
+        "status": "empty",
+        "value": null,
+        "unit": "",
+        "formula": "",
+        "formulaHash": "ea9ebfe1e988c12abc8d67de75371adea9c59e20c8d08e82f0a93c39127a1314",
+        "fingerprint": "d2319e89fa7c60fcac464af12c2211db3effc34d691a14dcdee07a4e7e7b98c9",
+        "issues": [],
+        "inputs": [],
+        "source": {
+          "text": "",
+          "freshness": "unknown",
+          "sourceRefs": []
+        },
+        "specification": null,
+        "version": 3,
+        "atRevision": 29
+      },
+      "shared": {
+        "id": "shared",
+        "status": "empty",
+        "value": null,
+        "unit": "",
+        "formula": "",
+        "formulaHash": "ea9ebfe1e988c12abc8d67de75371adea9c59e20c8d08e82f0a93c39127a1314",
+        "fingerprint": "d2319e89fa7c60fcac464af12c2211db3effc34d691a14dcdee07a4e7e7b98c9",
+        "issues": [],
+        "inputs": [],
+        "source": {
+          "text": "",
+          "freshness": "unknown",
+          "sourceRefs": []
+        },
+        "specification": null,
+        "version": 4,
+        "atRevision": 29
+      },
+      "regular": {
+        "id": "regular",
+        "status": "empty",
+        "value": null,
+        "unit": "",
+        "formula": "",
+        "formulaHash": "ea9ebfe1e988c12abc8d67de75371adea9c59e20c8d08e82f0a93c39127a1314",
+        "fingerprint": "d2319e89fa7c60fcac464af12c2211db3effc34d691a14dcdee07a4e7e7b98c9",
+        "issues": [],
+        "inputs": [],
+        "source": {
+          "text": "",
+          "freshness": "unknown",
+          "sourceRefs": []
+        },
+        "specification": null,
+        "version": 8,
+        "atRevision": 29
+      },
+      "local": {
+        "id": "local",
+        "status": "empty",
+        "value": null,
+        "unit": "",
+        "formula": "",
+        "formulaHash": "ea9ebfe1e988c12abc8d67de75371adea9c59e20c8d08e82f0a93c39127a1314",
+        "fingerprint": "d2319e89fa7c60fcac464af12c2211db3effc34d691a14dcdee07a4e7e7b98c9",
+        "issues": [],
+        "inputs": [],
+        "source": {
+          "text": "",
+          "freshness": "unknown",
+          "sourceRefs": []
+        },
+        "specification": null,
+        "version": 6,
+        "atRevision": 29
+      },
+      "unexplored": {
+        "id": "unexplored",
+        "status": "empty",
+        "value": null,
+        "unit": "",
+        "formula": "",
+        "formulaHash": "ea9ebfe1e988c12abc8d67de75371adea9c59e20c8d08e82f0a93c39127a1314",
+        "fingerprint": "d2319e89fa7c60fcac464af12c2211db3effc34d691a14dcdee07a4e7e7b98c9",
+        "issues": [],
+        "inputs": [],
+        "source": {
+          "text": "",
+          "freshness": "unknown",
+          "sourceRefs": []
+        },
+        "specification": null,
+        "version": 3,
+        "atRevision": 29
+      },
+      "alias": {
+        "id": "alias",
+        "status": "empty",
+        "value": null,
+        "unit": "",
+        "formula": "",
+        "formulaHash": "ea9ebfe1e988c12abc8d67de75371adea9c59e20c8d08e82f0a93c39127a1314",
+        "fingerprint": "d2319e89fa7c60fcac464af12c2211db3effc34d691a14dcdee07a4e7e7b98c9",
+        "issues": [],
+        "inputs": [],
+        "source": {
+          "text": "",
+          "freshness": "unknown",
+          "sourceRefs": []
+        },
+        "specification": null,
+        "version": 7,
+        "atRevision": 29
+      },
+      "4d1ee4db-8747-45cc-8d91-b4785ec6b608": {
+        "id": "4d1ee4db-8747-45cc-8d91-b4785ec6b608",
+        "status": "empty",
+        "value": null,
+        "unit": "",
+        "formula": "",
+        "formulaHash": "ea9ebfe1e988c12abc8d67de75371adea9c59e20c8d08e82f0a93c39127a1314",
+        "fingerprint": "98ca36e78e7a79042070c5a3d92729ab859e631d268e7d347666e0f00f883b7d",
+        "issues": [],
+        "inputs": [],
+        "source": {
+          "text": "",
+          "freshness": "unknown",
+          "sourceRefs": [
+            {
+              "documentId": "goal",
+              "section": "1. 最終到達点",
+              "sha256": "a79eb266a618f3ac1a4d59643a1a955cb4ea207c098d4d5358ac1d5d29ae076f",
+              "revision": "Mindwise Rebuild Rev 2"
+            }
+          ]
+        },
+        "specification": null,
+        "version": 6,
+        "atRevision": 29
+      },
+      "10492290-2234-4555-94f1-83f5e60bbff3": {
+        "id": "10492290-2234-4555-94f1-83f5e60bbff3",
+        "status": "input",
+        "value": 4,
+        "unit": "時間",
+        "formula": "",
+        "formulaHash": "277cdc4fc77352ad60c07f96771d484d80f6cd8c1d1a1916e25237791ec738f5",
+        "fingerprint": "898f0a03d2af07f67beb9b9fd1ba3d51a2f3e7b9058bbfb029252e1ac433d3e2",
+        "issues": [],
+        "inputs": [],
+        "source": {
+          "text": "架空短編の接続検証用。試験仮定3時間。実案件の予算ではない。",
+          "freshness": "current",
+          "sourceRefs": []
+        },
+        "specification": {
+          "status": "resolved",
+          "fingerprint": "c05dadc38ab5969835828fec87797619df57e2a15a78cb6beade93af65acb9a2",
+          "sources": []
+        },
+        "version": 5,
+        "atRevision": 29
+      },
+      "971a7b19-9a2e-4f39-8758-1327a1968678": {
+        "id": "971a7b19-9a2e-4f39-8758-1327a1968678",
+        "status": "input",
+        "value": 1200,
+        "unit": "円/時間",
+        "formula": "",
+        "formulaHash": "5a0c8e6769e809a91e478a92e18fc0b1062e7f7331f113a47bbaf342234c8b27",
+        "fingerprint": "e6505747abfb160291b976b413b3051d5aa717458e1d48765e05731238121631",
+        "issues": [],
+        "inputs": [],
+        "source": {
+          "text": "接続検証の架空単価。1200円/時間。実取引なし。",
+          "freshness": "current",
+          "sourceRefs": []
+        },
+        "specification": {
+          "status": "resolved",
+          "fingerprint": "c05dadc38ab5969835828fec87797619df57e2a15a78cb6beade93af65acb9a2",
+          "sources": []
+        },
+        "version": 3,
+        "atRevision": 29
+      },
+      "fa2f7bcf-ef72-4b39-af97-9c68b0c25e84": {
+        "id": "fa2f7bcf-ef72-4b39-af97-9c68b0c25e84",
+        "status": "calculated",
+        "value": 4800,
+        "unit": "円",
+        "formula": "hours * rate",
+        "formulaHash": "367a13a5f186baef6234a37d73128f607b24e7e031a75522d333792f68f069e1",
+        "fingerprint": "7eb1ccc1a4e0bd4adf1e83098e6f7817f6eb9c8b8bc39a4cdbf4a850b155f4d3",
+        "issues": [],
+        "inputs": [
+          {
+            "name": "hours",
+            "nodeId": "10492290-2234-4555-94f1-83f5e60bbff3",
+            "title": "試験：見積り時間",
+            "version": 5,
+            "status": "input",
+            "value": 4,
+            "unit": "時間",
+            "fingerprint": "898f0a03d2af07f67beb9b9fd1ba3d51a2f3e7b9058bbfb029252e1ac433d3e2"
+          },
+          {
+            "name": "rate",
+            "nodeId": "971a7b19-9a2e-4f39-8758-1327a1968678",
+            "title": "試験：時間あたり見積り",
+            "version": 3,
+            "status": "input",
+            "value": 1200,
+            "unit": "円/時間",
+            "fingerprint": "e6505747abfb160291b976b413b3051d5aa717458e1d48765e05731238121631"
+          }
+        ],
+        "source": {
+          "text": "試験の時間×単価を計算。実案件の予算承認ではない。",
+          "freshness": "unknown",
+          "sourceRefs": []
+        },
+        "specification": {
+          "status": "resolved",
+          "fingerprint": "c05dadc38ab5969835828fec87797619df57e2a15a78cb6beade93af65acb9a2",
+          "sources": []
+        },
+        "version": 4,
+        "atRevision": 29
+      }
+    }
+  },
+  "artifact": {
+    "path": "artifacts/3fcbed02-3e29-47de-b396-b5a2252ecb1d/numbers-check.md",
+    "text": "# 数値接続チェック（架空素材）\n\n- 保存時の対象版：試験：短編の見積り合計 v3（提供データの revision 28）。入力は hours v5、rate v3。\n- 計算機の再計算結果：hours 4時間 × rate 1,200円/時間 = 合計 4,800円。式は `hours * rate`、合計の単位は円。\n- 出所：hours は「架空短編の接続検証用」、rate は「接続検証の架空単価」、合計は「試験の時間×単価を計算」。いずれも提供データの記載によるもので、数値の参照文書（sourceRefs）はありません。\n- 注意：hours の出所文には「試験仮定3時間」とあり、入力値4時間と一致しません。合計の出所の鮮度は `unknown` です。\n\nこれは架空素材の接続検証記録であり、実案件の予算承認や受入を示しません。\n",
+    "sha256": "8cd9650051d851cb3f8c3fd270fa78c5a0b6269bd895b3daee37608ae8869edf",
+    "recordedSha256": "8cd9650051d851cb3f8c3fd270fa78c5a0b6269bd895b3daee37608ae8869edf",
+    "matches": true
+  },
+  "provenance": {
+    "targetId": "fa2f7bcf-ef72-4b39-af97-9c68b0c25e84",
+    "entries": [
+      {
+        "revision": 29,
+        "operationId": "ai-3fcbed02-3e29-47de-b396-b5a2252ecb1d",
+        "kind": "change",
+        "at": "2026-10-25T21:08:23.414Z",
+        "undone": false,
+        "actor": "codex",
+        "reason": "hoursの数値は4時間（v5）ですが、出所文には「試験仮定3時間」とあります。合計には提供されたnumbersの再計算結果を採用し、この不一致を明記しました。",
+        "runId": "3fcbed02-3e29-47de-b396-b5a2252ecb1d",
+        "sourceRefs": [
+          {
+            "documentId": "goal",
+            "section": "1. 最終到達点",
+            "sha256": "a79eb266a618f3ac1a4d59643a1a955cb4ea207c098d4d5358ac1d5d29ae076f",
+            "revision": "Mindwise Rebuild Rev 2",
+            "status": "current",
+            "text": "## 1. 最終到達点\n\n人とCodexが、構想・設計・プロセス・タスク・進捗・成果物を、同じ地図から扱える汎用の制作・開発空間を完成させる。\n\nMindwise自身の作業画面で全体を考え、枝を自由に増やし、切り離し、付け替え、関係を結ぶ。全体から個別の仕事へ降り、対象を選んでAIと相談・設計・制作を進める。同じ仕事を地図、領域別のレーン、構想から現物への具体化、工程、タスク一覧、数値から見られ、変更と制作結果が共有する地図へ戻る。表示やセッションを替えても、何を扱っているかと、なぜそうしたかが途切れない。\n\n航海が進むにつれて、探索した設計、判断、資料、現物、検証が主題ごとにつながり、海図が充実する。枝数は完成度ではない。できた部分、未探索、変更の影響、未反映、判断待ちを見分け、完成までの位置を把握できることが価値である。\n\n利用者はオーナー本人、自宅Windows環境を対象とする。ゲーム、取引システム、本などで共通の仕組みを使い、用途に応じて内容と表示を変える。MindManagerの外観や本体の常時使用には固定しない。既存データ・有用な機能や設計の知見は活かす。\n\nGoal Forgeは戦略契約を形成し、オーナーは重要な価値・戦略・権限を決める。Codexはその範囲で制作を担い、Mindwiseは共通の作業空間と持続する文脈を担う。",
+            "documentStatus": "approved",
+            "currentSha256": "a79eb266a618f3ac1a4d59643a1a955cb4ea207c098d4d5358ac1d5d29ae076f",
+            "currentRevision": "Mindwise Rebuild Rev 2"
+          }
+        ],
+        "inputs": [
+          {
+            "id": "fa2f7bcf-ef72-4b39-af97-9c68b0c25e84",
+            "title": "試験：短編の見積り合計",
+            "version": 3,
+            "body": "",
+            "specs": [],
+            "sourceRefs": [],
+            "number": {
+              "id": "fa2f7bcf-ef72-4b39-af97-9c68b0c25e84",
+              "status": "calculated",
+              "value": 4800,
+              "unit": "円",
+              "formula": "hours * rate",
+              "formulaHash": "367a13a5f186baef6234a37d73128f607b24e7e031a75522d333792f68f069e1",
+              "fingerprint": "7eb1ccc1a4e0bd4adf1e83098e6f7817f6eb9c8b8bc39a4cdbf4a850b155f4d3",
+              "issues": [],
+              "inputs": [
+                {
+                  "name": "hours",
+                  "nodeId": "10492290-2234-4555-94f1-83f5e60bbff3",
+                  "title": "試験：見積り時間",
+                  "version": 5,
+                  "status": "input",
+                  "value": 4,
+                  "unit": "時間",
+                  "fingerprint": "898f0a03d2af07f67beb9b9fd1ba3d51a2f3e7b9058bbfb029252e1ac433d3e2"
+                },
+                {
+                  "name": "rate",
+                  "nodeId": "971a7b19-9a2e-4f39-8758-1327a1968678",
+                  "title": "試験：時間あたり見積り",
+                  "version": 3,
+                  "status": "input",
+                  "value": 1200,
+                  "unit": "円/時間",
+                  "fingerprint": "e6505747abfb160291b976b413b3051d5aa717458e1d48765e05731238121631"
+                }
+              ],
+              "source": {
+                "text": "試験の時間×単価を計算。実案件の予算承認ではない。",
+                "freshness": "unknown",
+                "sourceRefs": []
+              },
+              "specification": {
+                "status": "resolved",
+                "fingerprint": "c05dadc38ab5969835828fec87797619df57e2a15a78cb6beade93af65acb9a2",
+                "sources": []
+              },
+              "version": 3,
+              "atRevision": 28
+            }
+          },
+          {
+            "id": "goal",
+            "title": "架空ゲーム完成（接続検証）",
+            "version": 3,
+            "body": "機能の接続を検証する架空案件。実案件の受入ではありません。",
+            "specs": [],
+            "sourceRefs": [],
+            "number": null
+          },
+          {
+            "id": "4d1ee4db-8747-45cc-8d91-b4785ec6b608",
+            "title": "琥珀の時計塔（出所・設定の接続検証）",
+            "version": 6,
+            "body": "架空の短編の構想。舞台は琥珀の時計塔、案内役はミオ、語り口は穏やかにする。実案件の承認ではなく機能検証用。",
+            "specs": [
+              {
+                "key": "舞台",
+                "value": "琥珀の時計塔"
+              },
+              {
+                "key": "案内役",
+                "value": "ミオ"
+              },
+              {
+                "key": "語り口",
+                "value": "穏やか"
+              }
+            ],
+            "sourceRefs": [
+              {
+                "documentId": "goal",
+                "section": "1. 最終到達点",
+                "sha256": "a79eb266a618f3ac1a4d59643a1a955cb4ea207c098d4d5358ac1d5d29ae076f",
+                "revision": "Mindwise Rebuild Rev 2"
+              }
+            ],
+            "number": null
+          },
+          {
+            "id": "10492290-2234-4555-94f1-83f5e60bbff3",
+            "title": "試験：見積り時間",
+            "version": 5,
+            "body": "",
+            "specs": [],
+            "sourceRefs": [],
+            "number": {
+              "id": "10492290-2234-4555-94f1-83f5e60bbff3",
+              "status": "input",
+              "value": 4,
+              "unit": "時間",
+              "formula": "",
+              "formulaHash": "277cdc4fc77352ad60c07f96771d484d80f6cd8c1d1a1916e25237791ec738f5",
+              "fingerprint": "898f0a03d2af07f67beb9b9fd1ba3d51a2f3e7b9058bbfb029252e1ac433d3e2",
+              "issues": [],
+              "inputs": [],
+              "source": {
+                "text": "架空短編の接続検証用。試験仮定3時間。実案件の予算ではない。",
+                "freshness": "current",
+                "sourceRefs": []
+              },
+              "specification": {
+                "status": "resolved",
+                "fingerprint": "c05dadc38ab5969835828fec87797619df57e2a15a78cb6beade93af65acb9a2",
+                "sources": []
+              },
+              "version": 5,
+              "atRevision": 28
+            }
+          },
+          {
+            "id": "971a7b19-9a2e-4f39-8758-1327a1968678",
+            "title": "試験：時間あたり見積り",
+            "version": 3,
+            "body": "",
+            "specs": [],
+            "sourceRefs": [],
+            "number": {
+              "id": "971a7b19-9a2e-4f39-8758-1327a1968678",
+              "status": "input",
+              "value": 1200,
+              "unit": "円/時間",
+              "formula": "",
+              "formulaHash": "5a0c8e6769e809a91e478a92e18fc0b1062e7f7331f113a47bbaf342234c8b27",
+              "fingerprint": "e6505747abfb160291b976b413b3051d5aa717458e1d48765e05731238121631",
+              "issues": [],
+              "inputs": [],
+              "source": {
+                "text": "接続検証の架空単価。1200円/時間。実取引なし。",
+                "freshness": "current",
+                "sourceRefs": []
+              },
+              "specification": {
+                "status": "resolved",
+                "fingerprint": "c05dadc38ab5969835828fec87797619df57e2a15a78cb6beade93af65acb9a2",
+                "sources": []
+              },
+              "version": 3,
+              "atRevision": 28
+            }
+          }
+        ],
+        "changes": [
+          {
+            "field": "artifact",
+            "before": "",
+            "after": "artifacts/3fcbed02-3e29-47de-b396-b5a2252ecb1d/numbers-check.md"
+          }
+        ],
+        "relations": null
+      },
+      {
+        "revision": 25,
+        "operationId": "3f2947fa-c216-47c1-b181-7eb176c353a5",
+        "kind": "change",
+        "at": "2026-10-25T21:05:17.795Z",
+        "undone": false,
+        "actor": "owner",
+        "reason": null,
+        "runId": null,
+        "sourceRefs": [],
+        "inputs": [],
+        "changes": [
+          {
+            "field": "title",
+            "before": "新しい枝",
+            "after": "試験：短編の見積り合計"
+          },
+          {
+            "field": "unit",
+            "before": "",
+            "after": "円"
+          },
+          {
+            "field": "formula",
+            "before": "",
+            "after": "hours * rate"
+          },
+          {
+            "field": "metricInputs",
+            "before": [],
+            "after": [
+              {
+                "name": "hours",
+                "nodeId": "10492290-2234-4555-94f1-83f5e60bbff3"
+              },
+              {
+                "name": "rate",
+                "nodeId": "971a7b19-9a2e-4f39-8758-1327a1968678"
+              }
+            ]
+          },
+          {
+            "field": "metricSource",
+            "before": "",
+            "after": "試験の時間×単価を計算。実案件の予算承認ではない。"
+          }
+        ],
+        "relations": null
+      },
+      {
+        "revision": 24,
+        "operationId": "97691005-a07d-4464-8eb5-f0785cdfa8da",
+        "kind": "change",
+        "at": "2026-10-25T21:05:10.495Z",
+        "undone": false,
+        "actor": "owner",
+        "reason": null,
+        "runId": null,
+        "sourceRefs": [],
+        "inputs": [],
+        "changes": [
+          {
+            "field": "id",
+            "before": null,
+            "after": "fa2f7bcf-ef72-4b39-af97-9c68b0c25e84"
+          },
+          {
+            "field": "parentId",
+            "before": null,
+            "after": "971a7b19-9a2e-4f39-8758-1327a1968678"
+          },
+          {
+            "field": "title",
+            "before": null,
+            "after": "新しい枝"
+          },
+          {
+            "field": "body",
+            "before": null,
+            "after": ""
+          },
+          {
+            "field": "domain",
+            "before": null,
+            "after": "数値の接続検証"
+          },
+          {
+            "field": "depth",
+            "before": null,
+            "after": 4
+          },
+          {
+            "field": "status",
+            "before": null,
+            "after": "planned"
+          },
+          {
+            "field": "progress",
+            "before": null,
+            "after": 0
+          },
+          {
+            "field": "start",
+            "before": null,
+            "after": ""
+          },
+          {
+            "field": "due",
+            "before": null,
+            "after": ""
+          },
+          {
+            "field": "x",
+            "before": null,
+            "after": 1020
+          },
+          {
+            "field": "y",
+            "before": null,
+            "after": 650
+          },
+          {
+            "field": "kind",
+            "before": null,
+            "after": "concept"
+          },
+          {
+            "field": "unit",
+            "before": null,
+            "after": ""
+          },
+          {
+            "field": "value",
+            "before": null,
+            "after": null
+          },
+          {
+            "field": "formula",
+            "before": null,
+            "after": ""
+          },
+          {
+            "field": "artifact",
+            "before": null,
+            "after": ""
+          },
+          {
+            "field": "criteria",
+            "before": null,
+            "after": ""
+          },
+          {
+            "field": "verified",
+            "before": null,
+            "after": false
+          },
+          {
+            "field": "specs",
+            "before": null,
+            "after": []
+          },
+          {
+            "field": "required",
+            "before": null,
+            "after": false
+          },
+          {
+            "field": "weight",
+            "before": null,
+            "after": null
+          },
+          {
+            "field": "sourceRefs",
+            "before": null,
+            "after": []
+          },
+          {
+            "field": "metricInputs",
+            "before": null,
+            "after": []
+          },
+          {
+            "field": "metricSource",
+            "before": null,
+            "after": ""
+          },
+          {
+            "field": "metricFreshness",
+            "before": null,
+            "after": "unknown"
+          }
+        ],
+        "relations": null
+      }
+    ],
+    "limit": 100,
+    "runs": [
+      {
+        "id": "3fcbed02-3e29-47de-b396-b5a2252ecb1d",
+        "status": "completed",
+        "mode": "production",
+        "startedAt": "2026-10-25T21:08:12.335Z",
+        "targetVersion": 3,
+        "prompt": "これは架空素材による数値接続の検証です。numbersにある計算機の再計算結果と参照元を使い、hours、rate、合計、単位、出所、保存時の対象版を短い日本語のnumbers-check.mdへ記してください。実案件の予算承認や受入とは書かないでください。本文や子の枝は変更せず、updatedBody=null、children=[]、settings=null。資料を実行せず、ファイル内容をartifactsに返してください。",
+        "reply": "提供された計算機の再計算結果と参照元を、架空素材の数値接続チェックとしてまとめました。",
+        "decisionReason": "hoursの数値は4時間（v5）ですが、出所文には「試験仮定3時間」とあります。合計には提供されたnumbersの再計算結果を採用し、この不一致を明記しました。"
+      }
+    ],
+    "sources": {
+      "revision": "Mindwise Rebuild Rev 2",
+      "status": "approved",
+      "documents": [
+        {
+          "id": "goal",
+          "path": "GOAL.md",
+          "title": "到達点と完成条件",
+          "revision": "Mindwise Rebuild Rev 2",
+          "declaredStatus": "ACTIVE（2026-10-25のレビュー・修正委譲と条件付き実装GOに基づく。実Codex検証の利用範囲を追加確認済み）",
+          "status": "approved",
+          "sha256": "a79eb266a618f3ac1a4d59643a1a955cb4ea207c098d4d5358ac1d5d29ae076f",
+          "approval": {
+            "documentId": "discovery",
+            "section": "7. 引継ぎ後の全面レビューと実装GO（2026-10-25）",
+            "sha256": "594edaa39cde4d691901f144f37ef9dea9451ecc38cbdfb9ed4eaf44d5a57e01",
+            "normalization": "UTF-8 / LF",
+            "status": "current",
+            "note": "既存のレビュー・修正委譲と条件付き実装GOの記録（DISCOVERY_LOG第7節）。2026-10-25の新セッションでオーナーがRev 2 / ACTIVEと実装GO取得済みを再確認。これは既存承認への照合登録であり、新たな承認や権限付与ではない。"
+          },
+          "issues": []
+        },
+        {
+          "id": "design",
+          "path": "DESIGN_STANDARD.md",
+          "title": "設計と品質の基準",
+          "revision": "Mindwise Rebuild Rev 2",
+          "declaredStatus": "ACTIVE（2026-10-25のレビュー・修正委譲により補正。個人用ChatGPTの既存枠内で新ルート試験資料を使う実装・検証GO）",
+          "status": "approved",
+          "sha256": "11885ee9b45e42b994fae00183c677daa128c82a640c01fdac4cec9ca8fdd241",
+          "approval": {
+            "documentId": "discovery",
+            "section": "7. 引継ぎ後の全面レビューと実装GO（2026-10-25）",
+            "sha256": "594edaa39cde4d691901f144f37ef9dea9451ecc38cbdfb9ed4eaf44d5a57e01",
+            "normalization": "UTF-8 / LF",
+            "status": "current",
+            "note": "既存のレビュー・修正委譲と条件付き実装GOの記録（DISCOVERY_LOG第7節）。2026-10-25の新セッションでオーナーがRev 2 / ACTIVEと実装GO取得済みを再確認。これは既存承認への照合登録であり、新たな承認や権限付与ではない。"
+          },
+          "issues": []
+        },
+        {
+          "id": "discovery",
+          "path": "DISCOVERY_LOG.md",
+          "title": "判断と承認の記録",
+          "revision": "Mindwise Rebuild Rev 2",
+          "declaredStatus": "ACTIVE（Rev 1の起草記録を保持。Rev 2の修正委譲・条件付きGO・利用範囲の確認は末尾7節）",
+          "status": "record",
+          "sha256": "626dc201a52d4bbebdf8797d72f7256006ab905fc1a37a1fc5aad6b7723c0da9",
+          "issues": []
+        }
+      ],
+      "references": [],
+      "issues": [],
+      "authority": "契約の原文と既存承認記録の照合表示です。実行権限を新たに付与しません。"
+    }
+  },
+  "contract": {
+    "status": "approved",
+    "revision": "Mindwise Rebuild Rev 2",
+    "documents": [
+      {
+        "id": "goal",
+        "sha256": "a79eb266a618f3ac1a4d59643a1a955cb4ea207c098d4d5358ac1d5d29ae076f",
+        "status": "approved"
+      },
+      {
+        "id": "design",
+        "sha256": "11885ee9b45e42b994fae00183c677daa128c82a640c01fdac4cec9ca8fdd241",
+        "status": "approved"
+      },
+      {
+        "id": "discovery",
+        "sha256": "626dc201a52d4bbebdf8797d72f7256006ab905fc1a37a1fc5aad6b7723c0da9",
+        "status": "record"
+      }
+    ]
+  },
+  "sourceHashes": {
+    "src/numbers.mjs": "900be56b9e60c4f7f4770277586d9e012324646c9da363dae26abec056aefdaa",
+    "src/number-links.mjs": "fabf9e0583959742eeecc81770632b32b1e032462c9e10f5e131bbf4b3415137",
+    "src/store.mjs": "7e50aaf8053b89b12da9a4ad0617ef1ee261f5cc05dfd3df4d96b80e0fe8cfff",
+    "src/semantics.mjs": "be013c7ebfdfaf9ca72e13c70959d60e3293211bfe5bf0b90d97c11caaee7f5e",
+    "src/artifacts.mjs": "31065c1e9f6d9f8f1896fe6d7d11394b3d4e1499901ceb8cea41f216978835e8",
+    "src/server.mjs": "eaeb50d75d41e5e02d5541364723445a54ac4c4ad5fec0afe40d7600f905b1bc",
+    "src/codex.mjs": "5ac6c75d483a43ac02e09f26ef29aa154fd768ce260350235b3c4d74f48aeb57",
+    "public/numbers.js": "cfe2aa00aa6a16f69ae2b814f1031cbf1653b4e1db60f1419bcb7be3f4fe9cea",
+    "public/app.js": "f94ebaa26ae4ce23dceb5261cf31d9659bfd274a0ba8a426e962818507584fa4",
+    "public/sources.js": "eac7da2dde0d5e9ead4fa939c52adcc95773c7659489cfcf8f86a7da07e213f4",
+    "public/style.css": "9688f8d2a31253fab1e862dad3f77b5f842ce39c127084d05fcd9dd260280474"
+  }
+}

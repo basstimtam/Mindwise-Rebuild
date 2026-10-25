@@ -7,6 +7,7 @@ import { createStore, StoreError } from './store.mjs';
 import { readNodeArtifact, evaluateVerification, assessSources } from './artifacts.mjs';
 import { resolveSpecifications, summarizeProgress } from './semantics.mjs';
 import { readContracts, contractContext } from './contracts.mjs';
+import { calculateNumbers, assessNumbers } from './numbers.mjs';
 
 const rootDefault = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const mime = {'.html':'text/html; charset=utf-8','.js':'text/javascript; charset=utf-8','.mjs':'text/javascript; charset=utf-8','.css':'text/css; charset=utf-8','.svg':'image/svg+xml','.png':'image/png','.ico':'image/x-icon','.json':'application/json; charset=utf-8'};
@@ -51,15 +52,15 @@ export async function createServer({root=rootDefault,dataDir,port=Number(process
         return json({...store.provenance(targetId),sources:contractContext(root,node.sourceRefs||[])});
       }
       if(url.pathname==='/api/analysis' && req.method==='GET') {
-        const state=store.getState(), targetId=url.searchParams.get('targetId'),catalog=readContracts(root);
+        const state=store.getState(), targetId=url.searchParams.get('targetId'),catalog=readContracts(root),calculations=calculateNumbers(state,{root,catalog});
         if(targetId&&!state.nodes.some(n=>n.id===targetId)) throw new StoreError('対象が見つかりません。',404);
         const verificationById=Object.create(null), artifactKeys=Object.create(null);
         for(const node of state.nodes) {
-          const observation=evaluateVerification(root,state,node,{catalog});
+          const observation=evaluateVerification(root,state,node,{catalog,calculations});
           verificationById[node.id]=observation;
           if(observation.canonicalKey) artifactKeys[node.id]=observation.canonicalKey;
         }
-        return json({revision:state.revision,specification:targetId?resolveSpecifications(state,targetId):null,verificationById,progress:summarizeProgress(state,verificationById,artifactKeys)});
+        return json({revision:state.revision,specification:targetId?resolveSpecifications(state,targetId):null,numbers:calculations,verificationById,progress:summarizeProgress(state,verificationById,artifactKeys)});
       }
       if(url.pathname==='/api/artifact' && req.method==='GET') {
         const nodeId=url.searchParams.get('nodeId');
@@ -68,7 +69,8 @@ export async function createServer({root=rootDefault,dataDir,port=Number(process
           if(!node) throw new StoreError('対象が見つかりません。',404);
           const artifact=readNodeArtifact(root,node), specification=resolveSpecifications(state,nodeId);
           const sources=assessSources(root,state,node,specification);
-          return json({...artifact,revision:state.revision,targetId:nodeId,targetVersion:node.version,criteria:node.criteria,specHash:specification.fingerprint,sourceHash:sources.fingerprint,sourceStatus:sources.status,specificationStatus:specification.status,verification:evaluateVerification(root,state,node,{artifact,specification})});
+          const calculations=calculateNumbers(state,{root}),numbers=assessNumbers(state,nodeId,calculations,specification.sources.map(s=>s.id));
+          return json({...artifact,revision:state.revision,targetId:nodeId,targetVersion:node.version,criteria:node.criteria,specHash:specification.fingerprint,sourceHash:sources.fingerprint,sourceStatus:sources.status,numberHash:numbers.fingerprint,numberStatus:numbers.status,specificationStatus:specification.status,verification:evaluateVerification(root,state,node,{artifact,specification,calculations})});
         }
         const run=store.getState().runs.find(r=>r.id===url.searchParams.get('runId'));
         const index=Number(url.searchParams.get('index'));
@@ -85,7 +87,7 @@ export async function createServer({root=rootDefault,dataDir,port=Number(process
       if(url.pathname==='/api/preview' && req.method==='POST') return json(store.preview(await body(req)));
       if(url.pathname==='/api/verify' && req.method==='POST') {
         const input=await body(req);
-        const fields=new Set(['baseRevision','operationId','targetId','targetVersion','artifactHash','criteria','sourceHash','method','result','note']);
+        const fields=new Set(['baseRevision','operationId','targetId','targetVersion','artifactHash','criteria','sourceHash','numberHash','method','result','note']);
         if(!input||typeof input!=='object'||Array.isArray(input)||Object.keys(input).some(key=>!fields.has(key))) throw new StoreError('確認記録の形式を確認してください。');
         if(!Number.isInteger(input.baseRevision)||!Number.isInteger(input.targetVersion)||input.targetVersion<1||typeof input.operationId!=='string'||!/^[\p{L}\p{N}_:.-]{1,160}$/u.test(input.operationId)||typeof input.targetId!=='string') throw new StoreError('確認した対象版と操作IDが必要です。');
         if(input.method!=='owner-review'||input.result!=='passed'||typeof input.criteria!=='string'||!input.criteria.trim()||typeof input.artifactHash!=='string'||!(/^[a-f0-9]{64}$/i.test(input.artifactHash))) throw new StoreError('現物と受入条件を確認し、確認方法と合格結果を明示してください。');
@@ -103,9 +105,11 @@ export async function createServer({root=rootDefault,dataDir,port=Number(process
         if(specification.status!=='resolved') throw new StoreError('仕様の衝突または循環を解決してから確認してください。',409);
         const sources=assessSources(root,state,node,specification);
         if(sources.status!=='current'||(input.sourceHash??null)!==sources.fingerprint)throw new StoreError('確認画面の契約原文・版・承認状態が変わっています。出所を照合してから開き直してください。',409);
+        const numbers=assessNumbers(state,node.id,calculateNumbers(state,{root}),specification.sources.map(s=>s.id));
+        if(numbers.status!=='current'||(input.numberHash??null)!==numbers.fingerprint)throw new StoreError('関連する数値または計算根拠が変わっています。再計算した内容を確認してください。',409);
         const artifact=readNodeArtifact(root,node);
         if(artifact.sha256!==input.artifactHash.toLowerCase()) throw new StoreError('確認画面を開いてから現物が変わりました。読み直してください。',409);
-        const proof={artifactHash:artifact.sha256,artifact:node.artifact,criteria:node.criteria,specHash:specification.fingerprint,sourceHash:sources.fingerprint,method:input.method,result:input.result,at:new Date().toISOString(),targetVersion:node.version,reviewer:'owner',operationId:input.operationId,requestHash,...(input.note?{note:input.note}:{})};
+        const proof={artifactHash:artifact.sha256,artifact:node.artifact,criteria:node.criteria,specHash:specification.fingerprint,sourceHash:sources.fingerprint,numberHash:numbers.fingerprint,method:input.method,result:input.result,at:new Date().toISOString(),targetVersion:node.version,reviewer:'owner',operationId:input.operationId,requestHash,...(input.note?{note:input.note}:{})};
         return json(store.change({baseRevision:state.revision,operationId:input.operationId,ops:[{type:'update',id:node.id,patch:{verified:proof}}]}));
       }
       if(url.pathname==='/api/import' && req.method==='POST') return json(store.importState(await body(req)));

@@ -1,0 +1,17 @@
+{
+  "observedAt": "2026-10-25T21:11:24.840Z",
+  "sameDataDir": ".runtime/spec-progress-workflow",
+  "revision": 29,
+  "value": 4800,
+  "fingerprint": "7eb1ccc1a4e0bd4adf1e83098e6f7817f6eb9c8b8bc39a4cdbf4a850b155f4d3",
+  "artifact": {
+    "path": "artifacts/3fcbed02-3e29-47de-b396-b5a2252ecb1d/numbers-check.md",
+    "sha256": "8cd9650051d851cb3f8c3fd270fa78c5a0b6269bd895b3daee37608ae8869edf",
+    "matches": true
+  },
+  "runId": "3fcbed02-3e29-47de-b396-b5a2252ecb1d",
+  "status": "completed",
+  "contractStatus": "approved",
+  "sourceHashesMatch": true,
+  "scope": "最終ソースによる再起動保持の照合。モデルの再実行ではない。"
+}
