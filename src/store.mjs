@@ -173,10 +173,10 @@ export function createStore({ root = process.cwd(), dataDir } = {}) {
       } else throw new StoreError(`未対応の操作: ${op.type}`);
     }
     validate(state);
-    const impact=analyzeChange(before,state), invalidate=new Set([...impact.affected,...impact.unknown]);
+    const impact=analyzeChange(before,state), invalidate=new Set([...impact.affected,...impact.unknown]),inputRecheck=new Set(impact.inputRecheck);
     const numericEdits=new Set(ops.filter(op=>op.type==='add'||op.type==='update'&&Object.keys(op.patch).some(key=>['value','unit','formula','metricInputs','metricSource','metricFreshness'].includes(key))).map(op=>op.id||op.node?.id));
     state.nodes=state.nodes.map(n=>{
-      const affected=invalidate.has(n.id),stale=affected&&hasNumber(n)&&!n.formula.trim()&&n.metricFreshness==='current'&&!numericEdits.has(n.id);
+      const affected=invalidate.has(n.id),stale=inputRecheck.has(n.id)&&hasNumber(n)&&!n.formula.trim()&&n.metricFreshness==='current'&&!numericEdits.has(n.id);
       return affected&&n.verified||stale?{...n,verified:false,...(stale?{metricFreshness:'stale'}:{}),version:n.version+1}:n;
     });
     return {state,impact};

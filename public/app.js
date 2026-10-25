@@ -1,5 +1,6 @@
 import {createSourcesUi} from './sources.js';
 import {createNumbersUi} from './numbers.js';
+import {rebaseDraft,parentCandidates,selectionAfterChange} from './editing.js';
 const $ = (q, parent = document) => parent.querySelector(q);
 const $$ = (q, parent = document) => [...parent.querySelectorAll(q)];
 const el = (tag, cls, text) => { const e = document.createElement(tag); if (cls) e.className = cls; if (text !== undefined) e.textContent = text; return e; };
@@ -55,8 +56,11 @@ async function change(ops) {
    if ((meaningful.length || impact.conflicts?.length) && !await confirmImpact(impact, edited)) { cancelled = true; return false; }
   }
   $('#saveState').textContent = '○ 保存中';
+  const before=state;
   state = await api('/api/change', payload);
-  if (!node()) selected = state.nodes[0]?.id || null;
+  for(const [id,draft] of detailDrafts)detailDrafts.set(id,rebaseDraft(draft,before.nodes.find(n=>n.id===id),node(id)));
+  selected=selectionAfterChange(before,state,selected,ops);
+  localStorage.setItem('mindwise.selected',selected||'');
   render(); await refreshAnalysis(); saved = true; return true;
  } catch (error) { toast(error.message, true); return false; }
  finally { busy = false; $('#saveState').textContent = saved ? '● 保存済み' : cancelled ? '○ 変更は未保存' : '○ 保存できませんでした'; }
@@ -89,12 +93,23 @@ function confirmImpact(impact, edited, proposal) {
   dialog.showModal();
  });
 }
+function confirmDeletion(n) {
+ const dialog=$('#deleteDialog');
+ $('#deleteTarget').textContent=`「${n.title}」を削除します。子の枝は独立して残り、モデルの変更は取り消せます。`;
+ return new Promise(resolve=>{
+  let accepted=false;
+  $('#deleteContinue').onclick=()=>{accepted=true;dialog.close();};
+  $('#deleteCancel').onclick=()=>dialog.close();
+  dialog.onclose=()=>{dialog.onclose=null;resolve(accepted);};
+  dialog.showModal();
+ });
+}
 function choose(id) { selected = id; localStorage.setItem('mindwise.selected', id || ''); render(); }
 function button(text, fn, cls = '') { const b = el('button', cls, text); b.type = 'button'; b.addEventListener('click', fn); return b; }
 function badge(n) { return el('span', `badge ${n.status || 'planned'}`, statuses[n.status] || n.status || '未着手'); }
 function field(label, name, value, type = 'text', options) { const l = el('label', 'field'); l.append(el('span', '', label)); const i = el(options ? 'select' : type === 'textarea' ? 'textarea' : 'input'); i.name = name; if (options) { for (const [v, text] of options) { const o = el('option', '', text); o.value = v; i.append(o); } } else if (type !== 'textarea') i.type = type; i.value = value ?? ''; l.append(i); return l; }
 function empty(message, detail, action) { const e = el('div', 'empty'); e.append(el('div', 'empty-icon', '◇'), el('strong', '', message), el('p', '', detail)); if (action) e.append(action); return e; }
-function render() { if (!views[view]) view = 'map'; renderDomains(); renderView(); renderInspector(); renderProgress(); renderAiTarget(); renderSpecification(); renderVerification(); if (!currentAnalysis()) void refreshAnalysis(); $$('.tabs button').forEach(b => { b.classList.toggle('active', b.dataset.view === view); b.setAttribute('aria-selected', String(b.dataset.view === view)); }); $('#scopeLabel').textContent = domain || '全領域'; $('#viewLabel').textContent = views[view][0]; $('#viewHint').textContent = views[view][1]; $('#mapControls').hidden = view !== 'map'; $('#modelSummary').textContent = `表示 ${nodes().length} 対象 / 全 ${state.nodes.length} 対象 · 保存版 ${state.revision}`; $('#undo').disabled = !state.history?.length; }
+function render() { if (!views[view]) view = 'map'; renderDomains(); renderView(); renderInspector(); renderProgress(); renderAiTarget(); renderSpecification(); renderVerification(); if (!currentAnalysis()) void refreshAnalysis(); $$('.tabs button').forEach(b => { b.classList.toggle('active', b.dataset.view === view); b.setAttribute('aria-selected', String(b.dataset.view === view)); }); $('#scopeLabel').textContent = domain || '全領域'; $('#viewLabel').textContent = views[view][0]; $('#viewHint').textContent = views[view][1]; $('#mapControls').hidden = view !== 'map'; $('#modelSummary').textContent = `表示 ${nodes().length} 対象 / 全 ${state.nodes.length} 対象 · 保存版 ${state.revision}`; $('#undo').disabled = !state.history?.some(item=>item.kind!=='undo'&&!item.undone); }
 function renderDomains() { const d = $('#domains'); d.replaceChildren(); for (const name of [...new Set(state.nodes.map(n => n.domain).filter(Boolean))]) { const b = button('', () => { domain = domain === name ? '' : name; render(); }, 'nav-item'); b.classList.toggle('active', domain === name); b.append(el('span', 'domain-dot'), el('span', '', name), el('span', 'count', String(state.nodes.filter(n => n.domain === name).length))); d.append(b); } $('#allDomains').classList.toggle('active', !domain); const result = $('#searchResults'); result.replaceChildren(); if (query) { const matched = nodes(); result.append(el('div', 'search-caption', `${matched.length} 件`)); for (const n of matched.slice(0, 12)) result.append(button(n.title, () => choose(n.id))); } }
 function renderView() { const v = $('#view'); v.replaceChildren(); v.className = view; if (!state.nodes.length) { v.append(empty('最初の枝から、地図がはじまる。', '作りたいものを置いて、領域や仕様へ広げましょう。制作した結果も同じ地図に戻ります。', button('＋ 最初の枝をつくる', () => addNode(false), 'primary'))); v.firstChild.append(button('ゲームのサンプルで試す', createSample, 'text-button')); return; } if (!nodes().length) { v.append(empty('この範囲に対象はありません', '領域や検索条件を変えると、ほかの枝へ戻れます。', button('全体へ戻る', () => { domain = ''; query = ''; $('#search').value = ''; render(); }))); return; } if (view === 'map') drawMap(); else if (view === 'hierarchy') drawHierarchy(); else if (view === 'lanes') drawLanes(); else if (view === 'tasks') drawTasks(); else if (view === 'process') drawProcess(); else if (view === 'gantt') drawGantt(); else drawNumbers(); }
 function position(n, i = state.nodes.indexOf(n)) { return { x: Number.isFinite(n.x) ? n.x : 70 + (Number(n.depth) || 0) * 240, y: Number.isFinite(n.y) ? n.y : 60 + i * 100 }; }
@@ -107,7 +122,7 @@ function drawMap() { const host = $('#view'), svg = svgEl('svg', { role: 'img', 
 function content(titleText, note) { const wrap = el('div', 'view-content'); wrap.append(el('h2', 'view-heading', titleText), el('p', 'view-note', note)); $('#view').append(wrap); return wrap; }
 function nodeCard(n) { const b = button('', () => choose(n.id), `node-card ${selected === n.id ? 'selected' : ''}`), description = el('small', '', `${n.domain || '領域未設定'} · ${statuses[n.status] || '未着手'}`); if(n.artifact) { const proof = el('span', '', ' · ' + verificationText(n.id)); proof.dataset.verificationId = n.id; description.append(proof); } b.append(el('strong', '', n.title), description); return b; }
 function updateVerificationLabels() { for(const label of $$('[data-verification-id]')) label.textContent = ' · ' + verificationText(label.dataset.verificationId); }
-function drawHierarchy() { const wrap = content('全体から、個別の仕事へ', '切り離した枝も、この一覧から探してつなぎ直せます。'), visible = nodes(), ids = new Set(visible.map(n => n.id)), visited = new Set(); function walk(n, depth) { if (visited.has(n.id)) return; visited.add(n.id); const r = el('div', `hierarchy-row ${n.id === selected ? 'selected' : ''}`); r.style.paddingLeft = `${18 + depth * 22}px`; r.append(el('span', '', depth ? '└' : '◇'), el('strong', '', n.title), el('small', '', n.domain || '領域未設定'), badge(n)); r.addEventListener('click', () => choose(n.id)); wrap.append(r); visible.filter(c => c.parentId === n.id).forEach(c => walk(c, depth + 1)); } visible.filter(n => !n.parentId || !ids.has(n.parentId)).forEach(n => walk(n, 0)); visible.filter(n => !visited.has(n.id)).forEach(n => walk(n, 0)); }
+function drawHierarchy() { const wrap = content('全体から、個別の仕事へ', '切り離した枝も、この一覧から探してつなぎ直せます。'), visible = nodes(), ids = new Set(visible.map(n => n.id)), visited = new Set(); function walk(n, depth) { if (visited.has(n.id)) return; visited.add(n.id); const r = button('',()=>choose(n.id),`hierarchy-row ${n.id === selected ? 'selected' : ''}`);r.dataset.id=n.id;r.setAttribute('aria-label',n.title); r.style.paddingLeft = `${18 + depth * 22}px`; r.append(el('span', '', depth ? '└' : '◇'), el('strong', '', n.title), el('small', '', n.domain || '領域未設定'), badge(n)); wrap.append(r); visible.filter(c => c.parentId === n.id).forEach(c => walk(c, depth + 1)); } visible.filter(n => !n.parentId || !ids.has(n.parentId)).forEach(n => walk(n, 0)); visible.filter(n => !visited.has(n.id)).forEach(n => walk(n, 0)); }
 function drawLanes() { const wrap = content('完成に必要な領域を、並べる', '具体化の深さは自由です。空欄は未探索・未具体化を表し、完成済みには数えません。'), ns = nodes(), domains = [...new Set(ns.map(n => n.domain || '領域未設定'))], depths = [...new Set(ns.map(n => Number(n.depth) || 0))].sort((a,b) => a-b), grid = el('div', 'lanes'); grid.style.gridTemplateColumns = `130px repeat(${depths.length}, minmax(180px, 1fr))`; grid.append(el('div', 'lane-cell header', '領域 / 具体化')); depths.forEach(d => grid.append(el('div', 'lane-cell header', `深さ ${d}`))); for (const domainName of domains) { grid.append(el('div', 'lane-cell domain', domainName)); for (const depth of depths) { const cell = el('div', 'lane-cell'), matched = ns.filter(n => (n.domain || '領域未設定') === domainName && (Number(n.depth) || 0) === depth); matched.forEach(n => cell.append(nodeCard(n))); if (!matched.length) cell.append(el('span', 'lane-empty', '未具体化')); grid.append(cell); } } wrap.append(grid); }
 function drawTasks() { const wrap = content('作業の状態と、成果の確認を分ける', '「作業完了」でも、受入条件と現物の確認が済むまでは確認済み成果にはなりません。'), board = el('div', 'board'); for (const [status, label] of Object.entries(statuses)) { const col = el('div', 'board-column'), list = nodes().filter(n => (n.status || 'planned') === status), h = el('h3', '', label); h.append(el('span', '', String(list.length))); col.append(h); list.forEach(n => col.append(nodeCard(n))); board.append(col); } wrap.append(board); }
 function drawProcess() { const wrap = content('工程の前後と、意味のある依存', '工程関係を明示してつなぎます。並びや親子だけから順序を推定しません。'), visible = new Set(nodes().map(n => n.id)), links = state.links.filter(l => ['precedes', 'depends_on'].includes(l.type) && visible.has(l.from) && visible.has(l.to)); if (!links.length) wrap.append(el('div', 'no-process', '工程関係はまだありません。枝の詳細から「工程の前にある」または「依存する」をつなげてください。')); const connected = new Set(); for (const l of links) { connected.add(l.from); connected.add(l.to); const row = el('div', 'process-chain'); row.append(nodeCard(node(l.from)), el('span', 'process-arrow', l.type === 'precedes' ? '→' : '⇢'), nodeCard(node(l.to)), el('span', 'muted', relations[l.type])); wrap.append(row); } const free = nodes().filter(n => !connected.has(n.id)); if (free.length) { wrap.append(el('h3', 'section-title', '工程未設定の対象')); const row = el('div', 'process-chain'); free.forEach(n => row.append(nodeCard(n))); wrap.append(row); } }
@@ -138,7 +153,8 @@ function renderInspector() {
  form.append(field('タイトル','title',n.title),field('構想・仕様・判断の内容','body',n.body,'textarea'));
  const row1 = el('div','field-row');row1.append(field('領域','domain',n.domain),field('具体化の深さ','depth',n.depth ?? 0,'number'));form.append(row1);
  const row2 = el('div','field-row');row2.append(field('作業状態','status',n.status || 'planned','select',Object.entries(statuses)),field('用途','kind',n.kind || 'concept','select',[['concept','構想・仕様'],['task','タスク'],['artifact','成果物'],['metric','数値']]));form.append(row2);
- form.append(field('表示上の親（仕様の適用とは別）','parentId',n.parentId || '','select',[['','切り離す / 独立した枝'],...state.nodes.filter(x=>x.id!==n.id).map(x=>[x.id,x.title])]));
+ form.append(field('表示上の親（仕様の適用とは別）','parentId',n.parentId || '','select',[['','切り離す / 独立した枝'],...parentCandidates(state.nodes,n.id).map(x=>[x.id,x.title])]));
+ form.append(button('切り離す',()=>change([{type:'update',id:n.id,patch:{parentId:null}}])));
  const row3 = el('div','field-row');row3.append(field('開始予定','start',n.start,'date'),field('期限','due',n.due,'date'));form.append(row3,field('計画進捗 %（成果確認とは別）','progress',n.progress,'number'));
  form.append(el('div','section-title','この枝が持つ設定'),field('1行に「項目 = 値」','specsText',(n.specs || []).map(spec=>`${spec.key} = ${spec.value}`).join('\n'),'textarea'),el('p','small-note','例：主人公 = ユイ。共有設定は「仕様を適用する」でつなぎます。局所設定も自動で優先せず、異なる値は明示した例外で解決します。'));
  form.append(el('div','section-title','成果物と確認条件'),field('成果物の参照先','artifact',n.artifact),field('受入条件','criteria',n.criteria,'textarea'),checkField('完成に必要な成果として数える','required',n.required),field('成果の重み（未定なら空欄）','weight',n.weight,'number'),el('p','small-note','重みは相対的な大きさです。未定は未見積りとして残し、計画進捗 % とは分けます。'));
@@ -177,7 +193,7 @@ function renderInspector() {
  box.append(sourcesUi.renderTarget(n),form,numbersUi.details(n,currentAnalysis()?.numbers?.byId[n.id]));
  const specificationBox = el('section','analysis-section');specificationBox.id = 'specificationDetails';box.append(specificationBox);
  const verificationBox = el('section','analysis-section');verificationBox.id = 'verificationDetails';box.append(verificationBox);
- const actions2 = el('div','button-row');actions2.append(button('入力を取り消して最新へ',()=>{if(!detailDrafts.has(n.id)||confirm('未保存の入力を取り消し、最新の保存内容を表示しますか？')){detailDrafts.delete(n.id);renderInspector();renderSpecification();renderVerification();}}),button('切り離す',()=>change([{type:'update',id:n.id,patch:{parentId:null}}])),button('枝を削除',async()=>{if(confirm(`「${n.title}」を削除します。モデルの変更は取り消せます。`))await change([{type:'delete',id:n.id}]);},'danger'));box.append(actions2);renderRelations(box,n);renderSpecification();renderVerification();
+ const actions2 = el('div','button-row');actions2.append(button('入力を取り消して最新へ',()=>{if(!detailDrafts.has(n.id)||confirm('未保存の入力を取り消し、最新の保存内容を表示しますか？')){detailDrafts.delete(n.id);renderInspector();renderSpecification();renderVerification();}}),button('枝を削除',async()=>{if(!await confirmDeletion(n))return;if(node(n.id)?.version!==n.version)return toast('削除の確認中に対象が変わりました。最新内容を確認してから開き直してください。',true);await change([{type:'delete',id:n.id}]);},'danger'));box.append(actions2);renderRelations(box,n);renderSpecification();renderVerification();
 }
 function renderSpecification() {
  const box = $('#specificationDetails');if(!box)return;box.replaceChildren(el('div','section-title','この対象で有効な設定'));

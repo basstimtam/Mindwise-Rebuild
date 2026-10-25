@@ -1,5 +1,5 @@
 import { createHash } from 'node:crypto';
-import { numericDependencies } from './number-links.mjs';
+import { numericDependencies,numberContextDependencies,hasNumber } from './number-links.mjs';
 
 const hash = value => createHash('sha256').update(JSON.stringify(value)).digest('hex');
 const compare = (a, b) => String(a).localeCompare(String(b), 'en');
@@ -137,12 +137,22 @@ export function analyzeChange(before, after) {
     const pair = dependencyPair(link);
     if (pair) { if (!graph.has(pair[0])) graph.set(pair[0], []); graph.get(pair[0]).push({ to: pair[1], dependency: true }); }
   }
+  const numberEdges=[...numberContextDependencies(before),...numberContextDependencies(after)];
   for(const edge of [...numericDependencies(before),...numericDependencies(after)]) {
     if(!graph.has(edge.from))graph.set(edge.from,[]);
     graph.get(edge.from).push({to:edge.to,dependency:true});
   }
+  for(const edge of numberEdges) {
+    if(!graph.has(edge.from))graph.set(edge.from,[]);
+    graph.get(edge.from).push({to:edge.to,dependency:true,contextOnly:true});
+  }
   const oldLinks = new Map((before.links || []).map(link => [link.id, link])), newLinks = new Map((after.links || []).map(link => [link.id, link]));
-  const linkSeeds = new Set(), unknownSeeds = new Set();
+  const linkSeeds = new Set(), unknownSeeds = new Set(),contextSeeds=new Set();
+  const pair=(a,b)=>sorted([a,b]).join('\0'),beforePairs=new Set((before.links||[]).map(l=>pair(l.from,l.to))),afterPairs=new Set((after.links||[]).map(l=>pair(l.from,l.to)));
+  for(const edge of numberEdges) {
+    const key=pair(edge.from,edge.to);
+    if(beforePairs.has(key)!==afterPairs.has(key))contextSeeds.add(edge.to);
+  }
   const oldProse = proseApplications(before), newProse = proseApplications(after);
   for (const id of new Set([...oldLinks.keys(), ...newLinks.keys()])) {
     const a = oldLinks.get(id), b = newLinks.get(id);
@@ -153,33 +163,38 @@ export function analyzeChange(before, after) {
       const pair = dependencyPair(link); if (pair) { linkSeeds.add(pair[0]); linkSeeds.add(pair[1]); unknownSeeds.add(pair[1]); }
     }
   }
-  const queue = [], seen = new Set();
+  const queue = [], seen = new Set(),inputCandidates=new Set(),inputUnknownIds=new Set();
   for (const [id, fields] of fieldsById) queue.push({ id, unknown: fields.some(field => !['specs', 'existence'].includes(field)) || fields.includes('existence') && (hasFreeBody(oldNodes.get(id)) || hasFreeBody(newNodes.get(id))) });
   for (const id of linkSeeds) queue.push({ id, unknown: unknownSeeds.has(id) });
-  while (queue.length) {
-    const { id, unknown } = queue.shift(), signature = `${id}\0${unknown}`;
+  for (const id of contextSeeds) queue.push({id,unknown:true,contextOnly:true});
+  for(let index=0;index<queue.length;index++) {
+    const { id, unknown,contextOnly=false } = queue[index], signature = `${id}\0${unknown}\0${contextOnly}`;
     if (seen.has(signature)) continue;
     seen.add(signature); candidateIds.add(id);
+    if(!contextOnly)inputCandidates.add(id);
+    if(!contextOnly&&unknown)inputUnknownIds.add(id);
     if (unknown) unknownIds.add(id);
-    for (const edge of graph.get(id) || []) queue.push({ id: edge.to, unknown: unknown || edge.dependency });
+    for (const edge of graph.get(id) || []) queue.push({ id: edge.to, unknown: unknown || edge.dependency,contextOnly:contextOnly||edge.contextOnly });
   }
-  const result = { changed: sorted(fieldsById.keys()), affected: [], exempt: [], unknown: [], conflicts: [], details: [] };
+  const result = { changed: sorted(fieldsById.keys()), affected: [], exempt: [], unknown: [], inputRecheck:[],conflicts: [], details: [] };
   for (const id of ids) {
     const target = newNodes.get(id) || oldNodes.get(id);
-    let effect = 'unchanged', reasons = ['明示された影響経路なし。未記録の影響は保証しません。'], beforeSpecHash = null, afterSpecHash = null;
+    let effect = 'unchanged', reasons = ['明示された影響経路なし。未記録の影響は保証しません。'], beforeSpecHash = null, afterSpecHash = null,inputChanged=false;
     if (candidateIds.has(id)) {
       const previous = resolveSpecifications(before, id), current = resolveSpecifications(after, id), fields = fieldsById.get(id) || [];
       beforeSpecHash = previous.fingerprint; afterSpecHash = current.fingerprint;
+      inputChanged=inputCandidates.has(id)&&(fields.some(field=>field!=='specs')||beforeSpecHash!==afterSpecHash||inputUnknownIds.has(id));
       if (current.status === 'conflict') result.conflicts.push({ targetId: id, conflicts: current.conflicts, cycles: current.cycles });
       if (fields.some(field => field !== 'specs') || beforeSpecHash !== afterSpecHash) {
         effect = 'affected'; reasons = fields.some(field => field !== 'specs') ? ['対象の内容・条件・参照が変更されます。'] : ['有効な設定または明示された適用・例外が変わります。'];
       } else if (unknownIds.has(id)) {
-        effect = 'unknown'; reasons = ['関連元の本文や意味上の依存が変わります。内容への影響は再確認が必要です。'];
+        effect = 'unknown'; reasons = [inputUnknownIds.has(id)?'関連元の本文や意味上の依存が変わります。内容への影響は再確認が必要です。':'関連する数値の確認範囲が変わります。入力値そのものの鮮度とは別に成果を再確認します。'];
       } else if (current.exceptions.some(exception => fieldsById.get(exception.to)?.includes('specs') && changedSpecificationKeys(oldNodes.get(exception.to), newNodes.get(exception.to)).has(exception.key))) {
         effect = 'exempt'; reasons = ['明示した局所例外により、有効な設定は変わりません。'];
       } else reasons = ['記録済みの設定・関係では有効な内容は変わりません。未記録の影響は保証しません。'];
     }
     if (effect !== 'unchanged') result[effect].push(id);
+    if(['affected','unknown'].includes(effect)&&inputChanged&&newNodes.has(id)&&hasNumber(newNodes.get(id)))result.inputRecheck.push(id);
     result.details.push({ targetId: id, title: target.title || id, domain: target.domain || '', effect, reasons, beforeSpecHash, afterSpecHash });
   }
   return result;

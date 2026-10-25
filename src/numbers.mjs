@@ -2,13 +2,14 @@ import { createHash } from 'node:crypto';
 import { contractContext, readContracts } from './contracts.mjs';
 import { resolveSpecifications } from './semantics.mjs';
 export { numericDependencies } from './number-links.mjs';
+import { hasNumber } from './number-links.mjs';
+export { hasNumber } from './number-links.mjs';
 
 const hash = value => createHash('sha256').update(JSON.stringify(value)).digest('hex');
 const issue = (code, message) => ({code, message});
 const fail = (code, message) => { throw Object.assign(new Error(message), {code}); };
 const identifier = /^[A-Za-z][A-Za-z0-9_]{0,31}$/;
 export const validMetricName = name => typeof name === 'string' && identifier.test(name);
-export const hasNumber = n => n.value !== null && n.value !== undefined || Boolean(n.formula?.trim()||n.unit?.trim()||n.metricSource?.trim()||n.metricInputs?.length) || n.kind === 'metric' || ['current','stale'].includes(n.metricFreshness);
 
 /** Small arithmetic language. No eval, property access, calls, strings or ambient names. */
 export function parseFormula(text) {
