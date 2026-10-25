@@ -1,0 +1,62 @@
+{
+  "at": "2026-10-25T07:35:36.782Z",
+  "result": "passed",
+  "checks": [
+    "final MCP-disabled connection succeeded",
+    "same conversation resumed",
+    "corrected context retained",
+    "display move during production preserved",
+    "unrelated branch untouched",
+    "real artifact connected and hash matched"
+  ],
+  "sourceHashes": {
+    "src/codex.mjs": "a5d92b3a47c5b9271c41bb26ae86913173992b38ff1192ad179f0b4377f9bd31",
+    "src/server.mjs": "b6d52181824b8775ee61ee9e6bea09468bf0770359d2466e71ec0c4ce1057168",
+    "src/store.mjs": "2dba89bd9dcb0bd22321d46297f0a2ffdedb0fcd836c713085065e4bd06186e0",
+    "public/app.js": "a211142067a49c70533bdc786dfe0319187b72ee57c7220e5a1e88c20d0b716b"
+  },
+  "run": {
+    "id": "cb14b1e2-4838-4b0a-9c25-2192bd73cdfd",
+    "projectId": "92fe2aeb0b38f2193f45",
+    "targetId": "integration-character",
+    "targetVersion": 4,
+    "baseRevision": 4,
+    "status": "completed",
+    "startedAt": "2026-10-25T07:35:29.486Z",
+    "prompt": "現在の訂正済み仕様を使って、主人公の紹介を50文字程度で character-layout.md に制作してください。本文の更新も子の追加も不要です。外部ツールは使いません。",
+    "artifacts": [
+      {
+        "path": "artifacts/cb14b1e2-4838-4b0a-9c25-2192bd73cdfd/character-layout.md",
+        "sha256": "890aff1a68d5759e7d29b40af9c911555f7d611fcbfb5f26df0fa9c0defbfe3d",
+        "bytes": 154
+      }
+    ],
+    "threadId": "01a171ec-aae0-74f3-b534-25b4149f57a8",
+    "contextHash": "669674e46a9a90eec1aa6a656c44c188c7f44f143f6fc64bcdba760b8104b0e4",
+    "contextFingerprint": "cfd5dea5dc357b184c9e67b46c45662efbc5acb006c89f8bb82ab9c0c939aec8",
+    "turnId": "01a171fc-6c3d-7f11-bace-297f0914b06c",
+    "reply": "訂正済み仕様で、約50文字の紹介文を制作しました。",
+    "decisionReason": "現在の仕様に従い、ユイ・緑の灯台・黒い猫を含めました。",
+    "proposal": {
+      "reply": "訂正済み仕様で、約50文字の紹介文を制作しました。",
+      "updatedBody": null,
+      "decisionReason": "現在の仕様に従い、ユイ・緑の灯台・黒い猫を含めました。",
+      "children": [],
+      "artifacts": [
+        {
+          "name": "character-layout.md",
+          "content": "ユイは緑の灯台を守る主人公。相棒の黒い猫とともに、嵐の夜も灯りを絶やさず、海を渡る人々の帰りを見守る。\n"
+        }
+      ]
+    },
+    "finishedAt": "2026-10-25T07:35:36.658Z"
+  },
+  "artifact": {
+    "path": "artifacts/cb14b1e2-4838-4b0a-9c25-2192bd73cdfd/character-layout.md",
+    "text": "ユイは緑の灯台を守る主人公。相棒の黒い猫とともに、嵐の夜も灯りを絶やさず、海を渡る人々の帰りを見守る。\n",
+    "sha256": "890aff1a68d5759e7d29b40af9c911555f7d611fcbfb5f26df0fa9c0defbfe3d",
+    "recordedSha256": "890aff1a68d5759e7d29b40af9c911555f7d611fcbfb5f26df0fa9c0defbfe3d",
+    "matches": true
+  },
+  "modelRevision": 6
+}

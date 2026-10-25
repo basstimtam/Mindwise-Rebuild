@@ -1,0 +1,20 @@
+{
+  "purpose": "Read-only reference material for the new Mindwise design; not an approved product contract or a reusable engine SDK.",
+  "copied_at_utc": "2026-10-25T05:58:22.5057386Z",
+  "original_folder": "P:\\AI Output\\REA\\MindManager19",
+  "installed_software_reference": "C:\\Program Files (x86)\\Mindjet\\MindManager 19",
+  "originals_preserved": true,
+  "hash_algorithm": "SHA-256",
+  "files": [
+    {
+      "name": "ANALYSIS_REPORT.md",
+      "original_path": "P:\\AI Output\\REA\\MindManager19\\ANALYSIS_REPORT.md",
+      "sha256": "78f6dbee35c221fbb509a562d15175eeaaacf41932e616d0fe306aaead8fa1f2"
+    },
+    {
+      "name": "MindManager_exports.json",
+      "original_path": "P:\\AI Output\\REA\\MindManager19\\MindManager_exports.json",
+      "sha256": "77db90819aadaafb5a6c4498739372181bda681ea8172b41b5a701187dcf3c2a"
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Mindwise — 制作の地図</title><link rel="stylesheet" href="/style.css"><script type="module" src="/app.js"></script></head>
+<body>
+<aside class="sidebar">
+ <div class="brand"><span class="brand-mark">m<span>·</span></span><div>mindwise<small>制作の地図</small></div></div>
+ <div class="project-tag"><span class="live-dot"></span> PERSONAL WORKSPACE</div>
+ <button id="allDomains" class="nav-item active">◈ <span>プロジェクト全体</span></button>
+ <div class="sidebar-label">完成に必要な領域</div><nav id="domains" aria-label="領域"></nav>
+ <div class="sidebar-label">探す・つなぐ</div><input id="search" class="search" placeholder="枝のタイトルを検索" aria-label="枝を検索"><div id="searchResults"></div>
+ <div class="sidebar-foot"><span class="live-dot"></span> ローカル保存<div id="connectionText">接続を確認中</div><button id="backup">バックアップ</button><button id="export">書き出す</button><button id="import">読み込む</button><input type="file" id="importFile" accept="application/json,.json" hidden></div>
+</aside>
+<main>
+ <header class="topbar"><div><div class="eyebrow">WORKSPACE <span>/</span> MINDWISE REBUILD</div><h1>構想から、完成まで。</h1></div><div class="top-actions"><span id="saveState" class="saved">● 保存済み</span><button id="undo" title="モデルの最後の変更を取り消す">↶ 取り消す</button><button id="addNode" class="primary">＋ 枝をつくる</button></div></header>
+ <div class="workspace-head"><div class="tabs" role="tablist" aria-label="表示方法"><button data-view="map" class="active" role="tab">◈ 地図</button><button data-view="hierarchy" role="tab">☷ 階層</button><button data-view="lanes" role="tab">▥ 領域</button><button data-view="process" role="tab">⇢ プロセス</button><button data-view="tasks" role="tab">▤ タスク</button><button data-view="gantt" role="tab">▰ ガント</button><button data-view="numbers" role="tab">＃ 数値</button></div><span id="scopeLabel" class="scope">全領域</span></div>
+ <div class="workspace"><section class="canvas-area"><div class="canvas-toolbar"><div><span class="label" id="viewLabel">全体を考える</span><span id="viewHint">枝を動かして整理。関係は意味を分けてつなげます。</span></div><div id="mapControls"><button id="zoomOut" aria-label="縮小">−</button><span id="zoomLabel">100%</span><button id="zoomIn" aria-label="拡大">＋</button><button id="fit">全体表示</button></div></div><div id="view" tabindex="0" aria-label="作業画面"></div><footer class="canvas-footer"><span id="modelSummary"></span><span>同じ対象を、異なる見方で。</span></footer></section>
+ <aside class="detail-panel"><div class="panel-tabs"><button id="detailTab" class="active">対象の詳細</button><button id="aiTab">Codexと制作 <span>✧</span></button></div><section id="inspector"></section><section id="aiPanel" hidden><div class="ai-heading"><span class="ai-symbol">✧</span><div><strong>選んだ枝から制作へ</strong><p id="aiTarget">対象を選択してください</p></div></div><div class="ai-note">実行開始時の対象と版を保持します。制作の終了と、成果物の確認済みは別に扱います。</div><div id="aiStatus" class="muted">接続を確認中</div><div id="aiMessages" class="ai-messages" aria-live="polite"></div><form id="aiForm"><label for="aiPrompt">この対象で取り組むこと</label><textarea id="aiPrompt" rows="4" placeholder="例：この仕様に沿って、制作物の初稿を作ってください。" required></textarea><div class="ai-actions"><button id="interrupt" type="button">中断</button><button class="primary" id="sendAi" type="submit">制作を始める ↗</button></div></form><button id="newConversation" class="text-button">新しい会話で続ける</button></section></aside></div>
+ <section class="bottom-strip"><div><span class="eyebrow">成果の見通し</span><strong id="progressSummary">必要な成果物を定義しましょう</strong><small id="progressDetail">枝の数は完成率にしません。</small></div><div id="recentRun"><span class="eyebrow">セッションをつなぐ</span><strong>制作の記録が、ここに戻ります</strong><small>対象・成果物・理由を同じ地図へ</small></div><button id="historyButton">変更履歴を見る ↗</button></section>
+</main>
+<div id="toast" role="status" hidden></div><dialog id="historyDialog"><div class="dialog-head"><h2>変更履歴</h2><button id="closeHistory">閉じる</button></div><div id="historyList"></div></dialog>
+<dialog id="artifactDialog"><div class="dialog-head"><h2>制作結果を読む</h2><button id="closeArtifact">閉じる</button></div><p id="artifactPath"></p><p id="artifactFreshness"></p><pre id="artifactContent"></pre></dialog>
+</body></html>

@@ -1,0 +1,207 @@
+{
+  "pack_kind": "reference_only_not_adopted_code",
+  "source_root": "C:\\Users\\basst\\Dropbox\\AI Project\\15.Mind-wise",
+  "source_commit": "7ccfd1454bc14becb1b3539bab3009ad29fabb24",
+  "source_contract_revision": "Mindwise Rev 4 (legacy reference only)",
+  "source_tracked_changes_at_snapshot": "",
+  "tests_executed": false,
+  "legacy_database_opened": false,
+  "product_code_installed": false,
+  "hash_algorithm": "SHA-256",
+  "snapshot_files": [
+    {
+      "source_path": "C:\\Users\\basst\\Dropbox\\AI Project\\15.Mind-wise\\src\\mindwise\\__init__.py",
+      "source_relative_path": "src/mindwise/__init__.py",
+      "snapshot_relative_path": "source-snapshot/src/mindwise/__init__.py",
+      "bytes": 101,
+      "sha256": "47900253233fdace0053bb10404e32a96737981521632bdd885b6a58eeab6835"
+    },
+    {
+      "source_path": "C:\\Users\\basst\\Dropbox\\AI Project\\15.Mind-wise\\src\\mindwise\\core.py",
+      "source_relative_path": "src/mindwise/core.py",
+      "snapshot_relative_path": "source-snapshot/src/mindwise/core.py",
+      "bytes": 74365,
+      "sha256": "787a009cb10dfc4fa614664836f600b3f817466032cd1add6b9f0c918e07dd09"
+    },
+    {
+      "source_path": "C:\\Users\\basst\\Dropbox\\AI Project\\15.Mind-wise\\src\\mindwise\\tasks.py",
+      "source_relative_path": "src/mindwise/tasks.py",
+      "snapshot_relative_path": "source-snapshot/src/mindwise/tasks.py",
+      "bytes": 3033,
+      "sha256": "ba9637008fae8fa3b9efca7679abcdff5b813072fc9c2ffb7dda9405b7753b5a"
+    },
+    {
+      "source_path": "C:\\Users\\basst\\Dropbox\\AI Project\\15.Mind-wise\\src\\mindwise\\metrics.py",
+      "source_relative_path": "src/mindwise/metrics.py",
+      "snapshot_relative_path": "source-snapshot/src/mindwise/metrics.py",
+      "bytes": 9671,
+      "sha256": "7b2c6fde8491a4b0569993a5f7dc6181c66916b92eac0dcf1b7c55f112e87865"
+    },
+    {
+      "source_path": "C:\\Users\\basst\\Dropbox\\AI Project\\15.Mind-wise\\src\\mindwise\\backup.py",
+      "source_relative_path": "src/mindwise/backup.py",
+      "snapshot_relative_path": "source-snapshot/src/mindwise/backup.py",
+      "bytes": 5111,
+      "sha256": "6c6e25e6079cddb07b5257f9f6af5830f9b3945a798317123f76d77a1476bd90"
+    },
+    {
+      "source_path": "C:\\Users\\basst\\Dropbox\\AI Project\\15.Mind-wise\\src\\mindwise\\coverage.py",
+      "source_relative_path": "src/mindwise/coverage.py",
+      "snapshot_relative_path": "source-snapshot/src/mindwise/coverage.py",
+      "bytes": 1594,
+      "sha256": "37ba3b4a0859b2549cebcdd2016e1fcda60c617a0942717e27ab3de0eb31c5f7"
+    },
+    {
+      "source_path": "C:\\Users\\basst\\Dropbox\\AI Project\\15.Mind-wise\\src\\mindwise\\verification.py",
+      "source_relative_path": "src/mindwise/verification.py",
+      "snapshot_relative_path": "source-snapshot/src/mindwise/verification.py",
+      "bytes": 9423,
+      "sha256": "58a998753d86a87fc888d675feb0cb80b38d87acfa950987c686a21d25bc0a92"
+    },
+    {
+      "source_path": "C:\\Users\\basst\\Dropbox\\AI Project\\15.Mind-wise\\src\\mindwise\\locations.py",
+      "source_relative_path": "src/mindwise/locations.py",
+      "snapshot_relative_path": "source-snapshot/src/mindwise/locations.py",
+      "bytes": 2011,
+      "sha256": "039ac50844793f8888b0422f9812e9391dbb325896f8b0a5b2ab6f60a0ad15d5"
+    },
+    {
+      "source_path": "C:\\Users\\basst\\Dropbox\\AI Project\\15.Mind-wise\\src\\mindwise\\changes.py",
+      "source_relative_path": "src/mindwise/changes.py",
+      "snapshot_relative_path": "source-snapshot/src/mindwise/changes.py",
+      "bytes": 11224,
+      "sha256": "1d2bffb1e237f430e9b24756c0c6de2f3fa1d1590732ece4e8bcf6443fa28707"
+    },
+    {
+      "source_path": "C:\\Users\\basst\\Dropbox\\AI Project\\15.Mind-wise\\src\\mindwise\\contract.py",
+      "source_relative_path": "src/mindwise/contract.py",
+      "snapshot_relative_path": "source-snapshot/src/mindwise/contract.py",
+      "bytes": 16449,
+      "sha256": "218c0f9401a2dc44b1f97957b49a1d545d8d2e48fdd4914ff3994b5dd1ab6bb0"
+    },
+    {
+      "source_path": "C:\\Users\\basst\\Dropbox\\AI Project\\15.Mind-wise\\src\\mindwise\\evidence.py",
+      "source_relative_path": "src/mindwise/evidence.py",
+      "snapshot_relative_path": "source-snapshot/src/mindwise/evidence.py",
+      "bytes": 8012,
+      "sha256": "9896d08f2d00a5040caf282f0e808b01d1045c8cfb4a10b56f7f40f68ed5c645"
+    },
+    {
+      "source_path": "C:\\Users\\basst\\Dropbox\\AI Project\\15.Mind-wise\\tests\\test_core.py",
+      "source_relative_path": "tests/test_core.py",
+      "snapshot_relative_path": "source-snapshot/tests/test_core.py",
+      "bytes": 73272,
+      "sha256": "0d914d14713a5c747941641e4f7651683974b524996a39a483fc4c6790aac60f"
+    },
+    {
+      "source_path": "C:\\Users\\basst\\Dropbox\\AI Project\\15.Mind-wise\\tests\\test_tasks.py",
+      "source_relative_path": "tests/test_tasks.py",
+      "snapshot_relative_path": "source-snapshot/tests/test_tasks.py",
+      "bytes": 2139,
+      "sha256": "fb8889d18fc50592a1134672da804d676f9d96bf3fd899bbfc181ec3ed5a504c"
+    },
+    {
+      "source_path": "C:\\Users\\basst\\Dropbox\\AI Project\\15.Mind-wise\\tests\\test_metrics.py",
+      "source_relative_path": "tests/test_metrics.py",
+      "snapshot_relative_path": "source-snapshot/tests/test_metrics.py",
+      "bytes": 10392,
+      "sha256": "a589f46e10faa510ad61818059edcb4b0ef4100acfacc0701c054b71969b8061"
+    },
+    {
+      "source_path": "C:\\Users\\basst\\Dropbox\\AI Project\\15.Mind-wise\\tests\\test_backup.py",
+      "source_relative_path": "tests/test_backup.py",
+      "snapshot_relative_path": "source-snapshot/tests/test_backup.py",
+      "bytes": 10071,
+      "sha256": "3839c44cb536b9f39f60db142ac4f8722bc5bc732e75eb91a83bedb9fc28a2fc"
+    },
+    {
+      "source_path": "C:\\Users\\basst\\Dropbox\\AI Project\\15.Mind-wise\\tests\\test_coverage.py",
+      "source_relative_path": "tests/test_coverage.py",
+      "snapshot_relative_path": "source-snapshot/tests/test_coverage.py",
+      "bytes": 1908,
+      "sha256": "9a7381b04e04d556758a0cfb92a147e83ae0408dc0d212c657f9f495b22f9949"
+    },
+    {
+      "source_path": "C:\\Users\\basst\\Dropbox\\AI Project\\15.Mind-wise\\tests\\test_verification.py",
+      "source_relative_path": "tests/test_verification.py",
+      "snapshot_relative_path": "source-snapshot/tests/test_verification.py",
+      "bytes": 6557,
+      "sha256": "9ce312d9c7e848c59dddbfe8d977342db2bf42c82693f4e95fd09651855b19d5"
+    },
+    {
+      "source_path": "C:\\Users\\basst\\Dropbox\\AI Project\\15.Mind-wise\\tests\\test_locations.py",
+      "source_relative_path": "tests/test_locations.py",
+      "snapshot_relative_path": "source-snapshot/tests/test_locations.py",
+      "bytes": 2885,
+      "sha256": "504caf084f994dd6c454a431d9dfecd462724990bf69fbffb30b1f52bd2fd58e"
+    },
+    {
+      "source_path": "C:\\Users\\basst\\Dropbox\\AI Project\\15.Mind-wise\\tests\\test_changes.py",
+      "source_relative_path": "tests/test_changes.py",
+      "snapshot_relative_path": "source-snapshot/tests/test_changes.py",
+      "bytes": 11714,
+      "sha256": "74df78077a4583a4adb14d4ff7c23d2a911e71264e9a2047c596e936366f08b0"
+    },
+    {
+      "source_path": "C:\\Users\\basst\\Dropbox\\AI Project\\15.Mind-wise\\tests\\test_acceptance_workflow.py",
+      "source_relative_path": "tests/test_acceptance_workflow.py",
+      "snapshot_relative_path": "source-snapshot/tests/test_acceptance_workflow.py",
+      "bytes": 9015,
+      "sha256": "407c04be7fd47bc54c3e057337a47b9fe09444d2577ec64289c4e7b9c2ef68d8"
+    }
+  ],
+  "excerpt_sources": [
+    {
+      "source_path": "C:\\Users\\basst\\Dropbox\\AI Project\\15.Mind-wise\\src\\mindwise\\core.py",
+      "source_relative_path": "src/mindwise/core.py",
+      "start_line": 73,
+      "end_line": 103,
+      "source_sha256": "787a009cb10dfc4fa614664836f600b3f817466032cd1add6b9f0c918e07dd09"
+    },
+    {
+      "source_path": "C:\\Users\\basst\\Dropbox\\AI Project\\15.Mind-wise\\src\\mindwise\\app.js",
+      "source_relative_path": "src/mindwise/app.js",
+      "start_line": 193,
+      "end_line": 211,
+      "source_sha256": "404a8df585f2205105d341e2f461a62c46f22836b3233683d57c5337f4608b2f"
+    },
+    {
+      "source_path": "C:\\Users\\basst\\Dropbox\\AI Project\\15.Mind-wise\\src\\mindwise\\mmap_content.py",
+      "source_relative_path": "src/mindwise/mmap_content.py",
+      "start_line": 218,
+      "end_line": 227,
+      "source_sha256": "ed2e73cd1b64b02c27a77bb1819a718fff44d8432db1fc489314853435f03ef8"
+    },
+    {
+      "source_path": "C:\\Users\\basst\\Dropbox\\AI Project\\15.Mind-wise\\src\\mindwise\\mm_bridge.py",
+      "source_relative_path": "src/mindwise/mm_bridge.py",
+      "start_line": 102,
+      "end_line": 138,
+      "source_sha256": "605843ae1f5987da6308b5a7143e5b07db7df4a2620255463192668a890fe1dd"
+    },
+    {
+      "source_path": "C:\\Users\\basst\\Dropbox\\AI Project\\15.Mind-wise\\src\\mindwise\\tasks.py",
+      "source_relative_path": "src/mindwise/tasks.py",
+      "start_line": 14,
+      "end_line": 28,
+      "source_sha256": "ba9637008fae8fa3b9efca7679abcdff5b813072fc9c2ffb7dda9405b7753b5a"
+    },
+    {
+      "source_path": "C:\\Users\\basst\\Dropbox\\AI Project\\15.Mind-wise\\src\\mindwise\\metrics.py",
+      "source_relative_path": "src/mindwise/metrics.py",
+      "start_line": 97,
+      "end_line": 116,
+      "source_sha256": "7b2c6fde8491a4b0569993a5f7dc6181c66916b92eac0dcf1b7c55f112e87865"
+    }
+  ],
+  "static_mindwise_import_closure": "complete_for_selected_files_only",
+  "excluded": [
+    "legacy contracts and voyage directives",
+    "config and hooks",
+    "database and backups",
+    "git history",
+    "large evidence/runtime/work",
+    "installed MindManager binaries",
+    "unregistered sibling/old projects"
+  ]
+}

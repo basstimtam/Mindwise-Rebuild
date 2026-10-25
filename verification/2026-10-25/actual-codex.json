@@ -1,0 +1,671 @@
+{
+  "at": "2026-10-25T07:18:31.318Z",
+  "status": {
+    "connected": true,
+    "accountType": "chatgpt",
+    "active": false,
+    "lastError": null,
+    "mode": "bounded-text-production",
+    "guarantee": "対象の文脈を送信し、構造化応答を検証して枝とテキスト成果物へ反映。任意shell実行なし。",
+    "run": {
+      "id": "bae02b86-07a2-4f1c-a67d-ea0ba74a7339",
+      "targetId": "integration-character",
+      "targetVersion": 1,
+      "baseRevision": 1,
+      "status": "completed",
+      "startedAt": "2026-10-25T07:18:17.292Z",
+      "prompt": "対象本文の設定を使い、主人公の紹介を100文字程度で character.md に制作してください。対象本文は変更せず、子の枝も追加しないでください。作成理由を短く示してください。これはアプリ接続検証で、外部ツールは使いません。",
+      "artifacts": [
+        {
+          "path": "artifacts/bae02b86-07a2-4f1c-a67d-ea0ba74a7339/character.md",
+          "sha256": "3936627f5f2f7d6ac18469a8b233c883d1208985f4864cf324ba3c43c101de4b",
+          "bytes": 319
+        }
+      ],
+      "threadId": "01a171ec-aae0-74f3-b534-25b4149f57a8",
+      "contextHash": "95dc5eeda02d487773398e689a162abbbe90ea8cbca233fef4d70331cadfa683",
+      "turnId": "01a171ec-aaef-7cc1-b670-e64ecb6357dc",
+      "reply": "主人公紹介を約100文字で制作しました。",
+      "decisionReason": "ミナが青い灯台を守り、白い鳥を相棒とする設定を軸に、人柄が伝わる紹介にしました。",
+      "proposal": {
+        "reply": "主人公紹介を約100文字で制作しました。",
+        "updatedBody": null,
+        "decisionReason": "ミナが青い灯台を守り、白い鳥を相棒とする設定を軸に、人柄が伝わる紹介にしました。",
+        "children": [],
+        "artifacts": [
+          {
+            "name": "character.md",
+            "content": "ミナは、海辺に立つ青い灯台を守る主人公。相棒の白い鳥とともに、毎日灯りを確かめ、帰る船を見守っている。静かな時間を好むが、誰かが迷えばためらわず手を差し伸べる。嵐の夜にも希望の灯りを絶やさない、芯の強い守り手だ。\n"
+          }
+        ]
+      },
+      "finishedAt": "2026-10-25T07:18:31.294Z"
+    }
+  },
+  "state": {
+    "schemaVersion": 1,
+    "projectId": "92fe2aeb0b38f2193f45",
+    "revision": 2,
+    "nodes": [
+      {
+        "id": "integration-character",
+        "parentId": null,
+        "title": "接続試験：主人公の初稿",
+        "body": "新Mindwise内だけの架空の検証用素材。主人公ミナは青い灯台を守る。相棒は白い鳥。確認用語は「青い灯台」。",
+        "domain": "キャラクター",
+        "depth": 2,
+        "status": "planned",
+        "progress": 0,
+        "start": "",
+        "due": "",
+        "x": 80,
+        "y": 80,
+        "kind": "artifact",
+        "unit": "",
+        "value": null,
+        "formula": "",
+        "artifact": "artifacts/bae02b86-07a2-4f1c-a67d-ea0ba74a7339/character.md",
+        "criteria": "青い灯台と白い鳥を含む短い紹介文。",
+        "verified": false,
+        "version": 2
+      }
+    ],
+    "links": [],
+    "runs": [
+      {
+        "id": "b374fd48-e04b-4799-8a71-76b25fe0c7bc",
+        "targetId": "integration-character",
+        "targetVersion": 1,
+        "baseRevision": 1,
+        "status": "failed",
+        "startedAt": "2026-10-25T07:15:40.605Z",
+        "prompt": "対象本文の設定を使い、主人公の紹介を100文字程度で character.md に制作してください。対象本文は変更せず、子の枝も追加しないでください。作成理由を短く示してください。これはアプリ接続検証で、外部ツールは使いません。",
+        "artifacts": [],
+        "events": [
+          {
+            "type": "error",
+            "text": "接続が中断しました。現物照合が必要です",
+            "time": "2026-10-25T07:15:40.671Z"
+          }
+        ],
+        "updatedAt": "2026-10-25T07:15:40.671Z",
+        "error": "接続が中断しました。現物照合が必要です",
+        "finishedAt": "2026-10-25T07:15:40.671Z"
+      },
+      {
+        "id": "5f61d3f4-1c73-4c9e-a9e3-026ea3ce8aaf",
+        "targetId": "integration-character",
+        "targetVersion": 1,
+        "baseRevision": 1,
+        "status": "failed",
+        "startedAt": "2026-10-25T07:17:55.639Z",
+        "prompt": "対象本文の設定を使い、主人公の紹介を100文字程度で character.md に制作してください。対象本文は変更せず、子の枝も追加しないでください。作成理由を短く示してください。これはアプリ接続検証で、外部ツールは使いません。",
+        "artifacts": [],
+        "events": [
+          {
+            "type": "error",
+            "text": "thread/start.environments requires experimentalApi capability",
+            "time": "2026-10-25T07:17:56.734Z"
+          }
+        ],
+        "updatedAt": "2026-10-25T07:17:56.735Z",
+        "error": "thread/start.environments requires experimentalApi capability",
+        "finishedAt": "2026-10-25T07:17:56.734Z"
+      },
+      {
+        "id": "bae02b86-07a2-4f1c-a67d-ea0ba74a7339",
+        "targetId": "integration-character",
+        "targetVersion": 1,
+        "baseRevision": 1,
+        "status": "completed",
+        "startedAt": "2026-10-25T07:18:17.292Z",
+        "prompt": "対象本文の設定を使い、主人公の紹介を100文字程度で character.md に制作してください。対象本文は変更せず、子の枝も追加しないでください。作成理由を短く示してください。これはアプリ接続検証で、外部ツールは使いません。",
+        "artifacts": [
+          {
+            "path": "artifacts/bae02b86-07a2-4f1c-a67d-ea0ba74a7339/character.md",
+            "sha256": "3936627f5f2f7d6ac18469a8b233c883d1208985f4864cf324ba3c43c101de4b",
+            "bytes": 319
+          }
+        ],
+        "events": [
+          {
+            "type": "delta",
+            "text": "海",
+            "time": "2026-10-25T07:18:25.899Z"
+          },
+          {
+            "type": "delta",
+            "text": "辺",
+            "time": "2026-10-25T07:18:26.265Z"
+          },
+          {
+            "type": "delta",
+            "text": "に",
+            "time": "2026-10-25T07:18:26.520Z"
+          },
+          {
+            "type": "delta",
+            "text": "立",
+            "time": "2026-10-25T07:18:26.520Z"
+          },
+          {
+            "type": "delta",
+            "text": "つ",
+            "time": "2026-10-25T07:18:26.520Z"
+          },
+          {
+            "type": "delta",
+            "text": "青",
+            "time": "2026-10-25T07:18:26.520Z"
+          },
+          {
+            "type": "delta",
+            "text": "い",
+            "time": "2026-10-25T07:18:26.520Z"
+          },
+          {
+            "type": "delta",
+            "text": "灯",
+            "time": "2026-10-25T07:18:26.521Z"
+          },
+          {
+            "type": "delta",
+            "text": "台",
+            "time": "2026-10-25T07:18:26.521Z"
+          },
+          {
+            "type": "delta",
+            "text": "を",
+            "time": "2026-10-25T07:18:26.521Z"
+          },
+          {
+            "type": "delta",
+            "text": "守",
+            "time": "2026-10-25T07:18:26.521Z"
+          },
+          {
+            "type": "delta",
+            "text": "る",
+            "time": "2026-10-25T07:18:26.521Z"
+          },
+          {
+            "type": "delta",
+            "text": "主人",
+            "time": "2026-10-25T07:18:26.521Z"
+          },
+          {
+            "type": "delta",
+            "text": "公",
+            "time": "2026-10-25T07:18:26.521Z"
+          },
+          {
+            "type": "delta",
+            "text": "。",
+            "time": "2026-10-25T07:18:26.521Z"
+          },
+          {
+            "type": "delta",
+            "text": "相",
+            "time": "2026-10-25T07:18:26.521Z"
+          },
+          {
+            "type": "delta",
+            "text": "棒",
+            "time": "2026-10-25T07:18:26.521Z"
+          },
+          {
+            "type": "delta",
+            "text": "の",
+            "time": "2026-10-25T07:18:26.521Z"
+          },
+          {
+            "type": "delta",
+            "text": "白",
+            "time": "2026-10-25T07:18:26.680Z"
+          },
+          {
+            "type": "delta",
+            "text": "い",
+            "time": "2026-10-25T07:18:26.680Z"
+          },
+          {
+            "type": "delta",
+            "text": "鳥",
+            "time": "2026-10-25T07:18:26.680Z"
+          },
+          {
+            "type": "delta",
+            "text": "と",
+            "time": "2026-10-25T07:18:26.680Z"
+          },
+          {
+            "type": "delta",
+            "text": "とも",
+            "time": "2026-10-25T07:18:26.680Z"
+          },
+          {
+            "type": "delta",
+            "text": "に",
+            "time": "2026-10-25T07:18:26.680Z"
+          },
+          {
+            "type": "delta",
+            "text": "、",
+            "time": "2026-10-25T07:18:26.680Z"
+          },
+          {
+            "type": "delta",
+            "text": "毎",
+            "time": "2026-10-25T07:18:26.680Z"
+          },
+          {
+            "type": "delta",
+            "text": "日",
+            "time": "2026-10-25T07:18:26.879Z"
+          },
+          {
+            "type": "delta",
+            "text": "灯",
+            "time": "2026-10-25T07:18:26.879Z"
+          },
+          {
+            "type": "delta",
+            "text": "り",
+            "time": "2026-10-25T07:18:26.879Z"
+          },
+          {
+            "type": "delta",
+            "text": "を",
+            "time": "2026-10-25T07:18:26.879Z"
+          },
+          {
+            "type": "delta",
+            "text": "確",
+            "time": "2026-10-25T07:18:27.068Z"
+          },
+          {
+            "type": "delta",
+            "text": "か",
+            "time": "2026-10-25T07:18:27.068Z"
+          },
+          {
+            "type": "delta",
+            "text": "め",
+            "time": "2026-10-25T07:18:27.068Z"
+          },
+          {
+            "type": "delta",
+            "text": "、",
+            "time": "2026-10-25T07:18:27.068Z"
+          },
+          {
+            "type": "delta",
+            "text": "帰",
+            "time": "2026-10-25T07:18:27.437Z"
+          },
+          {
+            "type": "delta",
+            "text": "る",
+            "time": "2026-10-25T07:18:27.437Z"
+          },
+          {
+            "type": "delta",
+            "text": "船",
+            "time": "2026-10-25T07:18:27.437Z"
+          },
+          {
+            "type": "delta",
+            "text": "を",
+            "time": "2026-10-25T07:18:27.635Z"
+          },
+          {
+            "type": "delta",
+            "text": "見",
+            "time": "2026-10-25T07:18:27.635Z"
+          },
+          {
+            "type": "delta",
+            "text": "守",
+            "time": "2026-10-25T07:18:27.635Z"
+          },
+          {
+            "type": "delta",
+            "text": "って",
+            "time": "2026-10-25T07:18:27.635Z"
+          },
+          {
+            "type": "delta",
+            "text": "いる",
+            "time": "2026-10-25T07:18:27.822Z"
+          },
+          {
+            "type": "delta",
+            "text": "。",
+            "time": "2026-10-25T07:18:27.822Z"
+          },
+          {
+            "type": "delta",
+            "text": "静",
+            "time": "2026-10-25T07:18:27.822Z"
+          },
+          {
+            "type": "delta",
+            "text": "かな",
+            "time": "2026-10-25T07:18:28.088Z"
+          },
+          {
+            "type": "delta",
+            "text": "時間",
+            "time": "2026-10-25T07:18:28.088Z"
+          },
+          {
+            "type": "delta",
+            "text": "を",
+            "time": "2026-10-25T07:18:28.431Z"
+          },
+          {
+            "type": "delta",
+            "text": "好",
+            "time": "2026-10-25T07:18:28.594Z"
+          },
+          {
+            "type": "delta",
+            "text": "む",
+            "time": "2026-10-25T07:18:29.255Z"
+          },
+          {
+            "type": "delta",
+            "text": "が",
+            "time": "2026-10-25T07:18:29.255Z"
+          },
+          {
+            "type": "delta",
+            "text": "、",
+            "time": "2026-10-25T07:18:29.255Z"
+          },
+          {
+            "type": "delta",
+            "text": "誰",
+            "time": "2026-10-25T07:18:29.255Z"
+          },
+          {
+            "type": "delta",
+            "text": "か",
+            "time": "2026-10-25T07:18:29.392Z"
+          },
+          {
+            "type": "delta",
+            "text": "が",
+            "time": "2026-10-25T07:18:29.392Z"
+          },
+          {
+            "type": "delta",
+            "text": "迷",
+            "time": "2026-10-25T07:18:29.392Z"
+          },
+          {
+            "type": "delta",
+            "text": "えば",
+            "time": "2026-10-25T07:18:29.392Z"
+          },
+          {
+            "type": "delta",
+            "text": "ため",
+            "time": "2026-10-25T07:18:29.392Z"
+          },
+          {
+            "type": "delta",
+            "text": "ら",
+            "time": "2026-10-25T07:18:29.392Z"
+          },
+          {
+            "type": "delta",
+            "text": "わ",
+            "time": "2026-10-25T07:18:29.392Z"
+          },
+          {
+            "type": "delta",
+            "text": "ず",
+            "time": "2026-10-25T07:18:29.392Z"
+          },
+          {
+            "type": "delta",
+            "text": "手",
+            "time": "2026-10-25T07:18:29.392Z"
+          },
+          {
+            "type": "delta",
+            "text": "を",
+            "time": "2026-10-25T07:18:29.598Z"
+          },
+          {
+            "type": "delta",
+            "text": "差",
+            "time": "2026-10-25T07:18:29.598Z"
+          },
+          {
+            "type": "delta",
+            "text": "し",
+            "time": "2026-10-25T07:18:29.749Z"
+          },
+          {
+            "type": "delta",
+            "text": "伸",
+            "time": "2026-10-25T07:18:29.760Z"
+          },
+          {
+            "type": "delta",
+            "text": "べ",
+            "time": "2026-10-25T07:18:29.760Z"
+          },
+          {
+            "type": "delta",
+            "text": "る",
+            "time": "2026-10-25T07:18:29.760Z"
+          },
+          {
+            "type": "delta",
+            "text": "。",
+            "time": "2026-10-25T07:18:29.760Z"
+          },
+          {
+            "type": "delta",
+            "text": "嵐",
+            "time": "2026-10-25T07:18:29.941Z"
+          },
+          {
+            "type": "delta",
+            "text": "の",
+            "time": "2026-10-25T07:18:29.941Z"
+          },
+          {
+            "type": "delta",
+            "text": "夜",
+            "time": "2026-10-25T07:18:30.161Z"
+          },
+          {
+            "type": "delta",
+            "text": "にも",
+            "time": "2026-10-25T07:18:30.161Z"
+          },
+          {
+            "type": "delta",
+            "text": "希望",
+            "time": "2026-10-25T07:18:30.161Z"
+          },
+          {
+            "type": "delta",
+            "text": "の",
+            "time": "2026-10-25T07:18:30.410Z"
+          },
+          {
+            "type": "delta",
+            "text": "灯",
+            "time": "2026-10-25T07:18:30.410Z"
+          },
+          {
+            "type": "delta",
+            "text": "り",
+            "time": "2026-10-25T07:18:30.410Z"
+          },
+          {
+            "type": "delta",
+            "text": "を",
+            "time": "2026-10-25T07:18:30.410Z"
+          },
+          {
+            "type": "delta",
+            "text": "絶",
+            "time": "2026-10-25T07:18:30.558Z"
+          },
+          {
+            "type": "delta",
+            "text": "や",
+            "time": "2026-10-25T07:18:30.558Z"
+          },
+          {
+            "type": "delta",
+            "text": "さ",
+            "time": "2026-10-25T07:18:30.558Z"
+          },
+          {
+            "type": "delta",
+            "text": "ない",
+            "time": "2026-10-25T07:18:30.558Z"
+          },
+          {
+            "type": "delta",
+            "text": "、",
+            "time": "2026-10-25T07:18:30.558Z"
+          },
+          {
+            "type": "delta",
+            "text": "芯",
+            "time": "2026-10-25T07:18:30.908Z"
+          },
+          {
+            "type": "delta",
+            "text": "の",
+            "time": "2026-10-25T07:18:30.908Z"
+          },
+          {
+            "type": "delta",
+            "text": "強",
+            "time": "2026-10-25T07:18:30.909Z"
+          },
+          {
+            "type": "delta",
+            "text": "い",
+            "time": "2026-10-25T07:18:30.909Z"
+          },
+          {
+            "type": "delta",
+            "text": "守",
+            "time": "2026-10-25T07:18:30.909Z"
+          },
+          {
+            "type": "delta",
+            "text": "り",
+            "time": "2026-10-25T07:18:31.110Z"
+          },
+          {
+            "type": "delta",
+            "text": "手",
+            "time": "2026-10-25T07:18:31.110Z"
+          },
+          {
+            "type": "delta",
+            "text": "だ",
+            "time": "2026-10-25T07:18:31.110Z"
+          },
+          {
+            "type": "delta",
+            "text": "。\\",
+            "time": "2026-10-25T07:18:31.110Z"
+          },
+          {
+            "type": "delta",
+            "text": "n",
+            "time": "2026-10-25T07:18:31.187Z"
+          },
+          {
+            "type": "delta",
+            "text": "\"\n",
+            "time": "2026-10-25T07:18:31.187Z"
+          },
+          {
+            "type": "delta",
+            "text": "   ",
+            "time": "2026-10-25T07:18:31.187Z"
+          },
+          {
+            "type": "delta",
+            "text": " }\n",
+            "time": "2026-10-25T07:18:31.187Z"
+          },
+          {
+            "type": "delta",
+            "text": " ",
+            "time": "2026-10-25T07:18:31.187Z"
+          },
+          {
+            "type": "delta",
+            "text": " ]\n",
+            "time": "2026-10-25T07:18:31.187Z"
+          },
+          {
+            "type": "delta",
+            "text": "}",
+            "time": "2026-10-25T07:18:31.187Z"
+          },
+          {
+            "type": "message",
+            "text": "主人公紹介を約100文字で制作しました。",
+            "time": "2026-10-25T07:18:31.294Z"
+          },
+          {
+            "type": "status",
+            "text": "制作結果を接続しました。受入確認は別です",
+            "time": "2026-10-25T07:18:31.294Z"
+          }
+        ],
+        "updatedAt": "2026-10-25T07:18:31.294Z",
+        "threadId": "01a171ec-aae0-74f3-b534-25b4149f57a8",
+        "contextHash": "95dc5eeda02d487773398e689a162abbbe90ea8cbca233fef4d70331cadfa683",
+        "turnId": "01a171ec-aaef-7cc1-b670-e64ecb6357dc",
+        "output": "{\n  \"reply\": \"主人公紹介を約100文字で制作しました。\",\n  \"updatedBody\": null,\n  \"decisionReason\": \"ミナが青い灯台を守り、白い鳥を相棒とする設定を軸に、人柄が伝わる紹介にしました。\",\n  \"children\": [],\n  \"artifacts\": [\n    {\n      \"name\": \"character.md\",\n      \"content\": \"ミナは、海辺に立つ青い灯台を守る主人公。相棒の白い鳥とともに、毎日灯りを確かめ、帰る船を見守っている。静かな時間を好むが、誰かが迷えばためらわず手を差し伸べる。嵐の夜にも希望の灯りを絶やさない、芯の強い守り手だ。\\n\"\n    }\n  ]\n}",
+        "reply": "主人公紹介を約100文字で制作しました。",
+        "decisionReason": "ミナが青い灯台を守り、白い鳥を相棒とする設定を軸に、人柄が伝わる紹介にしました。",
+        "proposal": {
+          "reply": "主人公紹介を約100文字で制作しました。",
+          "updatedBody": null,
+          "decisionReason": "ミナが青い灯台を守り、白い鳥を相棒とする設定を軸に、人柄が伝わる紹介にしました。",
+          "children": [],
+          "artifacts": [
+            {
+              "name": "character.md",
+              "content": "ミナは、海辺に立つ青い灯台を守る主人公。相棒の白い鳥とともに、毎日灯りを確かめ、帰る船を見守っている。静かな時間を好むが、誰かが迷えばためらわず手を差し伸べる。嵐の夜にも希望の灯りを絶やさない、芯の強い守り手だ。\n"
+            }
+          ]
+        },
+        "finishedAt": "2026-10-25T07:18:31.294Z"
+      }
+    ],
+    "history": [
+      {
+        "revision": 2,
+        "operationId": "ai-bae02b86-07a2-4f1c-a67d-ea0ba74a7339",
+        "kind": "change",
+        "at": "2026-10-25T07:18:31.293Z",
+        "undone": 0
+      },
+      {
+        "revision": 1,
+        "operationId": "resume-integration-seed",
+        "kind": "change",
+        "at": "2026-10-25T07:15:40.597Z",
+        "undone": 0
+      }
+    ]
+  }
+}

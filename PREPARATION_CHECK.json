@@ -1,0 +1,17 @@
+{
+  "contract_revision": "Mindwise Rebuild Rev 1",
+  "contract_state": "DRAFT",
+  "goal_characters": 2911,
+  "acceptance_conditions": 12,
+  "matching_verification_cases": 12,
+  "domains_with_five_elements": 6,
+  "legacy_snapshots_hash_verified": 20,
+  "legacy_excerpt_sources_hash_verified": 6,
+  "mindmanager_analysis_copies_hash_verified": 2,
+  "pending_local_links": [],
+  "new_product_implementation_started": false,
+  "product_tests_executed": false,
+  "local_reference_links_verified": 16,
+  "latest_draft_clarification": "solo_project_domain_lanes_and_elaboration_depth",
+  "post_independent_review_change": "owner clarification 6.2, root static consistency check only"
+}

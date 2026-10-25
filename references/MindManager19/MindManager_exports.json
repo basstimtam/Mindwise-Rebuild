@@ -1,0 +1,2426 @@
+﻿[
+    {
+        "Ordinal":  0,
+        "RVA":  "0x0004D890",
+        "Mangled":  "??0CmjCliUtilities@@QAE@XZ",
+        "Demangled":  "public: __thiscall CmjCliUtilities::CmjCliUtilities(void)"
+    },
+    {
+        "Ordinal":  1,
+        "RVA":  "0x001CDB60",
+        "Mangled":  "??0CmjDebugInfoBridgeManager@@QAE@XZ",
+        "Demangled":  "public: __thiscall CmjDebugInfoBridgeManager::CmjDebugInfoBridgeManager(void)"
+    },
+    {
+        "Ordinal":  2,
+        "RVA":  "0x0091C200",
+        "Mangled":  "??0CmjMfcAddReminderDialog@@QAE@$$QAV0@@Z",
+        "Demangled":  "public: __thiscall CmjMfcAddReminderDialog::CmjMfcAddReminderDialog(class CmjMfcAddReminderDialog \u0026\u0026)"
+    },
+    {
+        "Ordinal":  3,
+        "RVA":  "0x0091C230",
+        "Mangled":  "??0CmjMfcAddReminderDialog@@QAE@ABV0@@Z",
+        "Demangled":  "public: __thiscall CmjMfcAddReminderDialog::CmjMfcAddReminderDialog(class CmjMfcAddReminderDialog const \u0026)"
+    },
+    {
+        "Ordinal":  4,
+        "RVA":  "0x0091C260",
+        "Mangled":  "??0CmjMfcDialogBase@@QAE@ABV0@@Z",
+        "Demangled":  "public: __thiscall CmjMfcDialogBase::CmjMfcDialogBase(class CmjMfcDialogBase const \u0026)"
+    },
+    {
+        "Ordinal":  5,
+        "RVA":  "0x0091C290",
+        "Mangled":  "??0CmjMfcDialogBase@@QAE@XZ",
+        "Demangled":  "public: __thiscall CmjMfcDialogBase::CmjMfcDialogBase(void)"
+    },
+    {
+        "Ordinal":  6,
+        "RVA":  "0x009529A0",
+        "Mangled":  "??0CmjMfcManageRemindersDialog@@QAE@$$QAV0@@Z",
+        "Demangled":  "public: __thiscall CmjMfcManageRemindersDialog::CmjMfcManageRemindersDialog(class CmjMfcManageRemindersDialog \u0026\u0026)"
+    },
+    {
+        "Ordinal":  7,
+        "RVA":  "0x009529D0",
+        "Mangled":  "??0CmjMfcManageRemindersDialog@@QAE@ABV0@@Z",
+        "Demangled":  "public: __thiscall CmjMfcManageRemindersDialog::CmjMfcManageRemindersDialog(class CmjMfcManageRemindersDialog const \u0026)"
+    },
+    {
+        "Ordinal":  8,
+        "RVA":  "0x000D20B0",
+        "Mangled":  "??0CmjProxyTestHost@@QAE@$$QAV0@@Z",
+        "Demangled":  "public: __thiscall CmjProxyTestHost::CmjProxyTestHost(class CmjProxyTestHost \u0026\u0026)"
+    },
+    {
+        "Ordinal":  9,
+        "RVA":  "0x000D20D0",
+        "Mangled":  "??0CmjProxyTestHost@@QAE@ABV0@@Z",
+        "Demangled":  "public: __thiscall CmjProxyTestHost::CmjProxyTestHost(class CmjProxyTestHost const \u0026)"
+    },
+    {
+        "Ordinal":  10,
+        "RVA":  "0x000D20F0",
+        "Mangled":  "??0CmjProxyTestHost@@QAE@XZ",
+        "Demangled":  "public: __thiscall CmjProxyTestHost::CmjProxyTestHost(void)"
+    },
+    {
+        "Ordinal":  11,
+        "RVA":  "0x00622610",
+        "Mangled":  "??0CmjReminderData@@QAE@ABV0@@Z",
+        "Demangled":  "public: __thiscall CmjReminderData::CmjReminderData(class CmjReminderData const \u0026)"
+    },
+    {
+        "Ordinal":  12,
+        "RVA":  "0x00041090",
+        "Mangled":  "??0CmjRemoteBridgeHost@@QAE@$$QAV0@@Z",
+        "Demangled":  "public: __thiscall CmjRemoteBridgeHost::CmjRemoteBridgeHost(class CmjRemoteBridgeHost \u0026\u0026)"
+    },
+    {
+        "Ordinal":  13,
+        "RVA":  "0x000410B0",
+        "Mangled":  "??0CmjRemoteBridgeHost@@QAE@ABV0@@Z",
+        "Demangled":  "public: __thiscall CmjRemoteBridgeHost::CmjRemoteBridgeHost(class CmjRemoteBridgeHost const \u0026)"
+    },
+    {
+        "Ordinal":  14,
+        "RVA":  "0x000410D0",
+        "Mangled":  "??0CmjRemoteBridgeHost@@QAE@XZ",
+        "Demangled":  "public: __thiscall CmjRemoteBridgeHost::CmjRemoteBridgeHost(void)"
+    },
+    {
+        "Ordinal":  15,
+        "RVA":  "0x00046710",
+        "Mangled":  "??0CmjWildcatEventPublisher@@QAE@$$QAV0@@Z",
+        "Demangled":  "public: __thiscall CmjWildcatEventPublisher::CmjWildcatEventPublisher(class CmjWildcatEventPublisher \u0026\u0026)"
+    },
+    {
+        "Ordinal":  16,
+        "RVA":  "0x00046730",
+        "Mangled":  "??0CmjWildcatEventPublisher@@QAE@ABV0@@Z",
+        "Demangled":  "public: __thiscall CmjWildcatEventPublisher::CmjWildcatEventPublisher(class CmjWildcatEventPublisher const \u0026)"
+    },
+    {
+        "Ordinal":  17,
+        "RVA":  "0x00046750",
+        "Mangled":  "??0CmjWildcatEventPublisher@@QAE@XZ",
+        "Demangled":  "public: __thiscall CmjWildcatEventPublisher::CmjWildcatEventPublisher(void)"
+    },
+    {
+        "Ordinal":  18,
+        "RVA":  "0x00035660",
+        "Mangled":  "??0CmjWildcatId@@QAE@ABU_GUID@@@Z",
+        "Demangled":  "public: __thiscall CmjWildcatId::CmjWildcatId(struct _GUID const \u0026)"
+    },
+    {
+        "Ordinal":  19,
+        "RVA":  "0x000356A0",
+        "Mangled":  "??0CmjWildcatId@@QAE@ABV0@@Z",
+        "Demangled":  "public: __thiscall CmjWildcatId::CmjWildcatId(class CmjWildcatId const \u0026)"
+    },
+    {
+        "Ordinal":  20,
+        "RVA":  "0x000356F0",
+        "Mangled":  "??0CmjWildcatId@@QAE@H@Z",
+        "Demangled":  "public: __thiscall CmjWildcatId::CmjWildcatId(int)"
+    },
+    {
+        "Ordinal":  21,
+        "RVA":  "0x00035720",
+        "Mangled":  "??0CmjWildcatId@@QAE@XZ",
+        "Demangled":  "public: __thiscall CmjWildcatId::CmjWildcatId(void)"
+    },
+    {
+        "Ordinal":  22,
+        "RVA":  "0x000EFF60",
+        "Mangled":  "??0CmjWildcatViewModel@@QAE@ABV0@@Z",
+        "Demangled":  "public: __thiscall CmjWildcatViewModel::CmjWildcatViewModel(class CmjWildcatViewModel const \u0026)"
+    },
+    {
+        "Ordinal":  23,
+        "RVA":  "0x00042B70",
+        "Mangled":  "??0SmjPublishStatusInfo@@QAE@W4EmjPublishStatus@@ABV?$CStringT@_WV?$StrTraitMFC_DLL@_WV?$ChTraitsCRT@_W@ATL@@@@@ATL@@@Z",
+        "Demangled":  "public: __thiscall SmjPublishStatusInfo::SmjPublishStatusInfo(enum EmjPublishStatus,class ATL::CStringT\u003cwchar_t,class StrTraitMFC_DLL\u003cwchar_t,class ATL::ChTraitsCRT\u003cwchar_t\u003e \u003e \u003e const \u0026)"
+    },
+    {
+        "Ordinal":  24,
+        "RVA":  "0x000410F0",
+        "Mangled":  "??0SmjRemoteErrorInfo@@QAE@$$QAU0@@Z",
+        "Demangled":  "public: __thiscall SmjRemoteErrorInfo::SmjRemoteErrorInfo(struct SmjRemoteErrorInfo \u0026\u0026)"
+    },
+    {
+        "Ordinal":  25,
+        "RVA":  "0x00041170",
+        "Mangled":  "??0SmjRemoteErrorInfo@@QAE@ABU0@@Z",
+        "Demangled":  "public: __thiscall SmjRemoteErrorInfo::SmjRemoteErrorInfo(struct SmjRemoteErrorInfo const \u0026)"
+    },
+    {
+        "Ordinal":  26,
+        "RVA":  "0x000411F0",
+        "Mangled":  "??0SmjRemoteErrorInfo@@QAE@ABV?$CStringT@_WV?$StrTraitMFC_DLL@_WV?$ChTraitsCRT@_W@ATL@@@@@ATL@@@Z",
+        "Demangled":  "public: __thiscall SmjRemoteErrorInfo::SmjRemoteErrorInfo(class ATL::CStringT\u003cwchar_t,class StrTraitMFC_DLL\u003cwchar_t,class ATL::ChTraitsCRT\u003cwchar_t\u003e \u003e \u003e const \u0026)"
+    },
+    {
+        "Ordinal":  27,
+        "RVA":  "0x00041220",
+        "Mangled":  "??0SmjRemoteErrorInfo@@QAE@XZ",
+        "Demangled":  "public: __thiscall SmjRemoteErrorInfo::SmjRemoteErrorInfo(void)"
+    },
+    {
+        "Ordinal":  28,
+        "RVA":  "0x00041250",
+        "Mangled":  "??0SmjRemoteFileInfo@@QAE@ABU0@@Z",
+        "Demangled":  "public: __thiscall SmjRemoteFileInfo::SmjRemoteFileInfo(struct SmjRemoteFileInfo const \u0026)"
+    },
+    {
+        "Ordinal":  29,
+        "RVA":  "0x00041320",
+        "Mangled":  "??0SmjRemoteFileInfo@@QAE@ABV?$CStringT@_WV?$StrTraitMFC_DLL@_WV?$ChTraitsCRT@_W@ATL@@@@@ATL@@@Z",
+        "Demangled":  "public: __thiscall SmjRemoteFileInfo::SmjRemoteFileInfo(class ATL::CStringT\u003cwchar_t,class StrTraitMFC_DLL\u003cwchar_t,class ATL::ChTraitsCRT\u003cwchar_t\u003e \u003e \u003e const \u0026)"
+    },
+    {
+        "Ordinal":  30,
+        "RVA":  "0x00042BF0",
+        "Mangled":  "??0SmjZapTopicInfo@@QAE@ABU0@@Z",
+        "Demangled":  "public: __thiscall SmjZapTopicInfo::SmjZapTopicInfo(struct SmjZapTopicInfo const \u0026)"
+    },
+    {
+        "Ordinal":  31,
+        "RVA":  "0x00042D40",
+        "Mangled":  "??0SmjZapTopicInfo@@QAE@XZ",
+        "Demangled":  "public: __thiscall SmjZapTopicInfo::SmjZapTopicInfo(void)"
+    },
+    {
+        "Ordinal":  32,
+        "RVA":  "0x00054180",
+        "Mangled":  "??1CmjAuth0User@@UAE@XZ",
+        "Demangled":  "public: virtual __thiscall CmjAuth0User::~CmjAuth0User(void)"
+    },
+    {
+        "Ordinal":  33,
+        "RVA":  "0x00041440",
+        "Mangled":  "??1CmjBoxFileBridge@@UAE@XZ",
+        "Demangled":  "public: virtual __thiscall CmjBoxFileBridge::~CmjBoxFileBridge(void)"
+    },
+    {
+        "Ordinal":  34,
+        "RVA":  "0x0004D970",
+        "Mangled":  "??1CmjCliUtilities@@UAE@XZ",
+        "Demangled":  "public: virtual __thiscall CmjCliUtilities::~CmjCliUtilities(void)"
+    },
+    {
+        "Ordinal":  35,
+        "RVA":  "0x001CE060",
+        "Mangled":  "??1CmjDebugInfoBridgeManager@@UAE@XZ",
+        "Demangled":  "public: virtual __thiscall CmjDebugInfoBridgeManager::~CmjDebugInfoBridgeManager(void)"
+    },
+    {
+        "Ordinal":  36,
+        "RVA":  "0x00041540",
+        "Mangled":  "??1CmjDropboxFileBridge@@UAE@XZ",
+        "Demangled":  "public: virtual __thiscall CmjDropboxFileBridge::~CmjDropboxFileBridge(void)"
+    },
+    {
+        "Ordinal":  37,
+        "RVA":  "0x00041560",
+        "Mangled":  "??1CmjGoogleDriveFileBridge@@UAE@XZ",
+        "Demangled":  "public: virtual __thiscall CmjGoogleDriveFileBridge::~CmjGoogleDriveFileBridge(void)"
+    },
+    {
+        "Ordinal":  38,
+        "RVA":  "0x0091C330",
+        "Mangled":  "??1CmjMfcAddReminderDialog@@UAE@XZ",
+        "Demangled":  "public: virtual __thiscall CmjMfcAddReminderDialog::~CmjMfcAddReminderDialog(void)"
+    },
+    {
+        "Ordinal":  39,
+        "RVA":  "0x00952AC0",
+        "Mangled":  "??1CmjMfcManageRemindersDialog@@UAE@XZ",
+        "Demangled":  "public: virtual __thiscall CmjMfcManageRemindersDialog::~CmjMfcManageRemindersDialog(void)"
+    },
+    {
+        "Ordinal":  40,
+        "RVA":  "0x00041580",
+        "Mangled":  "??1CmjMindjetCloudFileBridge@@UAE@XZ",
+        "Demangled":  "public: virtual __thiscall CmjMindjetCloudFileBridge::~CmjMindjetCloudFileBridge(void)"
+    },
+    {
+        "Ordinal":  41,
+        "RVA":  "0x000415A0",
+        "Mangled":  "??1CmjOneDriveFileBridge@@UAE@XZ",
+        "Demangled":  "public: virtual __thiscall CmjOneDriveFileBridge::~CmjOneDriveFileBridge(void)"
+    },
+    {
+        "Ordinal":  42,
+        "RVA":  "0x00041610",
+        "Mangled":  "??1CmjSharePointFileBridge@@UAE@XZ",
+        "Demangled":  "public: virtual __thiscall CmjSharePointFileBridge::~CmjSharePointFileBridge(void)"
+    },
+    {
+        "Ordinal":  43,
+        "RVA":  "0x00041630",
+        "Mangled":  "??1CmjWebDavFileBridge@@UAE@XZ",
+        "Demangled":  "public: virtual __thiscall CmjWebDavFileBridge::~CmjWebDavFileBridge(void)"
+    },
+    {
+        "Ordinal":  44,
+        "RVA":  "0x002DC830",
+        "Mangled":  "??1CmjWildcatAcl@@QAE@XZ",
+        "Demangled":  "public: __thiscall CmjWildcatAcl::~CmjWildcatAcl(void)"
+    },
+    {
+        "Ordinal":  45,
+        "RVA":  "0x007453A0",
+        "Mangled":  "??1CmjWildcatFileSearch@@UAE@XZ",
+        "Demangled":  "public: virtual __thiscall CmjWildcatFileSearch::~CmjWildcatFileSearch(void)"
+    },
+    {
+        "Ordinal":  46,
+        "RVA":  "0x000357E0",
+        "Mangled":  "??1CmjWildcatId@@QAE@XZ",
+        "Demangled":  "public: __thiscall CmjWildcatId::~CmjWildcatId(void)"
+    },
+    {
+        "Ordinal":  47,
+        "RVA":  "0x000F0240",
+        "Mangled":  "??1CmjWildcatItemSelection@@QAE@XZ",
+        "Demangled":  "public: __thiscall CmjWildcatItemSelection::~CmjWildcatItemSelection(void)"
+    },
+    {
+        "Ordinal":  48,
+        "RVA":  "0x00043030",
+        "Mangled":  "??1SmjPublishStatusInfo@@UAE@XZ",
+        "Demangled":  "public: virtual __thiscall SmjPublishStatusInfo::~SmjPublishStatusInfo(void)"
+    },
+    {
+        "Ordinal":  49,
+        "RVA":  "0x00041650",
+        "Mangled":  "??1SmjRemoteErrorInfo@@QAE@XZ",
+        "Demangled":  "public: __thiscall SmjRemoteErrorInfo::~SmjRemoteErrorInfo(void)"
+    },
+    {
+        "Ordinal":  50,
+        "RVA":  "0x00041680",
+        "Mangled":  "??1SmjRemoteFileInfo@@UAE@XZ",
+        "Demangled":  "public: virtual __thiscall SmjRemoteFileInfo::~SmjRemoteFileInfo(void)"
+    },
+    {
+        "Ordinal":  51,
+        "RVA":  "0x00043050",
+        "Mangled":  "??1SmjZapTopicInfo@@UAE@XZ",
+        "Demangled":  "public: virtual __thiscall SmjZapTopicInfo::~SmjZapTopicInfo(void)"
+    },
+    {
+        "Ordinal":  52,
+        "RVA":  "0x0091C350",
+        "Mangled":  "??4CmjMfcAddReminderDialog@@QAEAAV0@$$QAV0@@Z",
+        "Demangled":  "public: class CmjMfcAddReminderDialog \u0026 __thiscall CmjMfcAddReminderDialog::operator=(class CmjMfcAddReminderDialog \u0026\u0026)"
+    },
+    {
+        "Ordinal":  53,
+        "RVA":  "0x0091C370",
+        "Mangled":  "??4CmjMfcAddReminderDialog@@QAEAAV0@ABV0@@Z",
+        "Demangled":  "public: class CmjMfcAddReminderDialog \u0026 __thiscall CmjMfcAddReminderDialog::operator=(class CmjMfcAddReminderDialog const \u0026)"
+    },
+    {
+        "Ordinal":  54,
+        "RVA":  "0x0091C390",
+        "Mangled":  "??4CmjMfcDialogBase@@QAEAAV0@ABV0@@Z",
+        "Demangled":  "public: class CmjMfcDialogBase \u0026 __thiscall CmjMfcDialogBase::operator=(class CmjMfcDialogBase const \u0026)"
+    },
+    {
+        "Ordinal":  55,
+        "RVA":  "0x00952AE0",
+        "Mangled":  "??4CmjMfcManageRemindersDialog@@QAEAAV0@$$QAV0@@Z",
+        "Demangled":  "public: class CmjMfcManageRemindersDialog \u0026 __thiscall CmjMfcManageRemindersDialog::operator=(class CmjMfcManageRemindersDialog \u0026\u0026)"
+    },
+    {
+        "Ordinal":  56,
+        "RVA":  "0x00952B00",
+        "Mangled":  "??4CmjMfcManageRemindersDialog@@QAEAAV0@ABV0@@Z",
+        "Demangled":  "public: class CmjMfcManageRemindersDialog \u0026 __thiscall CmjMfcManageRemindersDialog::operator=(class CmjMfcManageRemindersDialog const \u0026)"
+    },
+    {
+        "Ordinal":  57,
+        "RVA":  "0x000D2230",
+        "Mangled":  "??4CmjProxyTestHost@@QAEAAV0@$$QAV0@@Z",
+        "Demangled":  "public: class CmjProxyTestHost \u0026 __thiscall CmjProxyTestHost::operator=(class CmjProxyTestHost \u0026\u0026)"
+    },
+    {
+        "Ordinal":  58,
+        "RVA":  "0x000D2240",
+        "Mangled":  "??4CmjProxyTestHost@@QAEAAV0@ABV0@@Z",
+        "Demangled":  "public: class CmjProxyTestHost \u0026 __thiscall CmjProxyTestHost::operator=(class CmjProxyTestHost const \u0026)"
+    },
+    {
+        "Ordinal":  59,
+        "RVA":  "0x00622DA0",
+        "Mangled":  "??4CmjReminderData@@QAEAAV0@ABV0@@Z",
+        "Demangled":  "public: class CmjReminderData \u0026 __thiscall CmjReminderData::operator=(class CmjReminderData const \u0026)"
+    },
+    {
+        "Ordinal":  60,
+        "RVA":  "0x00622F40",
+        "Mangled":  "??4CmjReminderDataUtilities@@QAEAAV0@$$QAV0@@Z",
+        "Demangled":  "public: class CmjReminderDataUtilities \u0026 __thiscall CmjReminderDataUtilities::operator=(class CmjReminderDataUtilities \u0026\u0026)"
+    },
+    {
+        "Ordinal":  61,
+        "RVA":  "0x00622F50",
+        "Mangled":  "??4CmjReminderDataUtilities@@QAEAAV0@ABV0@@Z",
+        "Demangled":  "public: class CmjReminderDataUtilities \u0026 __thiscall CmjReminderDataUtilities::operator=(class CmjReminderDataUtilities const \u0026)"
+    },
+    {
+        "Ordinal":  62,
+        "RVA":  "0x000416F0",
+        "Mangled":  "??4CmjRemoteBridgeHost@@QAEAAV0@$$QAV0@@Z",
+        "Demangled":  "public: class CmjRemoteBridgeHost \u0026 __thiscall CmjRemoteBridgeHost::operator=(class CmjRemoteBridgeHost \u0026\u0026)"
+    },
+    {
+        "Ordinal":  63,
+        "RVA":  "0x00041700",
+        "Mangled":  "??4CmjRemoteBridgeHost@@QAEAAV0@ABV0@@Z",
+        "Demangled":  "public: class CmjRemoteBridgeHost \u0026 __thiscall CmjRemoteBridgeHost::operator=(class CmjRemoteBridgeHost const \u0026)"
+    },
+    {
+        "Ordinal":  64,
+        "RVA":  "0x00046800",
+        "Mangled":  "??4CmjWildcatEventPublisher@@QAEAAV0@$$QAV0@@Z",
+        "Demangled":  "public: class CmjWildcatEventPublisher \u0026 __thiscall CmjWildcatEventPublisher::operator=(class CmjWildcatEventPublisher \u0026\u0026)"
+    },
+    {
+        "Ordinal":  65,
+        "RVA":  "0x00046810",
+        "Mangled":  "??4CmjWildcatEventPublisher@@QAEAAV0@ABV0@@Z",
+        "Demangled":  "public: class CmjWildcatEventPublisher \u0026 __thiscall CmjWildcatEventPublisher::operator=(class CmjWildcatEventPublisher const \u0026)"
+    },
+    {
+        "Ordinal":  66,
+        "RVA":  "0x00035800",
+        "Mangled":  "??4CmjWildcatId@@QAEAAV0@ABV0@@Z",
+        "Demangled":  "public: class CmjWildcatId \u0026 __thiscall CmjWildcatId::operator=(class CmjWildcatId const \u0026)"
+    },
+    {
+        "Ordinal":  67,
+        "RVA":  "0x000F0260",
+        "Mangled":  "??4CmjWildcatViewModel@@QAEAAV0@ABV0@@Z",
+        "Demangled":  "public: class CmjWildcatViewModel \u0026 __thiscall CmjWildcatViewModel::operator=(class CmjWildcatViewModel const \u0026)"
+    },
+    {
+        "Ordinal":  68,
+        "RVA":  "0x00041710",
+        "Mangled":  "??4SmjRemoteErrorInfo@@QAEAAU0@$$QAU0@@Z",
+        "Demangled":  "public: struct SmjRemoteErrorInfo \u0026 __thiscall SmjRemoteErrorInfo::operator=(struct SmjRemoteErrorInfo \u0026\u0026)"
+    },
+    {
+        "Ordinal":  69,
+        "RVA":  "0x00041750",
+        "Mangled":  "??4SmjRemoteErrorInfo@@QAEAAU0@ABU0@@Z",
+        "Demangled":  "public: struct SmjRemoteErrorInfo \u0026 __thiscall SmjRemoteErrorInfo::operator=(struct SmjRemoteErrorInfo const \u0026)"
+    },
+    {
+        "Ordinal":  70,
+        "RVA":  "0x00041790",
+        "Mangled":  "??4SmjRemoteFileInfo@@QAEAAU0@ABU0@@Z",
+        "Demangled":  "public: struct SmjRemoteFileInfo \u0026 __thiscall SmjRemoteFileInfo::operator=(struct SmjRemoteFileInfo const \u0026)"
+    },
+    {
+        "Ordinal":  71,
+        "RVA":  "0x000430E0",
+        "Mangled":  "??4SmjZapTopicInfo@@QAEAAU0@ABU0@@Z",
+        "Demangled":  "public: struct SmjZapTopicInfo \u0026 __thiscall SmjZapTopicInfo::operator=(struct SmjZapTopicInfo const \u0026)"
+    },
+    {
+        "Ordinal":  72,
+        "RVA":  "0x00035850",
+        "Mangled":  "??8CmjWildcatId@@QBE_NABV0@@Z",
+        "Demangled":  "public: bool __thiscall CmjWildcatId::operator==(class CmjWildcatId const \u0026)const "
+    },
+    {
+        "Ordinal":  73,
+        "RVA":  "0x000358E0",
+        "Mangled":  "??9CmjWildcatId@@QBE_NABV0@@Z",
+        "Demangled":  "public: bool __thiscall CmjWildcatId::operator!=(class CmjWildcatId const \u0026)const "
+    },
+    {
+        "Ordinal":  74,
+        "RVA":  "0x00035970",
+        "Mangled":  "??BCmjWildcatId@@QBEABU_GUID@@XZ",
+        "Demangled":  "public: __thiscall CmjWildcatId::operator struct _GUID const \u0026(void)const "
+    },
+    {
+        "Ordinal":  75,
+        "RVA":  "0x00035980",
+        "Mangled":  "??BCmjWildcatId@@QBEHXZ",
+        "Demangled":  "public: __thiscall CmjWildcatId::operator int(void)const "
+    },
+    {
+        "Ordinal":  76,
+        "RVA":  "0x000359A0",
+        "Mangled":  "??BCmjWildcatId@@QBEKXZ",
+        "Demangled":  "public: __thiscall CmjWildcatId::operator unsigned long(void)const "
+    },
+    {
+        "Ordinal":  77,
+        "RVA":  "0x00035A10",
+        "Mangled":  "??MCmjWildcatId@@QBE_NABV0@@Z",
+        "Demangled":  "public: bool __thiscall CmjWildcatId::operator\u003c(class CmjWildcatId const \u0026)const "
+    },
+    {
+        "Ordinal":  78,
+        "RVA":  "0x00035A80",
+        "Mangled":  "??NCmjWildcatId@@QBE_NABV0@@Z",
+        "Demangled":  "public: bool __thiscall CmjWildcatId::operator\u003c=(class CmjWildcatId const \u0026)const "
+    },
+    {
+        "Ordinal":  79,
+        "RVA":  "0x00035AF0",
+        "Mangled":  "??OCmjWildcatId@@QBE_NABV0@@Z",
+        "Demangled":  "public: bool __thiscall CmjWildcatId::operator\u003e(class CmjWildcatId const \u0026)const "
+    },
+    {
+        "Ordinal":  80,
+        "RVA":  "0x00035B60",
+        "Mangled":  "??PCmjWildcatId@@QBE_NABV0@@Z",
+        "Demangled":  "public: bool __thiscall CmjWildcatId::operator\u003e=(class CmjWildcatId const \u0026)const "
+    },
+    {
+        "Ordinal":  81,
+        "RVA":  "0x00AF9494",
+        "Mangled":  "??_7CmjCliUtilities@@6B@",
+        "Demangled":  "const CmjCliUtilities::`vftable\u0027"
+    },
+    {
+        "Ordinal":  82,
+        "RVA":  "0x00B13B90",
+        "Mangled":  "??_7CmjDebugInfoBridgeManager@@6B@",
+        "Demangled":  "const CmjDebugInfoBridgeManager::`vftable\u0027"
+    },
+    {
+        "Ordinal":  83,
+        "RVA":  "0x00BB6608",
+        "Mangled":  "??_7CmjMfcAddReminderDialog@@6B@",
+        "Demangled":  "const CmjMfcAddReminderDialog::`vftable\u0027"
+    },
+    {
+        "Ordinal":  84,
+        "RVA":  "0x00BB65F4",
+        "Mangled":  "??_7CmjMfcDialogBase@@6B@",
+        "Demangled":  "const CmjMfcDialogBase::`vftable\u0027"
+    },
+    {
+        "Ordinal":  85,
+        "RVA":  "0x00BBDD18",
+        "Mangled":  "??_7CmjMfcManageRemindersDialog@@6B@",
+        "Demangled":  "const CmjMfcManageRemindersDialog::`vftable\u0027"
+    },
+    {
+        "Ordinal":  86,
+        "RVA":  "0x00AFBA98",
+        "Mangled":  "??_7CmjProxyTestHost@@6B@",
+        "Demangled":  "const CmjProxyTestHost::`vftable\u0027"
+    },
+    {
+        "Ordinal":  87,
+        "RVA":  "0x00B64F68",
+        "Mangled":  "??_7CmjReminderData@@6B@",
+        "Demangled":  "const CmjReminderData::`vftable\u0027"
+    },
+    {
+        "Ordinal":  88,
+        "RVA":  "0x00AF8A20",
+        "Mangled":  "??_7CmjRemoteBridgeHost@@6B@",
+        "Demangled":  "const CmjRemoteBridgeHost::`vftable\u0027"
+    },
+    {
+        "Ordinal":  89,
+        "RVA":  "0x00AF9294",
+        "Mangled":  "??_7CmjWildcatEventPublisher@@6B@",
+        "Demangled":  "const CmjWildcatEventPublisher::`vftable\u0027"
+    },
+    {
+        "Ordinal":  90,
+        "RVA":  "0x00B00B94",
+        "Mangled":  "??_7CmjWildcatViewModel@@6B@",
+        "Demangled":  "const CmjWildcatViewModel::`vftable\u0027"
+    },
+    {
+        "Ordinal":  91,
+        "RVA":  "0x00AF9218",
+        "Mangled":  "??_7SmjPublishStatusInfo@@6B@",
+        "Demangled":  "const SmjPublishStatusInfo::`vftable\u0027"
+    },
+    {
+        "Ordinal":  92,
+        "RVA":  "0x00AF8A28",
+        "Mangled":  "??_7SmjRemoteFileInfo@@6B@",
+        "Demangled":  "const SmjRemoteFileInfo::`vftable\u0027"
+    },
+    {
+        "Ordinal":  93,
+        "RVA":  "0x00AF9200",
+        "Mangled":  "??_7SmjZapTopicInfo@@6B@",
+        "Demangled":  "const SmjZapTopicInfo::`vftable\u0027"
+    },
+    {
+        "Ordinal":  94,
+        "RVA":  "0x0091C520",
+        "Mangled":  "??_FCmjMfcAddReminderDialog@@QAEXXZ",
+        "Demangled":  "public: void __thiscall CmjMfcAddReminderDialog::`default constructor closure\u0027(void)"
+    },
+    {
+        "Ordinal":  95,
+        "RVA":  "0x0091C540",
+        "Mangled":  "??_FCmjMfcRecurrenceDailyDialog@@QAEXXZ",
+        "Demangled":  "public: void __thiscall CmjMfcRecurrenceDailyDialog::`default constructor closure\u0027(void)"
+    },
+    {
+        "Ordinal":  96,
+        "RVA":  "0x0091C560",
+        "Mangled":  "??_FCmjMfcRecurrenceMonthlyDialog@@QAEXXZ",
+        "Demangled":  "public: void __thiscall CmjMfcRecurrenceMonthlyDialog::`default constructor closure\u0027(void)"
+    },
+    {
+        "Ordinal":  97,
+        "RVA":  "0x0091C580",
+        "Mangled":  "??_FCmjMfcRecurrenceWeeklyDialog@@QAEXXZ",
+        "Demangled":  "public: void __thiscall CmjMfcRecurrenceWeeklyDialog::`default constructor closure\u0027(void)"
+    },
+    {
+        "Ordinal":  98,
+        "RVA":  "0x0091C5A0",
+        "Mangled":  "??_FCmjMfcRecurrenceYearlyDialog@@QAEXXZ",
+        "Demangled":  "public: void __thiscall CmjMfcRecurrenceYearlyDialog::`default constructor closure\u0027(void)"
+    },
+    {
+        "Ordinal":  99,
+        "RVA":  "0x00623020",
+        "Mangled":  "??_FCmjReminderDataCollectionManager@@QAEXXZ",
+        "Demangled":  "public: void __thiscall CmjReminderDataCollectionManager::`default constructor closure\u0027(void)"
+    },
+    {
+        "Ordinal":  100,
+        "RVA":  "0x000EC460",
+        "Mangled":  "?AccountStatus@CmjWildcatAccount@@QBE?AW4EmjAccountStatus@1@XZ",
+        "Demangled":  "public: enum CmjWildcatAccount::EmjAccountStatus __thiscall CmjWildcatAccount::AccountStatus(void)const "
+    },
+    {
+        "Ordinal":  101,
+        "RVA":  "0x00111F40",
+        "Mangled":  "?CanSendRequest@CmjCohumanProjectList@@UAE_NXZ",
+        "Demangled":  "public: virtual bool __thiscall CmjCohumanProjectList::CanSendRequest(void)"
+    },
+    {
+        "Ordinal":  102,
+        "RVA":  "0x00111440",
+        "Mangled":  "?CanSendRequest@CmjCohumanUserList@@UAE_NXZ",
+        "Demangled":  "public: virtual bool __thiscall CmjCohumanUserList::CanSendRequest(void)"
+    },
+    {
+        "Ordinal":  103,
+        "RVA":  "0x00955110",
+        "Mangled":  "?CanSendRequest@CmjWildcatContactList@@UAE_NXZ",
+        "Demangled":  "public: virtual bool __thiscall CmjWildcatContactList::CanSendRequest(void)"
+    },
+    {
+        "Ordinal":  104,
+        "RVA":  "0x000EDBF0",
+        "Mangled":  "?ContainsUserId@CmjWildcatUserList@@QAE_NABVCmjWildcatId@@@Z",
+        "Demangled":  "public: bool __thiscall CmjWildcatUserList::ContainsUserId(class CmjWildcatId const \u0026)"
+    },
+    {
+        "Ordinal":  105,
+        "RVA":  "0x000F4780",
+        "Mangled":  "?Find@CmjWildcatItemList@@QAEPAU__POSITION@@ABVCmjWildcatId@@@Z",
+        "Demangled":  "public: struct __POSITION * __thiscall CmjWildcatItemList::Find(class CmjWildcatId const \u0026)"
+    },
+    {
+        "Ordinal":  106,
+        "RVA":  "0x000EC7B0",
+        "Mangled":  "?FindAccountIndex@CmjWildcatRestClient@@QAEPAU__POSITION@@H@Z",
+        "Demangled":  "public: struct __POSITION * __thiscall CmjWildcatRestClient::FindAccountIndex(int)"
+    },
+    {
+        "Ordinal":  107,
+        "RVA":  "0x000F47B0",
+        "Mangled":  "?FindIndex@CmjWildcatItemList@@QAEPAU__POSITION@@H@Z",
+        "Demangled":  "public: struct __POSITION * __thiscall CmjWildcatItemList::FindIndex(int)"
+    },
+    {
+        "Ordinal":  108,
+        "RVA":  "0x00041B10",
+        "Mangled":  "?GetAccessToken@CmjRemoteFileBridge@@QAEABV?$CStringT@_WV?$StrTraitMFC_DLL@_WV?$ChTraitsCRT@_W@ATL@@@@@ATL@@XZ",
+        "Demangled":  "public: class ATL::CStringT\u003cwchar_t,class StrTraitMFC_DLL\u003cwchar_t,class ATL::ChTraitsCRT\u003cwchar_t\u003e \u003e \u003e const \u0026 __thiscall CmjRemoteFileBridge::GetAccessToken(void)"
+    },
+    {
+        "Ordinal":  109,
+        "RVA":  "0x000EC830",
+        "Mangled":  "?GetAccountAt@CmjWildcatRestClient@@QAEABVCmjWildcatId@@PAU__POSITION@@@Z",
+        "Demangled":  "public: class CmjWildcatId const \u0026 __thiscall CmjWildcatRestClient::GetAccountAt(struct __POSITION *)"
+    },
+    {
+        "Ordinal":  110,
+        "RVA":  "0x000EC890",
+        "Mangled":  "?GetAccountHeadPosition@CmjWildcatRestClient@@QAEPAU__POSITION@@XZ",
+        "Demangled":  "public: struct __POSITION * __thiscall CmjWildcatRestClient::GetAccountHeadPosition(void)"
+    },
+    {
+        "Ordinal":  111,
+        "RVA":  "0x00037F70",
+        "Mangled":  "?GetAccountRefId@CmjWildcatRecord@@QAEABVCmjWildcatId@@XZ",
+        "Demangled":  "public: class CmjWildcatId const \u0026 __thiscall CmjWildcatRecord::GetAccountRefId(void)"
+    },
+    {
+        "Ordinal":  112,
+        "RVA":  "0x000EC8B0",
+        "Mangled":  "?GetAccountsCount@CmjWildcatRestClient@@QAEIXZ",
+        "Demangled":  "public: unsigned int __thiscall CmjWildcatRestClient::GetAccountsCount(void)"
+    },
+    {
+        "Ordinal":  113,
+        "RVA":  "0x002DC970",
+        "Mangled":  "?GetAclType@CmjWildcatAcl@@QBE?AW4EmjWildcatAclType@@XZ",
+        "Demangled":  "public: enum EmjWildcatAclType __thiscall CmjWildcatAcl::GetAclType(void)const "
+    },
+    {
+        "Ordinal":  114,
+        "RVA":  "0x00041B30",
+        "Mangled":  "?GetAddress@CmjRemoteFileBridge@@QAEABV?$CStringT@_WV?$StrTraitMFC_DLL@_WV?$ChTraitsCRT@_W@ATL@@@@@ATL@@XZ",
+        "Demangled":  "public: class ATL::CStringT\u003cwchar_t,class StrTraitMFC_DLL\u003cwchar_t,class ATL::ChTraitsCRT\u003cwchar_t\u003e \u003e \u003e const \u0026 __thiscall CmjRemoteFileBridge::GetAddress(void)"
+    },
+    {
+        "Ordinal":  115,
+        "RVA":  "0x00043920",
+        "Mangled":  "?GetApiKey@CmjDesktopServerBridge@@QAEABV?$CStringT@_WV?$StrTraitMFC_DLL@_WV?$ChTraitsCRT@_W@ATL@@@@@ATL@@XZ",
+        "Demangled":  "public: class ATL::CStringT\u003cwchar_t,class StrTraitMFC_DLL\u003cwchar_t,class ATL::ChTraitsCRT\u003cwchar_t\u003e \u003e \u003e const \u0026 __thiscall CmjDesktopServerBridge::GetApiKey(void)"
+    },
+    {
+        "Ordinal":  116,
+        "RVA":  "0x007E34A0",
+        "Mangled":  "?GetAt@CmjWildcatAclList@@QAE?AVCmjWildcatAcl@@PAU__POSITION@@@Z",
+        "Demangled":  "public: class CmjWildcatAcl __thiscall CmjWildcatAclList::GetAt(struct __POSITION *)"
+    },
+    {
+        "Ordinal":  117,
+        "RVA":  "0x000F47D0",
+        "Mangled":  "?GetAt@CmjWildcatItemList@@QAE?AVCmjWildcatId@@AAPAU__POSITION@@@Z",
+        "Demangled":  "public: class CmjWildcatId __thiscall CmjWildcatItemList::GetAt(struct __POSITION * \u0026)"
+    },
+    {
+        "Ordinal":  118,
+        "RVA":  "0x009C99D0",
+        "Mangled":  "?GetAuthor@CmjMftMapItem@@QAEABV?$CStringT@_WV?$StrTraitMFC_DLL@_WV?$ChTraitsCRT@_W@ATL@@@@@ATL@@XZ",
+        "Demangled":  "public: class ATL::CStringT\u003cwchar_t,class StrTraitMFC_DLL\u003cwchar_t,class ATL::ChTraitsCRT\u003cwchar_t\u003e \u003e \u003e const \u0026 __thiscall CmjMftMapItem::GetAuthor(void)"
+    },
+    {
+        "Ordinal":  119,
+        "RVA":  "0x009C99F0",
+        "Mangled":  "?GetCategoryIconUrl@CmjMftCategoryItem@@QAEABV?$CStringT@_WV?$StrTraitMFC_DLL@_WV?$ChTraitsCRT@_W@ATL@@@@@ATL@@XZ",
+        "Demangled":  "public: class ATL::CStringT\u003cwchar_t,class StrTraitMFC_DLL\u003cwchar_t,class ATL::ChTraitsCRT\u003cwchar_t\u003e \u003e \u003e const \u0026 __thiscall CmjMftCategoryItem::GetCategoryIconUrl(void)"
+    },
+    {
+        "Ordinal":  120,
+        "RVA":  "0x00037F90",
+        "Mangled":  "?GetCheckOutToken@CmjWildcatFile@@QAEABVCmjWildcatId@@XZ",
+        "Demangled":  "public: class CmjWildcatId const \u0026 __thiscall CmjWildcatFile::GetCheckOutToken(void)"
+    },
+    {
+        "Ordinal":  121,
+        "RVA":  "0x00037FB0",
+        "Mangled":  "?GetCheckedOutBy@CmjWildcatFile@@QAEABVCmjWildcatId@@XZ",
+        "Demangled":  "public: class CmjWildcatId const \u0026 __thiscall CmjWildcatFile::GetCheckedOutBy(void)"
+    },
+    {
+        "Ordinal":  122,
+        "RVA":  "0x00037FD0",
+        "Mangled":  "?GetCheckedOutDate@CmjWildcatFile@@QAEABVCTime@ATL@@XZ",
+        "Demangled":  "public: class ATL::CTime const \u0026 __thiscall CmjWildcatFile::GetCheckedOutDate(void)"
+    },
+    {
+        "Ordinal":  123,
+        "RVA":  "0x002DC9D0",
+        "Mangled":  "?GetContactRefId@CmjWildcatAcl@@QBEABVCmjWildcatId@@XZ",
+        "Demangled":  "public: class CmjWildcatId const \u0026 __thiscall CmjWildcatAcl::GetContactRefId(void)const "
+    },
+    {
+        "Ordinal":  124,
+        "RVA":  "0x00037FF0",
+        "Mangled":  "?GetContentUrl@CmjWildcatFile@@QAEABV?$CStringT@_WV?$StrTraitMFC_DLL@_WV?$ChTraitsCRT@_W@ATL@@@@@ATL@@XZ",
+        "Demangled":  "public: class ATL::CStringT\u003cwchar_t,class StrTraitMFC_DLL\u003cwchar_t,class ATL::ChTraitsCRT\u003cwchar_t\u003e \u003e \u003e const \u0026 __thiscall CmjWildcatFile::GetContentUrl(void)"
+    },
+    {
+        "Ordinal":  125,
+        "RVA":  "0x007E3520",
+        "Mangled":  "?GetCount@CmjWildcatAclList@@QAEIXZ",
+        "Demangled":  "public: unsigned int __thiscall CmjWildcatAclList::GetCount(void)"
+    },
+    {
+        "Ordinal":  126,
+        "RVA":  "0x000F48D0",
+        "Mangled":  "?GetCount@CmjWildcatItemList@@QAEIXZ",
+        "Demangled":  "public: unsigned int __thiscall CmjWildcatItemList::GetCount(void)"
+    },
+    {
+        "Ordinal":  127,
+        "RVA":  "0x000EE0E0",
+        "Mangled":  "?GetCount@CmjWildcatUserList@@QAEIXZ",
+        "Demangled":  "public: unsigned int __thiscall CmjWildcatUserList::GetCount(void)"
+    },
+    {
+        "Ordinal":  128,
+        "RVA":  "0x000FC280",
+        "Mangled":  "?GetCreatedBy@CmjWildcatFileVersion@@QAEABVCmjWildcatId@@XZ",
+        "Demangled":  "public: class CmjWildcatId const \u0026 __thiscall CmjWildcatFileVersion::GetCreatedBy(void)"
+    },
+    {
+        "Ordinal":  129,
+        "RVA":  "0x00038010",
+        "Mangled":  "?GetCreatedBy@CmjWildcatRecord@@QAEABVCmjWildcatId@@XZ",
+        "Demangled":  "public: class CmjWildcatId const \u0026 __thiscall CmjWildcatRecord::GetCreatedBy(void)"
+    },
+    {
+        "Ordinal":  130,
+        "RVA":  "0x00038030",
+        "Mangled":  "?GetCreatedDate@CmjWildcatRecord@@QAEABVCTime@ATL@@XZ",
+        "Demangled":  "public: class ATL::CTime const \u0026 __thiscall CmjWildcatRecord::GetCreatedDate(void)"
+    },
+    {
+        "Ordinal":  131,
+        "RVA":  "0x000546C0",
+        "Mangled":  "?GetCreationTime@CmjIntercomConversation@@QAEABVCTime@ATL@@XZ",
+        "Demangled":  "public: class ATL::CTime const \u0026 __thiscall CmjIntercomConversation::GetCreationTime(void)"
+    },
+    {
+        "Ordinal":  132,
+        "RVA":  "0x000FC2A0",
+        "Mangled":  "?GetCreationTime@CmjWildcatFileVersion@@QAEABVCTime@ATL@@XZ",
+        "Demangled":  "public: class ATL::CTime const \u0026 __thiscall CmjWildcatFileVersion::GetCreationTime(void)"
+    },
+    {
+        "Ordinal":  133,
+        "RVA":  "0x00131840",
+        "Mangled":  "?GetCreatorId@CmjCohumanTask@@QAEABVCmjWildcatId@@XZ",
+        "Demangled":  "public: class CmjWildcatId const \u0026 __thiscall CmjCohumanTask::GetCreatorId(void)"
+    },
+    {
+        "Ordinal":  134,
+        "RVA":  "0x00111450",
+        "Mangled":  "?GetCurrentUserId@CmjCohumanUserList@@QAEABVCmjWildcatId@@XZ",
+        "Demangled":  "public: class CmjWildcatId const \u0026 __thiscall CmjCohumanUserList::GetCurrentUserId(void)"
+    },
+    {
+        "Ordinal":  135,
+        "RVA":  "0x000EC8D0",
+        "Mangled":  "?GetCurrentUserRole@CmjWildcatAccount@@QAE?AW4EmjWildcatAccountRole@@XZ",
+        "Demangled":  "public: enum EmjWildcatAccountRole __thiscall CmjWildcatAccount::GetCurrentUserRole(void)"
+    },
+    {
+        "Ordinal":  136,
+        "RVA":  "0x00038050",
+        "Mangled":  "?GetCustomRequestId@CmjWildcatItem@@UAE?AVCmjWildcatId@@XZ",
+        "Demangled":  "public: virtual class CmjWildcatId __thiscall CmjWildcatItem::GetCustomRequestId(void)"
+    },
+    {
+        "Ordinal":  137,
+        "RVA":  "0x00623BC0",
+        "Mangled":  "?GetDenaliPath@CmjReminderData@@QAE?AV?$CStringT@_WV?$StrTraitMFC_DLL@_WV?$ChTraitsCRT@_W@ATL@@@@@ATL@@XZ",
+        "Demangled":  "public: class ATL::CStringT\u003cwchar_t,class StrTraitMFC_DLL\u003cwchar_t,class ATL::ChTraitsCRT\u003cwchar_t\u003e \u003e \u003e __thiscall CmjReminderData::GetDenaliPath(void)"
+    },
+    {
+        "Ordinal":  138,
+        "RVA":  "0x009C9A10",
+        "Mangled":  "?GetDescription@CmjMftMapItem@@QAEABV?$CStringT@_WV?$StrTraitMFC_DLL@_WV?$ChTraitsCRT@_W@ATL@@@@@ATL@@XZ",
+        "Demangled":  "public: class ATL::CStringT\u003cwchar_t,class StrTraitMFC_DLL\u003cwchar_t,class ATL::ChTraitsCRT\u003cwchar_t\u003e \u003e \u003e const \u0026 __thiscall CmjMftMapItem::GetDescription(void)"
+    },
+    {
+        "Ordinal":  139,
+        "RVA":  "0x000EC8F0",
+        "Mangled":  "?GetDescription@CmjWildcatAccount@@QAEABV?$CStringT@_WV?$StrTraitMFC_DLL@_WV?$ChTraitsCRT@_W@ATL@@@@@ATL@@XZ",
+        "Demangled":  "public: class ATL::CStringT\u003cwchar_t,class StrTraitMFC_DLL\u003cwchar_t,class ATL::ChTraitsCRT\u003cwchar_t\u003e \u003e \u003e const \u0026 __thiscall CmjWildcatAccount::GetDescription(void)"
+    },
+    {
+        "Ordinal":  140,
+        "RVA":  "0x000FC2C0",
+        "Mangled":  "?GetDescription@CmjWildcatFileVersion@@QAEABV?$CStringT@_WV?$StrTraitMFC_DLL@_WV?$ChTraitsCRT@_W@ATL@@@@@ATL@@XZ",
+        "Demangled":  "public: class ATL::CStringT\u003cwchar_t,class StrTraitMFC_DLL\u003cwchar_t,class ATL::ChTraitsCRT\u003cwchar_t\u003e \u003e \u003e const \u0026 __thiscall CmjWildcatFileVersion::GetDescription(void)"
+    },
+    {
+        "Ordinal":  141,
+        "RVA":  "0x00623C00",
+        "Mangled":  "?GetDocumentPath@CmjReminderData@@QAE?AV?$CStringT@_WV?$StrTraitMFC_DLL@_WV?$ChTraitsCRT@_W@ATL@@@@@ATL@@XZ",
+        "Demangled":  "public: class ATL::CStringT\u003cwchar_t,class StrTraitMFC_DLL\u003cwchar_t,class ATL::ChTraitsCRT\u003cwchar_t\u003e \u003e \u003e __thiscall CmjReminderData::GetDocumentPath(void)"
+    },
+    {
+        "Ordinal":  142,
+        "RVA":  "0x00623C40",
+        "Mangled":  "?GetDocumentTitle@CmjReminderData@@QAE?AV?$CStringT@_WV?$StrTraitMFC_DLL@_WV?$ChTraitsCRT@_W@ATL@@@@@ATL@@XZ",
+        "Demangled":  "public: class ATL::CStringT\u003cwchar_t,class StrTraitMFC_DLL\u003cwchar_t,class ATL::ChTraitsCRT\u003cwchar_t\u003e \u003e \u003e __thiscall CmjReminderData::GetDocumentTitle(void)"
+    },
+    {
+        "Ordinal":  143,
+        "RVA":  "0x0091C8C0",
+        "Mangled":  "?GetDueDateControl@CmjMfcRecurrenceYearlyDialog@@QAEPAVCDateTimeCtrl@@XZ",
+        "Demangled":  "public: class CDateTimeCtrl * __thiscall CmjMfcRecurrenceYearlyDialog::GetDueDateControl(void)"
+    },
+    {
+        "Ordinal":  144,
+        "RVA":  "0x00111490",
+        "Mangled":  "?GetEmail@CmjCohumanUser@@QAEABV?$CStringT@_WV?$StrTraitMFC_DLL@_WV?$ChTraitsCRT@_W@ATL@@@@@ATL@@XZ",
+        "Demangled":  "public: class ATL::CStringT\u003cwchar_t,class StrTraitMFC_DLL\u003cwchar_t,class ATL::ChTraitsCRT\u003cwchar_t\u003e \u003e \u003e const \u0026 __thiscall CmjCohumanUser::GetEmail(void)"
+    },
+    {
+        "Ordinal":  145,
+        "RVA":  "0x00054770",
+        "Mangled":  "?GetEmailAddress@CmjAuth0User@@QAEABV?$CStringT@_WV?$StrTraitMFC_DLL@_WV?$ChTraitsCRT@_W@ATL@@@@@ATL@@XZ",
+        "Demangled":  "public: class ATL::CStringT\u003cwchar_t,class StrTraitMFC_DLL\u003cwchar_t,class ATL::ChTraitsCRT\u003cwchar_t\u003e \u003e \u003e const \u0026 __thiscall CmjAuth0User::GetEmailAddress(void)"
+    },
+    {
+        "Ordinal":  146,
+        "RVA":  "0x002DC9F0",
+        "Mangled":  "?GetEmailAddress@CmjWildcatAcl@@QBEABV?$CStringT@_WV?$StrTraitMFC_DLL@_WV?$ChTraitsCRT@_W@ATL@@@@@ATL@@XZ",
+        "Demangled":  "public: class ATL::CStringT\u003cwchar_t,class StrTraitMFC_DLL\u003cwchar_t,class ATL::ChTraitsCRT\u003cwchar_t\u003e \u003e \u003e const \u0026 __thiscall CmjWildcatAcl::GetEmailAddress(void)const "
+    },
+    {
+        "Ordinal":  147,
+        "RVA":  "0x00955180",
+        "Mangled":  "?GetEmailAddress@CmjWildcatContact@@QAEABV?$CStringT@_WV?$StrTraitMFC_DLL@_WV?$ChTraitsCRT@_W@ATL@@@@@ATL@@XZ",
+        "Demangled":  "public: class ATL::CStringT\u003cwchar_t,class StrTraitMFC_DLL\u003cwchar_t,class ATL::ChTraitsCRT\u003cwchar_t\u003e \u003e \u003e const \u0026 __thiscall CmjWildcatContact::GetEmailAddress(void)"
+    },
+    {
+        "Ordinal":  148,
+        "RVA":  "0x0010BD50",
+        "Mangled":  "?GetEmailAddress@CmjWildcatUser@@QAEABV?$CStringT@_WV?$StrTraitMFC_DLL@_WV?$ChTraitsCRT@_W@ATL@@@@@ATL@@XZ",
+        "Demangled":  "public: class ATL::CStringT\u003cwchar_t,class StrTraitMFC_DLL\u003cwchar_t,class ATL::ChTraitsCRT\u003cwchar_t\u003e \u003e \u003e const \u0026 __thiscall CmjWildcatUser::GetEmailAddress(void)"
+    },
+    {
+        "Ordinal":  149,
+        "RVA":  "0x00054790",
+        "Mangled":  "?GetExpiryDate@CmjCrowdcastBridge@@QAEABVCTime@ATL@@XZ",
+        "Demangled":  "public: class ATL::CTime const \u0026 __thiscall CmjCrowdcastBridge::GetExpiryDate(void)"
+    },
+    {
+        "Ordinal":  150,
+        "RVA":  "0x000EC910",
+        "Mangled":  "?GetExpiryDate@CmjWildcatAccount@@QAEABVCTime@ATL@@XZ",
+        "Demangled":  "public: class ATL::CTime const \u0026 __thiscall CmjWildcatAccount::GetExpiryDate(void)"
+    },
+    {
+        "Ordinal":  151,
+        "RVA":  "0x00102FD0",
+        "Mangled":  "?GetFileCount@CmjWildcatFolder@@QAEHXZ",
+        "Demangled":  "public: int __thiscall CmjWildcatFolder::GetFileCount(void)"
+    },
+    {
+        "Ordinal":  152,
+        "RVA":  "0x00102FF0",
+        "Mangled":  "?GetFileListRetrieved@CmjWildcatFolder@@QAE_NXZ",
+        "Demangled":  "public: bool __thiscall CmjWildcatFolder::GetFileListRetrieved(void)"
+    },
+    {
+        "Ordinal":  153,
+        "RVA":  "0x000F1970",
+        "Mangled":  "?GetFileSelection@CmjWildcatViewModel@@QAEPAVCmjWildcatItemSelection@@XZ",
+        "Demangled":  "public: class CmjWildcatItemSelection * __thiscall CmjWildcatViewModel::GetFileSelection(void)"
+    },
+    {
+        "Ordinal":  154,
+        "RVA":  "0x000547B0",
+        "Mangled":  "?GetFirstName@CmjAuth0User@@QAEABV?$CStringT@_WV?$StrTraitMFC_DLL@_WV?$ChTraitsCRT@_W@ATL@@@@@ATL@@XZ",
+        "Demangled":  "public: class ATL::CStringT\u003cwchar_t,class StrTraitMFC_DLL\u003cwchar_t,class ATL::ChTraitsCRT\u003cwchar_t\u003e \u003e \u003e const \u0026 __thiscall CmjAuth0User::GetFirstName(void)"
+    },
+    {
+        "Ordinal":  155,
+        "RVA":  "0x002DCA10",
+        "Mangled":  "?GetFirstName@CmjWildcatAcl@@QBEABV?$CStringT@_WV?$StrTraitMFC_DLL@_WV?$ChTraitsCRT@_W@ATL@@@@@ATL@@XZ",
+        "Demangled":  "public: class ATL::CStringT\u003cwchar_t,class StrTraitMFC_DLL\u003cwchar_t,class ATL::ChTraitsCRT\u003cwchar_t\u003e \u003e \u003e const \u0026 __thiscall CmjWildcatAcl::GetFirstName(void)const "
+    },
+    {
+        "Ordinal":  156,
+        "RVA":  "0x009551A0",
+        "Mangled":  "?GetFirstName@CmjWildcatContact@@QAEABV?$CStringT@_WV?$StrTraitMFC_DLL@_WV?$ChTraitsCRT@_W@ATL@@@@@ATL@@XZ",
+        "Demangled":  "public: class ATL::CStringT\u003cwchar_t,class StrTraitMFC_DLL\u003cwchar_t,class ATL::ChTraitsCRT\u003cwchar_t\u003e \u003e \u003e const \u0026 __thiscall CmjWildcatContact::GetFirstName(void)"
+    },
+    {
+        "Ordinal":  157,
+        "RVA":  "0x0010BD70",
+        "Mangled":  "?GetFirstName@CmjWildcatUser@@QAEABV?$CStringT@_WV?$StrTraitMFC_DLL@_WV?$ChTraitsCRT@_W@ATL@@@@@ATL@@XZ",
+        "Demangled":  "public: class ATL::CStringT\u003cwchar_t,class StrTraitMFC_DLL\u003cwchar_t,class ATL::ChTraitsCRT\u003cwchar_t\u003e \u003e \u003e const \u0026 __thiscall CmjWildcatUser::GetFirstName(void)"
+    },
+    {
+        "Ordinal":  158,
+        "RVA":  "0x000F1E70",
+        "Mangled":  "?GetFolderSelection@CmjWildcatViewModel@@QAEPAVCmjWildcatItemSelection@@XZ",
+        "Demangled":  "public: class CmjWildcatItemSelection * __thiscall CmjWildcatViewModel::GetFolderSelection(void)"
+    },
+    {
+        "Ordinal":  159,
+        "RVA":  "0x009C9A30",
+        "Mangled":  "?GetGalleryType@CmjMftItemsList@@QAE?AW4EmjGalleryType@@XZ",
+        "Demangled":  "public: enum EmjGalleryType __thiscall CmjMftItemsList::GetGalleryType(void)"
+    },
+    {
+        "Ordinal":  160,
+        "RVA":  "0x002DCA30",
+        "Mangled":  "?GetGroupName@CmjWildcatAcl@@QBEABV?$CStringT@_WV?$StrTraitMFC_DLL@_WV?$ChTraitsCRT@_W@ATL@@@@@ATL@@XZ",
+        "Demangled":  "public: class ATL::CStringT\u003cwchar_t,class StrTraitMFC_DLL\u003cwchar_t,class ATL::ChTraitsCRT\u003cwchar_t\u003e \u003e \u003e const \u0026 __thiscall CmjWildcatAcl::GetGroupName(void)const "
+    },
+    {
+        "Ordinal":  161,
+        "RVA":  "0x007E3540",
+        "Mangled":  "?GetHeadPosition@CmjWildcatAclList@@QAEPAU__POSITION@@XZ",
+        "Demangled":  "public: struct __POSITION * __thiscall CmjWildcatAclList::GetHeadPosition(void)"
+    },
+    {
+        "Ordinal":  162,
+        "RVA":  "0x000F4910",
+        "Mangled":  "?GetHeadPosition@CmjWildcatItemList@@QAEPAU__POSITION@@XZ",
+        "Demangled":  "public: struct __POSITION * __thiscall CmjWildcatItemList::GetHeadPosition(void)"
+    },
+    {
+        "Ordinal":  163,
+        "RVA":  "0x000EE100",
+        "Mangled":  "?GetHeadPosition@CmjWildcatUserList@@QAEPAU__POSITION@@XZ",
+        "Demangled":  "public: struct __POSITION * __thiscall CmjWildcatUserList::GetHeadPosition(void)"
+    },
+    {
+        "Ordinal":  164,
+        "RVA":  "0x000547D0",
+        "Mangled":  "?GetId@CmjIntercomConversation@@QAEABV?$CStringT@_WV?$StrTraitMFC_DLL@_WV?$ChTraitsCRT@_W@ATL@@@@@ATL@@XZ",
+        "Demangled":  "public: class ATL::CStringT\u003cwchar_t,class StrTraitMFC_DLL\u003cwchar_t,class ATL::ChTraitsCRT\u003cwchar_t\u003e \u003e \u003e const \u0026 __thiscall CmjIntercomConversation::GetId(void)"
+    },
+    {
+        "Ordinal":  165,
+        "RVA":  "0x000380B0",
+        "Mangled":  "?GetId@CmjWildcatItem@@QAEABVCmjWildcatId@@XZ",
+        "Demangled":  "public: class CmjWildcatId const \u0026 __thiscall CmjWildcatItem::GetId(void)"
+    },
+    {
+        "Ordinal":  166,
+        "RVA":  "0x000F1EC0",
+        "Mangled":  "?GetIncludeDeletedItems@CmjWildcatViewModel@@UAE_NXZ",
+        "Demangled":  "public: virtual bool __thiscall CmjWildcatViewModel::GetIncludeDeletedItems(void)"
+    },
+    {
+        "Ordinal":  167,
+        "RVA":  "0x00623E70",
+        "Mangled":  "?GetInitialDueDate@CmjReminderData@@QAE?AVCTime@ATL@@XZ",
+        "Demangled":  "public: class ATL::CTime __thiscall CmjReminderData::GetInitialDueDate(void)"
+    },
+    {
+        "Ordinal":  168,
+        "RVA":  "0x0091C8E0",
+        "Mangled":  "?GetInternalDialog@CmjMfcDialogBase@@QAEPAVCmjMfcDialogBaseInternal@@XZ",
+        "Demangled":  "public: class CmjMfcDialogBaseInternal * __thiscall CmjMfcDialogBase::GetInternalDialog(void)"
+    },
+    {
+        "Ordinal":  169,
+        "RVA":  "0x00623EA0",
+        "Mangled":  "?GetIsDenaliLink@CmjReminderData@@QAE_NXZ",
+        "Demangled":  "public: bool __thiscall CmjReminderData::GetIsDenaliLink(void)"
+    },
+    {
+        "Ordinal":  170,
+        "RVA":  "0x0091C900",
+        "Mangled":  "?GetIsRecurrentOnFriday@CmjMfcRecurrenceWeeklyDialog@@QAE_NXZ",
+        "Demangled":  "public: bool __thiscall CmjMfcRecurrenceWeeklyDialog::GetIsRecurrentOnFriday(void)"
+    },
+    {
+        "Ordinal":  171,
+        "RVA":  "0x0091C930",
+        "Mangled":  "?GetIsRecurrentOnMonday@CmjMfcRecurrenceWeeklyDialog@@QAE_NXZ",
+        "Demangled":  "public: bool __thiscall CmjMfcRecurrenceWeeklyDialog::GetIsRecurrentOnMonday(void)"
+    },
+    {
+        "Ordinal":  172,
+        "RVA":  "0x0091C960",
+        "Mangled":  "?GetIsRecurrentOnSaturday@CmjMfcRecurrenceWeeklyDialog@@QAE_NXZ",
+        "Demangled":  "public: bool __thiscall CmjMfcRecurrenceWeeklyDialog::GetIsRecurrentOnSaturday(void)"
+    },
+    {
+        "Ordinal":  173,
+        "RVA":  "0x0091C990",
+        "Mangled":  "?GetIsRecurrentOnSunday@CmjMfcRecurrenceWeeklyDialog@@QAE_NXZ",
+        "Demangled":  "public: bool __thiscall CmjMfcRecurrenceWeeklyDialog::GetIsRecurrentOnSunday(void)"
+    },
+    {
+        "Ordinal":  174,
+        "RVA":  "0x0091C9C0",
+        "Mangled":  "?GetIsRecurrentOnThursday@CmjMfcRecurrenceWeeklyDialog@@QAE_NXZ",
+        "Demangled":  "public: bool __thiscall CmjMfcRecurrenceWeeklyDialog::GetIsRecurrentOnThursday(void)"
+    },
+    {
+        "Ordinal":  175,
+        "RVA":  "0x0091C9F0",
+        "Mangled":  "?GetIsRecurrentOnTuesday@CmjMfcRecurrenceWeeklyDialog@@QAE_NXZ",
+        "Demangled":  "public: bool __thiscall CmjMfcRecurrenceWeeklyDialog::GetIsRecurrentOnTuesday(void)"
+    },
+    {
+        "Ordinal":  176,
+        "RVA":  "0x0091CA20",
+        "Mangled":  "?GetIsRecurrentOnWednesday@CmjMfcRecurrenceWeeklyDialog@@QAE_NXZ",
+        "Demangled":  "public: bool __thiscall CmjMfcRecurrenceWeeklyDialog::GetIsRecurrentOnWednesday(void)"
+    },
+    {
+        "Ordinal":  177,
+        "RVA":  "0x009C9A50",
+        "Mangled":  "?GetItemRef@CmjMftItem@@QAEABV?$CStringT@_WV?$StrTraitMFC_DLL@_WV?$ChTraitsCRT@_W@ATL@@@@@ATL@@XZ",
+        "Demangled":  "public: class ATL::CStringT\u003cwchar_t,class StrTraitMFC_DLL\u003cwchar_t,class ATL::ChTraitsCRT\u003cwchar_t\u003e \u003e \u003e const \u0026 __thiscall CmjMftItem::GetItemRef(void)"
+    },
+    {
+        "Ordinal":  178,
+        "RVA":  "0x009C9A70",
+        "Mangled":  "?GetItemsCount@CmjMftItemsList@@QAEIXZ",
+        "Demangled":  "public: unsigned int __thiscall CmjMftItemsList::GetItemsCount(void)"
+    },
+    {
+        "Ordinal":  179,
+        "RVA":  "0x009C9A90",
+        "Mangled":  "?GetItemsHeadPosition@CmjMftItemsList@@QAEPAU__POSITION@@XZ",
+        "Demangled":  "public: struct __POSITION * __thiscall CmjMftItemsList::GetItemsHeadPosition(void)"
+    },
+    {
+        "Ordinal":  180,
+        "RVA":  "0x00112110",
+        "Mangled":  "?GetKeywords@CmjCohumanQuery@@QAEABV?$CStringT@_WV?$StrTraitMFC_DLL@_WV?$ChTraitsCRT@_W@ATL@@@@@ATL@@XZ",
+        "Demangled":  "public: class ATL::CStringT\u003cwchar_t,class StrTraitMFC_DLL\u003cwchar_t,class ATL::ChTraitsCRT\u003cwchar_t\u003e \u003e \u003e const \u0026 __thiscall CmjCohumanQuery::GetKeywords(void)"
+    },
+    {
+        "Ordinal":  181,
+        "RVA":  "0x009C9AB0",
+        "Mangled":  "?GetLanguage@CmjMftMapItem@@QAEABV?$CStringT@_WV?$StrTraitMFC_DLL@_WV?$ChTraitsCRT@_W@ATL@@@@@ATL@@XZ",
+        "Demangled":  "public: class ATL::CStringT\u003cwchar_t,class StrTraitMFC_DLL\u003cwchar_t,class ATL::ChTraitsCRT\u003cwchar_t\u003e \u003e \u003e const \u0026 __thiscall CmjMftMapItem::GetLanguage(void)"
+    },
+    {
+        "Ordinal":  182,
+        "RVA":  "0x000380D0",
+        "Mangled":  "?GetLastAccessedDate@CmjWildcatFile@@QAEABVCTime@ATL@@XZ",
+        "Demangled":  "public: class ATL::CTime const \u0026 __thiscall CmjWildcatFile::GetLastAccessedDate(void)"
+    },
+    {
+        "Ordinal":  183,
+        "RVA":  "0x00054BD0",
+        "Mangled":  "?GetLastName@CmjAuth0User@@QAEABV?$CStringT@_WV?$StrTraitMFC_DLL@_WV?$ChTraitsCRT@_W@ATL@@@@@ATL@@XZ",
+        "Demangled":  "public: class ATL::CStringT\u003cwchar_t,class StrTraitMFC_DLL\u003cwchar_t,class ATL::ChTraitsCRT\u003cwchar_t\u003e \u003e \u003e const \u0026 __thiscall CmjAuth0User::GetLastName(void)"
+    },
+    {
+        "Ordinal":  184,
+        "RVA":  "0x002DCA50",
+        "Mangled":  "?GetLastName@CmjWildcatAcl@@QBEABV?$CStringT@_WV?$StrTraitMFC_DLL@_WV?$ChTraitsCRT@_W@ATL@@@@@ATL@@XZ",
+        "Demangled":  "public: class ATL::CStringT\u003cwchar_t,class StrTraitMFC_DLL\u003cwchar_t,class ATL::ChTraitsCRT\u003cwchar_t\u003e \u003e \u003e const \u0026 __thiscall CmjWildcatAcl::GetLastName(void)const "
+    },
+    {
+        "Ordinal":  185,
+        "RVA":  "0x009551C0",
+        "Mangled":  "?GetLastName@CmjWildcatContact@@QAEABV?$CStringT@_WV?$StrTraitMFC_DLL@_WV?$ChTraitsCRT@_W@ATL@@@@@ATL@@XZ",
+        "Demangled":  "public: class ATL::CStringT\u003cwchar_t,class StrTraitMFC_DLL\u003cwchar_t,class ATL::ChTraitsCRT\u003cwchar_t\u003e \u003e \u003e const \u0026 __thiscall CmjWildcatContact::GetLastName(void)"
+    },
+    {
+        "Ordinal":  186,
+        "RVA":  "0x0010C010",
+        "Mangled":  "?GetLastName@CmjWildcatUser@@QAEABV?$CStringT@_WV?$StrTraitMFC_DLL@_WV?$ChTraitsCRT@_W@ATL@@@@@ATL@@XZ",
+        "Demangled":  "public: class ATL::CStringT\u003cwchar_t,class StrTraitMFC_DLL\u003cwchar_t,class ATL::ChTraitsCRT\u003cwchar_t\u003e \u003e \u003e const \u0026 __thiscall CmjWildcatUser::GetLastName(void)"
+    },
+    {
+        "Ordinal":  187,
+        "RVA":  "0x00054BF0",
+        "Mangled":  "?GetLicenseStatus@CmjCrowdcastBridge@@QAEABV?$CStringT@_WV?$StrTraitMFC_DLL@_WV?$ChTraitsCRT@_W@ATL@@@@@ATL@@XZ",
+        "Demangled":  "public: class ATL::CStringT\u003cwchar_t,class StrTraitMFC_DLL\u003cwchar_t,class ATL::ChTraitsCRT\u003cwchar_t\u003e \u003e \u003e const \u0026 __thiscall CmjCrowdcastBridge::GetLicenseStatus(void)"
+    },
+    {
+        "Ordinal":  188,
+        "RVA":  "0x00054C10",
+        "Mangled":  "?GetLicenseType@CmjCrowdcastBridge@@QAEABV?$CStringT@_WV?$StrTraitMFC_DLL@_WV?$ChTraitsCRT@_W@ATL@@@@@ATL@@XZ",
+        "Demangled":  "public: class ATL::CStringT\u003cwchar_t,class StrTraitMFC_DLL\u003cwchar_t,class ATL::ChTraitsCRT\u003cwchar_t\u003e \u003e \u003e const \u0026 __thiscall CmjCrowdcastBridge::GetLicenseType(void)"
+    },
+    {
+        "Ordinal":  189,
+        "RVA":  "0x00623EC0",
+        "Mangled":  "?GetMapGuid@CmjReminderData@@QAE?AV?$CStringT@_WV?$StrTraitMFC_DLL@_WV?$ChTraitsCRT@_W@ATL@@@@@ATL@@XZ",
+        "Demangled":  "public: class ATL::CStringT\u003cwchar_t,class StrTraitMFC_DLL\u003cwchar_t,class ATL::ChTraitsCRT\u003cwchar_t\u003e \u003e \u003e __thiscall CmjReminderData::GetMapGuid(void)"
+    },
+    {
+        "Ordinal":  190,
+        "RVA":  "0x009C9AD0",
+        "Mangled":  "?GetMapUrl@CmjMftMapItem@@QAEABV?$CStringT@_WV?$StrTraitMFC_DLL@_WV?$ChTraitsCRT@_W@ATL@@@@@ATL@@XZ",
+        "Demangled":  "public: class ATL::CStringT\u003cwchar_t,class StrTraitMFC_DLL\u003cwchar_t,class ATL::ChTraitsCRT\u003cwchar_t\u003e \u003e \u003e const \u0026 __thiscall CmjMftMapItem::GetMapUrl(void)"
+    },
+    {
+        "Ordinal":  191,
+        "RVA":  "0x00112130",
+        "Mangled":  "?GetMaxResults@CmjCohumanQuery@@QAEHXZ",
+        "Demangled":  "public: int __thiscall CmjCohumanQuery::GetMaxResults(void)"
+    },
+    {
+        "Ordinal":  192,
+        "RVA":  "0x00112150",
+        "Mangled":  "?GetMaxStartDate@CmjCohumanQuery@@QAEABVCTime@ATL@@XZ",
+        "Demangled":  "public: class ATL::CTime const \u0026 __thiscall CmjCohumanQuery::GetMaxStartDate(void)"
+    },
+    {
+        "Ordinal":  193,
+        "RVA":  "0x00112170",
+        "Mangled":  "?GetMaxTargetDate@CmjCohumanQuery@@QAEABVCTime@ATL@@XZ",
+        "Demangled":  "public: class ATL::CTime const \u0026 __thiscall CmjCohumanQuery::GetMaxTargetDate(void)"
+    },
+    {
+        "Ordinal":  194,
+        "RVA":  "0x00112190",
+        "Mangled":  "?GetMinStartDate@CmjCohumanQuery@@QAEABVCTime@ATL@@XZ",
+        "Demangled":  "public: class ATL::CTime const \u0026 __thiscall CmjCohumanQuery::GetMinStartDate(void)"
+    },
+    {
+        "Ordinal":  195,
+        "RVA":  "0x001121B0",
+        "Mangled":  "?GetMinTargetDate@CmjCohumanQuery@@QAEABVCTime@ATL@@XZ",
+        "Demangled":  "public: class ATL::CTime const \u0026 __thiscall CmjCohumanQuery::GetMinTargetDate(void)"
+    },
+    {
+        "Ordinal":  196,
+        "RVA":  "0x000380F0",
+        "Mangled":  "?GetModifiedBy@CmjWildcatRecord@@QAEABVCmjWildcatId@@XZ",
+        "Demangled":  "public: class CmjWildcatId const \u0026 __thiscall CmjWildcatRecord::GetModifiedBy(void)"
+    },
+    {
+        "Ordinal":  197,
+        "RVA":  "0x00038110",
+        "Mangled":  "?GetModifiedDate@CmjWildcatRecord@@QAEABVCTime@ATL@@XZ",
+        "Demangled":  "public: class ATL::CTime const \u0026 __thiscall CmjWildcatRecord::GetModifiedDate(void)"
+    },
+    {
+        "Ordinal":  198,
+        "RVA":  "0x0091CA50",
+        "Mangled":  "?GetMonthlyRecurrentDayOfMonth@CmjMfcRecurrenceMonthlyDialog@@QAEHXZ",
+        "Demangled":  "public: int __thiscall CmjMfcRecurrenceMonthlyDialog::GetMonthlyRecurrentDayOfMonth(void)"
+    },
+    {
+        "Ordinal":  199,
+        "RVA":  "0x0091CA70",
+        "Mangled":  "?GetMonthlyReminderPattern1Month@CmjMfcRecurrenceMonthlyDialog@@QAEHXZ",
+        "Demangled":  "public: int __thiscall CmjMfcRecurrenceMonthlyDialog::GetMonthlyReminderPattern1Month(void)"
+    },
+    {
+        "Ordinal":  200,
+        "RVA":  "0x0091CA90",
+        "Mangled":  "?GetMonthlyReminderPattern2Month@CmjMfcRecurrenceMonthlyDialog@@QAEHXZ",
+        "Demangled":  "public: int __thiscall CmjMfcRecurrenceMonthlyDialog::GetMonthlyReminderPattern2Month(void)"
+    },
+    {
+        "Ordinal":  201,
+        "RVA":  "0x001121D0",
+        "Mangled":  "?GetName@CmjCohumanProject@@QAE?AV?$CStringT@_WV?$StrTraitMFC_DLL@_WV?$ChTraitsCRT@_W@ATL@@@@@ATL@@XZ",
+        "Demangled":  "public: class ATL::CStringT\u003cwchar_t,class StrTraitMFC_DLL\u003cwchar_t,class ATL::ChTraitsCRT\u003cwchar_t\u003e \u003e \u003e __thiscall CmjCohumanProject::GetName(void)"
+    },
+    {
+        "Ordinal":  202,
+        "RVA":  "0x00131860",
+        "Mangled":  "?GetName@CmjCohumanTask@@QAEABV?$CStringT@_WV?$StrTraitMFC_DLL@_WV?$ChTraitsCRT@_W@ATL@@@@@ATL@@XZ",
+        "Demangled":  "public: class ATL::CStringT\u003cwchar_t,class StrTraitMFC_DLL\u003cwchar_t,class ATL::ChTraitsCRT\u003cwchar_t\u003e \u003e \u003e const \u0026 __thiscall CmjCohumanTask::GetName(void)"
+    },
+    {
+        "Ordinal":  203,
+        "RVA":  "0x001114B0",
+        "Mangled":  "?GetName@CmjCohumanUser@@QAEABV?$CStringT@_WV?$StrTraitMFC_DLL@_WV?$ChTraitsCRT@_W@ATL@@@@@ATL@@XZ",
+        "Demangled":  "public: class ATL::CStringT\u003cwchar_t,class StrTraitMFC_DLL\u003cwchar_t,class ATL::ChTraitsCRT\u003cwchar_t\u003e \u003e \u003e const \u0026 __thiscall CmjCohumanUser::GetName(void)"
+    },
+    {
+        "Ordinal":  204,
+        "RVA":  "0x009C9AF0",
+        "Mangled":  "?GetName@CmjMftItem@@QAEABV?$CStringT@_WV?$StrTraitMFC_DLL@_WV?$ChTraitsCRT@_W@ATL@@@@@ATL@@XZ",
+        "Demangled":  "public: class ATL::CStringT\u003cwchar_t,class StrTraitMFC_DLL\u003cwchar_t,class ATL::ChTraitsCRT\u003cwchar_t\u003e \u003e \u003e const \u0026 __thiscall CmjMftItem::GetName(void)"
+    },
+    {
+        "Ordinal":  205,
+        "RVA":  "0x000ECA30",
+        "Mangled":  "?GetName@CmjWildcatAccount@@QAEABV?$CStringT@_WV?$StrTraitMFC_DLL@_WV?$ChTraitsCRT@_W@ATL@@@@@ATL@@XZ",
+        "Demangled":  "public: class ATL::CStringT\u003cwchar_t,class StrTraitMFC_DLL\u003cwchar_t,class ATL::ChTraitsCRT\u003cwchar_t\u003e \u003e \u003e const \u0026 __thiscall CmjWildcatAccount::GetName(void)"
+    },
+    {
+        "Ordinal":  206,
+        "RVA":  "0x00038130",
+        "Mangled":  "?GetName@CmjWildcatRecord@@QAEABV?$CStringT@_WV?$StrTraitMFC_DLL@_WV?$ChTraitsCRT@_W@ATL@@@@@ATL@@XZ",
+        "Demangled":  "public: class ATL::CStringT\u003cwchar_t,class StrTraitMFC_DLL\u003cwchar_t,class ATL::ChTraitsCRT\u003cwchar_t\u003e \u003e \u003e const \u0026 __thiscall CmjWildcatRecord::GetName(void)"
+    },
+    {
+        "Ordinal":  207,
+        "RVA":  "0x007E35F0",
+        "Mangled":  "?GetNext@CmjWildcatAclList@@QAE?AVCmjWildcatAcl@@AAPAU__POSITION@@@Z",
+        "Demangled":  "public: class CmjWildcatAcl __thiscall CmjWildcatAclList::GetNext(struct __POSITION * \u0026)"
+    },
+    {
+        "Ordinal":  208,
+        "RVA":  "0x000F4A80",
+        "Mangled":  "?GetNext@CmjWildcatItemList@@QAE?AVCmjWildcatId@@AAPAU__POSITION@@@Z",
+        "Demangled":  "public: class CmjWildcatId __thiscall CmjWildcatItemList::GetNext(struct __POSITION * \u0026)"
+    },
+    {
+        "Ordinal":  209,
+        "RVA":  "0x000EE270",
+        "Mangled":  "?GetNext@CmjWildcatUserList@@QAE?AVCmjWildcatId@@AAPAU__POSITION@@@Z",
+        "Demangled":  "public: class CmjWildcatId __thiscall CmjWildcatUserList::GetNext(struct __POSITION * \u0026)"
+    },
+    {
+        "Ordinal":  210,
+        "RVA":  "0x000ECA50",
+        "Mangled":  "?GetNextAccount@CmjWildcatRestClient@@QAEABVCmjWildcatId@@AAPAU__POSITION@@@Z",
+        "Demangled":  "public: class CmjWildcatId const \u0026 __thiscall CmjWildcatRestClient::GetNextAccount(struct __POSITION * \u0026)"
+    },
+    {
+        "Ordinal":  211,
+        "RVA":  "0x00623F10",
+        "Mangled":  "?GetNextDueDate@CmjReminderData@@QAE?AVCTime@ATL@@XZ",
+        "Demangled":  "public: class ATL::CTime __thiscall CmjReminderData::GetNextDueDate(void)"
+    },
+    {
+        "Ordinal":  212,
+        "RVA":  "0x009C9B10",
+        "Mangled":  "?GetNextItem@CmjMftItemsList@@QAEPAVCmjMftItem@@AAPAU__POSITION@@@Z",
+        "Demangled":  "public: class CmjMftItem * __thiscall CmjMftItemsList::GetNextItem(struct __POSITION * \u0026)"
+    },
+    {
+        "Ordinal":  213,
+        "RVA":  "0x00623FB0",
+        "Mangled":  "?GetObjectGuid@CmjReminderData@@QAE?AV?$CStringT@_WV?$StrTraitMFC_DLL@_WV?$ChTraitsCRT@_W@ATL@@@@@ATL@@XZ",
+        "Demangled":  "public: class ATL::CStringT\u003cwchar_t,class StrTraitMFC_DLL\u003cwchar_t,class ATL::ChTraitsCRT\u003cwchar_t\u003e \u003e \u003e __thiscall CmjReminderData::GetObjectGuid(void)"
+    },
+    {
+        "Ordinal":  214,
+        "RVA":  "0x00623FF0",
+        "Mangled":  "?GetObjectTitle@CmjReminderData@@QAE?AV?$CStringT@_WV?$StrTraitMFC_DLL@_WV?$ChTraitsCRT@_W@ATL@@@@@ATL@@XZ",
+        "Demangled":  "public: class ATL::CStringT\u003cwchar_t,class StrTraitMFC_DLL\u003cwchar_t,class ATL::ChTraitsCRT\u003cwchar_t\u003e \u003e \u003e __thiscall CmjReminderData::GetObjectTitle(void)"
+    },
+    {
+        "Ordinal":  215,
+        "RVA":  "0x006247B0",
+        "Mangled":  "?GetOutlookEntryId@CmjReminderData@@QAE?AV?$CStringT@_WV?$StrTraitMFC_DLL@_WV?$ChTraitsCRT@_W@ATL@@@@@ATL@@XZ",
+        "Demangled":  "public: class ATL::CStringT\u003cwchar_t,class StrTraitMFC_DLL\u003cwchar_t,class ATL::ChTraitsCRT\u003cwchar_t\u003e \u003e \u003e __thiscall CmjReminderData::GetOutlookEntryId(void)"
+    },
+    {
+        "Ordinal":  216,
+        "RVA":  "0x006247F0",
+        "Mangled":  "?GetOutlookObjectGuid@CmjReminderData@@QAE?AV?$CStringT@_WV?$StrTraitMFC_DLL@_WV?$ChTraitsCRT@_W@ATL@@@@@ATL@@XZ",
+        "Demangled":  "public: class ATL::CStringT\u003cwchar_t,class StrTraitMFC_DLL\u003cwchar_t,class ATL::ChTraitsCRT\u003cwchar_t\u003e \u003e \u003e __thiscall CmjReminderData::GetOutlookObjectGuid(void)"
+    },
+    {
+        "Ordinal":  217,
+        "RVA":  "0x000ECAC0",
+        "Mangled":  "?GetOwnerEmailAddress@CmjWildcatAccount@@QAEABV?$CStringT@_WV?$StrTraitMFC_DLL@_WV?$ChTraitsCRT@_W@ATL@@@@@ATL@@XZ",
+        "Demangled":  "public: class ATL::CStringT\u003cwchar_t,class StrTraitMFC_DLL\u003cwchar_t,class ATL::ChTraitsCRT\u003cwchar_t\u003e \u003e \u003e const \u0026 __thiscall CmjWildcatAccount::GetOwnerEmailAddress(void)"
+    },
+    {
+        "Ordinal":  218,
+        "RVA":  "0x00112240",
+        "Mangled":  "?GetOwnerId@CmjCohumanQuery@@QAEABVCmjWildcatId@@XZ",
+        "Demangled":  "public: class CmjWildcatId const \u0026 __thiscall CmjCohumanQuery::GetOwnerId(void)"
+    },
+    {
+        "Ordinal":  219,
+        "RVA":  "0x00131880",
+        "Mangled":  "?GetOwnerId@CmjCohumanTask@@QAEABVCmjWildcatId@@XZ",
+        "Demangled":  "public: class CmjWildcatId const \u0026 __thiscall CmjCohumanTask::GetOwnerId(void)"
+    },
+    {
+        "Ordinal":  220,
+        "RVA":  "0x001318A0",
+        "Mangled":  "?GetParentId@CmjCohumanTask@@UAE?AVCmjWildcatId@@XZ",
+        "Demangled":  "public: virtual class CmjWildcatId __thiscall CmjCohumanTask::GetParentId(void)"
+    },
+    {
+        "Ordinal":  221,
+        "RVA":  "0x000FC430",
+        "Mangled":  "?GetParentId@CmjWildcatFileVersion@@UAE?AVCmjWildcatId@@XZ",
+        "Demangled":  "public: virtual class CmjWildcatId __thiscall CmjWildcatFileVersion::GetParentId(void)"
+    },
+    {
+        "Ordinal":  222,
+        "RVA":  "0x00038150",
+        "Mangled":  "?GetParentId@CmjWildcatItem@@UAE?AVCmjWildcatId@@XZ",
+        "Demangled":  "public: virtual class CmjWildcatId __thiscall CmjWildcatItem::GetParentId(void)"
+    },
+    {
+        "Ordinal":  223,
+        "RVA":  "0x000381A0",
+        "Mangled":  "?GetParentId@CmjWildcatRecord@@UAE?AVCmjWildcatId@@XZ",
+        "Demangled":  "public: virtual class CmjWildcatId __thiscall CmjWildcatRecord::GetParentId(void)"
+    },
+    {
+        "Ordinal":  224,
+        "RVA":  "0x009C9B80",
+        "Mangled":  "?GetParentItemRef@CmjMftItem@@QAEABV?$CStringT@_WV?$StrTraitMFC_DLL@_WV?$ChTraitsCRT@_W@ATL@@@@@ATL@@XZ",
+        "Demangled":  "public: class ATL::CStringT\u003cwchar_t,class StrTraitMFC_DLL\u003cwchar_t,class ATL::ChTraitsCRT\u003cwchar_t\u003e \u003e \u003e const \u0026 __thiscall CmjMftItem::GetParentItemRef(void)"
+    },
+    {
+        "Ordinal":  225,
+        "RVA":  "0x00112260",
+        "Mangled":  "?GetPath@CmjCohumanProject@@QAE?AV?$CStringT@_WV?$StrTraitMFC_DLL@_WV?$ChTraitsCRT@_W@ATL@@@@@ATL@@XZ",
+        "Demangled":  "public: class ATL::CStringT\u003cwchar_t,class StrTraitMFC_DLL\u003cwchar_t,class ATL::ChTraitsCRT\u003cwchar_t\u003e \u003e \u003e __thiscall CmjCohumanProject::GetPath(void)"
+    },
+    {
+        "Ordinal":  226,
+        "RVA":  "0x00131910",
+        "Mangled":  "?GetPath@CmjCohumanTask@@QAEABV?$CStringT@_WV?$StrTraitMFC_DLL@_WV?$ChTraitsCRT@_W@ATL@@@@@ATL@@XZ",
+        "Demangled":  "public: class ATL::CStringT\u003cwchar_t,class StrTraitMFC_DLL\u003cwchar_t,class ATL::ChTraitsCRT\u003cwchar_t\u003e \u003e \u003e const \u0026 __thiscall CmjCohumanTask::GetPath(void)"
+    },
+    {
+        "Ordinal":  227,
+        "RVA":  "0x001114F0",
+        "Mangled":  "?GetPath@CmjCohumanUser@@QAEABV?$CStringT@_WV?$StrTraitMFC_DLL@_WV?$ChTraitsCRT@_W@ATL@@@@@ATL@@XZ",
+        "Demangled":  "public: class ATL::CStringT\u003cwchar_t,class StrTraitMFC_DLL\u003cwchar_t,class ATL::ChTraitsCRT\u003cwchar_t\u003e \u003e \u003e const \u0026 __thiscall CmjCohumanUser::GetPath(void)"
+    },
+    {
+        "Ordinal":  228,
+        "RVA":  "0x00038210",
+        "Mangled":  "?GetPath@CmjWildcatRecord@@QAEABV?$CStringT@_WV?$StrTraitMFC_DLL@_WV?$ChTraitsCRT@_W@ATL@@@@@ATL@@XZ",
+        "Demangled":  "public: class ATL::CStringT\u003cwchar_t,class StrTraitMFC_DLL\u003cwchar_t,class ATL::ChTraitsCRT\u003cwchar_t\u003e \u003e \u003e const \u0026 __thiscall CmjWildcatRecord::GetPath(void)"
+    },
+    {
+        "Ordinal":  229,
+        "RVA":  "0x000EE410",
+        "Mangled":  "?GetPendingUsersCount@CmjWildcatUserList@@QAEIXZ",
+        "Demangled":  "public: unsigned int __thiscall CmjWildcatUserList::GetPendingUsersCount(void)"
+    },
+    {
+        "Ordinal":  230,
+        "RVA":  "0x000EE430",
+        "Mangled":  "?GetPendingUsersHeadPosition@CmjWildcatUserList@@QAEPAU__POSITION@@XZ",
+        "Demangled":  "public: struct __POSITION * __thiscall CmjWildcatUserList::GetPendingUsersHeadPosition(void)"
+    },
+    {
+        "Ordinal":  231,
+        "RVA":  "0x002DCA80",
+        "Mangled":  "?GetPermissions@CmjWildcatAcl@@QBE?AW4EmjWildcatPermissions@@XZ",
+        "Demangled":  "public: enum EmjWildcatPermissions __thiscall CmjWildcatAcl::GetPermissions(void)const "
+    },
+    {
+        "Ordinal":  232,
+        "RVA":  "0x00038230",
+        "Mangled":  "?GetPermissions@CmjWildcatRecord@@QAE?AW4EmjWildcatPermissions@@XZ",
+        "Demangled":  "public: enum EmjWildcatPermissions __thiscall CmjWildcatRecord::GetPermissions(void)"
+    },
+    {
+        "Ordinal":  233,
+        "RVA":  "0x009C9BA0",
+        "Mangled":  "?GetPreviewImageUrl@CmjMftMapItem@@QAEABV?$CStringT@_WV?$StrTraitMFC_DLL@_WV?$ChTraitsCRT@_W@ATL@@@@@ATL@@XZ",
+        "Demangled":  "public: class ATL::CStringT\u003cwchar_t,class StrTraitMFC_DLL\u003cwchar_t,class ATL::ChTraitsCRT\u003cwchar_t\u003e \u003e \u003e const \u0026 __thiscall CmjMftMapItem::GetPreviewImageUrl(void)"
+    },
+    {
+        "Ordinal":  234,
+        "RVA":  "0x001122A0",
+        "Mangled":  "?GetProgress@CmjCohumanQuery@@QAE?AW4EmjCohumanQueryProgress@@XZ",
+        "Demangled":  "public: enum EmjCohumanQueryProgress __thiscall CmjCohumanQuery::GetProgress(void)"
+    },
+    {
+        "Ordinal":  235,
+        "RVA":  "0x00131930",
+        "Mangled":  "?GetProgress@CmjCohumanTask@@QAEHXZ",
+        "Demangled":  "public: int __thiscall CmjCohumanTask::GetProgress(void)"
+    },
+    {
+        "Ordinal":  236,
+        "RVA":  "0x001122C0",
+        "Mangled":  "?GetProjectId@CmjCohumanQuery@@QAEABVCmjWildcatId@@XZ",
+        "Demangled":  "public: class CmjWildcatId const \u0026 __thiscall CmjCohumanQuery::GetProjectId(void)"
+    },
+    {
+        "Ordinal":  237,
+        "RVA":  "0x00103180",
+        "Mangled":  "?GetProjectId@CmjWildcatFolder@@QAEABVCmjWildcatId@@XZ",
+        "Demangled":  "public: class CmjWildcatId const \u0026 __thiscall CmjWildcatFolder::GetProjectId(void)"
+    },
+    {
+        "Ordinal":  238,
+        "RVA":  "0x009C9BC0",
+        "Mangled":  "?GetRating@CmjMftMapItem@@QAEABV?$CStringT@_WV?$StrTraitMFC_DLL@_WV?$ChTraitsCRT@_W@ATL@@@@@ATL@@XZ",
+        "Demangled":  "public: class ATL::CStringT\u003cwchar_t,class StrTraitMFC_DLL\u003cwchar_t,class ATL::ChTraitsCRT\u003cwchar_t\u003e \u003e \u003e const \u0026 __thiscall CmjMftMapItem::GetRating(void)"
+    },
+    {
+        "Ordinal":  239,
+        "RVA":  "0x00043B50",
+        "Mangled":  "?GetReceivedZaps@CmjDesktopServerBridge@@QAEPAV?$CAtlList@USmjZapTopicInfo@@V?$CElementTraits@USmjZapTopicInfo@@@ATL@@@ATL@@XZ",
+        "Demangled":  "public: class ATL::CAtlList\u003cstruct SmjZapTopicInfo,class ATL::CElementTraits\u003cstruct SmjZapTopicInfo\u003e \u003e * __thiscall CmjDesktopServerBridge::GetReceivedZaps(void)"
+    },
+    {
+        "Ordinal":  240,
+        "RVA":  "0x00041B50",
+        "Mangled":  "?GetRefreshToken@CmjRemoteFileBridge@@QAEABV?$CStringT@_WV?$StrTraitMFC_DLL@_WV?$ChTraitsCRT@_W@ATL@@@@@ATL@@XZ",
+        "Demangled":  "public: class ATL::CStringT\u003cwchar_t,class StrTraitMFC_DLL\u003cwchar_t,class ATL::ChTraitsCRT\u003cwchar_t\u003e \u003e \u003e const \u0026 __thiscall CmjRemoteFileBridge::GetRefreshToken(void)"
+    },
+    {
+        "Ordinal":  241,
+        "RVA":  "0x00624830",
+        "Mangled":  "?GetReminderCollection@CmjReminderDataCollectionManager@@AAEPAV?$CAtlArray@PAVCmjReminderData@@V?$CElementTraits@PAVCmjReminderData@@@ATL@@@ATL@@XZ",
+        "Demangled":  "private: class ATL::CAtlArray\u003cclass CmjReminderData *,class ATL::CElementTraits\u003cclass CmjReminderData *\u003e \u003e * __thiscall CmjReminderDataCollectionManager::GetReminderCollection(void)"
+    },
+    {
+        "Ordinal":  242,
+        "RVA":  "0x00624850",
+        "Mangled":  "?GetReminderTimeSpan@CmjReminderData@@QAE?AVCTimeSpan@ATL@@XZ",
+        "Demangled":  "public: class ATL::CTimeSpan __thiscall CmjReminderData::GetReminderTimeSpan(void)"
+    },
+    {
+        "Ordinal":  243,
+        "RVA":  "0x002DCCD0",
+        "Mangled":  "?GetRole@CmjWildcatAcl@@QBE?AW4EmjWildcatAccountRole@@XZ",
+        "Demangled":  "public: enum EmjWildcatAccountRole __thiscall CmjWildcatAcl::GetRole(void)const "
+    },
+    {
+        "Ordinal":  244,
+        "RVA":  "0x000F1FC0",
+        "Mangled":  "?GetSelectedFileUserEmail@CmjWildcatViewModel@@QAEABV?$CStringT@_WV?$StrTraitMFC_DLL@_WV?$ChTraitsCRT@_W@ATL@@@@@ATL@@XZ",
+        "Demangled":  "public: class ATL::CStringT\u003cwchar_t,class StrTraitMFC_DLL\u003cwchar_t,class ATL::ChTraitsCRT\u003cwchar_t\u003e \u003e \u003e const \u0026 __thiscall CmjWildcatViewModel::GetSelectedFileUserEmail(void)"
+    },
+    {
+        "Ordinal":  245,
+        "RVA":  "0x000F1FE0",
+        "Mangled":  "?GetSelectedFolderUserEmail@CmjWildcatViewModel@@QAEABV?$CStringT@_WV?$StrTraitMFC_DLL@_WV?$ChTraitsCRT@_W@ATL@@@@@ATL@@XZ",
+        "Demangled":  "public: class ATL::CStringT\u003cwchar_t,class StrTraitMFC_DLL\u003cwchar_t,class ATL::ChTraitsCRT\u003cwchar_t\u003e \u003e \u003e const \u0026 __thiscall CmjWildcatViewModel::GetSelectedFolderUserEmail(void)"
+    },
+    {
+        "Ordinal":  246,
+        "RVA":  "0x000ECAE0",
+        "Mangled":  "?GetSessionId@CmjWildcatRestClient@@QAEABV?$CStringT@_WV?$StrTraitMFC_DLL@_WV?$ChTraitsCRT@_W@ATL@@@@@ATL@@XZ",
+        "Demangled":  "public: class ATL::CStringT\u003cwchar_t,class StrTraitMFC_DLL\u003cwchar_t,class ATL::ChTraitsCRT\u003cwchar_t\u003e \u003e \u003e const \u0026 __thiscall CmjWildcatRestClient::GetSessionId(void)"
+    },
+    {
+        "Ordinal":  247,
+        "RVA":  "0x00038260",
+        "Mangled":  "?GetSize@CmjWildcatRecord@@QAE_JXZ",
+        "Demangled":  "public: __int64 __thiscall CmjWildcatRecord::GetSize(void)"
+    },
+    {
+        "Ordinal":  248,
+        "RVA":  "0x00624970",
+        "Mangled":  "?GetSnoozeTime@CmjReminderData@@QAE?AVCTime@ATL@@XZ",
+        "Demangled":  "public: class ATL::CTime __thiscall CmjReminderData::GetSnoozeTime(void)"
+    },
+    {
+        "Ordinal":  249,
+        "RVA":  "0x00131A40",
+        "Mangled":  "?GetStartDate@CmjCohumanTask@@QAEABVCTime@ATL@@XZ",
+        "Demangled":  "public: class ATL::CTime const \u0026 __thiscall CmjCohumanTask::GetStartDate(void)"
+    },
+    {
+        "Ordinal":  250,
+        "RVA":  "0x00055490",
+        "Mangled":  "?GetStartMessageBody@CmjIntercomConversation@@QAEABV?$CStringT@_WV?$StrTraitMFC_DLL@_WV?$ChTraitsCRT@_W@ATL@@@@@ATL@@XZ",
+        "Demangled":  "public: class ATL::CStringT\u003cwchar_t,class StrTraitMFC_DLL\u003cwchar_t,class ATL::ChTraitsCRT\u003cwchar_t\u003e \u003e \u003e const \u0026 __thiscall CmjIntercomConversation::GetStartMessageBody(void)"
+    },
+    {
+        "Ordinal":  251,
+        "RVA":  "0x0091CC20",
+        "Mangled":  "?GetStartTime@CmjMfcRecurrenceMonthlyDialog@@QAE?AVCTime@ATL@@XZ",
+        "Demangled":  "public: class ATL::CTime __thiscall CmjMfcRecurrenceMonthlyDialog::GetStartTime(void)"
+    },
+    {
+        "Ordinal":  252,
+        "RVA":  "0x0091CC50",
+        "Mangled":  "?GetStartTime@CmjMfcRecurrenceWeeklyDialog@@QAE?AVCTime@ATL@@XZ",
+        "Demangled":  "public: class ATL::CTime __thiscall CmjMfcRecurrenceWeeklyDialog::GetStartTime(void)"
+    },
+    {
+        "Ordinal":  253,
+        "RVA":  "0x0091CC80",
+        "Mangled":  "?GetStartTime@CmjMfcRecurrenceYearlyDialog@@QAE?AVCTime@ATL@@XZ",
+        "Demangled":  "public: class ATL::CTime __thiscall CmjMfcRecurrenceYearlyDialog::GetStartTime(void)"
+    },
+    {
+        "Ordinal":  254,
+        "RVA":  "0x00131A60",
+        "Mangled":  "?GetState@CmjCohumanTask@@QAE?AW4EmjCohumanTaskState@@XZ",
+        "Demangled":  "public: enum EmjCohumanTaskState __thiscall CmjCohumanTask::GetState(void)"
+    },
+    {
+        "Ordinal":  255,
+        "RVA":  "0x001031A0",
+        "Mangled":  "?GetSubFolderCount@CmjWildcatFolder@@QAEHXZ",
+        "Demangled":  "public: int __thiscall CmjWildcatFolder::GetSubFolderCount(void)"
+    },
+    {
+        "Ordinal":  256,
+        "RVA":  "0x00624A10",
+        "Mangled":  "?GetSubject@CmjReminderData@@QAE?AV?$CStringT@_WV?$StrTraitMFC_DLL@_WV?$ChTraitsCRT@_W@ATL@@@@@ATL@@XZ",
+        "Demangled":  "public: class ATL::CStringT\u003cwchar_t,class StrTraitMFC_DLL\u003cwchar_t,class ATL::ChTraitsCRT\u003cwchar_t\u003e \u003e \u003e __thiscall CmjReminderData::GetSubject(void)"
+    },
+    {
+        "Ordinal":  257,
+        "RVA":  "0x00038280",
+        "Mangled":  "?GetSyncVersion@CmjWildcatFile@@QAEJXZ",
+        "Demangled":  "public: long __thiscall CmjWildcatFile::GetSyncVersion(void)"
+    },
+    {
+        "Ordinal":  258,
+        "RVA":  "0x000382A0",
+        "Mangled":  "?GetSynchronizedVersion@CmjWildcatFile@@QAEJXZ",
+        "Demangled":  "public: long __thiscall CmjWildcatFile::GetSynchronizedVersion(void)"
+    },
+    {
+        "Ordinal":  259,
+        "RVA":  "0x000382C0",
+        "Mangled":  "?GetTags@CmjWildcatRecord@@QAE?AW4EmjWildcatTags@@XZ",
+        "Demangled":  "public: enum EmjWildcatTags __thiscall CmjWildcatRecord::GetTags(void)"
+    },
+    {
+        "Ordinal":  260,
+        "RVA":  "0x00131A80",
+        "Mangled":  "?GetTargetDate@CmjCohumanTask@@QAEABVCTime@ATL@@XZ",
+        "Demangled":  "public: class ATL::CTime const \u0026 __thiscall CmjCohumanTask::GetTargetDate(void)"
+    },
+    {
+        "Ordinal":  261,
+        "RVA":  "0x001122E0",
+        "Mangled":  "?GetTaskStartDate@CmjCohumanQuery@@QAE?AW4EmjCohumanQueryDate@@XZ",
+        "Demangled":  "public: enum EmjCohumanQueryDate __thiscall CmjCohumanQuery::GetTaskStartDate(void)"
+    },
+    {
+        "Ordinal":  262,
+        "RVA":  "0x00112300",
+        "Mangled":  "?GetTaskTargetDate@CmjCohumanQuery@@QAE?AW4EmjCohumanQueryDate@@XZ",
+        "Demangled":  "public: enum EmjCohumanQueryDate __thiscall CmjCohumanQuery::GetTaskTargetDate(void)"
+    },
+    {
+        "Ordinal":  263,
+        "RVA":  "0x000382E0",
+        "Mangled":  "?GetTemporaryId@CmjWildcatItem@@QAEABVCmjWildcatId@@XZ",
+        "Demangled":  "public: class CmjWildcatId const \u0026 __thiscall CmjWildcatItem::GetTemporaryId(void)"
+    },
+    {
+        "Ordinal":  264,
+        "RVA":  "0x009C9BE0",
+        "Mangled":  "?GetThumbanilImageUrl@CmjMftMapItem@@QAEABV?$CStringT@_WV?$StrTraitMFC_DLL@_WV?$ChTraitsCRT@_W@ATL@@@@@ATL@@XZ",
+        "Demangled":  "public: class ATL::CStringT\u003cwchar_t,class StrTraitMFC_DLL\u003cwchar_t,class ATL::ChTraitsCRT\u003cwchar_t\u003e \u003e \u003e const \u0026 __thiscall CmjMftMapItem::GetThumbanilImageUrl(void)"
+    },
+    {
+        "Ordinal":  265,
+        "RVA":  "0x000ECB00",
+        "Mangled":  "?GetType@CmjWildcatAccount@@QAE?AW4EmjAccountType@1@XZ",
+        "Demangled":  "public: enum CmjWildcatAccount::EmjAccountType __thiscall CmjWildcatAccount::GetType(void)"
+    },
+    {
+        "Ordinal":  266,
+        "RVA":  "0x000554B0",
+        "Mangled":  "?GetUpdatedTimeInternal@CmjIntercomConversation@@QAEABVCTime@ATL@@XZ",
+        "Demangled":  "public: class ATL::CTime const \u0026 __thiscall CmjIntercomConversation::GetUpdatedTimeInternal(void)"
+    },
+    {
+        "Ordinal":  267,
+        "RVA":  "0x00043BE0",
+        "Mangled":  "?GetUserEmail@CmjDesktopServerBridge@@QAEABV?$CStringT@_WV?$StrTraitMFC_DLL@_WV?$ChTraitsCRT@_W@ATL@@@@@ATL@@XZ",
+        "Demangled":  "public: class ATL::CStringT\u003cwchar_t,class StrTraitMFC_DLL\u003cwchar_t,class ATL::ChTraitsCRT\u003cwchar_t\u003e \u003e \u003e const \u0026 __thiscall CmjDesktopServerBridge::GetUserEmail(void)"
+    },
+    {
+        "Ordinal":  268,
+        "RVA":  "0x00041B70",
+        "Mangled":  "?GetUserId@CmjRemoteFileBridge@@QAEABV?$CStringT@_WV?$StrTraitMFC_DLL@_WV?$ChTraitsCRT@_W@ATL@@@@@ATL@@XZ",
+        "Demangled":  "public: class ATL::CStringT\u003cwchar_t,class StrTraitMFC_DLL\u003cwchar_t,class ATL::ChTraitsCRT\u003cwchar_t\u003e \u003e \u003e const \u0026 __thiscall CmjRemoteFileBridge::GetUserId(void)"
+    },
+    {
+        "Ordinal":  269,
+        "RVA":  "0x000ECB80",
+        "Mangled":  "?GetUserId@CmjWildcatRestClient@@QAE?AVCmjWildcatId@@XZ",
+        "Demangled":  "public: class CmjWildcatId __thiscall CmjWildcatRestClient::GetUserId(void)"
+    },
+    {
+        "Ordinal":  270,
+        "RVA":  "0x00041B90",
+        "Mangled":  "?GetUserLogin@CmjRemoteFileBridge@@QAEABV?$CStringT@_WV?$StrTraitMFC_DLL@_WV?$ChTraitsCRT@_W@ATL@@@@@ATL@@XZ",
+        "Demangled":  "public: class ATL::CStringT\u003cwchar_t,class StrTraitMFC_DLL\u003cwchar_t,class ATL::ChTraitsCRT\u003cwchar_t\u003e \u003e \u003e const \u0026 __thiscall CmjRemoteFileBridge::GetUserLogin(void)"
+    },
+    {
+        "Ordinal":  271,
+        "RVA":  "0x002DCD00",
+        "Mangled":  "?GetUserRefId@CmjWildcatAcl@@QBEABVCmjWildcatId@@XZ",
+        "Demangled":  "public: class CmjWildcatId const \u0026 __thiscall CmjWildcatAcl::GetUserRefId(void)const "
+    },
+    {
+        "Ordinal":  272,
+        "RVA":  "0x000FC520",
+        "Mangled":  "?GetVersionNumber@CmjWildcatFileVersion@@QAE?AV?$CStringT@_WV?$StrTraitMFC_DLL@_WV?$ChTraitsCRT@_W@ATL@@@@@ATL@@XZ",
+        "Demangled":  "public: class ATL::CStringT\u003cwchar_t,class StrTraitMFC_DLL\u003cwchar_t,class ATL::ChTraitsCRT\u003cwchar_t\u003e \u003e \u003e __thiscall CmjWildcatFileVersion::GetVersionNumber(void)"
+    },
+    {
+        "Ordinal":  273,
+        "RVA":  "0x000F2350",
+        "Mangled":  "?GetVersionSelection@CmjWildcatViewModel@@QAEPAVCmjWildcatItemSelection@@XZ",
+        "Demangled":  "public: class CmjWildcatItemSelection * __thiscall CmjWildcatViewModel::GetVersionSelection(void)"
+    },
+    {
+        "Ordinal":  274,
+        "RVA":  "0x00038310",
+        "Mangled":  "?GetVetoes@CmjWildcatRecord@@QAE?AW4EmjWildcatVetoes@@XZ",
+        "Demangled":  "public: enum EmjWildcatVetoes __thiscall CmjWildcatRecord::GetVetoes(void)"
+    },
+    {
+        "Ordinal":  275,
+        "RVA":  "0x002DCD10",
+        "Mangled":  "?GetViewModel@CmjWildcatModel@@QAEPAVCmjWildcatViewModel@@XZ",
+        "Demangled":  "public: class CmjWildcatViewModel * __thiscall CmjWildcatModel::GetViewModel(void)"
+    },
+    {
+        "Ordinal":  276,
+        "RVA":  "0x0091CCB0",
+        "Mangled":  "?GetWeeklyNumber@CmjMfcRecurrenceWeeklyDialog@@QAEHXZ",
+        "Demangled":  "public: int __thiscall CmjMfcRecurrenceWeeklyDialog::GetWeeklyNumber(void)"
+    },
+    {
+        "Ordinal":  277,
+        "RVA":  "0x00624B40",
+        "Mangled":  "?GetWildcatPath@CmjReminderData@@QAE?AV?$CStringT@_WV?$StrTraitMFC_DLL@_WV?$ChTraitsCRT@_W@ATL@@@@@ATL@@XZ",
+        "Demangled":  "public: class ATL::CStringT\u003cwchar_t,class StrTraitMFC_DLL\u003cwchar_t,class ATL::ChTraitsCRT\u003cwchar_t\u003e \u003e \u003e __thiscall CmjReminderData::GetWildcatPath(void)"
+    },
+    {
+        "Ordinal":  278,
+        "RVA":  "0x0091CCD0",
+        "Mangled":  "?GetYearlyRecurrentDay@CmjMfcRecurrenceYearlyDialog@@QAEHXZ",
+        "Demangled":  "public: int __thiscall CmjMfcRecurrenceYearlyDialog::GetYearlyRecurrentDay(void)"
+    },
+    {
+        "Ordinal":  279,
+        "RVA":  "0x00131AA0",
+        "Mangled":  "?HasAccess@CmjCohumanTask@@QAE_NXZ",
+        "Demangled":  "public: bool __thiscall CmjCohumanTask::HasAccess(void)"
+    },
+    {
+        "Ordinal":  280,
+        "RVA":  "0x00055630",
+        "Mangled":  "?HasConversations@CmjIntercomBridge@@QAE_NXZ",
+        "Demangled":  "public: bool __thiscall CmjIntercomBridge::HasConversations(void)"
+    },
+    {
+        "Ordinal":  281,
+        "RVA":  "0x00131AC0",
+        "Mangled":  "?HasError@CmjCohumanTask@@QAE_NXZ",
+        "Demangled":  "public: bool __thiscall CmjCohumanTask::HasError(void)"
+    },
+    {
+        "Ordinal":  282,
+        "RVA":  "0x000ECBE0",
+        "Mangled":  "?HasExpiryDate@CmjWildcatAccount@@QAE_NXZ",
+        "Demangled":  "public: bool __thiscall CmjWildcatAccount::HasExpiryDate(void)"
+    },
+    {
+        "Ordinal":  283,
+        "RVA":  "0x00131AE0",
+        "Mangled":  "?HasProgress@CmjCohumanTask@@QAE_NXZ",
+        "Demangled":  "public: bool __thiscall CmjCohumanTask::HasProgress(void)"
+    },
+    {
+        "Ordinal":  284,
+        "RVA":  "0x00131B00",
+        "Mangled":  "?HasStartDate@CmjCohumanTask@@QAE_NXZ",
+        "Demangled":  "public: bool __thiscall CmjCohumanTask::HasStartDate(void)"
+    },
+    {
+        "Ordinal":  285,
+        "RVA":  "0x00131B20",
+        "Mangled":  "?HasTargetDate@CmjCohumanTask@@QAE_NXZ",
+        "Demangled":  "public: bool __thiscall CmjCohumanTask::HasTargetDate(void)"
+    },
+    {
+        "Ordinal":  286,
+        "RVA":  "0x00112320",
+        "Mangled":  "?IsActive@CmjCohumanProject@@QAE_NXZ",
+        "Demangled":  "public: bool __thiscall CmjCohumanProject::IsActive(void)"
+    },
+    {
+        "Ordinal":  287,
+        "RVA":  "0x00111510",
+        "Mangled":  "?IsActive@CmjCohumanUser@@QAE_NXZ",
+        "Demangled":  "public: bool __thiscall CmjCohumanUser::IsActive(void)"
+    },
+    {
+        "Ordinal":  288,
+        "RVA":  "0x00038330",
+        "Mangled":  "?IsCheckedOut@CmjWildcatFile@@QAE_NXZ",
+        "Demangled":  "public: bool __thiscall CmjWildcatFile::IsCheckedOut(void)"
+    },
+    {
+        "Ordinal":  289,
+        "RVA":  "0x00038350",
+        "Mangled":  "?IsCheckingIn@CmjWildcatFile@@QAE_NXZ",
+        "Demangled":  "public: bool __thiscall CmjWildcatFile::IsCheckingIn(void)"
+    },
+    {
+        "Ordinal":  290,
+        "RVA":  "0x00038370",
+        "Mangled":  "?IsCheckingOut@CmjWildcatFile@@QAE_NXZ",
+        "Demangled":  "public: bool __thiscall CmjWildcatFile::IsCheckingOut(void)"
+    },
+    {
+        "Ordinal":  291,
+        "RVA":  "0x00036160",
+        "Mangled":  "?IsCohumanId@CmjWildcatId@@QBE_NXZ",
+        "Demangled":  "public: bool __thiscall CmjWildcatId::IsCohumanId(void)const "
+    },
+    {
+        "Ordinal":  292,
+        "RVA":  "0x001034A0",
+        "Mangled":  "?IsCollapsed@CmjWildcatFolder@@QAE_NXZ",
+        "Demangled":  "public: bool __thiscall CmjWildcatFolder::IsCollapsed(void)"
+    },
+    {
+        "Ordinal":  293,
+        "RVA":  "0x00038390",
+        "Mangled":  "?IsCreateInProgress@CmjWildcatItem@@QAE_NXZ",
+        "Demangled":  "public: bool __thiscall CmjWildcatItem::IsCreateInProgress(void)"
+    },
+    {
+        "Ordinal":  294,
+        "RVA":  "0x000383B0",
+        "Mangled":  "?IsCreatingFile@CmjWildcatFile@@QAE_NXZ",
+        "Demangled":  "public: bool __thiscall CmjWildcatFile::IsCreatingFile(void)"
+    },
+    {
+        "Ordinal":  295,
+        "RVA":  "0x000383D0",
+        "Mangled":  "?IsDiscardingCheckout@CmjWildcatFile@@QAE_NXZ",
+        "Demangled":  "public: bool __thiscall CmjWildcatFile::IsDiscardingCheckout(void)"
+    },
+    {
+        "Ordinal":  296,
+        "RVA":  "0x00036180",
+        "Mangled":  "?IsEmpty@CmjWildcatId@@QBE_NXZ",
+        "Demangled":  "public: bool __thiscall CmjWildcatId::IsEmpty(void)const "
+    },
+    {
+        "Ordinal":  297,
+        "RVA":  "0x00112340",
+        "Mangled":  "?IsFavorite@CmjCohumanProject@@QAE_NXZ",
+        "Demangled":  "public: bool __thiscall CmjCohumanProject::IsFavorite(void)"
+    },
+    {
+        "Ordinal":  298,
+        "RVA":  "0x000383F0",
+        "Mangled":  "?IsOpening@CmjWildcatFile@@QAE_NXZ",
+        "Demangled":  "public: bool __thiscall CmjWildcatFile::IsOpening(void)"
+    },
+    {
+        "Ordinal":  299,
+        "RVA":  "0x0010C250",
+        "Mangled":  "?IsPending@CmjWildcatUser@@QAE_NXZ",
+        "Demangled":  "public: bool __thiscall CmjWildcatUser::IsPending(void)"
+    },
+    {
+        "Ordinal":  300,
+        "RVA":  "0x002DD710",
+        "Mangled":  "?IsPendingUser@CmjWildcatAcl@@QBE_NXZ",
+        "Demangled":  "public: bool __thiscall CmjWildcatAcl::IsPendingUser(void)const "
+    },
+    {
+        "Ordinal":  301,
+        "RVA":  "0x00055AB0",
+        "Mangled":  "?IsRead@CmjIntercomConversation@@QAE_NXZ",
+        "Demangled":  "public: bool __thiscall CmjIntercomConversation::IsRead(void)"
+    },
+    {
+        "Ordinal":  302,
+        "RVA":  "0x00038410",
+        "Mangled":  "?IsRefreshInProgress@CmjWildcatItem@@QAE_NXZ",
+        "Demangled":  "public: bool __thiscall CmjWildcatItem::IsRefreshInProgress(void)"
+    },
+    {
+        "Ordinal":  303,
+        "RVA":  "0x00038430",
+        "Mangled":  "?IsRefreshNeeded@CmjWildcatItem@@UAE_NXZ",
+        "Demangled":  "public: virtual bool __thiscall CmjWildcatItem::IsRefreshNeeded(void)"
+    },
+    {
+        "Ordinal":  304,
+        "RVA":  "0x001010D0",
+        "Mangled":  "?IsRootFolderList@CmjWildcatFolderList@@QAE_NXZ",
+        "Demangled":  "public: bool __thiscall CmjWildcatFolderList::IsRootFolderList(void)"
+    },
+    {
+        "Ordinal":  305,
+        "RVA":  "0x00038450",
+        "Mangled":  "?IsSoftDeleted@CmjWildcatRecord@@QAE_NXZ",
+        "Demangled":  "public: bool __thiscall CmjWildcatRecord::IsSoftDeleted(void)"
+    },
+    {
+        "Ordinal":  306,
+        "RVA":  "0x00055AD0",
+        "Mangled":  "?IsStartedByAdmin@CmjIntercomConversation@@QAE_NXZ",
+        "Demangled":  "public: bool __thiscall CmjIntercomConversation::IsStartedByAdmin(void)"
+    },
+    {
+        "Ordinal":  307,
+        "RVA":  "0x00112360",
+        "Mangled":  "?IsSucceeded@CmjCohumanQuery@@QAE_NXZ",
+        "Demangled":  "public: bool __thiscall CmjCohumanQuery::IsSucceeded(void)"
+    },
+    {
+        "Ordinal":  308,
+        "RVA":  "0x00038470",
+        "Mangled":  "?IsUploading@CmjWildcatFile@@QAE_NXZ",
+        "Demangled":  "public: bool __thiscall CmjWildcatFile::IsUploading(void)"
+    },
+    {
+        "Ordinal":  309,
+        "RVA":  "0x00625A00",
+        "Mangled":  "?IsWildcatLink@CmjReminderData@@QAE_NXZ",
+        "Demangled":  "public: bool __thiscall CmjReminderData::IsWildcatLink(void)"
+    },
+    {
+        "Ordinal":  310,
+        "RVA":  "0x00041BB0",
+        "Mangled":  "?OnCheckInComplete@CmjRemoteFileBridge@@SAXPAVCmjCliObjectHolder@@PAX@Z",
+        "Demangled":  "public: static void __cdecl CmjRemoteFileBridge::OnCheckInComplete(class CmjCliObjectHolder *,void *)"
+    },
+    {
+        "Ordinal":  311,
+        "RVA":  "0x00041BD0",
+        "Mangled":  "?OnCheckOutComplete@CmjRemoteFileBridge@@SAXPAVCmjCliObjectHolder@@PAX@Z",
+        "Demangled":  "public: static void __cdecl CmjRemoteFileBridge::OnCheckOutComplete(class CmjCliObjectHolder *,void *)"
+    },
+    {
+        "Ordinal":  312,
+        "RVA":  "0x00055FA0",
+        "Mangled":  "?OnConversationsRequestComplete@CmjIntercomBridge@@SAXPAVCmjCliObjectHolder@@PAX@Z",
+        "Demangled":  "public: static void __cdecl CmjIntercomBridge::OnConversationsRequestComplete(class CmjCliObjectHolder *,void *)"
+    },
+    {
+        "Ordinal":  313,
+        "RVA":  "0x00041BF0",
+        "Mangled":  "?OnDiscardCheckOutComplete@CmjRemoteFileBridge@@SAXPAVCmjCliObjectHolder@@PAX@Z",
+        "Demangled":  "public: static void __cdecl CmjRemoteFileBridge::OnDiscardCheckOutComplete(class CmjCliObjectHolder *,void *)"
+    },
+    {
+        "Ordinal":  314,
+        "RVA":  "0x00041D20",
+        "Mangled":  "?OnDownloadFileComplete@CmjRemoteFileBridge@@SAXPAVCmjCliObjectHolder@@PAX@Z",
+        "Demangled":  "public: static void __cdecl CmjRemoteFileBridge::OnDownloadFileComplete(class CmjCliObjectHolder *,void *)"
+    },
+    {
+        "Ordinal":  315,
+        "RVA":  "0x00041D40",
+        "Mangled":  "?OnFileInfoComplete@CmjRemoteFileBridge@@SAXPAVCmjCliObjectHolder@@PAX@Z",
+        "Demangled":  "public: static void __cdecl CmjRemoteFileBridge::OnFileInfoComplete(class CmjCliObjectHolder *,void *)"
+    },
+    {
+        "Ordinal":  316,
+        "RVA":  "0x00056170",
+        "Mangled":  "?OnLicenseRequestComplete@CmjCrowdcastBridge@@SAXPAVCmjCliObjectHolder@@PAX@Z",
+        "Demangled":  "public: static void __cdecl CmjCrowdcastBridge::OnLicenseRequestComplete(class CmjCliObjectHolder *,void *)"
+    },
+    {
+        "Ordinal":  317,
+        "RVA":  "0x00042210",
+        "Mangled":  "?OnLockComplete@CmjRemoteFileBridge@@SAXPAVCmjCliObjectHolder@@PAX@Z",
+        "Demangled":  "public: static void __cdecl CmjRemoteFileBridge::OnLockComplete(class CmjCliObjectHolder *,void *)"
+    },
+    {
+        "Ordinal":  318,
+        "RVA":  "0x00044820",
+        "Mangled":  "?OnMakeReceiverRequestComplete@CmjDesktopServerBridge@@SAXPAVCmjCliObjectHolder@@PAX@Z",
+        "Demangled":  "public: static void __cdecl CmjDesktopServerBridge::OnMakeReceiverRequestComplete(class CmjCliObjectHolder *,void *)"
+    },
+    {
+        "Ordinal":  319,
+        "RVA":  "0x00044840",
+        "Mangled":  "?OnPublishIdRequestComplete@CmjDesktopServerBridge@@SAXPAVCmjCliObjectHolder@@PAX@Z",
+        "Demangled":  "public: static void __cdecl CmjDesktopServerBridge::OnPublishIdRequestComplete(class CmjCliObjectHolder *,void *)"
+    },
+    {
+        "Ordinal":  320,
+        "RVA":  "0x00044860",
+        "Mangled":  "?OnPublishRequestComplete@CmjDesktopServerBridge@@SAXPAVCmjCliObjectHolder@@PAX@Z",
+        "Demangled":  "public: static void __cdecl CmjDesktopServerBridge::OnPublishRequestComplete(class CmjCliObjectHolder *,void *)"
+    },
+    {
+        "Ordinal":  321,
+        "RVA":  "0x00044880",
+        "Mangled":  "?OnPublishStatusRequestComplete@CmjDesktopServerBridge@@SAXPAVCmjCliObjectHolder@@PAX@Z",
+        "Demangled":  "public: static void __cdecl CmjDesktopServerBridge::OnPublishStatusRequestComplete(class CmjCliObjectHolder *,void *)"
+    },
+    {
+        "Ordinal":  322,
+        "RVA":  "0x000448A0",
+        "Mangled":  "?OnReceiveZapRequestComplete@CmjDesktopServerBridge@@SAXPAVCmjCliObjectHolder@@PAX@Z",
+        "Demangled":  "public: static void __cdecl CmjDesktopServerBridge::OnReceiveZapRequestComplete(class CmjCliObjectHolder *,void *)"
+    },
+    {
+        "Ordinal":  323,
+        "RVA":  "0x00042230",
+        "Mangled":  "?OnSessionChanged@CmjRemoteFileBridge@@SAXPAVCmjCliObjectHolder@@0PAX@Z",
+        "Demangled":  "public: static void __cdecl CmjRemoteFileBridge::OnSessionChanged(class CmjCliObjectHolder *,class CmjCliObjectHolder *,void *)"
+    },
+    {
+        "Ordinal":  324,
+        "RVA":  "0x00042250",
+        "Mangled":  "?OnUiLogout@CmjRemoteFileBridge@@SAXPAVCmjCliObjectHolder@@0PAX@Z",
+        "Demangled":  "public: static void __cdecl CmjRemoteFileBridge::OnUiLogout(class CmjCliObjectHolder *,class CmjCliObjectHolder *,void *)"
+    },
+    {
+        "Ordinal":  325,
+        "RVA":  "0x00042270",
+        "Mangled":  "?OnUnlockComplete@CmjRemoteFileBridge@@SAXPAVCmjCliObjectHolder@@PAX@Z",
+        "Demangled":  "public: static void __cdecl CmjRemoteFileBridge::OnUnlockComplete(class CmjCliObjectHolder *,void *)"
+    },
+    {
+        "Ordinal":  326,
+        "RVA":  "0x00042290",
+        "Mangled":  "?OnUploadFileComplete@CmjRemoteFileBridge@@SAXPAVCmjCliObjectHolder@@PAX@Z",
+        "Demangled":  "public: static void __cdecl CmjRemoteFileBridge::OnUploadFileComplete(class CmjCliObjectHolder *,void *)"
+    },
+    {
+        "Ordinal":  327,
+        "RVA":  "0x000564F0",
+        "Mangled":  "?OnUserInfoRequestComplete@CmjAuth0Bridge@@SAXPAVCmjCliObjectHolder@@PAX@Z",
+        "Demangled":  "public: static void __cdecl CmjAuth0Bridge::OnUserInfoRequestComplete(class CmjCliObjectHolder *,void *)"
+    },
+    {
+        "Ordinal":  328,
+        "RVA":  "0x000448C0",
+        "Mangled":  "?OnUserInfoRequestComplete@CmjDesktopServerBridge@@SAXPAVCmjCliObjectHolder@@PAX@Z",
+        "Demangled":  "public: static void __cdecl CmjDesktopServerBridge::OnUserInfoRequestComplete(class CmjCliObjectHolder *,void *)"
+    },
+    {
+        "Ordinal":  329,
+        "RVA":  "0x000448E0",
+        "Mangled":  "?OnZapRequestComplete@CmjDesktopServerBridge@@SAXPAVCmjCliObjectHolder@@PAX@Z",
+        "Demangled":  "public: static void __cdecl CmjDesktopServerBridge::OnZapRequestComplete(class CmjCliObjectHolder *,void *)"
+    },
+    {
+        "Ordinal":  330,
+        "RVA":  "0x00044900",
+        "Mangled":  "?OnZapierKeyRequestComplete@CmjDesktopServerBridge@@SAXPAVCmjCliObjectHolder@@PAX@Z",
+        "Demangled":  "public: static void __cdecl CmjDesktopServerBridge::OnZapierKeyRequestComplete(class CmjCliObjectHolder *,void *)"
+    },
+    {
+        "Ordinal":  331,
+        "RVA":  "0x000ECF40",
+        "Mangled":  "?SetAccountType@CmjWildcatAccount@@QAEXW4EmjAccountType@1@@Z",
+        "Demangled":  "public: void __thiscall CmjWildcatAccount::SetAccountType(enum CmjWildcatAccount::EmjAccountType)"
+    },
+    {
+        "Ordinal":  332,
+        "RVA":  "0x009C9D80",
+        "Mangled":  "?SetCategoryItemRef@CmjMftItemsList@@QAEXV?$CStringT@_WV?$StrTraitMFC_DLL@_WV?$ChTraitsCRT@_W@ATL@@@@@ATL@@@Z",
+        "Demangled":  "public: void __thiscall CmjMftItemsList::SetCategoryItemRef(class ATL::CStringT\u003cwchar_t,class StrTraitMFC_DLL\u003cwchar_t,class ATL::ChTraitsCRT\u003cwchar_t\u003e \u003e \u003e)"
+    },
+    {
+        "Ordinal":  333,
+        "RVA":  "0x000385F0",
+        "Mangled":  "?SetCreateInProgress@CmjWildcatItem@@QAEX_N@Z",
+        "Demangled":  "public: void __thiscall CmjWildcatItem::SetCreateInProgress(bool)"
+    },
+    {
+        "Ordinal":  334,
+        "RVA":  "0x000FCA10",
+        "Mangled":  "?SetCreatedBy@CmjWildcatFileVersion@@QAEXABVCmjWildcatId@@@Z",
+        "Demangled":  "public: void __thiscall CmjWildcatFileVersion::SetCreatedBy(class CmjWildcatId const \u0026)"
+    },
+    {
+        "Ordinal":  335,
+        "RVA":  "0x000FCA70",
+        "Mangled":  "?SetCreationTime@CmjWildcatFileVersion@@QAEXABVCTime@ATL@@@Z",
+        "Demangled":  "public: void __thiscall CmjWildcatFileVersion::SetCreationTime(class ATL::CTime const \u0026)"
+    },
+    {
+        "Ordinal":  336,
+        "RVA":  "0x000ECF60",
+        "Mangled":  "?SetCurrentUserRole@CmjWildcatAccount@@QAEXW4EmjWildcatAccountRole@@@Z",
+        "Demangled":  "public: void __thiscall CmjWildcatAccount::SetCurrentUserRole(enum EmjWildcatAccountRole)"
+    },
+    {
+        "Ordinal":  337,
+        "RVA":  "0x006266A0",
+        "Mangled":  "?SetDeleteThread@CmjReminderDataCollectionManager@@QAEX_N@Z",
+        "Demangled":  "public: void __thiscall CmjReminderDataCollectionManager::SetDeleteThread(bool)"
+    },
+    {
+        "Ordinal":  338,
+        "RVA":  "0x006266C0",
+        "Mangled":  "?SetDenaliPath@CmjReminderData@@QAEXABV?$CStringT@_WV?$StrTraitMFC_DLL@_WV?$ChTraitsCRT@_W@ATL@@@@@ATL@@@Z",
+        "Demangled":  "public: void __thiscall CmjReminderData::SetDenaliPath(class ATL::CStringT\u003cwchar_t,class StrTraitMFC_DLL\u003cwchar_t,class ATL::ChTraitsCRT\u003cwchar_t\u003e \u003e \u003e const \u0026)"
+    },
+    {
+        "Ordinal":  339,
+        "RVA":  "0x000ECF80",
+        "Mangled":  "?SetDescription@CmjWildcatAccount@@QAEXABV?$CStringT@_WV?$StrTraitMFC_DLL@_WV?$ChTraitsCRT@_W@ATL@@@@@ATL@@@Z",
+        "Demangled":  "public: void __thiscall CmjWildcatAccount::SetDescription(class ATL::CStringT\u003cwchar_t,class StrTraitMFC_DLL\u003cwchar_t,class ATL::ChTraitsCRT\u003cwchar_t\u003e \u003e \u003e const \u0026)"
+    },
+    {
+        "Ordinal":  340,
+        "RVA":  "0x000FCAA0",
+        "Mangled":  "?SetDescription@CmjWildcatFileVersion@@QAEXABV?$CStringT@_WV?$StrTraitMFC_DLL@_WV?$ChTraitsCRT@_W@ATL@@@@@ATL@@@Z",
+        "Demangled":  "public: void __thiscall CmjWildcatFileVersion::SetDescription(class ATL::CStringT\u003cwchar_t,class StrTraitMFC_DLL\u003cwchar_t,class ATL::ChTraitsCRT\u003cwchar_t\u003e \u003e \u003e const \u0026)"
+    },
+    {
+        "Ordinal":  341,
+        "RVA":  "0x006266E0",
+        "Mangled":  "?SetDocumentPath@CmjReminderData@@QAEXABV?$CStringT@_WV?$StrTraitMFC_DLL@_WV?$ChTraitsCRT@_W@ATL@@@@@ATL@@@Z",
+        "Demangled":  "public: void __thiscall CmjReminderData::SetDocumentPath(class ATL::CStringT\u003cwchar_t,class StrTraitMFC_DLL\u003cwchar_t,class ATL::ChTraitsCRT\u003cwchar_t\u003e \u003e \u003e const \u0026)"
+    },
+    {
+        "Ordinal":  342,
+        "RVA":  "0x0091CE70",
+        "Mangled":  "?SetDueDateControl@CmjMfcRecurrenceYearlyDialog@@QAEXPAVCDateTimeCtrl@@@Z",
+        "Demangled":  "public: void __thiscall CmjMfcRecurrenceYearlyDialog::SetDueDateControl(class CDateTimeCtrl *)"
+    },
+    {
+        "Ordinal":  343,
+        "RVA":  "0x002E1580",
+        "Mangled":  "?SetEmailAddress@CmjWildcatAcl@@QAEXABV?$CStringT@_WV?$StrTraitMFC_DLL@_WV?$ChTraitsCRT@_W@ATL@@@@@ATL@@@Z",
+        "Demangled":  "public: void __thiscall CmjWildcatAcl::SetEmailAddress(class ATL::CStringT\u003cwchar_t,class StrTraitMFC_DLL\u003cwchar_t,class ATL::ChTraitsCRT\u003cwchar_t\u003e \u003e \u003e const \u0026)"
+    },
+    {
+        "Ordinal":  344,
+        "RVA":  "0x00955B80",
+        "Mangled":  "?SetEmailAddress@CmjWildcatContact@@QAEXABV?$CStringT@_WV?$StrTraitMFC_DLL@_WV?$ChTraitsCRT@_W@ATL@@@@@ATL@@@Z",
+        "Demangled":  "public: void __thiscall CmjWildcatContact::SetEmailAddress(class ATL::CStringT\u003cwchar_t,class StrTraitMFC_DLL\u003cwchar_t,class ATL::ChTraitsCRT\u003cwchar_t\u003e \u003e \u003e const \u0026)"
+    },
+    {
+        "Ordinal":  345,
+        "RVA":  "0x00104060",
+        "Mangled":  "?SetFileListRetrieved@CmjWildcatFolder@@QAEX_N@Z",
+        "Demangled":  "public: void __thiscall CmjWildcatFolder::SetFileListRetrieved(bool)"
+    },
+    {
+        "Ordinal":  346,
+        "RVA":  "0x002E15A0",
+        "Mangled":  "?SetFirstName@CmjWildcatAcl@@QAEXABV?$CStringT@_WV?$StrTraitMFC_DLL@_WV?$ChTraitsCRT@_W@ATL@@@@@ATL@@@Z",
+        "Demangled":  "public: void __thiscall CmjWildcatAcl::SetFirstName(class ATL::CStringT\u003cwchar_t,class StrTraitMFC_DLL\u003cwchar_t,class ATL::ChTraitsCRT\u003cwchar_t\u003e \u003e \u003e const \u0026)"
+    },
+    {
+        "Ordinal":  347,
+        "RVA":  "0x00955BA0",
+        "Mangled":  "?SetFirstName@CmjWildcatContact@@QAEXABV?$CStringT@_WV?$StrTraitMFC_DLL@_WV?$ChTraitsCRT@_W@ATL@@@@@ATL@@@Z",
+        "Demangled":  "public: void __thiscall CmjWildcatContact::SetFirstName(class ATL::CStringT\u003cwchar_t,class StrTraitMFC_DLL\u003cwchar_t,class ATL::ChTraitsCRT\u003cwchar_t\u003e \u003e \u003e const \u0026)"
+    },
+    {
+        "Ordinal":  348,
+        "RVA":  "0x000422B0",
+        "Mangled":  "?SetFrom@SmjRemoteFileInfo@@AAEXABU1@@Z",
+        "Demangled":  "private: void __thiscall SmjRemoteFileInfo::SetFrom(struct SmjRemoteFileInfo const \u0026)"
+    },
+    {
+        "Ordinal":  349,
+        "RVA":  "0x00045460",
+        "Mangled":  "?SetFrom@SmjZapTopicInfo@@AAEXABU1@@Z",
+        "Demangled":  "private: void __thiscall SmjZapTopicInfo::SetFrom(struct SmjZapTopicInfo const \u0026)"
+    },
+    {
+        "Ordinal":  350,
+        "RVA":  "0x009C9DE0",
+        "Mangled":  "?SetGalleryType@CmjMftItemsList@@QAEXW4EmjGalleryType@@@Z",
+        "Demangled":  "public: void __thiscall CmjMftItemsList::SetGalleryType(enum EmjGalleryType)"
+    },
+    {
+        "Ordinal":  351,
+        "RVA":  "0x000F2AB0",
+        "Mangled":  "?SetIncludeDeletedItems@CmjWildcatViewModel@@UAEX_N@Z",
+        "Demangled":  "public: virtual void __thiscall CmjWildcatViewModel::SetIncludeDeletedItems(bool)"
+    },
+    {
+        "Ordinal":  352,
+        "RVA":  "0x00626700",
+        "Mangled":  "?SetInitialDueDate@CmjReminderData@@QAEXABVCTime@ATL@@@Z",
+        "Demangled":  "public: void __thiscall CmjReminderData::SetInitialDueDate(class ATL::CTime const \u0026)"
+    },
+    {
+        "Ordinal":  353,
+        "RVA":  "0x0091CE90",
+        "Mangled":  "?SetInternalDialog@CmjMfcDialogBase@@QAEXPAVCmjMfcDialogBaseInternal@@@Z",
+        "Demangled":  "public: void __thiscall CmjMfcDialogBase::SetInternalDialog(class CmjMfcDialogBaseInternal *)"
+    },
+    {
+        "Ordinal":  354,
+        "RVA":  "0x00626720",
+        "Mangled":  "?SetIsDenaliLink@CmjReminderData@@QAEX_N@Z",
+        "Demangled":  "public: void __thiscall CmjReminderData::SetIsDenaliLink(bool)"
+    },
+    {
+        "Ordinal":  355,
+        "RVA":  "0x0091CEB0",
+        "Mangled":  "?SetIsRecurrentOnFriday@CmjMfcRecurrenceWeeklyDialog@@QAEX_N@Z",
+        "Demangled":  "public: void __thiscall CmjMfcRecurrenceWeeklyDialog::SetIsRecurrentOnFriday(bool)"
+    },
+    {
+        "Ordinal":  356,
+        "RVA":  "0x0091CF00",
+        "Mangled":  "?SetIsRecurrentOnMonday@CmjMfcRecurrenceWeeklyDialog@@QAEX_N@Z",
+        "Demangled":  "public: void __thiscall CmjMfcRecurrenceWeeklyDialog::SetIsRecurrentOnMonday(bool)"
+    },
+    {
+        "Ordinal":  357,
+        "RVA":  "0x0091CF50",
+        "Mangled":  "?SetIsRecurrentOnSaturday@CmjMfcRecurrenceWeeklyDialog@@QAEX_N@Z",
+        "Demangled":  "public: void __thiscall CmjMfcRecurrenceWeeklyDialog::SetIsRecurrentOnSaturday(bool)"
+    },
+    {
+        "Ordinal":  358,
+        "RVA":  "0x0091CFA0",
+        "Mangled":  "?SetIsRecurrentOnSunday@CmjMfcRecurrenceWeeklyDialog@@QAEX_N@Z",
+        "Demangled":  "public: void __thiscall CmjMfcRecurrenceWeeklyDialog::SetIsRecurrentOnSunday(bool)"
+    },
+    {
+        "Ordinal":  359,
+        "RVA":  "0x0091CFF0",
+        "Mangled":  "?SetIsRecurrentOnThursday@CmjMfcRecurrenceWeeklyDialog@@QAEX_N@Z",
+        "Demangled":  "public: void __thiscall CmjMfcRecurrenceWeeklyDialog::SetIsRecurrentOnThursday(bool)"
+    },
+    {
+        "Ordinal":  360,
+        "RVA":  "0x0091D040",
+        "Mangled":  "?SetIsRecurrentOnTuesday@CmjMfcRecurrenceWeeklyDialog@@QAEX_N@Z",
+        "Demangled":  "public: void __thiscall CmjMfcRecurrenceWeeklyDialog::SetIsRecurrentOnTuesday(bool)"
+    },
+    {
+        "Ordinal":  361,
+        "RVA":  "0x0091D090",
+        "Mangled":  "?SetIsRecurrentOnWednesday@CmjMfcRecurrenceWeeklyDialog@@QAEX_N@Z",
+        "Demangled":  "public: void __thiscall CmjMfcRecurrenceWeeklyDialog::SetIsRecurrentOnWednesday(bool)"
+    },
+    {
+        "Ordinal":  362,
+        "RVA":  "0x00112AA0",
+        "Mangled":  "?SetKeywords@CmjCohumanQuery@@QAEXABV?$CStringT@_WV?$StrTraitMFC_DLL@_WV?$ChTraitsCRT@_W@ATL@@@@@ATL@@@Z",
+        "Demangled":  "public: void __thiscall CmjCohumanQuery::SetKeywords(class ATL::CStringT\u003cwchar_t,class StrTraitMFC_DLL\u003cwchar_t,class ATL::ChTraitsCRT\u003cwchar_t\u003e \u003e \u003e const \u0026)"
+    },
+    {
+        "Ordinal":  363,
+        "RVA":  "0x00038610",
+        "Mangled":  "?SetLastAccessedDate@CmjWildcatFile@@QAEXABVCTime@ATL@@@Z",
+        "Demangled":  "public: void __thiscall CmjWildcatFile::SetLastAccessedDate(class ATL::CTime const \u0026)"
+    },
+    {
+        "Ordinal":  364,
+        "RVA":  "0x002E15C0",
+        "Mangled":  "?SetLastName@CmjWildcatAcl@@QAEXABV?$CStringT@_WV?$StrTraitMFC_DLL@_WV?$ChTraitsCRT@_W@ATL@@@@@ATL@@@Z",
+        "Demangled":  "public: void __thiscall CmjWildcatAcl::SetLastName(class ATL::CStringT\u003cwchar_t,class StrTraitMFC_DLL\u003cwchar_t,class ATL::ChTraitsCRT\u003cwchar_t\u003e \u003e \u003e const \u0026)"
+    },
+    {
+        "Ordinal":  365,
+        "RVA":  "0x00955BC0",
+        "Mangled":  "?SetLastName@CmjWildcatContact@@QAEXABV?$CStringT@_WV?$StrTraitMFC_DLL@_WV?$ChTraitsCRT@_W@ATL@@@@@ATL@@@Z",
+        "Demangled":  "public: void __thiscall CmjWildcatContact::SetLastName(class ATL::CStringT\u003cwchar_t,class StrTraitMFC_DLL\u003cwchar_t,class ATL::ChTraitsCRT\u003cwchar_t\u003e \u003e \u003e const \u0026)"
+    },
+    {
+        "Ordinal":  366,
+        "RVA":  "0x00626740",
+        "Mangled":  "?SetMapGuid@CmjReminderData@@QAEXABV?$CStringT@_WV?$StrTraitMFC_DLL@_WV?$ChTraitsCRT@_W@ATL@@@@@ATL@@@Z",
+        "Demangled":  "public: void __thiscall CmjReminderData::SetMapGuid(class ATL::CStringT\u003cwchar_t,class StrTraitMFC_DLL\u003cwchar_t,class ATL::ChTraitsCRT\u003cwchar_t\u003e \u003e \u003e const \u0026)"
+    },
+    {
+        "Ordinal":  367,
+        "RVA":  "0x00112AC0",
+        "Mangled":  "?SetMaxResults@CmjCohumanQuery@@QAEXH@Z",
+        "Demangled":  "public: void __thiscall CmjCohumanQuery::SetMaxResults(int)"
+    },
+    {
+        "Ordinal":  368,
+        "RVA":  "0x00112AE0",
+        "Mangled":  "?SetMaxStartDate@CmjCohumanQuery@@QAEXABVCTime@ATL@@@Z",
+        "Demangled":  "public: void __thiscall CmjCohumanQuery::SetMaxStartDate(class ATL::CTime const \u0026)"
+    },
+    {
+        "Ordinal":  369,
+        "RVA":  "0x00112B10",
+        "Mangled":  "?SetMaxTargetDate@CmjCohumanQuery@@QAEXABVCTime@ATL@@@Z",
+        "Demangled":  "public: void __thiscall CmjCohumanQuery::SetMaxTargetDate(class ATL::CTime const \u0026)"
+    },
+    {
+        "Ordinal":  370,
+        "RVA":  "0x00112B40",
+        "Mangled":  "?SetMinStartDate@CmjCohumanQuery@@QAEXABVCTime@ATL@@@Z",
+        "Demangled":  "public: void __thiscall CmjCohumanQuery::SetMinStartDate(class ATL::CTime const \u0026)"
+    },
+    {
+        "Ordinal":  371,
+        "RVA":  "0x00112B70",
+        "Mangled":  "?SetMinTargetDate@CmjCohumanQuery@@QAEXABVCTime@ATL@@@Z",
+        "Demangled":  "public: void __thiscall CmjCohumanQuery::SetMinTargetDate(class ATL::CTime const \u0026)"
+    },
+    {
+        "Ordinal":  372,
+        "RVA":  "0x0091D0E0",
+        "Mangled":  "?SetMonthlyRecurrentDayOfMonth@CmjMfcRecurrenceMonthlyDialog@@QAEXH@Z",
+        "Demangled":  "public: void __thiscall CmjMfcRecurrenceMonthlyDialog::SetMonthlyRecurrentDayOfMonth(int)"
+    },
+    {
+        "Ordinal":  373,
+        "RVA":  "0x0091D100",
+        "Mangled":  "?SetMonthlyReminderPattern1Month@CmjMfcRecurrenceMonthlyDialog@@QAEXH@Z",
+        "Demangled":  "public: void __thiscall CmjMfcRecurrenceMonthlyDialog::SetMonthlyReminderPattern1Month(int)"
+    },
+    {
+        "Ordinal":  374,
+        "RVA":  "0x0091D120",
+        "Mangled":  "?SetMonthlyReminderPattern2Month@CmjMfcRecurrenceMonthlyDialog@@QAEXH@Z",
+        "Demangled":  "public: void __thiscall CmjMfcRecurrenceMonthlyDialog::SetMonthlyReminderPattern2Month(int)"
+    },
+    {
+        "Ordinal":  375,
+        "RVA":  "0x000ECFA0",
+        "Mangled":  "?SetName@CmjWildcatAccount@@QAEXABV?$CStringT@_WV?$StrTraitMFC_DLL@_WV?$ChTraitsCRT@_W@ATL@@@@@ATL@@@Z",
+        "Demangled":  "public: void __thiscall CmjWildcatAccount::SetName(class ATL::CStringT\u003cwchar_t,class StrTraitMFC_DLL\u003cwchar_t,class ATL::ChTraitsCRT\u003cwchar_t\u003e \u003e \u003e const \u0026)"
+    },
+    {
+        "Ordinal":  376,
+        "RVA":  "0x00626760",
+        "Mangled":  "?SetNextDueDate@CmjReminderData@@QAEXABVCTime@ATL@@@Z",
+        "Demangled":  "public: void __thiscall CmjReminderData::SetNextDueDate(class ATL::CTime const \u0026)"
+    },
+    {
+        "Ordinal":  377,
+        "RVA":  "0x00626780",
+        "Mangled":  "?SetObjectGuid@CmjReminderData@@QAEXABV?$CStringT@_WV?$StrTraitMFC_DLL@_WV?$ChTraitsCRT@_W@ATL@@@@@ATL@@@Z",
+        "Demangled":  "public: void __thiscall CmjReminderData::SetObjectGuid(class ATL::CStringT\u003cwchar_t,class StrTraitMFC_DLL\u003cwchar_t,class ATL::ChTraitsCRT\u003cwchar_t\u003e \u003e \u003e const \u0026)"
+    },
+    {
+        "Ordinal":  378,
+        "RVA":  "0x006267A0",
+        "Mangled":  "?SetOutlookEntryId@CmjReminderData@@QAEXABV?$CStringT@_WV?$StrTraitMFC_DLL@_WV?$ChTraitsCRT@_W@ATL@@@@@ATL@@@Z",
+        "Demangled":  "public: void __thiscall CmjReminderData::SetOutlookEntryId(class ATL::CStringT\u003cwchar_t,class StrTraitMFC_DLL\u003cwchar_t,class ATL::ChTraitsCRT\u003cwchar_t\u003e \u003e \u003e const \u0026)"
+    },
+    {
+        "Ordinal":  379,
+        "RVA":  "0x006267C0",
+        "Mangled":  "?SetOutlookObjectGuid@CmjReminderData@@QAEXABV?$CStringT@_WV?$StrTraitMFC_DLL@_WV?$ChTraitsCRT@_W@ATL@@@@@ATL@@@Z",
+        "Demangled":  "public: void __thiscall CmjReminderData::SetOutlookObjectGuid(class ATL::CStringT\u003cwchar_t,class StrTraitMFC_DLL\u003cwchar_t,class ATL::ChTraitsCRT\u003cwchar_t\u003e \u003e \u003e const \u0026)"
+    },
+    {
+        "Ordinal":  380,
+        "RVA":  "0x000ECFC0",
+        "Mangled":  "?SetOwnerEmailAddress@CmjWildcatAccount@@QAEXABV?$CStringT@_WV?$StrTraitMFC_DLL@_WV?$ChTraitsCRT@_W@ATL@@@@@ATL@@@Z",
+        "Demangled":  "public: void __thiscall CmjWildcatAccount::SetOwnerEmailAddress(class ATL::CStringT\u003cwchar_t,class StrTraitMFC_DLL\u003cwchar_t,class ATL::ChTraitsCRT\u003cwchar_t\u003e \u003e \u003e const \u0026)"
+    },
+    {
+        "Ordinal":  381,
+        "RVA":  "0x00112BA0",
+        "Mangled":  "?SetOwnerId@CmjCohumanQuery@@QAEXABVCmjWildcatId@@@Z",
+        "Demangled":  "public: void __thiscall CmjCohumanQuery::SetOwnerId(class CmjWildcatId const \u0026)"
+    },
+    {
+        "Ordinal":  382,
+        "RVA":  "0x000FCAC0",
+        "Mangled":  "?SetParentId@CmjWildcatFileVersion@@QAEXABVCmjWildcatId@@@Z",
+        "Demangled":  "public: void __thiscall CmjWildcatFileVersion::SetParentId(class CmjWildcatId const \u0026)"
+    },
+    {
+        "Ordinal":  383,
+        "RVA":  "0x002E15E0",
+        "Mangled":  "?SetPermissions@CmjWildcatAcl@@QAEXW4EmjWildcatPermissions@@@Z",
+        "Demangled":  "public: void __thiscall CmjWildcatAcl::SetPermissions(enum EmjWildcatPermissions)"
+    },
+    {
+        "Ordinal":  384,
+        "RVA":  "0x00112C00",
+        "Mangled":  "?SetProgress@CmjCohumanQuery@@QAEXW4EmjCohumanQueryProgress@@@Z",
+        "Demangled":  "public: void __thiscall CmjCohumanQuery::SetProgress(enum EmjCohumanQueryProgress)"
+    },
+    {
+        "Ordinal":  385,
+        "RVA":  "0x00112C20",
+        "Mangled":  "?SetProjectId@CmjCohumanQuery@@QAEXABVCmjWildcatId@@@Z",
+        "Demangled":  "public: void __thiscall CmjCohumanQuery::SetProjectId(class CmjWildcatId const \u0026)"
+    },
+    {
+        "Ordinal":  386,
+        "RVA":  "0x00038640",
+        "Mangled":  "?SetRefreshInProgress@CmjWildcatItem@@QAEX_N@Z",
+        "Demangled":  "public: void __thiscall CmjWildcatItem::SetRefreshInProgress(bool)"
+    },
+    {
+        "Ordinal":  387,
+        "RVA":  "0x00038660",
+        "Mangled":  "?SetRefreshNeeded@CmjWildcatItem@@UAEX_N@Z",
+        "Demangled":  "public: virtual void __thiscall CmjWildcatItem::SetRefreshNeeded(bool)"
+    },
+    {
+        "Ordinal":  388,
+        "RVA":  "0x006268E0",
+        "Mangled":  "?SetReminderTimeSpan@CmjReminderData@@QAEXABVCTimeSpan@ATL@@@Z",
+        "Demangled":  "public: void __thiscall CmjReminderData::SetReminderTimeSpan(class ATL::CTimeSpan const \u0026)"
+    },
+    {
+        "Ordinal":  389,
+        "RVA":  "0x00038680",
+        "Mangled":  "?SetRestartRefreshNeeded@CmjWildcatItem@@UAEX_N@Z",
+        "Demangled":  "public: virtual void __thiscall CmjWildcatItem::SetRestartRefreshNeeded(bool)"
+    },
+    {
+        "Ordinal":  390,
+        "RVA":  "0x000F2AD0",
+        "Mangled":  "?SetSelectedFileUserEmail@CmjWildcatViewModel@@QAEXABV?$CStringT@_WV?$StrTraitMFC_DLL@_WV?$ChTraitsCRT@_W@ATL@@@@@ATL@@@Z",
+        "Demangled":  "public: void __thiscall CmjWildcatViewModel::SetSelectedFileUserEmail(class ATL::CStringT\u003cwchar_t,class StrTraitMFC_DLL\u003cwchar_t,class ATL::ChTraitsCRT\u003cwchar_t\u003e \u003e \u003e const \u0026)"
+    },
+    {
+        "Ordinal":  391,
+        "RVA":  "0x000F2AF0",
+        "Mangled":  "?SetSelectedFolderUserEmail@CmjWildcatViewModel@@QAEXABV?$CStringT@_WV?$StrTraitMFC_DLL@_WV?$ChTraitsCRT@_W@ATL@@@@@ATL@@@Z",
+        "Demangled":  "public: void __thiscall CmjWildcatViewModel::SetSelectedFolderUserEmail(class ATL::CStringT\u003cwchar_t,class StrTraitMFC_DLL\u003cwchar_t,class ATL::ChTraitsCRT\u003cwchar_t\u003e \u003e \u003e const \u0026)"
+    },
+    {
+        "Ordinal":  392,
+        "RVA":  "0x000ECFE0",
+        "Mangled":  "?SetSessionId@CmjWildcatRestClient@@QAEXABV?$CStringT@_WV?$StrTraitMFC_DLL@_WV?$ChTraitsCRT@_W@ATL@@@@@ATL@@@Z",
+        "Demangled":  "public: void __thiscall CmjWildcatRestClient::SetSessionId(class ATL::CStringT\u003cwchar_t,class StrTraitMFC_DLL\u003cwchar_t,class ATL::ChTraitsCRT\u003cwchar_t\u003e \u003e \u003e const \u0026)"
+    },
+    {
+        "Ordinal":  393,
+        "RVA":  "0x0091D140",
+        "Mangled":  "?SetStartTime@CmjMfcRecurrenceMonthlyDialog@@QAEXABVCTime@ATL@@@Z",
+        "Demangled":  "public: void __thiscall CmjMfcRecurrenceMonthlyDialog::SetStartTime(class ATL::CTime const \u0026)"
+    },
+    {
+        "Ordinal":  394,
+        "RVA":  "0x0091D170",
+        "Mangled":  "?SetStartTime@CmjMfcRecurrenceWeeklyDialog@@QAEXABVCTime@ATL@@@Z",
+        "Demangled":  "public: void __thiscall CmjMfcRecurrenceWeeklyDialog::SetStartTime(class ATL::CTime const \u0026)"
+    },
+    {
+        "Ordinal":  395,
+        "RVA":  "0x0091D1A0",
+        "Mangled":  "?SetStartTime@CmjMfcRecurrenceYearlyDialog@@QAEXABVCTime@ATL@@@Z",
+        "Demangled":  "public: void __thiscall CmjMfcRecurrenceYearlyDialog::SetStartTime(class ATL::CTime const \u0026)"
+    },
+    {
+        "Ordinal":  396,
+        "RVA":  "0x000386A0",
+        "Mangled":  "?SetSynchronizedVersion@CmjWildcatFile@@QAEXJ@Z",
+        "Demangled":  "public: void __thiscall CmjWildcatFile::SetSynchronizedVersion(long)"
+    },
+    {
+        "Ordinal":  397,
+        "RVA":  "0x00112C80",
+        "Mangled":  "?SetTaskStartDate@CmjCohumanQuery@@QAEXW4EmjCohumanQueryDate@@@Z",
+        "Demangled":  "public: void __thiscall CmjCohumanQuery::SetTaskStartDate(enum EmjCohumanQueryDate)"
+    },
+    {
+        "Ordinal":  398,
+        "RVA":  "0x00112CA0",
+        "Mangled":  "?SetTaskTargetDate@CmjCohumanQuery@@QAEXW4EmjCohumanQueryDate@@@Z",
+        "Demangled":  "public: void __thiscall CmjCohumanQuery::SetTaskTargetDate(enum EmjCohumanQueryDate)"
+    },
+    {
+        "Ordinal":  399,
+        "RVA":  "0x00056CF0",
+        "Mangled":  "?SetUpdatedTimeInternal@CmjIntercomConversation@@QAEXABVCTime@ATL@@@Z",
+        "Demangled":  "public: void __thiscall CmjIntercomConversation::SetUpdatedTimeInternal(class ATL::CTime const \u0026)"
+    },
+    {
+        "Ordinal":  400,
+        "RVA":  "0x000FCB20",
+        "Mangled":  "?SetVersionNumber@CmjWildcatFileVersion@@QAEXABV?$CStringT@_WV?$StrTraitMFC_DLL@_WV?$ChTraitsCRT@_W@ATL@@@@@ATL@@@Z",
+        "Demangled":  "public: void __thiscall CmjWildcatFileVersion::SetVersionNumber(class ATL::CStringT\u003cwchar_t,class StrTraitMFC_DLL\u003cwchar_t,class ATL::ChTraitsCRT\u003cwchar_t\u003e \u003e \u003e const \u0026)"
+    },
+    {
+        "Ordinal":  401,
+        "RVA":  "0x0091D1D0",
+        "Mangled":  "?SetWeeklyNumber@CmjMfcRecurrenceWeeklyDialog@@QAEXH@Z",
+        "Demangled":  "public: void __thiscall CmjMfcRecurrenceWeeklyDialog::SetWeeklyNumber(int)"
+    },
+    {
+        "Ordinal":  402,
+        "RVA":  "0x00626900",
+        "Mangled":  "?SetWildcatPath@CmjReminderData@@QAEXABV?$CStringT@_WV?$StrTraitMFC_DLL@_WV?$ChTraitsCRT@_W@ATL@@@@@ATL@@@Z",
+        "Demangled":  "public: void __thiscall CmjReminderData::SetWildcatPath(class ATL::CStringT\u003cwchar_t,class StrTraitMFC_DLL\u003cwchar_t,class ATL::ChTraitsCRT\u003cwchar_t\u003e \u003e \u003e const \u0026)"
+    },
+    {
+        "Ordinal":  403,
+        "RVA":  "0x0091D1F0",
+        "Mangled":  "?SetYearlyRecurrentDay@CmjMfcRecurrenceYearlyDialog@@QAEXH@Z",
+        "Demangled":  "public: void __thiscall CmjMfcRecurrenceYearlyDialog::SetYearlyRecurrentDay(int)"
+    }
+]

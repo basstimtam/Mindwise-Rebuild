@@ -1,0 +1,63 @@
+{
+  "at": "2026-10-25T07:24:13.461Z",
+  "result": "passed",
+  "checks": [
+    "actual Codex via loopback HTTP",
+    "same thread resumed",
+    "corrected target spec used",
+    "retired spec absent",
+    "real artifact hash matched",
+    "node result reference updated",
+    "not falsely verified",
+    "backup created"
+  ],
+  "run": {
+    "id": "6f8d5818-a1dd-4144-a175-d26818f095d0",
+    "targetId": "integration-character",
+    "targetVersion": 3,
+    "baseRevision": 3,
+    "status": "completed",
+    "startedAt": "2026-10-25T07:24:02.661Z",
+    "prompt": "現在の訂正済み仕様を使い、100文字程度の紹介文を character-revised.md に制作してください。対象本文は変更せず、子の枝も不要です。今回使った仕様と判断理由を短く示してください。外部ツールは使いません。",
+    "artifacts": [
+      {
+        "path": "artifacts/6f8d5818-a1dd-4144-a175-d26818f095d0/character-revised.md",
+        "sha256": "d8417a2570fee7bc9d8f4bf1f1e41a6c7458df419164381eafcebdd5e74230a0",
+        "bytes": 310
+      }
+    ],
+    "threadId": "01a171ec-aae0-74f3-b534-25b4149f57a8",
+    "contextHash": "c9239a0f13facf376c52c6f4dd1bb189d058a3a7a8aa0797d372c10b3c899643",
+    "turnId": "01a171f1-f0d0-7681-853a-62dccda4ce74",
+    "reply": "現在の仕様「ユイ・緑の灯台・黒い猫」を使い、約100文字の紹介文を制作しました。",
+    "decisionReason": "訂正済みの対象本文（version 3）を採用し、廃止された設定を引き継がずに構成しました。",
+    "proposal": {
+      "reply": "現在の仕様「ユイ・緑の灯台・黒い猫」を使い、約100文字の紹介文を制作しました。",
+      "updatedBody": null,
+      "decisionReason": "訂正済みの対象本文（version 3）を採用し、廃止された設定を引き継がずに構成しました。",
+      "children": [],
+      "artifacts": [
+        {
+          "name": "character-revised.md",
+          "content": "ユイは、海辺に立つ緑の灯台を守る主人公。相棒の黒い猫とともに灯台の階段を上り、今日も海へ灯りを届ける。穏やかな日も嵐の夜も、帰りを待つ誰かのために持ち場を離れない。その静かな決意が、小さな灯りを支えている。\n"
+        }
+      ]
+    },
+    "finishedAt": "2026-10-25T07:24:13.345Z"
+  },
+  "artifact": {
+    "path": "artifacts/6f8d5818-a1dd-4144-a175-d26818f095d0/character-revised.md",
+    "text": "ユイは、海辺に立つ緑の灯台を守る主人公。相棒の黒い猫とともに灯台の階段を上り、今日も海へ灯りを届ける。穏やかな日も嵐の夜も、帰りを待つ誰かのために持ち場を離れない。その静かな決意が、小さな灯りを支えている。\n",
+    "sha256": "d8417a2570fee7bc9d8f4bf1f1e41a6c7458df419164381eafcebdd5e74230a0",
+    "recordedSha256": "d8417a2570fee7bc9d8f4bf1f1e41a6c7458df419164381eafcebdd5e74230a0",
+    "matches": true
+  },
+  "backup": {
+    "path": "C:\\Users\\basst\\Dropbox\\AI Project\\16.Mindwise-Rebuild\\.runtime\\integration-resume\\backup-2026-10-25T07-24-13-454Z-715a2091.sqlite",
+    "sha256": "d60fe3d53cae1090d37ab8ce4533b04c24c63d7d00e15bf2c763915f7583a6f5",
+    "revision": 4,
+    "scope": "作業モデル・全変更履歴・実行記録。外部成果物と認証情報は含みません。",
+    "createdAt": "2026-10-25T07:24:13.460Z"
+  },
+  "modelRevision": 4
+}
