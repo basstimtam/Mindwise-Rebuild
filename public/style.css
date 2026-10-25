@@ -50,3 +50,5 @@
 @media(max-width:760px){.top-actions{flex-wrap:wrap;justify-content:flex-end}.top-actions #undo{display:block}.topbar>div:first-child{min-width:0}.eyebrow{overflow-wrap:anywhere}}
 
 .hierarchy-row{width:100%;text-align:left;border-radius:0}.hierarchy-row:hover{background:#f4f7fb}
+.hierarchy-row strong{min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.hierarchy-row .badge{flex-shrink:0}
+@media(max-width:760px){.hierarchy-row{gap:6px;padding-left:min(calc(18px + var(--display-depth,0)*10px),50px)!important}.hierarchy-row small{display:none}}

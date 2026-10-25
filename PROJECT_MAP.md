@@ -1,7 +1,7 @@
 # PROJECT MAP — Mindwise Rebuild
 
 - 参照契約: Mindwise Rebuild Rev 2 / ACTIVE
-- 検証基準点: 2026-10-26 06:40 JST。構造編集の実画面前半と下書き/影響の補正、自動試験69件中68成功/1skip、保存版41の再起動保持を照合。実画面の削除/取消は標準確認の解除待ち。全製品未完成。Git: origin=basstimtam/Mindwise-Rebuild、codex/rebuild。今回開始点e53e0c9。
+- 検証基準点: 2026-10-26 06:44 JST。構造編集の実画面前半と下書き/影響の補正、自動試験69件中68成功/1skip、保存版41の再起動保持を照合。実画面の削除/取消は標準確認の解除待ち。全製品未完成。Git: origin=basstimtam/Mindwise-Rebuild、codex/rebuild。今回開始点e53e0c9。
 
 - セッション移管確認: 2026-10-25。製品コード `1cfcb5c` とGitHub同SHAを確認。移管時の差分は文書のみ。旧版チャットの現在地から新版の戦術を再開しない。
 

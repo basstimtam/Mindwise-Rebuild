@@ -8065,17 +8065,1127 @@
           }
         ]
       }
+    },
+    {
+      "stage": "checkpoint-restart",
+      "at": "2026-10-25T21:44:41.259Z",
+      "revision": 41,
+      "target": {
+        "id": "fa2f7bcf-ef72-4b39-af97-9c68b0c25e84",
+        "parentId": "shared",
+        "title": "試験：短編の見積り合計",
+        "body": "架空短編の数値接続を確認するタスク。参照資料と現物は既存の numbers-check.md。枝の切離し・付替え・関係・削除と取消で同じ対象、式、制作履歴を保持する試験。実案件の受入ではない。",
+        "domain": "数値の接続検証",
+        "depth": 4,
+        "status": "active",
+        "progress": 40,
+        "start": "",
+        "due": "",
+        "x": 1020,
+        "y": 650,
+        "kind": "task",
+        "unit": "円",
+        "value": null,
+        "formula": "hours * rate",
+        "artifact": "artifacts/3fcbed02-3e29-47de-b396-b5a2252ecb1d/numbers-check.md",
+        "criteria": "",
+        "verified": false,
+        "version": 11,
+        "specs": [],
+        "required": false,
+        "weight": null,
+        "sourceRefs": [],
+        "metricInputs": [
+          {
+            "name": "hours",
+            "nodeId": "10492290-2234-4555-94f1-83f5e60bbff3"
+          },
+          {
+            "name": "rate",
+            "nodeId": "971a7b19-9a2e-4f39-8758-1327a1968678"
+          }
+        ],
+        "metricSource": "試験の時間×単価を計算。実案件の予算承認ではない。",
+        "metricFreshness": "unknown"
+      },
+      "note": {
+        "id": "2af665d2-8eb8-448c-aeb2-00a6b510b605",
+        "parentId": "fa2f7bcf-ef72-4b39-af97-9c68b0c25e84",
+        "title": "構造試験：資料メモ",
+        "body": "架空短編の構造試験資料。親の数値タスクと結び直しても、この本文とIDを保持する。",
+        "domain": "数値の接続検証",
+        "depth": 5,
+        "status": "planned",
+        "progress": 0,
+        "start": "",
+        "due": "",
+        "x": 1265,
+        "y": 750,
+        "kind": "concept",
+        "unit": "",
+        "value": null,
+        "formula": "",
+        "artifact": "",
+        "criteria": "",
+        "verified": false,
+        "version": 3,
+        "specs": [],
+        "required": false,
+        "weight": null,
+        "sourceRefs": [],
+        "metricInputs": [],
+        "metricSource": "",
+        "metricFreshness": "unknown"
+      },
+      "links": [
+        {
+          "id": "5a81e8c0-8f6b-4dc7-8999-24d477ae26a0",
+          "from": "fa2f7bcf-ef72-4b39-af97-9c68b0c25e84",
+          "to": "2af665d2-8eb8-448c-aeb2-00a6b510b605",
+          "type": "relates_to"
+        }
+      ],
+      "numbers": {
+        "id": "fa2f7bcf-ef72-4b39-af97-9c68b0c25e84",
+        "status": "calculated",
+        "value": 4800,
+        "unit": "円",
+        "formula": "hours * rate",
+        "formulaHash": "367a13a5f186baef6234a37d73128f607b24e7e031a75522d333792f68f069e1",
+        "fingerprint": "7eb1ccc1a4e0bd4adf1e83098e6f7817f6eb9c8b8bc39a4cdbf4a850b155f4d3",
+        "issues": [],
+        "inputs": [
+          {
+            "name": "hours",
+            "nodeId": "10492290-2234-4555-94f1-83f5e60bbff3",
+            "title": "試験：見積り時間",
+            "version": 6,
+            "status": "input",
+            "value": 4,
+            "unit": "時間",
+            "fingerprint": "898f0a03d2af07f67beb9b9fd1ba3d51a2f3e7b9058bbfb029252e1ac433d3e2"
+          },
+          {
+            "name": "rate",
+            "nodeId": "971a7b19-9a2e-4f39-8758-1327a1968678",
+            "title": "試験：時間あたり見積り",
+            "version": 4,
+            "status": "input",
+            "value": 1200,
+            "unit": "円/時間",
+            "fingerprint": "e6505747abfb160291b976b413b3051d5aa717458e1d48765e05731238121631"
+          }
+        ],
+        "source": {
+          "text": "試験の時間×単価を計算。実案件の予算承認ではない。",
+          "freshness": "unknown",
+          "sourceRefs": []
+        },
+        "specification": {
+          "status": "resolved",
+          "fingerprint": "c05dadc38ab5969835828fec87797619df57e2a15a78cb6beade93af65acb9a2",
+          "sources": [
+            {
+              "id": "fa2f7bcf-ef72-4b39-af97-9c68b0c25e84",
+              "title": "試験：短編の見積り合計"
+            }
+          ]
+        },
+        "version": 11,
+        "atRevision": 41
+      },
+      "history": [
+        {
+          "revision": 41,
+          "operationId": "59252ac3-6a38-4396-bdcf-8a7fb1d22e44",
+          "kind": "change",
+          "at": "2026-10-25T21:28:23.058Z",
+          "undone": 0
+        },
+        {
+          "revision": 40,
+          "operationId": "09dc5ae8-01aa-490b-9133-4356815a65ee",
+          "kind": "change",
+          "at": "2026-10-25T21:28:17.042Z",
+          "undone": 0
+        },
+        {
+          "revision": 39,
+          "operationId": "8dc471d0-b87f-4179-a2c0-b24aa6801bcf",
+          "kind": "change",
+          "at": "2026-10-25T21:28:08.792Z",
+          "undone": 0
+        },
+        {
+          "revision": 38,
+          "operationId": "c2770d76-6e49-459e-bdd1-ec571d032be6",
+          "kind": "change",
+          "at": "2026-10-25T21:27:58.878Z",
+          "undone": 0
+        },
+        {
+          "revision": 37,
+          "operationId": "ba2772e0-9c4d-40bb-9643-9c2a35603b1f",
+          "kind": "undo",
+          "at": "2026-10-25T21:27:39.724Z",
+          "undone": 0
+        },
+        {
+          "revision": 36,
+          "operationId": "15bf6d3b-595e-412f-a842-be30d1865f22",
+          "kind": "change",
+          "at": "2026-10-25T21:27:39.375Z",
+          "undone": 1
+        },
+        {
+          "revision": 35,
+          "operationId": "4d8c5347-35d3-4d0c-9a2a-fdc317535f37",
+          "kind": "change",
+          "at": "2026-10-25T21:27:33.441Z",
+          "undone": 0
+        },
+        {
+          "revision": 34,
+          "operationId": "dfa4c0b6-87c5-478d-9a8e-77aa24e2467a",
+          "kind": "change",
+          "at": "2026-10-25T21:27:32.996Z",
+          "undone": 0
+        },
+        {
+          "revision": 33,
+          "operationId": "448a0d03-d8d9-466a-8ae0-fc41c98688ec",
+          "kind": "change",
+          "at": "2026-10-25T21:24:59.756Z",
+          "undone": 0
+        },
+        {
+          "revision": 32,
+          "operationId": "645c495f-1113-4581-86e6-6fae27bd75da",
+          "kind": "change",
+          "at": "2026-10-25T21:24:05.254Z",
+          "undone": 0
+        },
+        {
+          "revision": 31,
+          "operationId": "f9982111-b29c-4bdf-aee7-f1407daf6880",
+          "kind": "change",
+          "at": "2026-10-25T21:24:04.922Z",
+          "undone": 0
+        },
+        {
+          "revision": 30,
+          "operationId": "c9292368-6400-462c-8edb-5ec1e1861624",
+          "kind": "change",
+          "at": "2026-10-25T21:23:40.407Z",
+          "undone": 0
+        },
+        {
+          "revision": 29,
+          "operationId": "ai-3fcbed02-3e29-47de-b396-b5a2252ecb1d",
+          "kind": "change",
+          "at": "2026-10-25T21:08:23.414Z",
+          "undone": 0
+        },
+        {
+          "revision": 28,
+          "operationId": "56f5df1a-6073-471d-ba7a-9cb6733500c4",
+          "kind": "undo",
+          "at": "2026-10-25T21:08:05.330Z",
+          "undone": 0
+        },
+        {
+          "revision": 27,
+          "operationId": "ab02d758-bbb1-47aa-b2b8-907e136b000a",
+          "kind": "change",
+          "at": "2026-10-25T21:08:01.746Z",
+          "undone": 1
+        },
+        {
+          "revision": 26,
+          "operationId": "6397a2c3-aedd-49e8-b886-c0b2a2e9d1a1",
+          "kind": "change",
+          "at": "2026-10-25T21:07:35.447Z",
+          "undone": 0
+        },
+        {
+          "revision": 25,
+          "operationId": "3f2947fa-c216-47c1-b181-7eb176c353a5",
+          "kind": "change",
+          "at": "2026-10-25T21:05:17.795Z",
+          "undone": 0
+        },
+        {
+          "revision": 24,
+          "operationId": "97691005-a07d-4464-8eb5-f0785cdfa8da",
+          "kind": "change",
+          "at": "2026-10-25T21:05:10.495Z",
+          "undone": 0
+        },
+        {
+          "revision": 23,
+          "operationId": "ceac8cee-ed7c-436a-a5ba-2250a771279b",
+          "kind": "change",
+          "at": "2026-10-25T21:05:06.461Z",
+          "undone": 0
+        },
+        {
+          "revision": 22,
+          "operationId": "78735349-17a8-453d-be3c-2aa6ef8b46df",
+          "kind": "change",
+          "at": "2026-10-25T21:05:06.047Z",
+          "undone": 0
+        },
+        {
+          "revision": 21,
+          "operationId": "db088f2d-cee5-49e7-af1d-4c7f2e7585ab",
+          "kind": "change",
+          "at": "2026-10-25T21:05:00.145Z",
+          "undone": 0
+        },
+        {
+          "revision": 20,
+          "operationId": "c60df15a-f344-4dec-9921-da5b866ff3cd",
+          "kind": "change",
+          "at": "2026-10-25T21:04:41.963Z",
+          "undone": 0
+        },
+        {
+          "revision": 19,
+          "operationId": "ai-57dcb812-9e50-40d4-b249-08b391127676",
+          "kind": "change",
+          "at": "2026-10-25T11:28:29.820Z",
+          "undone": 0
+        },
+        {
+          "revision": 18,
+          "operationId": "ai-settings-82e883a2-8fbb-47a0-b44d-e01414ec41b0",
+          "kind": "change",
+          "at": "2026-10-25T11:28:02.821Z",
+          "undone": 0
+        },
+        {
+          "revision": 17,
+          "operationId": "93f415a4-7a09-4a4c-b0a9-55ecb1ed4d84",
+          "kind": "change",
+          "at": "2026-10-25T11:27:00.111Z",
+          "undone": 0
+        },
+        {
+          "revision": 16,
+          "operationId": "f466c6f0-de71-49a9-a873-4d7f8d9c1a70",
+          "kind": "change",
+          "at": "2026-10-25T11:26:43.082Z",
+          "undone": 0
+        },
+        {
+          "revision": 15,
+          "operationId": "82cfae07-ce14-4063-935c-e25ab14626ea",
+          "kind": "change",
+          "at": "2026-10-25T11:26:29.652Z",
+          "undone": 0
+        },
+        {
+          "revision": 14,
+          "operationId": "6ead9f69-f48a-4938-bccd-5ed6228c2a49",
+          "kind": "undo",
+          "at": "2026-10-25T08:59:53.048Z",
+          "undone": 0
+        },
+        {
+          "revision": 13,
+          "operationId": "52e2041d-d5fa-460c-9522-1796ab7f6eb8",
+          "kind": "change",
+          "at": "2026-10-25T08:59:53.037Z",
+          "undone": 1
+        },
+        {
+          "revision": 12,
+          "operationId": "787cc829-bd13-4604-8a75-0c14275741d3",
+          "kind": "change",
+          "at": "2026-10-25T08:52:44.551Z",
+          "undone": 0
+        },
+        {
+          "revision": 11,
+          "operationId": "e68a96cc-1516-4e26-a90a-8ec5bb0ef943",
+          "kind": "change",
+          "at": "2026-10-25T08:52:44.544Z",
+          "undone": 0
+        },
+        {
+          "revision": 10,
+          "operationId": "2fa65bb7-914f-4976-bff6-8d11a02e131f",
+          "kind": "change",
+          "at": "2026-10-25T08:52:44.533Z",
+          "undone": 0
+        },
+        {
+          "revision": 9,
+          "operationId": "ai-af2f6ca9-ea5d-4e76-932c-1c789d859ef0",
+          "kind": "change",
+          "at": "2026-10-25T08:52:44.191Z",
+          "undone": 0
+        },
+        {
+          "revision": 8,
+          "operationId": "17d554e2-7e56-4d48-acb2-71e500b1a9ac",
+          "kind": "change",
+          "at": "2026-10-25T08:52:38.232Z",
+          "undone": 0
+        },
+        {
+          "revision": 7,
+          "operationId": "28b15390-1dbb-49d6-a8ed-7e14b1e97381",
+          "kind": "change",
+          "at": "2026-10-25T08:52:38.216Z",
+          "undone": 0
+        },
+        {
+          "revision": 6,
+          "operationId": "25f49b81-cbe1-452c-b0cb-c432af789309",
+          "kind": "change",
+          "at": "2026-10-25T08:52:38.209Z",
+          "undone": 0
+        },
+        {
+          "revision": 5,
+          "operationId": "7d5ce5a1-443e-4210-88a4-d887a8a39aa1",
+          "kind": "change",
+          "at": "2026-10-25T08:52:38.199Z",
+          "undone": 0
+        },
+        {
+          "revision": 4,
+          "operationId": "b4ddfdd8-7467-47bb-94a4-ea32c42ee30a",
+          "kind": "change",
+          "at": "2026-10-25T08:52:38.190Z",
+          "undone": 0
+        },
+        {
+          "revision": 3,
+          "operationId": "ai-7ce09d75-2ead-45b6-a104-4ea4ff8c6df4",
+          "kind": "change",
+          "at": "2026-10-25T08:52:37.841Z",
+          "undone": 0
+        },
+        {
+          "revision": 2,
+          "operationId": "ai-c5b3c56a-4a47-4a62-b21b-723098524e02",
+          "kind": "change",
+          "at": "2026-10-25T08:52:31.977Z",
+          "undone": 0
+        },
+        {
+          "revision": 1,
+          "operationId": "fd5cc228-64cf-42f1-be47-abadec31e119",
+          "kind": "change",
+          "at": "2026-10-25T08:52:25.454Z",
+          "undone": 0
+        }
+      ],
+      "provenance": {
+        "targetId": "fa2f7bcf-ef72-4b39-af97-9c68b0c25e84",
+        "entries": [
+          {
+            "revision": 41,
+            "operationId": "59252ac3-6a38-4396-bdcf-8a7fb1d22e44",
+            "kind": "change",
+            "at": "2026-10-25T21:28:23.058Z",
+            "undone": false,
+            "actor": "owner",
+            "reason": null,
+            "runId": null,
+            "sourceRefs": [],
+            "inputs": [],
+            "changes": [],
+            "relations": {
+              "before": [],
+              "after": [
+                {
+                  "id": "5a81e8c0-8f6b-4dc7-8999-24d477ae26a0",
+                  "from": "fa2f7bcf-ef72-4b39-af97-9c68b0c25e84",
+                  "to": "2af665d2-8eb8-448c-aeb2-00a6b510b605",
+                  "type": "relates_to"
+                }
+              ]
+            }
+          },
+          {
+            "revision": 40,
+            "operationId": "09dc5ae8-01aa-490b-9133-4356815a65ee",
+            "kind": "change",
+            "at": "2026-10-25T21:28:17.042Z",
+            "undone": false,
+            "actor": "owner",
+            "reason": null,
+            "runId": null,
+            "sourceRefs": [],
+            "inputs": [],
+            "changes": [],
+            "relations": {
+              "before": [
+                {
+                  "id": "40e2b2d7-9105-4a16-9b21-6b19d83bc357",
+                  "from": "fa2f7bcf-ef72-4b39-af97-9c68b0c25e84",
+                  "to": "2af665d2-8eb8-448c-aeb2-00a6b510b605",
+                  "type": "relates_to"
+                }
+              ],
+              "after": []
+            }
+          },
+          {
+            "revision": 39,
+            "operationId": "8dc471d0-b87f-4179-a2c0-b24aa6801bcf",
+            "kind": "change",
+            "at": "2026-10-25T21:28:08.792Z",
+            "undone": false,
+            "actor": "owner",
+            "reason": null,
+            "runId": null,
+            "sourceRefs": [],
+            "inputs": [],
+            "changes": [],
+            "relations": {
+              "before": [],
+              "after": [
+                {
+                  "id": "40e2b2d7-9105-4a16-9b21-6b19d83bc357",
+                  "from": "fa2f7bcf-ef72-4b39-af97-9c68b0c25e84",
+                  "to": "2af665d2-8eb8-448c-aeb2-00a6b510b605",
+                  "type": "relates_to"
+                }
+              ]
+            }
+          },
+          {
+            "revision": 38,
+            "operationId": "c2770d76-6e49-459e-bdd1-ec571d032be6",
+            "kind": "change",
+            "at": "2026-10-25T21:27:58.878Z",
+            "undone": false,
+            "actor": "owner",
+            "reason": null,
+            "runId": null,
+            "sourceRefs": [],
+            "inputs": [],
+            "changes": [
+              {
+                "field": "parentId",
+                "before": null,
+                "after": "shared"
+              }
+            ],
+            "relations": null
+          },
+          {
+            "revision": 37,
+            "operationId": "ba2772e0-9c4d-40bb-9643-9c2a35603b1f",
+            "kind": "undo",
+            "at": "2026-10-25T21:27:39.724Z",
+            "undone": false,
+            "actor": "owner",
+            "reason": null,
+            "runId": null,
+            "sourceRefs": [],
+            "inputs": [],
+            "changes": [
+              {
+                "field": "body",
+                "before": "架空短編の数値接続を確認するタスク。参照資料と現物は既存の numbers-check.md。枝の切離し・付替え・関係・削除と取消で同じ対象、式、制作履歴を保持する試験。実案件の受入ではない。\n未保存入力を保った切離し試験。",
+                "after": "架空短編の数値接続を確認するタスク。参照資料と現物は既存の numbers-check.md。枝の切離し・付替え・関係・削除と取消で同じ対象、式、制作履歴を保持する試験。実案件の受入ではない。"
+              }
+            ],
+            "relations": null
+          },
+          {
+            "revision": 36,
+            "operationId": "15bf6d3b-595e-412f-a842-be30d1865f22",
+            "kind": "change",
+            "at": "2026-10-25T21:27:39.375Z",
+            "undone": true,
+            "actor": "owner",
+            "reason": null,
+            "runId": null,
+            "sourceRefs": [],
+            "inputs": [],
+            "changes": [
+              {
+                "field": "body",
+                "before": "架空短編の数値接続を確認するタスク。参照資料と現物は既存の numbers-check.md。枝の切離し・付替え・関係・削除と取消で同じ対象、式、制作履歴を保持する試験。実案件の受入ではない。",
+                "after": "架空短編の数値接続を確認するタスク。参照資料と現物は既存の numbers-check.md。枝の切離し・付替え・関係・削除と取消で同じ対象、式、制作履歴を保持する試験。実案件の受入ではない。\n未保存入力を保った切離し試験。"
+              }
+            ],
+            "relations": null
+          },
+          {
+            "revision": 35,
+            "operationId": "4d8c5347-35d3-4d0c-9a2a-fdc317535f37",
+            "kind": "change",
+            "at": "2026-10-25T21:27:33.441Z",
+            "undone": false,
+            "actor": "owner",
+            "reason": null,
+            "runId": null,
+            "sourceRefs": [],
+            "inputs": [],
+            "changes": [
+              {
+                "field": "parentId",
+                "before": "971a7b19-9a2e-4f39-8758-1327a1968678",
+                "after": null
+              }
+            ],
+            "relations": null
+          },
+          {
+            "revision": 34,
+            "operationId": "dfa4c0b6-87c5-478d-9a8e-77aa24e2467a",
+            "kind": "change",
+            "at": "2026-10-25T21:27:32.996Z",
+            "undone": false,
+            "actor": "owner",
+            "reason": null,
+            "runId": null,
+            "sourceRefs": [],
+            "inputs": [],
+            "changes": [
+              {
+                "field": "parentId",
+                "before": null,
+                "after": "971a7b19-9a2e-4f39-8758-1327a1968678"
+              }
+            ],
+            "relations": null
+          },
+          {
+            "revision": 33,
+            "operationId": "448a0d03-d8d9-466a-8ae0-fc41c98688ec",
+            "kind": "change",
+            "at": "2026-10-25T21:24:59.756Z",
+            "undone": false,
+            "actor": "owner",
+            "reason": null,
+            "runId": null,
+            "sourceRefs": [],
+            "inputs": [],
+            "changes": [
+              {
+                "field": "parentId",
+                "before": "971a7b19-9a2e-4f39-8758-1327a1968678",
+                "after": null
+              }
+            ],
+            "relations": null
+          },
+          {
+            "revision": 30,
+            "operationId": "c9292368-6400-462c-8edb-5ec1e1861624",
+            "kind": "change",
+            "at": "2026-10-25T21:23:40.407Z",
+            "undone": false,
+            "actor": "owner",
+            "reason": null,
+            "runId": null,
+            "sourceRefs": [],
+            "inputs": [],
+            "changes": [
+              {
+                "field": "body",
+                "before": "",
+                "after": "架空短編の数値接続を確認するタスク。参照資料と現物は既存の numbers-check.md。枝の切離し・付替え・関係・削除と取消で同じ対象、式、制作履歴を保持する試験。実案件の受入ではない。"
+              },
+              {
+                "field": "status",
+                "before": "planned",
+                "after": "active"
+              },
+              {
+                "field": "progress",
+                "before": 0,
+                "after": 40
+              },
+              {
+                "field": "kind",
+                "before": "concept",
+                "after": "task"
+              }
+            ],
+            "relations": null
+          },
+          {
+            "revision": 29,
+            "operationId": "ai-3fcbed02-3e29-47de-b396-b5a2252ecb1d",
+            "kind": "change",
+            "at": "2026-10-25T21:08:23.414Z",
+            "undone": false,
+            "actor": "codex",
+            "reason": "hoursの数値は4時間（v5）ですが、出所文には「試験仮定3時間」とあります。合計には提供されたnumbersの再計算結果を採用し、この不一致を明記しました。",
+            "runId": "3fcbed02-3e29-47de-b396-b5a2252ecb1d",
+            "sourceRefs": [
+              {
+                "documentId": "goal",
+                "section": "1. 最終到達点",
+                "sha256": "a79eb266a618f3ac1a4d59643a1a955cb4ea207c098d4d5358ac1d5d29ae076f",
+                "revision": "Mindwise Rebuild Rev 2",
+                "status": "current",
+                "text": "## 1. 最終到達点\n\n人とCodexが、構想・設計・プロセス・タスク・進捗・成果物を、同じ地図から扱える汎用の制作・開発空間を完成させる。\n\nMindwise自身の作業画面で全体を考え、枝を自由に増やし、切り離し、付け替え、関係を結ぶ。全体から個別の仕事へ降り、対象を選んでAIと相談・設計・制作を進める。同じ仕事を地図、領域別のレーン、構想から現物への具体化、工程、タスク一覧、数値から見られ、変更と制作結果が共有する地図へ戻る。表示やセッションを替えても、何を扱っているかと、なぜそうしたかが途切れない。\n\n航海が進むにつれて、探索した設計、判断、資料、現物、検証が主題ごとにつながり、海図が充実する。枝数は完成度ではない。できた部分、未探索、変更の影響、未反映、判断待ちを見分け、完成までの位置を把握できることが価値である。\n\n利用者はオーナー本人、自宅Windows環境を対象とする。ゲーム、取引システム、本などで共通の仕組みを使い、用途に応じて内容と表示を変える。MindManagerの外観や本体の常時使用には固定しない。既存データ・有用な機能や設計の知見は活かす。\n\nGoal Forgeは戦略契約を形成し、オーナーは重要な価値・戦略・権限を決める。Codexはその範囲で制作を担い、Mindwiseは共通の作業空間と持続する文脈を担う。",
+                "documentStatus": "approved",
+                "currentSha256": "a79eb266a618f3ac1a4d59643a1a955cb4ea207c098d4d5358ac1d5d29ae076f",
+                "currentRevision": "Mindwise Rebuild Rev 2"
+              }
+            ],
+            "inputs": [
+              {
+                "id": "fa2f7bcf-ef72-4b39-af97-9c68b0c25e84",
+                "title": "試験：短編の見積り合計",
+                "version": 3,
+                "body": "",
+                "specs": [],
+                "sourceRefs": [],
+                "number": {
+                  "id": "fa2f7bcf-ef72-4b39-af97-9c68b0c25e84",
+                  "status": "calculated",
+                  "value": 4800,
+                  "unit": "円",
+                  "formula": "hours * rate",
+                  "formulaHash": "367a13a5f186baef6234a37d73128f607b24e7e031a75522d333792f68f069e1",
+                  "fingerprint": "7eb1ccc1a4e0bd4adf1e83098e6f7817f6eb9c8b8bc39a4cdbf4a850b155f4d3",
+                  "issues": [],
+                  "inputs": [
+                    {
+                      "name": "hours",
+                      "nodeId": "10492290-2234-4555-94f1-83f5e60bbff3",
+                      "title": "試験：見積り時間",
+                      "version": 5,
+                      "status": "input",
+                      "value": 4,
+                      "unit": "時間",
+                      "fingerprint": "898f0a03d2af07f67beb9b9fd1ba3d51a2f3e7b9058bbfb029252e1ac433d3e2"
+                    },
+                    {
+                      "name": "rate",
+                      "nodeId": "971a7b19-9a2e-4f39-8758-1327a1968678",
+                      "title": "試験：時間あたり見積り",
+                      "version": 3,
+                      "status": "input",
+                      "value": 1200,
+                      "unit": "円/時間",
+                      "fingerprint": "e6505747abfb160291b976b413b3051d5aa717458e1d48765e05731238121631"
+                    }
+                  ],
+                  "source": {
+                    "text": "試験の時間×単価を計算。実案件の予算承認ではない。",
+                    "freshness": "unknown",
+                    "sourceRefs": []
+                  },
+                  "specification": {
+                    "status": "resolved",
+                    "fingerprint": "c05dadc38ab5969835828fec87797619df57e2a15a78cb6beade93af65acb9a2",
+                    "sources": []
+                  },
+                  "version": 3,
+                  "atRevision": 28
+                }
+              },
+              {
+                "id": "goal",
+                "title": "架空ゲーム完成（接続検証）",
+                "version": 3,
+                "body": "機能の接続を検証する架空案件。実案件の受入ではありません。",
+                "specs": [],
+                "sourceRefs": [],
+                "number": null
+              },
+              {
+                "id": "4d1ee4db-8747-45cc-8d91-b4785ec6b608",
+                "title": "琥珀の時計塔（出所・設定の接続検証）",
+                "version": 6,
+                "body": "架空の短編の構想。舞台は琥珀の時計塔、案内役はミオ、語り口は穏やかにする。実案件の承認ではなく機能検証用。",
+                "specs": [
+                  {
+                    "key": "舞台",
+                    "value": "琥珀の時計塔"
+                  },
+                  {
+                    "key": "案内役",
+                    "value": "ミオ"
+                  },
+                  {
+                    "key": "語り口",
+                    "value": "穏やか"
+                  }
+                ],
+                "sourceRefs": [
+                  {
+                    "documentId": "goal",
+                    "section": "1. 最終到達点",
+                    "sha256": "a79eb266a618f3ac1a4d59643a1a955cb4ea207c098d4d5358ac1d5d29ae076f",
+                    "revision": "Mindwise Rebuild Rev 2"
+                  }
+                ],
+                "number": null
+              },
+              {
+                "id": "10492290-2234-4555-94f1-83f5e60bbff3",
+                "title": "試験：見積り時間",
+                "version": 5,
+                "body": "",
+                "specs": [],
+                "sourceRefs": [],
+                "number": {
+                  "id": "10492290-2234-4555-94f1-83f5e60bbff3",
+                  "status": "input",
+                  "value": 4,
+                  "unit": "時間",
+                  "formula": "",
+                  "formulaHash": "277cdc4fc77352ad60c07f96771d484d80f6cd8c1d1a1916e25237791ec738f5",
+                  "fingerprint": "898f0a03d2af07f67beb9b9fd1ba3d51a2f3e7b9058bbfb029252e1ac433d3e2",
+                  "issues": [],
+                  "inputs": [],
+                  "source": {
+                    "text": "架空短編の接続検証用。試験仮定3時間。実案件の予算ではない。",
+                    "freshness": "current",
+                    "sourceRefs": []
+                  },
+                  "specification": {
+                    "status": "resolved",
+                    "fingerprint": "c05dadc38ab5969835828fec87797619df57e2a15a78cb6beade93af65acb9a2",
+                    "sources": []
+                  },
+                  "version": 5,
+                  "atRevision": 28
+                }
+              },
+              {
+                "id": "971a7b19-9a2e-4f39-8758-1327a1968678",
+                "title": "試験：時間あたり見積り",
+                "version": 3,
+                "body": "",
+                "specs": [],
+                "sourceRefs": [],
+                "number": {
+                  "id": "971a7b19-9a2e-4f39-8758-1327a1968678",
+                  "status": "input",
+                  "value": 1200,
+                  "unit": "円/時間",
+                  "formula": "",
+                  "formulaHash": "5a0c8e6769e809a91e478a92e18fc0b1062e7f7331f113a47bbaf342234c8b27",
+                  "fingerprint": "e6505747abfb160291b976b413b3051d5aa717458e1d48765e05731238121631",
+                  "issues": [],
+                  "inputs": [],
+                  "source": {
+                    "text": "接続検証の架空単価。1200円/時間。実取引なし。",
+                    "freshness": "current",
+                    "sourceRefs": []
+                  },
+                  "specification": {
+                    "status": "resolved",
+                    "fingerprint": "c05dadc38ab5969835828fec87797619df57e2a15a78cb6beade93af65acb9a2",
+                    "sources": []
+                  },
+                  "version": 3,
+                  "atRevision": 28
+                }
+              }
+            ],
+            "changes": [
+              {
+                "field": "artifact",
+                "before": "",
+                "after": "artifacts/3fcbed02-3e29-47de-b396-b5a2252ecb1d/numbers-check.md"
+              }
+            ],
+            "relations": null
+          },
+          {
+            "revision": 25,
+            "operationId": "3f2947fa-c216-47c1-b181-7eb176c353a5",
+            "kind": "change",
+            "at": "2026-10-25T21:05:17.795Z",
+            "undone": false,
+            "actor": "owner",
+            "reason": null,
+            "runId": null,
+            "sourceRefs": [],
+            "inputs": [],
+            "changes": [
+              {
+                "field": "title",
+                "before": "新しい枝",
+                "after": "試験：短編の見積り合計"
+              },
+              {
+                "field": "unit",
+                "before": "",
+                "after": "円"
+              },
+              {
+                "field": "formula",
+                "before": "",
+                "after": "hours * rate"
+              },
+              {
+                "field": "metricInputs",
+                "before": [],
+                "after": [
+                  {
+                    "name": "hours",
+                    "nodeId": "10492290-2234-4555-94f1-83f5e60bbff3"
+                  },
+                  {
+                    "name": "rate",
+                    "nodeId": "971a7b19-9a2e-4f39-8758-1327a1968678"
+                  }
+                ]
+              },
+              {
+                "field": "metricSource",
+                "before": "",
+                "after": "試験の時間×単価を計算。実案件の予算承認ではない。"
+              }
+            ],
+            "relations": null
+          },
+          {
+            "revision": 24,
+            "operationId": "97691005-a07d-4464-8eb5-f0785cdfa8da",
+            "kind": "change",
+            "at": "2026-10-25T21:05:10.495Z",
+            "undone": false,
+            "actor": "owner",
+            "reason": null,
+            "runId": null,
+            "sourceRefs": [],
+            "inputs": [],
+            "changes": [
+              {
+                "field": "id",
+                "before": null,
+                "after": "fa2f7bcf-ef72-4b39-af97-9c68b0c25e84"
+              },
+              {
+                "field": "parentId",
+                "before": null,
+                "after": "971a7b19-9a2e-4f39-8758-1327a1968678"
+              },
+              {
+                "field": "title",
+                "before": null,
+                "after": "新しい枝"
+              },
+              {
+                "field": "body",
+                "before": null,
+                "after": ""
+              },
+              {
+                "field": "domain",
+                "before": null,
+                "after": "数値の接続検証"
+              },
+              {
+                "field": "depth",
+                "before": null,
+                "after": 4
+              },
+              {
+                "field": "status",
+                "before": null,
+                "after": "planned"
+              },
+              {
+                "field": "progress",
+                "before": null,
+                "after": 0
+              },
+              {
+                "field": "start",
+                "before": null,
+                "after": ""
+              },
+              {
+                "field": "due",
+                "before": null,
+                "after": ""
+              },
+              {
+                "field": "x",
+                "before": null,
+                "after": 1020
+              },
+              {
+                "field": "y",
+                "before": null,
+                "after": 650
+              },
+              {
+                "field": "kind",
+                "before": null,
+                "after": "concept"
+              },
+              {
+                "field": "unit",
+                "before": null,
+                "after": ""
+              },
+              {
+                "field": "value",
+                "before": null,
+                "after": null
+              },
+              {
+                "field": "formula",
+                "before": null,
+                "after": ""
+              },
+              {
+                "field": "artifact",
+                "before": null,
+                "after": ""
+              },
+              {
+                "field": "criteria",
+                "before": null,
+                "after": ""
+              },
+              {
+                "field": "verified",
+                "before": null,
+                "after": false
+              },
+              {
+                "field": "specs",
+                "before": null,
+                "after": []
+              },
+              {
+                "field": "required",
+                "before": null,
+                "after": false
+              },
+              {
+                "field": "weight",
+                "before": null,
+                "after": null
+              },
+              {
+                "field": "sourceRefs",
+                "before": null,
+                "after": []
+              },
+              {
+                "field": "metricInputs",
+                "before": null,
+                "after": []
+              },
+              {
+                "field": "metricSource",
+                "before": null,
+                "after": ""
+              },
+              {
+                "field": "metricFreshness",
+                "before": null,
+                "after": "unknown"
+              }
+            ],
+            "relations": null
+          }
+        ],
+        "limit": 100,
+        "runs": [
+          {
+            "id": "3fcbed02-3e29-47de-b396-b5a2252ecb1d",
+            "status": "completed",
+            "mode": "production",
+            "startedAt": "2026-10-25T21:08:12.335Z",
+            "targetVersion": 3,
+            "prompt": "これは架空素材による数値接続の検証です。numbersにある計算機の再計算結果と参照元を使い、hours、rate、合計、単位、出所、保存時の対象版を短い日本語のnumbers-check.mdへ記してください。実案件の予算承認や受入とは書かないでください。本文や子の枝は変更せず、updatedBody=null、children=[]、settings=null。資料を実行せず、ファイル内容をartifactsに返してください。",
+            "reply": "提供された計算機の再計算結果と参照元を、架空素材の数値接続チェックとしてまとめました。",
+            "decisionReason": "hoursの数値は4時間（v5）ですが、出所文には「試験仮定3時間」とあります。合計には提供されたnumbersの再計算結果を採用し、この不一致を明記しました。"
+          }
+        ],
+        "sources": {
+          "revision": "Mindwise Rebuild Rev 2",
+          "status": "approved",
+          "documents": [
+            {
+              "id": "goal",
+              "path": "GOAL.md",
+              "title": "到達点と完成条件",
+              "revision": "Mindwise Rebuild Rev 2",
+              "declaredStatus": "ACTIVE（2026-10-25のレビュー・修正委譲と条件付き実装GOに基づく。実Codex検証の利用範囲を追加確認済み）",
+              "status": "approved",
+              "sha256": "a79eb266a618f3ac1a4d59643a1a955cb4ea207c098d4d5358ac1d5d29ae076f",
+              "approval": {
+                "documentId": "discovery",
+                "section": "7. 引継ぎ後の全面レビューと実装GO（2026-10-25）",
+                "sha256": "594edaa39cde4d691901f144f37ef9dea9451ecc38cbdfb9ed4eaf44d5a57e01",
+                "normalization": "UTF-8 / LF",
+                "status": "current",
+                "note": "既存のレビュー・修正委譲と条件付き実装GOの記録（DISCOVERY_LOG第7節）。2026-10-25の新セッションでオーナーがRev 2 / ACTIVEと実装GO取得済みを再確認。これは既存承認への照合登録であり、新たな承認や権限付与ではない。"
+              },
+              "issues": []
+            },
+            {
+              "id": "design",
+              "path": "DESIGN_STANDARD.md",
+              "title": "設計と品質の基準",
+              "revision": "Mindwise Rebuild Rev 2",
+              "declaredStatus": "ACTIVE（2026-10-25のレビュー・修正委譲により補正。個人用ChatGPTの既存枠内で新ルート試験資料を使う実装・検証GO）",
+              "status": "approved",
+              "sha256": "11885ee9b45e42b994fae00183c677daa128c82a640c01fdac4cec9ca8fdd241",
+              "approval": {
+                "documentId": "discovery",
+                "section": "7. 引継ぎ後の全面レビューと実装GO（2026-10-25）",
+                "sha256": "594edaa39cde4d691901f144f37ef9dea9451ecc38cbdfb9ed4eaf44d5a57e01",
+                "normalization": "UTF-8 / LF",
+                "status": "current",
+                "note": "既存のレビュー・修正委譲と条件付き実装GOの記録（DISCOVERY_LOG第7節）。2026-10-25の新セッションでオーナーがRev 2 / ACTIVEと実装GO取得済みを再確認。これは既存承認への照合登録であり、新たな承認や権限付与ではない。"
+              },
+              "issues": []
+            },
+            {
+              "id": "discovery",
+              "path": "DISCOVERY_LOG.md",
+              "title": "判断と承認の記録",
+              "revision": "Mindwise Rebuild Rev 2",
+              "declaredStatus": "ACTIVE（Rev 1の起草記録を保持。Rev 2の修正委譲・条件付きGO・利用範囲の確認は末尾7節）",
+              "status": "record",
+              "sha256": "44be681c225aa38a93cc3a04eae3788e1247e260bdb40dce4c2a75821aac7189",
+              "issues": []
+            }
+          ],
+          "references": [],
+          "issues": [],
+          "authority": "契約の原文と既存承認記録の照合表示です。実行権限を新たに付与しません。"
+        }
+      },
+      "preservedRun": {
+        "id": "3fcbed02-3e29-47de-b396-b5a2252ecb1d",
+        "targetId": "fa2f7bcf-ef72-4b39-af97-9c68b0c25e84",
+        "targetVersion": 3,
+        "status": "completed",
+        "artifacts": [
+          {
+            "path": "artifacts/3fcbed02-3e29-47de-b396-b5a2252ecb1d/numbers-check.md",
+            "sha256": "8cd9650051d851cb3f8c3fd270fa78c5a0b6269bd895b3daee37608ae8869edf",
+            "bytes": 857
+          }
+        ]
+      }
     }
   ],
   "checkpointCheck": {
-    "at": "2026-10-25T21:41:34.591Z",
+    "at": "2026-10-25T21:44:41.258Z",
     "revision": 41,
     "contractStatus": "approved",
     "sourceHashes": {
-      "public/app.js": "4b5e669a04e8348cd44e26929c7fc1c4ced1812fbfb8905a682ac6c02dda6127",
+      "public/app.js": "f2348af3d92ad0cc9cb073ca17c68137ec6b5dc5005fb31f39186c75cbe041a3",
       "public/editing.js": "ab57da403b9d2643022e6418a3e97c3cfe1bfdc430aa8ede69bb3f875f08353f",
       "public/index.html": "02a3a341c974482d27ce77785888c861e348769f7929a2485404a3f1cd70b6a1",
-      "public/style.css": "246262d2a3d70595e6acd0b81ca079e7107171e7fe6742c0cdd7878fec2c588c",
+      "public/style.css": "041ba6fcf4d1829a85e5c4bb30c37f9924f10356313e831f4f258fbb6669afdd",
       "src/store.mjs": "18b1cdfa6e0cf3d934f82afe08af84ce6df73bf39a6b49b384683a49bde1d63e",
       "src/semantics.mjs": "c9fed87939628e3f5175c10fba798027b234a642f97ecc4d9a8a063efd4faad1",
       "src/numbers.mjs": "6f1f72b421a5c0c7170f1ef8bb154c636d99a5633bd7f955ee012d6cb3be5c10",
