@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "revision": "Mindwise Rebuild Rev 2",
+  "documents": [
+    {
+      "id": "goal",
+      "sha256": "a79eb266a618f3ac1a4d59643a1a955cb4ea207c098d4d5358ac1d5d29ae076f"
+    },
+    {
+      "id": "design",
+      "sha256": "11885ee9b45e42b994fae00183c677daa128c82a640c01fdac4cec9ca8fdd241"
+    }
+  ],
+  "approval": {
+    "documentId": "discovery",
+    "section": "7. 引継ぎ後の全面レビューと実装GO（2026-10-25）",
+    "sha256": "594edaa39cde4d691901f144f37ef9dea9451ecc38cbdfb9ed4eaf44d5a57e01",
+    "normalization": "UTF-8 / LF"
+  },
+  "note": "既存のレビュー・修正委譲と条件付き実装GOの記録（DISCOVERY_LOG第7節）。2026-10-25の新セッションでオーナーがRev 2 / ACTIVEと実装GO取得済みを再確認。これは既存承認への照合登録であり、新たな承認や権限付与ではない。"
+}

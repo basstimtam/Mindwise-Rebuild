@@ -1,3 +1,4 @@
+import {createSourcesUi} from './sources.js';
 const $ = (q, parent = document) => parent.querySelector(q);
 const $$ = (q, parent = document) => [...parent.querySelectorAll(q)];
 const el = (tag, cls, text) => { const e = document.createElement(tag); if (cls) e.className = cls; if (text !== undefined) e.textContent = text; return e; };
@@ -9,6 +10,7 @@ let state = { revision: 0, nodes: [], links: [], runs: [], history: [] }, token 
 let camera = { x: 20, y: 30, scale: 1 }, toastTimer, aiEvents = [], aiRun = null, aiThreads = {}, aiRequestPending = false, polling = false;
 const freshConversationTargets = new Set();
 const detailDrafts = new Map(), relationDrafts = new Map();
+const sourcesUi=createSourcesUi({api,getNode:node,change,toast});
 let analysis = null, analysisTarget = null, analysisSequence = 0, analysisFetch = null, analysisAt = 0, analysisError = '', reviewedArtifact = null, verificationPending = false;
 function currentAnalysis() { return analysis?.revision === state.revision && analysisTarget === (selected || '') ? analysis : null; }
 function verificationText(id) { return ({verified:'現物確認済み',stale:'変更後の再確認が必要',missing:'成果物が見つかりません',conflict:'仕様の衝突を解決してください',unverified:'受入は未確認'})[currentAnalysis()?.verificationById?.[id]?.status] || '現物との照合待ち'; }
@@ -41,7 +43,7 @@ async function change(ops) {
  busy = true; let saved = false, cancelled = false;
  $('#saveState').textContent = '○ 変更を確認中';
  try {
-  const payload = {baseRevision:state.revision,operationId:crypto.randomUUID(),ops};
+  const payload = {baseRevision:state.revision,operationId:crypto.randomUUID(),ops,meta:{actor:'owner',reason:null}};
   const substantive = ops.some(op => op.type === 'link' || op.type === 'unlink' || op.type === 'delete' || op.type === 'update' && Object.keys(op.patch).some(key => !['x','y','parentId','depth','domain','start','due','status','progress'].includes(key)));
   if (substantive) {
    const preview = await api('/api/preview', payload);
@@ -57,8 +59,15 @@ async function change(ops) {
  } catch (error) { toast(error.message, true); return false; }
  finally { busy = false; $('#saveState').textContent = saved ? '● 保存済み' : cancelled ? '○ 変更は未保存' : '○ 保存できませんでした'; }
 }
-function confirmImpact(impact, edited) {
+function confirmImpact(impact, edited, proposal) {
  const dialog = $('#impactDialog'), list = $('#impactList'); list.replaceChildren();
+ $('#impactHeading').textContent=proposal?'設定案の差分と影響を確認':'変更前に影響を確認';
+ $('#impactContinue').textContent=proposal?'この設定案を採用':'この変更を保存';
+ const changes=$('#impactChanges');changes.replaceChildren();
+ if(proposal) {
+  changes.append(el('strong','',title(proposal.targetId)),el('p','small-note',`採用理由：${proposal.reason}`));
+  for(const [label,specs] of [['変更前',proposal.before],['設定案',proposal.after]])changes.append(el('pre','source-excerpt',`${label}\n${specs.map(s=>`${s.key} = ${s.value}`).join('\n')||'設定なし'}`));
+ }
  const labels = {affected:'設定が変わる対象',exempt:'例外を保つ対象',unknown:'影響の再確認が必要',unchanged:'設定は変わりません'};
  const rows = (impact.details || []).filter(row => row.effect !== 'unchanged');
  for (const row of rows.slice(0,100)) {
@@ -159,7 +168,7 @@ function renderInspector() {
  const draft = detailDrafts.get(n.id);
  if(draft){for(const input of $$('[name]',form))if(input.name in draft.values){if(input.type==='checkbox')input.checked = Boolean(draft.values[input.name]);else input.value = draft.values[input.name];}box.append(el('p','small-note',draft.baseVersion===n.version?'未保存の入力を保持しています。':'別の更新があります。未保存の入力は保持しています。保存前に最新内容を確認してください。'));}
  form.addEventListener('input',()=>detailDrafts.set(n.id,{baseVersion:detailDrafts.get(n.id)?.baseVersion ?? n.version,values:formValues(form)}));
- box.append(form);
+ box.append(sourcesUi.renderTarget(n),form);
  const specificationBox = el('section','analysis-section');specificationBox.id = 'specificationDetails';box.append(specificationBox);
  const verificationBox = el('section','analysis-section');verificationBox.id = 'verificationDetails';box.append(verificationBox);
  const actions2 = el('div','button-row');actions2.append(button('入力を取り消して最新へ',()=>{if(!detailDrafts.has(n.id)||confirm('未保存の入力を取り消し、最新の保存内容を表示しますか？')){detailDrafts.delete(n.id);renderInspector();renderSpecification();renderVerification();}}),button('切り離す',()=>change([{type:'update',id:n.id,patch:{parentId:null}}])),button('枝を削除',async()=>{if(confirm(`「${n.title}」を削除します。モデルの変更は取り消せます。`))await change([{type:'delete',id:n.id}]);},'danger'));box.append(actions2);renderRelations(box,n);renderSpecification();renderVerification();
@@ -236,11 +245,14 @@ const activeRunStatuses = new Set(['connecting','running','applying','inProgress
 function renderAiTarget() {
  const n = node(), executing = activeRunStatuses.has(aiRun?.status);
  $('#aiTarget').textContent = executing ? `実行対象：${title(aiRun.targetId)} · 開始時の版 ${aiRun.targetVersion} / 選択中：${n?.title || '未選択'}` : n ? `${n.title} · 版 ${n.version ?? '—'}` : '対象を選択してください';
- const unresolved = !currentAnalysis() || currentAnalysis()?.specification?.status === 'conflict';
+ const unresolved = !currentAnalysis() || ($('#aiMode').value!=='settings' && currentAnalysis()?.specification?.status === 'conflict');
  $('#sendAi').disabled = !n || executing || aiRequestPending || unresolved;
  $('#aiSpecStatus').textContent = !n ? '制作対象を選択してください。' : !currentAnalysis() ? '制作前に現在の設定を照合しています。' : unresolved ? '仕様が未解決です。詳細で衝突・例外・循環を確認してください。' : '現在の有効設定と出所を使って制作します。';
  $('#interrupt').disabled = !executing;
+ if($('#aiMode').value==='settings'&&!unresolved)$('#aiSpecStatus').textContent='選択中の本文と設定から案を作ります。差分と影響を確認してから採用できます。';
  if (aiRun) $('#aiStatus').textContent = `${title(aiRun.targetId)} · ` + ({connecting:'Codexへ接続中',running:'制作中',applying:'制作結果を保存中',completed:'制作結果を保存しました。内容の受入は未確認です。',failed:'制作に失敗しました',interrupted:'前回の制作は中断しています。自動再送していません。',needs_review:'対象が更新されたため、元の版への提案として保存しています。',partial:'部分結果があります。自動再送していません。'}[aiRun.status] || aiRun.status) + (aiRun.error ? `：${aiRun.error}` : '');
+ if(aiRun?.status==='proposed')$('#aiStatus').textContent=`${title(aiRun.targetId)} · 設定案は未採用です。差分と影響を確認できます。`;
+ if(aiRun?.status==='adopted')$('#aiStatus').textContent=`${title(aiRun.targetId)} · 設定案を採用しました。制作と成果確認はこれからです。`;
 }
 function showArtifactText({path,text,message,criteria,review}) {
  reviewedArtifact = review || null;
@@ -264,8 +276,8 @@ async function openNodeArtifact(targetId) {
  try {
   const artifact = await api(`/api/artifact?nodeId=${encodeURIComponent(targetId)}`), target = node(targetId);
   if(!target)throw new Error('確認する対象が見つかりません。');
-  const review = {baseRevision:artifact.revision ?? state.revision,targetId,targetVersion:artifact.targetVersion,artifactHash:artifact.sha256,criteria:artifact.criteria};
-  const ready = Boolean(artifact.criteria?.trim()) && artifact.specificationStatus === 'resolved' && selected === targetId && Boolean(currentAnalysis()) && currentAnalysis().specification?.status !== 'conflict';
+  const review = {baseRevision:artifact.revision ?? state.revision,targetId,targetVersion:artifact.targetVersion,artifactHash:artifact.sha256,criteria:artifact.criteria,sourceHash:artifact.sourceHash};
+  const ready = Boolean(artifact.criteria?.trim()) && artifact.sourceStatus==='current' && artifact.specificationStatus === 'resolved' && selected === targetId && Boolean(currentAnalysis()) && currentAnalysis().specification?.status !== 'conflict';
   showArtifactText({path:artifact.path,text:artifact.text,criteria:artifact.criteria,message:ready?`確認対象：${target.title}。現物と受入条件を読み、満たしている場合に記録します。保存後は現物・条件・有効設定の変更を照合します。`:'受入条件の定義と仕様の照合が必要です。内容は読めますが、確認済みの記録はまだできません。',review:ready?review:null});
  }catch(error){toast(error.message,true);}
 }
@@ -286,6 +298,7 @@ async function pollAi() {
  try {
   const response = await api('/api/ai/events');
   aiRun = response.run || aiRun;
+  if(aiRun)state.runs=[...state.runs.filter(r=>r.id!==aiRun.id),aiRun];
   aiEvents = response.events || [];
   if (response.revision !== undefined && response.revision !== state.revision) {
    state = await api('/api/state');
@@ -305,6 +318,7 @@ async function pollAi() {
    if (stream) box.append(el('div', 'ai-message', stream));
   }
   if (aiRun?.decisionReason) box.append(el('div', 'ai-message', `制作判断の理由：${aiRun.decisionReason}`));
+  for(const proposal of state.runs.filter(r=>r.mode==='settings'&&r.status==='proposed'&&r.targetId===selected))box.append(button('設定案の差分と影響を確認',()=>reviewSettings(proposal.id),'artifact-button'));
   if (aiRun?.status === 'needs_review') {
    if (aiRun.reply) box.append(el('div', 'ai-message', aiRun.reply));
    const proposal = aiRun.proposal;
@@ -327,8 +341,9 @@ $('#aiForm').addEventListener('submit',async event=>{
  aiRequestPending = true;renderAiTarget();
  try {
   await refreshAnalysis();
-  if(selected!==targetId || !currentAnalysis() || currentAnalysis().specification?.status==='conflict')throw new Error('制作対象と現在の設定を確認してから開始してください。');
-  const result = await api('/api/ai/start',{targetId,prompt,...(aiThreads[targetId]?{threadId:aiThreads[targetId]}:{})});
+  const mode=$('#aiMode').value;
+  if(selected!==targetId || !currentAnalysis() || mode!=='settings'&&currentAnalysis().specification?.status==='conflict')throw new Error('制作対象と現在の設定を確認してから開始してください。');
+  const result = await api('/api/ai/start',{targetId,prompt,mode,...(aiThreads[targetId]?{threadId:aiThreads[targetId]}:{})});
   aiRun = result.run || result;freshConversationTargets.delete(targetId);
   if(aiRun.threadId){aiThreads[targetId]=aiRun.threadId;localStorage.setItem('mindwise.threads',JSON.stringify(aiThreads));}
   $('#aiPrompt').value='';toast('選択対象を固定して制作を開始しました');await pollAi();
@@ -350,4 +365,16 @@ $('#artifactReviewed').onchange = () => {$('#verifyArtifact').disabled = verific
 $('#verifyArtifact').onclick = confirmArtifactReview;
 $('#progressButton').onclick = () => {renderProgressDetails();$('#progressDialog').showModal();};
 $('#closeProgress').onclick = () => $('#progressDialog').close();
+async function reviewSettings(runId) {
+ if(busy)return;busy=true;
+ try {
+  const proposal=await api('/api/ai/proposal',{runId});
+  if(!await confirmImpact(proposal.impact,new Set([proposal.targetId]),proposal))return;
+  const adopted=await api('/api/ai/adopt',{runId,baseRevision:proposal.baseRevision});
+  state=adopted.state;aiRun=adopted.run;render();await refreshAnalysis();await pollAi();toast('設定案を採用しました。影響先の制作・検証は再確認として保持します。');
+ }catch(e){toast(e.message,true);}finally{busy=false;}
+}
+const modeField=field('Codexに依頼すること','mode','production','select',[['production','この仕様で制作・相談'],['settings','本文から設定案を作る']]);
+const modeInput=$('[name="mode"]',modeField);modeInput.id='aiMode';modeInput.onchange=()=>{renderAiTarget();$('#sendAi').textContent=modeInput.value==='settings'?'設定案を作る ↗':'制作を始める ↗';};
+$('#aiForm').prepend(modeField);
 boot();

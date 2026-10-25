@@ -1,0 +1,1812 @@
+{
+  "recordedAt": "2026-10-25T11:31:47.522Z",
+  "baseline": "bc2cb2f",
+  "projectId": "92fe2aeb0b38f2193f45",
+  "scope": "架空素材の設定案→画面採用→同一会話制作→実ファイル閲覧→再起動の接続検証。オーナー実案件の受入承認ではない。",
+  "revision": 19,
+  "target": {
+    "id": "4d1ee4db-8747-45cc-8d91-b4785ec6b608",
+    "parentId": "goal",
+    "title": "琥珀の時計塔（出所・設定の接続検証）",
+    "body": "架空の短編の構想。舞台は琥珀の時計塔、案内役はミオ、語り口は穏やかにする。実案件の承認ではなく機能検証用。",
+    "domain": "短編の接続検証",
+    "depth": 1,
+    "status": "planned",
+    "progress": 0,
+    "start": "",
+    "due": "",
+    "x": 285,
+    "y": 350,
+    "kind": "concept",
+    "unit": "",
+    "value": null,
+    "formula": "",
+    "artifact": "artifacts/57dcb812-9e50-40d4-b249-08b391127676/clocktower.md",
+    "criteria": "",
+    "verified": false,
+    "version": 5,
+    "specs": [
+      {
+        "key": "舞台",
+        "value": "琥珀の時計塔"
+      },
+      {
+        "key": "案内役",
+        "value": "ミオ"
+      },
+      {
+        "key": "語り口",
+        "value": "穏やか"
+      }
+    ],
+    "required": false,
+    "weight": null,
+    "sourceRefs": [
+      {
+        "documentId": "goal",
+        "section": "1. 最終到達点",
+        "sha256": "a79eb266a618f3ac1a4d59643a1a955cb4ea207c098d4d5358ac1d5d29ae076f",
+        "revision": "Mindwise Rebuild Rev 2"
+      }
+    ]
+  },
+  "runs": [
+    {
+      "id": "82e883a2-8fbb-47a0-b44d-e01414ec41b0",
+      "projectId": "92fe2aeb0b38f2193f45",
+      "targetId": "4d1ee4db-8747-45cc-8d91-b4785ec6b608",
+      "targetVersion": 3,
+      "baseRevision": 17,
+      "status": "adopted",
+      "startedAt": "2026-10-25T11:27:14.084Z",
+      "prompt": "本文に明示された舞台・案内役・語り口の3項目を設定案にしてください。キーは「舞台」「案内役」「語り口」。本文の意味を変えず、採用理由を記録してください。",
+      "mode": "settings",
+      "sourceRefs": [
+        {
+          "documentId": "goal",
+          "section": "1. 最終到達点",
+          "sha256": "a79eb266a618f3ac1a4d59643a1a955cb4ea207c098d4d5358ac1d5d29ae076f",
+          "revision": "Mindwise Rebuild Rev 2",
+          "status": "current",
+          "text": "## 1. 最終到達点\n\n人とCodexが、構想・設計・プロセス・タスク・進捗・成果物を、同じ地図から扱える汎用の制作・開発空間を完成させる。\n\nMindwise自身の作業画面で全体を考え、枝を自由に増やし、切り離し、付け替え、関係を結ぶ。全体から個別の仕事へ降り、対象を選んでAIと相談・設計・制作を進める。同じ仕事を地図、領域別のレーン、構想から現物への具体化、工程、タスク一覧、数値から見られ、変更と制作結果が共有する地図へ戻る。表示やセッションを替えても、何を扱っているかと、なぜそうしたかが途切れない。\n\n航海が進むにつれて、探索した設計、判断、資料、現物、検証が主題ごとにつながり、海図が充実する。枝数は完成度ではない。できた部分、未探索、変更の影響、未反映、判断待ちを見分け、完成までの位置を把握できることが価値である。\n\n利用者はオーナー本人、自宅Windows環境を対象とする。ゲーム、取引システム、本などで共通の仕組みを使い、用途に応じて内容と表示を変える。MindManagerの外観や本体の常時使用には固定しない。既存データ・有用な機能や設計の知見は活かす。\n\nGoal Forgeは戦略契約を形成し、オーナーは重要な価値・戦略・権限を決める。Codexはその範囲で制作を担い、Mindwiseは共通の作業空間と持続する文脈を担う。",
+          "documentStatus": "approved",
+          "currentSha256": "a79eb266a618f3ac1a4d59643a1a955cb4ea207c098d4d5358ac1d5d29ae076f",
+          "currentRevision": "Mindwise Rebuild Rev 2"
+        }
+      ],
+      "inputs": [
+        {
+          "id": "4d1ee4db-8747-45cc-8d91-b4785ec6b608",
+          "title": "琥珀の時計塔（出所・設定の接続検証）",
+          "version": 3,
+          "body": "架空の短編の構想。舞台は琥珀の時計塔、案内役はミオ、語り口は穏やかにする。実案件の承認ではなく機能検証用。",
+          "specs": [],
+          "sourceRefs": [
+            {
+              "documentId": "goal",
+              "section": "1. 最終到達点",
+              "sha256": "a79eb266a618f3ac1a4d59643a1a955cb4ea207c098d4d5358ac1d5d29ae076f",
+              "revision": "Mindwise Rebuild Rev 2"
+            }
+          ]
+        },
+        {
+          "id": "goal",
+          "title": "架空ゲーム完成（接続検証）",
+          "version": 2,
+          "body": "機能の接続を検証する架空案件。実案件の受入ではありません。",
+          "specs": [],
+          "sourceRefs": []
+        }
+      ],
+      "artifacts": [],
+      "events": [
+        {
+          "type": "delta",
+          "text": "案",
+          "time": "2026-10-25T11:27:22.365Z"
+        },
+        {
+          "type": "delta",
+          "text": "した",
+          "time": "2026-10-25T11:27:22.365Z"
+        },
+        {
+          "type": "delta",
+          "text": "。",
+          "time": "2026-10-25T11:27:22.365Z"
+        },
+        {
+          "type": "delta",
+          "text": "現在",
+          "time": "2026-10-25T11:27:22.365Z"
+        },
+        {
+          "type": "delta",
+          "text": "の",
+          "time": "2026-10-25T11:27:22.365Z"
+        },
+        {
+          "type": "delta",
+          "text": "局",
+          "time": "2026-10-25T11:27:22.414Z"
+        },
+        {
+          "type": "delta",
+          "text": "所",
+          "time": "2026-10-25T11:27:22.414Z"
+        },
+        {
+          "type": "delta",
+          "text": "設定",
+          "time": "2026-10-25T11:27:22.415Z"
+        },
+        {
+          "type": "delta",
+          "text": "は",
+          "time": "2026-10-25T11:27:22.415Z"
+        },
+        {
+          "type": "delta",
+          "text": "空",
+          "time": "2026-10-25T11:27:22.415Z"
+        },
+        {
+          "type": "delta",
+          "text": "で",
+          "time": "2026-10-25T11:27:22.415Z"
+        },
+        {
+          "type": "delta",
+          "text": "、",
+          "time": "2026-10-25T11:27:22.415Z"
+        },
+        {
+          "type": "delta",
+          "text": "保持",
+          "time": "2026-10-25T11:27:22.415Z"
+        },
+        {
+          "type": "delta",
+          "text": "す",
+          "time": "2026-10-25T11:27:22.415Z"
+        },
+        {
+          "type": "delta",
+          "text": "べ",
+          "time": "2026-10-25T11:27:22.415Z"
+        },
+        {
+          "type": "delta",
+          "text": "き",
+          "time": "2026-10-25T11:27:22.415Z"
+        },
+        {
+          "type": "delta",
+          "text": "他",
+          "time": "2026-10-25T11:27:22.415Z"
+        },
+        {
+          "type": "delta",
+          "text": "の",
+          "time": "2026-10-25T11:27:22.543Z"
+        },
+        {
+          "type": "delta",
+          "text": "項",
+          "time": "2026-10-25T11:27:22.555Z"
+        },
+        {
+          "type": "delta",
+          "text": "目",
+          "time": "2026-10-25T11:27:22.555Z"
+        },
+        {
+          "type": "delta",
+          "text": "は",
+          "time": "2026-10-25T11:27:22.555Z"
+        },
+        {
+          "type": "delta",
+          "text": "ない",
+          "time": "2026-10-25T11:27:22.555Z"
+        },
+        {
+          "type": "delta",
+          "text": "。",
+          "time": "2026-10-25T11:27:22.557Z"
+        },
+        {
+          "type": "delta",
+          "text": "本文",
+          "time": "2026-10-25T11:27:22.557Z"
+        },
+        {
+          "type": "delta",
+          "text": "は",
+          "time": "2026-10-25T11:27:22.557Z"
+        },
+        {
+          "type": "delta",
+          "text": "機",
+          "time": "2026-10-25T11:27:22.557Z"
+        },
+        {
+          "type": "delta",
+          "text": "能",
+          "time": "2026-10-25T11:27:22.558Z"
+        },
+        {
+          "type": "delta",
+          "text": "検",
+          "time": "2026-10-25T11:27:22.558Z"
+        },
+        {
+          "type": "delta",
+          "text": "証",
+          "time": "2026-10-25T11:27:22.558Z"
+        },
+        {
+          "type": "delta",
+          "text": "用",
+          "time": "2026-10-25T11:27:22.559Z"
+        },
+        {
+          "type": "delta",
+          "text": "の",
+          "time": "2026-10-25T11:27:22.559Z"
+        },
+        {
+          "type": "delta",
+          "text": "架",
+          "time": "2026-10-25T11:27:22.559Z"
+        },
+        {
+          "type": "delta",
+          "text": "空",
+          "time": "2026-10-25T11:27:22.560Z"
+        },
+        {
+          "type": "delta",
+          "text": "構",
+          "time": "2026-10-25T11:27:22.667Z"
+        },
+        {
+          "type": "delta",
+          "text": "想",
+          "time": "2026-10-25T11:27:22.685Z"
+        },
+        {
+          "type": "delta",
+          "text": "で",
+          "time": "2026-10-25T11:27:22.685Z"
+        },
+        {
+          "type": "delta",
+          "text": "あり",
+          "time": "2026-10-25T11:27:22.685Z"
+        },
+        {
+          "type": "delta",
+          "text": "、",
+          "time": "2026-10-25T11:27:22.685Z"
+        },
+        {
+          "type": "delta",
+          "text": "実",
+          "time": "2026-10-25T11:27:22.685Z"
+        },
+        {
+          "type": "delta",
+          "text": "案件",
+          "time": "2026-10-25T11:27:22.685Z"
+        },
+        {
+          "type": "delta",
+          "text": "の",
+          "time": "2026-10-25T11:27:22.685Z"
+        },
+        {
+          "type": "delta",
+          "text": "承",
+          "time": "2026-10-25T11:27:22.685Z"
+        },
+        {
+          "type": "delta",
+          "text": "認",
+          "time": "2026-10-25T11:27:22.685Z"
+        },
+        {
+          "type": "delta",
+          "text": "を",
+          "time": "2026-10-25T11:27:22.685Z"
+        },
+        {
+          "type": "delta",
+          "text": "示",
+          "time": "2026-10-25T11:27:22.845Z"
+        },
+        {
+          "type": "delta",
+          "text": "す",
+          "time": "2026-10-25T11:27:22.845Z"
+        },
+        {
+          "type": "delta",
+          "text": "もの",
+          "time": "2026-10-25T11:27:22.845Z"
+        },
+        {
+          "type": "delta",
+          "text": "では",
+          "time": "2026-10-25T11:27:22.845Z"
+        },
+        {
+          "type": "delta",
+          "text": "ない",
+          "time": "2026-10-25T11:27:22.845Z"
+        },
+        {
+          "type": "delta",
+          "text": "。",
+          "time": "2026-10-25T11:27:22.845Z"
+        },
+        {
+          "type": "delta",
+          "text": "\",\"",
+          "time": "2026-10-25T11:27:22.845Z"
+        },
+        {
+          "type": "delta",
+          "text": "settings",
+          "time": "2026-10-25T11:27:22.845Z"
+        },
+        {
+          "type": "delta",
+          "text": "\":[",
+          "time": "2026-10-25T11:27:22.856Z"
+        },
+        {
+          "type": "delta",
+          "text": "{\"",
+          "time": "2026-10-25T11:27:22.856Z"
+        },
+        {
+          "type": "delta",
+          "text": "key",
+          "time": "2026-10-25T11:27:22.856Z"
+        },
+        {
+          "type": "delta",
+          "text": "\":\"",
+          "time": "2026-10-25T11:27:22.856Z"
+        },
+        {
+          "type": "delta",
+          "text": "舞",
+          "time": "2026-10-25T11:27:22.858Z"
+        },
+        {
+          "type": "delta",
+          "text": "台",
+          "time": "2026-10-25T11:27:22.858Z"
+        },
+        {
+          "type": "delta",
+          "text": "\",\"",
+          "time": "2026-10-25T11:27:22.858Z"
+        },
+        {
+          "type": "delta",
+          "text": "value",
+          "time": "2026-10-25T11:27:22.858Z"
+        },
+        {
+          "type": "delta",
+          "text": "\":\"",
+          "time": "2026-10-25T11:27:22.938Z"
+        },
+        {
+          "type": "delta",
+          "text": "琥",
+          "time": "2026-10-25T11:27:22.938Z"
+        },
+        {
+          "type": "delta",
+          "text": "珀",
+          "time": "2026-10-25T11:27:22.938Z"
+        },
+        {
+          "type": "delta",
+          "text": "の",
+          "time": "2026-10-25T11:27:22.938Z"
+        },
+        {
+          "type": "delta",
+          "text": "時計",
+          "time": "2026-10-25T11:27:22.938Z"
+        },
+        {
+          "type": "delta",
+          "text": "塔",
+          "time": "2026-10-25T11:27:22.938Z"
+        },
+        {
+          "type": "delta",
+          "text": "\"},{\"",
+          "time": "2026-10-25T11:27:22.938Z"
+        },
+        {
+          "type": "delta",
+          "text": "key",
+          "time": "2026-10-25T11:27:22.938Z"
+        },
+        {
+          "type": "delta",
+          "text": "\":\"",
+          "time": "2026-10-25T11:27:22.938Z"
+        },
+        {
+          "type": "delta",
+          "text": "案",
+          "time": "2026-10-25T11:27:22.938Z"
+        },
+        {
+          "type": "delta",
+          "text": "内",
+          "time": "2026-10-25T11:27:22.938Z"
+        },
+        {
+          "type": "delta",
+          "text": "役",
+          "time": "2026-10-25T11:27:22.938Z"
+        },
+        {
+          "type": "delta",
+          "text": "\",\"",
+          "time": "2026-10-25T11:27:22.938Z"
+        },
+        {
+          "type": "delta",
+          "text": "value",
+          "time": "2026-10-25T11:27:22.938Z"
+        },
+        {
+          "type": "delta",
+          "text": "\":\"",
+          "time": "2026-10-25T11:27:23.045Z"
+        },
+        {
+          "type": "delta",
+          "text": "ミ",
+          "time": "2026-10-25T11:27:23.045Z"
+        },
+        {
+          "type": "delta",
+          "text": "オ",
+          "time": "2026-10-25T11:27:23.054Z"
+        },
+        {
+          "type": "delta",
+          "text": "\"},{\"",
+          "time": "2026-10-25T11:27:23.054Z"
+        },
+        {
+          "type": "delta",
+          "text": "key",
+          "time": "2026-10-25T11:27:23.054Z"
+        },
+        {
+          "type": "delta",
+          "text": "\":\"",
+          "time": "2026-10-25T11:27:23.062Z"
+        },
+        {
+          "type": "delta",
+          "text": "語",
+          "time": "2026-10-25T11:27:23.062Z"
+        },
+        {
+          "type": "delta",
+          "text": "り",
+          "time": "2026-10-25T11:27:23.069Z"
+        },
+        {
+          "type": "delta",
+          "text": "口",
+          "time": "2026-10-25T11:27:23.069Z"
+        },
+        {
+          "type": "delta",
+          "text": "\",\"",
+          "time": "2026-10-25T11:27:23.069Z"
+        },
+        {
+          "type": "delta",
+          "text": "value",
+          "time": "2026-10-25T11:27:23.069Z"
+        },
+        {
+          "type": "delta",
+          "text": "\":\"",
+          "time": "2026-10-25T11:27:23.069Z"
+        },
+        {
+          "type": "delta",
+          "text": "穏",
+          "time": "2026-10-25T11:27:23.069Z"
+        },
+        {
+          "type": "delta",
+          "text": "や",
+          "time": "2026-10-25T11:27:23.069Z"
+        },
+        {
+          "type": "delta",
+          "text": "か",
+          "time": "2026-10-25T11:27:23.069Z"
+        },
+        {
+          "type": "delta",
+          "text": "\"}",
+          "time": "2026-10-25T11:27:23.146Z"
+        },
+        {
+          "type": "delta",
+          "text": "],\"",
+          "time": "2026-10-25T11:27:23.146Z"
+        },
+        {
+          "type": "delta",
+          "text": "children",
+          "time": "2026-10-25T11:27:23.146Z"
+        },
+        {
+          "type": "delta",
+          "text": "\":[]",
+          "time": "2026-10-25T11:27:23.147Z"
+        },
+        {
+          "type": "delta",
+          "text": ",\"",
+          "time": "2026-10-25T11:27:23.147Z"
+        },
+        {
+          "type": "delta",
+          "text": "art",
+          "time": "2026-10-25T11:27:23.147Z"
+        },
+        {
+          "type": "delta",
+          "text": "ifacts",
+          "time": "2026-10-25T11:27:23.147Z"
+        },
+        {
+          "type": "delta",
+          "text": "\":",
+          "time": "2026-10-25T11:27:23.147Z"
+        },
+        {
+          "type": "delta",
+          "text": "[]}",
+          "time": "2026-10-25T11:27:23.147Z"
+        },
+        {
+          "type": "message",
+          "text": "本文に明示された3項目の設定案です。採用前に差分と影響をご確認ください。",
+          "time": "2026-10-25T11:27:23.246Z"
+        },
+        {
+          "type": "status",
+          "text": "設定案を保存しました。差分と影響を確認して採用できます",
+          "time": "2026-10-25T11:27:23.246Z"
+        }
+      ],
+      "updatedAt": "2026-10-25T11:27:23.247Z",
+      "threadId": "01a172d0-961b-75a2-825a-06169e849e4a",
+      "contextHash": "cccd8001cc936cd4bf83a4952a9d4d40ca624139e1cdcca0a7a1f13ac1369a49",
+      "contextFingerprint": "0f37bfc3ace41700c12969959f8ed64aa839e707cb9d5d1f53a05c828e95e10f",
+      "turnId": "01a172d0-967d-79f3-b0d3-b9cbd18f7759",
+      "output": "{\"reply\":\"本文に明示された3項目の設定案です。採用前に差分と影響をご確認ください。\",\"updatedBody\":null,\"decisionReason\":\"対象本文に「舞台は琥珀の時計塔、案内役はミオ、語り口は穏やかにする」と明示されているため、その意味に沿って設定値を提案した。現在の局所設定は空で、保持すべき他の項目はない。本文は機能検証用の架空構想であり、実案件の承認を示すものではない。\",\"settings\":[{\"key\":\"舞台\",\"value\":\"琥珀の時計塔\"},{\"key\":\"案内役\",\"value\":\"ミオ\"},{\"key\":\"語り口\",\"value\":\"穏やか\"}],\"children\":[],\"artifacts\":[]}",
+      "reply": "本文に明示された3項目の設定案です。採用前に差分と影響をご確認ください。",
+      "decisionReason": "対象本文に「舞台は琥珀の時計塔、案内役はミオ、語り口は穏やかにする」と明示されているため、その意味に沿って設定値を提案した。現在の局所設定は空で、保持すべき他の項目はない。本文は機能検証用の架空構想であり、実案件の承認を示すものではない。",
+      "proposal": {
+        "reply": "本文に明示された3項目の設定案です。採用前に差分と影響をご確認ください。",
+        "updatedBody": null,
+        "decisionReason": "対象本文に「舞台は琥珀の時計塔、案内役はミオ、語り口は穏やかにする」と明示されているため、その意味に沿って設定値を提案した。現在の局所設定は空で、保持すべき他の項目はない。本文は機能検証用の架空構想であり、実案件の承認を示すものではない。",
+        "settings": [
+          {
+            "key": "舞台",
+            "value": "琥珀の時計塔"
+          },
+          {
+            "key": "案内役",
+            "value": "ミオ"
+          },
+          {
+            "key": "語り口",
+            "value": "穏やか"
+          }
+        ],
+        "children": [],
+        "artifacts": []
+      },
+      "impact": {
+        "changed": [
+          "4d1ee4db-8747-45cc-8d91-b4785ec6b608"
+        ],
+        "affected": [
+          "4d1ee4db-8747-45cc-8d91-b4785ec6b608"
+        ],
+        "exempt": [],
+        "unknown": [],
+        "conflicts": [],
+        "details": [
+          {
+            "targetId": "4d1ee4db-8747-45cc-8d91-b4785ec6b608",
+            "title": "琥珀の時計塔（出所・設定の接続検証）",
+            "domain": "短編の接続検証",
+            "effect": "affected",
+            "reasons": [
+              "有効な設定または明示された適用・例外が変わります。"
+            ],
+            "beforeSpecHash": "c05dadc38ab5969835828fec87797619df57e2a15a78cb6beade93af65acb9a2",
+            "afterSpecHash": "c2e29838b9d1c8d9284cdc137f177710cf3f4a75053a0d17f5ecf0f91c1b424b"
+          },
+          {
+            "targetId": "alias",
+            "title": "UIから参照する同じ主人公紹介",
+            "domain": "UI・表現",
+            "effect": "unchanged",
+            "reasons": [
+              "明示された影響経路なし。未記録の影響は保証しません。"
+            ],
+            "beforeSpecHash": null,
+            "afterSpecHash": null
+          },
+          {
+            "targetId": "goal",
+            "title": "架空ゲーム完成（接続検証）",
+            "domain": "全体",
+            "effect": "unchanged",
+            "reasons": [
+              "明示された影響経路なし。未記録の影響は保証しません。"
+            ],
+            "beforeSpecHash": null,
+            "afterSpecHash": null
+          },
+          {
+            "targetId": "local",
+            "title": "局所例外の主人公紹介",
+            "domain": "物語",
+            "effect": "unchanged",
+            "reasons": [
+              "明示された影響経路なし。未記録の影響は保証しません。"
+            ],
+            "beforeSpecHash": null,
+            "afterSpecHash": null
+          },
+          {
+            "targetId": "regular",
+            "title": "通常の主人公紹介",
+            "domain": "キャラクター",
+            "effect": "unchanged",
+            "reasons": [
+              "明示された影響経路なし。未記録の影響は保証しません。"
+            ],
+            "beforeSpecHash": null,
+            "afterSpecHash": null
+          },
+          {
+            "targetId": "shared",
+            "title": "共有する衣装設定",
+            "domain": "共通仕様",
+            "effect": "unchanged",
+            "reasons": [
+              "明示された影響経路なし。未記録の影響は保証しません。"
+            ],
+            "beforeSpecHash": null,
+            "afterSpecHash": null
+          },
+          {
+            "targetId": "unexplored",
+            "title": "戦闘は未具体化",
+            "domain": "戦闘",
+            "effect": "unchanged",
+            "reasons": [
+              "明示された影響経路なし。未記録の影響は保証しません。"
+            ],
+            "beforeSpecHash": null,
+            "afterSpecHash": null
+          }
+        ]
+      },
+      "finishedAt": "2026-10-25T11:27:23.246Z",
+      "adoptedAt": "2026-10-25T11:28:02.820Z",
+      "adoptedRevision": 18
+    },
+    {
+      "id": "57dcb812-9e50-40d4-b249-08b391127676",
+      "projectId": "92fe2aeb0b38f2193f45",
+      "targetId": "4d1ee4db-8747-45cc-8d91-b4785ec6b608",
+      "targetVersion": 4,
+      "baseRevision": 18,
+      "status": "completed",
+      "startedAt": "2026-10-25T11:28:12.188Z",
+      "prompt": "採用された有効設定の舞台・案内役・語り口を使い、琥珀の時計塔でミオが案内する短編を150文字以内で制作してください。成果物名は clocktower.md。本文の構想は改訂せず、子の枝は不要です。",
+      "mode": "production",
+      "sourceRefs": [
+        {
+          "documentId": "goal",
+          "section": "1. 最終到達点",
+          "sha256": "a79eb266a618f3ac1a4d59643a1a955cb4ea207c098d4d5358ac1d5d29ae076f",
+          "revision": "Mindwise Rebuild Rev 2",
+          "status": "current",
+          "text": "## 1. 最終到達点\n\n人とCodexが、構想・設計・プロセス・タスク・進捗・成果物を、同じ地図から扱える汎用の制作・開発空間を完成させる。\n\nMindwise自身の作業画面で全体を考え、枝を自由に増やし、切り離し、付け替え、関係を結ぶ。全体から個別の仕事へ降り、対象を選んでAIと相談・設計・制作を進める。同じ仕事を地図、領域別のレーン、構想から現物への具体化、工程、タスク一覧、数値から見られ、変更と制作結果が共有する地図へ戻る。表示やセッションを替えても、何を扱っているかと、なぜそうしたかが途切れない。\n\n航海が進むにつれて、探索した設計、判断、資料、現物、検証が主題ごとにつながり、海図が充実する。枝数は完成度ではない。できた部分、未探索、変更の影響、未反映、判断待ちを見分け、完成までの位置を把握できることが価値である。\n\n利用者はオーナー本人、自宅Windows環境を対象とする。ゲーム、取引システム、本などで共通の仕組みを使い、用途に応じて内容と表示を変える。MindManagerの外観や本体の常時使用には固定しない。既存データ・有用な機能や設計の知見は活かす。\n\nGoal Forgeは戦略契約を形成し、オーナーは重要な価値・戦略・権限を決める。Codexはその範囲で制作を担い、Mindwiseは共通の作業空間と持続する文脈を担う。",
+          "documentStatus": "approved",
+          "currentSha256": "a79eb266a618f3ac1a4d59643a1a955cb4ea207c098d4d5358ac1d5d29ae076f",
+          "currentRevision": "Mindwise Rebuild Rev 2"
+        }
+      ],
+      "inputs": [
+        {
+          "id": "4d1ee4db-8747-45cc-8d91-b4785ec6b608",
+          "title": "琥珀の時計塔（出所・設定の接続検証）",
+          "version": 4,
+          "body": "架空の短編の構想。舞台は琥珀の時計塔、案内役はミオ、語り口は穏やかにする。実案件の承認ではなく機能検証用。",
+          "specs": [
+            {
+              "key": "舞台",
+              "value": "琥珀の時計塔"
+            },
+            {
+              "key": "案内役",
+              "value": "ミオ"
+            },
+            {
+              "key": "語り口",
+              "value": "穏やか"
+            }
+          ],
+          "sourceRefs": [
+            {
+              "documentId": "goal",
+              "section": "1. 最終到達点",
+              "sha256": "a79eb266a618f3ac1a4d59643a1a955cb4ea207c098d4d5358ac1d5d29ae076f",
+              "revision": "Mindwise Rebuild Rev 2"
+            }
+          ]
+        },
+        {
+          "id": "goal",
+          "title": "架空ゲーム完成（接続検証）",
+          "version": 2,
+          "body": "機能の接続を検証する架空案件。実案件の受入ではありません。",
+          "specs": [],
+          "sourceRefs": []
+        }
+      ],
+      "artifacts": [
+        {
+          "path": "artifacts/57dcb812-9e50-40d4-b249-08b391127676/clocktower.md",
+          "sha256": "e7534c8bed9c2adf2c33a2882b16854b91579346eb5fbd2c252e51e946b41458",
+          "bytes": 261
+        }
+      ],
+      "events": [
+        {
+          "type": "delta",
+          "text": "null",
+          "time": "2026-10-25T11:28:28.973Z"
+        },
+        {
+          "type": "delta",
+          "text": ",\"",
+          "time": "2026-10-25T11:28:28.973Z"
+        },
+        {
+          "type": "delta",
+          "text": "children",
+          "time": "2026-10-25T11:28:28.973Z"
+        },
+        {
+          "type": "delta",
+          "text": "\":[]",
+          "time": "2026-10-25T11:28:28.973Z"
+        },
+        {
+          "type": "delta",
+          "text": ",\"",
+          "time": "2026-10-25T11:28:28.973Z"
+        },
+        {
+          "type": "delta",
+          "text": "art",
+          "time": "2026-10-25T11:28:28.973Z"
+        },
+        {
+          "type": "delta",
+          "text": "ifacts",
+          "time": "2026-10-25T11:28:28.973Z"
+        },
+        {
+          "type": "delta",
+          "text": "\":[",
+          "time": "2026-10-25T11:28:28.973Z"
+        },
+        {
+          "type": "delta",
+          "text": "{\"",
+          "time": "2026-10-25T11:28:28.973Z"
+        },
+        {
+          "type": "delta",
+          "text": "name",
+          "time": "2026-10-25T11:28:28.973Z"
+        },
+        {
+          "type": "delta",
+          "text": "\":\"",
+          "time": "2026-10-25T11:28:28.973Z"
+        },
+        {
+          "type": "delta",
+          "text": "clock",
+          "time": "2026-10-25T11:28:28.973Z"
+        },
+        {
+          "type": "delta",
+          "text": "tower",
+          "time": "2026-10-25T11:28:28.973Z"
+        },
+        {
+          "type": "delta",
+          "text": ".md",
+          "time": "2026-10-25T11:28:28.973Z"
+        },
+        {
+          "type": "delta",
+          "text": "\",\"",
+          "time": "2026-10-25T11:28:29.111Z"
+        },
+        {
+          "type": "delta",
+          "text": "content",
+          "time": "2026-10-25T11:28:29.111Z"
+        },
+        {
+          "type": "delta",
+          "text": "\":\"",
+          "time": "2026-10-25T11:28:29.111Z"
+        },
+        {
+          "type": "delta",
+          "text": "琥",
+          "time": "2026-10-25T11:28:29.111Z"
+        },
+        {
+          "type": "delta",
+          "text": "珀",
+          "time": "2026-10-25T11:28:29.111Z"
+        },
+        {
+          "type": "delta",
+          "text": "の",
+          "time": "2026-10-25T11:28:29.111Z"
+        },
+        {
+          "type": "delta",
+          "text": "時計",
+          "time": "2026-10-25T11:28:29.113Z"
+        },
+        {
+          "type": "delta",
+          "text": "塔",
+          "time": "2026-10-25T11:28:29.113Z"
+        },
+        {
+          "type": "delta",
+          "text": "で",
+          "time": "2026-10-25T11:28:29.113Z"
+        },
+        {
+          "type": "delta",
+          "text": "、",
+          "time": "2026-10-25T11:28:29.113Z"
+        },
+        {
+          "type": "delta",
+          "text": "ミ",
+          "time": "2026-10-25T11:28:29.113Z"
+        },
+        {
+          "type": "delta",
+          "text": "オ",
+          "time": "2026-10-25T11:28:29.113Z"
+        },
+        {
+          "type": "delta",
+          "text": "が",
+          "time": "2026-10-25T11:28:29.113Z"
+        },
+        {
+          "type": "delta",
+          "text": "小",
+          "time": "2026-10-25T11:28:29.113Z"
+        },
+        {
+          "type": "delta",
+          "text": "さ",
+          "time": "2026-10-25T11:28:29.375Z"
+        },
+        {
+          "type": "delta",
+          "text": "な",
+          "time": "2026-10-25T11:28:29.375Z"
+        },
+        {
+          "type": "delta",
+          "text": "灯",
+          "time": "2026-10-25T11:28:29.375Z"
+        },
+        {
+          "type": "delta",
+          "text": "を",
+          "time": "2026-10-25T11:28:29.375Z"
+        },
+        {
+          "type": "delta",
+          "text": "掲",
+          "time": "2026-10-25T11:28:29.375Z"
+        },
+        {
+          "type": "delta",
+          "text": "げ",
+          "time": "2026-10-25T11:28:29.375Z"
+        },
+        {
+          "type": "delta",
+          "text": "た",
+          "time": "2026-10-25T11:28:29.375Z"
+        },
+        {
+          "type": "delta",
+          "text": "。「",
+          "time": "2026-10-25T11:28:29.375Z"
+        },
+        {
+          "type": "delta",
+          "text": "ゆ",
+          "time": "2026-10-25T11:28:29.378Z"
+        },
+        {
+          "type": "delta",
+          "text": "っ",
+          "time": "2026-10-25T11:28:29.378Z"
+        },
+        {
+          "type": "delta",
+          "text": "く",
+          "time": "2026-10-25T11:28:29.378Z"
+        },
+        {
+          "type": "delta",
+          "text": "り",
+          "time": "2026-10-25T11:28:29.378Z"
+        },
+        {
+          "type": "delta",
+          "text": "で",
+          "time": "2026-10-25T11:28:29.378Z"
+        },
+        {
+          "type": "delta",
+          "text": "大",
+          "time": "2026-10-25T11:28:29.378Z"
+        },
+        {
+          "type": "delta",
+          "text": "丈夫",
+          "time": "2026-10-25T11:28:29.378Z"
+        },
+        {
+          "type": "delta",
+          "text": "。",
+          "time": "2026-10-25T11:28:29.378Z"
+        },
+        {
+          "type": "delta",
+          "text": "階",
+          "time": "2026-10-25T11:28:29.378Z"
+        },
+        {
+          "type": "delta",
+          "text": "段",
+          "time": "2026-10-25T11:28:29.378Z"
+        },
+        {
+          "type": "delta",
+          "text": "は",
+          "time": "2026-10-25T11:28:29.378Z"
+        },
+        {
+          "type": "delta",
+          "text": "逃",
+          "time": "2026-10-25T11:28:29.378Z"
+        },
+        {
+          "type": "delta",
+          "text": "げ",
+          "time": "2026-10-25T11:28:29.378Z"
+        },
+        {
+          "type": "delta",
+          "text": "ない",
+          "time": "2026-10-25T11:28:29.378Z"
+        },
+        {
+          "type": "delta",
+          "text": "よ",
+          "time": "2026-10-25T11:28:29.378Z"
+        },
+        {
+          "type": "delta",
+          "text": "」",
+          "time": "2026-10-25T11:28:29.378Z"
+        },
+        {
+          "type": "delta",
+          "text": "ミ",
+          "time": "2026-10-25T11:28:29.378Z"
+        },
+        {
+          "type": "delta",
+          "text": "オ",
+          "time": "2026-10-25T11:28:29.378Z"
+        },
+        {
+          "type": "delta",
+          "text": "に",
+          "time": "2026-10-25T11:28:29.378Z"
+        },
+        {
+          "type": "delta",
+          "text": "案",
+          "time": "2026-10-25T11:28:29.378Z"
+        },
+        {
+          "type": "delta",
+          "text": "内",
+          "time": "2026-10-25T11:28:29.378Z"
+        },
+        {
+          "type": "delta",
+          "text": "され",
+          "time": "2026-10-25T11:28:29.378Z"
+        },
+        {
+          "type": "delta",
+          "text": "て",
+          "time": "2026-10-25T11:28:29.378Z"
+        },
+        {
+          "type": "delta",
+          "text": "最",
+          "time": "2026-10-25T11:28:29.378Z"
+        },
+        {
+          "type": "delta",
+          "text": "上",
+          "time": "2026-10-25T11:28:29.467Z"
+        },
+        {
+          "type": "delta",
+          "text": "階",
+          "time": "2026-10-25T11:28:29.467Z"
+        },
+        {
+          "type": "delta",
+          "text": "へ",
+          "time": "2026-10-25T11:28:29.467Z"
+        },
+        {
+          "type": "delta",
+          "text": "着",
+          "time": "2026-10-25T11:28:29.467Z"
+        },
+        {
+          "type": "delta",
+          "text": "く",
+          "time": "2026-10-25T11:28:29.467Z"
+        },
+        {
+          "type": "delta",
+          "text": "と",
+          "time": "2026-10-25T11:28:29.467Z"
+        },
+        {
+          "type": "delta",
+          "text": "、",
+          "time": "2026-10-25T11:28:29.467Z"
+        },
+        {
+          "type": "delta",
+          "text": "止",
+          "time": "2026-10-25T11:28:29.467Z"
+        },
+        {
+          "type": "delta",
+          "text": "ま",
+          "time": "2026-10-25T11:28:29.467Z"
+        },
+        {
+          "type": "delta",
+          "text": "って",
+          "time": "2026-10-25T11:28:29.467Z"
+        },
+        {
+          "type": "delta",
+          "text": "いた",
+          "time": "2026-10-25T11:28:29.467Z"
+        },
+        {
+          "type": "delta",
+          "text": "針",
+          "time": "2026-10-25T11:28:29.467Z"
+        },
+        {
+          "type": "delta",
+          "text": "が",
+          "time": "2026-10-25T11:28:29.467Z"
+        },
+        {
+          "type": "delta",
+          "text": "ひ",
+          "time": "2026-10-25T11:28:29.467Z"
+        },
+        {
+          "type": "delta",
+          "text": "と",
+          "time": "2026-10-25T11:28:29.467Z"
+        },
+        {
+          "type": "delta",
+          "text": "つ",
+          "time": "2026-10-25T11:28:29.675Z"
+        },
+        {
+          "type": "delta",
+          "text": "動",
+          "time": "2026-10-25T11:28:29.675Z"
+        },
+        {
+          "type": "delta",
+          "text": "いた",
+          "time": "2026-10-25T11:28:29.675Z"
+        },
+        {
+          "type": "delta",
+          "text": "。",
+          "time": "2026-10-25T11:28:29.675Z"
+        },
+        {
+          "type": "delta",
+          "text": "夕",
+          "time": "2026-10-25T11:28:29.675Z"
+        },
+        {
+          "type": "delta",
+          "text": "暮",
+          "time": "2026-10-25T11:28:29.675Z"
+        },
+        {
+          "type": "delta",
+          "text": "れ",
+          "time": "2026-10-25T11:28:29.675Z"
+        },
+        {
+          "type": "delta",
+          "text": "の",
+          "time": "2026-10-25T11:28:29.675Z"
+        },
+        {
+          "type": "delta",
+          "text": "鐘",
+          "time": "2026-10-25T11:28:29.675Z"
+        },
+        {
+          "type": "delta",
+          "text": "が",
+          "time": "2026-10-25T11:28:29.675Z"
+        },
+        {
+          "type": "delta",
+          "text": "、",
+          "time": "2026-10-25T11:28:29.675Z"
+        },
+        {
+          "type": "delta",
+          "text": "二",
+          "time": "2026-10-25T11:28:29.675Z"
+        },
+        {
+          "type": "delta",
+          "text": "人",
+          "time": "2026-10-25T11:28:29.675Z"
+        },
+        {
+          "type": "delta",
+          "text": "を",
+          "time": "2026-10-25T11:28:29.675Z"
+        },
+        {
+          "type": "delta",
+          "text": "静",
+          "time": "2026-10-25T11:28:29.675Z"
+        },
+        {
+          "type": "delta",
+          "text": "か",
+          "time": "2026-10-25T11:28:29.675Z"
+        },
+        {
+          "type": "delta",
+          "text": "に",
+          "time": "2026-10-25T11:28:29.675Z"
+        },
+        {
+          "type": "delta",
+          "text": "包",
+          "time": "2026-10-25T11:28:29.675Z"
+        },
+        {
+          "type": "delta",
+          "text": "ん",
+          "time": "2026-10-25T11:28:29.675Z"
+        },
+        {
+          "type": "delta",
+          "text": "だ",
+          "time": "2026-10-25T11:28:29.675Z"
+        },
+        {
+          "type": "delta",
+          "text": "。",
+          "time": "2026-10-25T11:28:29.701Z"
+        },
+        {
+          "type": "delta",
+          "text": "\"}",
+          "time": "2026-10-25T11:28:29.701Z"
+        },
+        {
+          "type": "delta",
+          "text": "]}",
+          "time": "2026-10-25T11:28:29.701Z"
+        },
+        {
+          "type": "message",
+          "text": "有効設定に沿って、150文字以内の短編を用意しました。",
+          "time": "2026-10-25T11:28:29.822Z"
+        },
+        {
+          "type": "status",
+          "text": "制作結果を接続しました。受入確認は別です",
+          "time": "2026-10-25T11:28:29.822Z"
+        }
+      ],
+      "updatedAt": "2026-10-25T11:28:29.822Z",
+      "threadId": "01a172d0-961b-75a2-825a-06169e849e4a",
+      "contextHash": "f84e60ac868a3dce6b229e0ec092027b1ce9f7eaae30d3b32ee26f43b311333d",
+      "contextFingerprint": "4ac8e4815c1902670071aeb0b34c39438f8799ba3a5aba9bf8930b53a33d49e9",
+      "turnId": "01a172d1-75a9-7ae3-908b-600d1446603d",
+      "output": "{\"reply\":\"有効設定に沿って、150文字以内の短編を用意しました。\",\"updatedBody\":null,\"decisionReason\":\"有効設定の「舞台：琥珀の時計塔」「案内役：ミオ」「語り口：穏やか」はいずれも対象枝を出所とし、本文の構想とも一致するため、短編に反映した。\",\"settings\":null,\"children\":[],\"artifacts\":[{\"name\":\"clocktower.md\",\"content\":\"琥珀の時計塔で、ミオが小さな灯を掲げた。「ゆっくりで大丈夫。階段は逃げないよ」ミオに案内されて最上階へ着くと、止まっていた針がひとつ動いた。夕暮れの鐘が、二人を静かに包んだ。\"}]}",
+      "reply": "有効設定に沿って、150文字以内の短編を用意しました。",
+      "decisionReason": "有効設定の「舞台：琥珀の時計塔」「案内役：ミオ」「語り口：穏やか」はいずれも対象枝を出所とし、本文の構想とも一致するため、短編に反映した。",
+      "proposal": {
+        "reply": "有効設定に沿って、150文字以内の短編を用意しました。",
+        "updatedBody": null,
+        "decisionReason": "有効設定の「舞台：琥珀の時計塔」「案内役：ミオ」「語り口：穏やか」はいずれも対象枝を出所とし、本文の構想とも一致するため、短編に反映した。",
+        "settings": null,
+        "children": [],
+        "artifacts": [
+          {
+            "name": "clocktower.md",
+            "content": "琥珀の時計塔で、ミオが小さな灯を掲げた。「ゆっくりで大丈夫。階段は逃げないよ」ミオに案内されて最上階へ着くと、止まっていた針がひとつ動いた。夕暮れの鐘が、二人を静かに包んだ。"
+          }
+        ]
+      },
+      "finishedAt": "2026-10-25T11:28:29.822Z"
+    }
+  ],
+  "artifact": {
+    "path": "artifacts/57dcb812-9e50-40d4-b249-08b391127676/clocktower.md",
+    "text": "琥珀の時計塔で、ミオが小さな灯を掲げた。「ゆっくりで大丈夫。階段は逃げないよ」ミオに案内されて最上階へ着くと、止まっていた針がひとつ動いた。夕暮れの鐘が、二人を静かに包んだ。",
+    "sha256": "e7534c8bed9c2adf2c33a2882b16854b91579346eb5fbd2c252e51e946b41458",
+    "recordedSha256": "e7534c8bed9c2adf2c33a2882b16854b91579346eb5fbd2c252e51e946b41458",
+    "matches": true
+  },
+  "provenance": {
+    "targetId": "4d1ee4db-8747-45cc-8d91-b4785ec6b608",
+    "entries": [
+      {
+        "revision": 19,
+        "operationId": "ai-57dcb812-9e50-40d4-b249-08b391127676",
+        "kind": "change",
+        "at": "2026-10-25T11:28:29.820Z",
+        "undone": false,
+        "actor": "codex",
+        "reason": "有効設定の「舞台：琥珀の時計塔」「案内役：ミオ」「語り口：穏やか」はいずれも対象枝を出所とし、本文の構想とも一致するため、短編に反映した。",
+        "runId": "57dcb812-9e50-40d4-b249-08b391127676",
+        "sourceRefs": [
+          {
+            "documentId": "goal",
+            "section": "1. 最終到達点",
+            "sha256": "a79eb266a618f3ac1a4d59643a1a955cb4ea207c098d4d5358ac1d5d29ae076f",
+            "revision": "Mindwise Rebuild Rev 2",
+            "status": "current",
+            "text": "## 1. 最終到達点\n\n人とCodexが、構想・設計・プロセス・タスク・進捗・成果物を、同じ地図から扱える汎用の制作・開発空間を完成させる。\n\nMindwise自身の作業画面で全体を考え、枝を自由に増やし、切り離し、付け替え、関係を結ぶ。全体から個別の仕事へ降り、対象を選んでAIと相談・設計・制作を進める。同じ仕事を地図、領域別のレーン、構想から現物への具体化、工程、タスク一覧、数値から見られ、変更と制作結果が共有する地図へ戻る。表示やセッションを替えても、何を扱っているかと、なぜそうしたかが途切れない。\n\n航海が進むにつれて、探索した設計、判断、資料、現物、検証が主題ごとにつながり、海図が充実する。枝数は完成度ではない。できた部分、未探索、変更の影響、未反映、判断待ちを見分け、完成までの位置を把握できることが価値である。\n\n利用者はオーナー本人、自宅Windows環境を対象とする。ゲーム、取引システム、本などで共通の仕組みを使い、用途に応じて内容と表示を変える。MindManagerの外観や本体の常時使用には固定しない。既存データ・有用な機能や設計の知見は活かす。\n\nGoal Forgeは戦略契約を形成し、オーナーは重要な価値・戦略・権限を決める。Codexはその範囲で制作を担い、Mindwiseは共通の作業空間と持続する文脈を担う。",
+            "documentStatus": "approved",
+            "currentSha256": "a79eb266a618f3ac1a4d59643a1a955cb4ea207c098d4d5358ac1d5d29ae076f",
+            "currentRevision": "Mindwise Rebuild Rev 2"
+          }
+        ],
+        "inputs": [
+          {
+            "id": "4d1ee4db-8747-45cc-8d91-b4785ec6b608",
+            "title": "琥珀の時計塔（出所・設定の接続検証）",
+            "version": 4,
+            "body": "架空の短編の構想。舞台は琥珀の時計塔、案内役はミオ、語り口は穏やかにする。実案件の承認ではなく機能検証用。",
+            "specs": [
+              {
+                "key": "舞台",
+                "value": "琥珀の時計塔"
+              },
+              {
+                "key": "案内役",
+                "value": "ミオ"
+              },
+              {
+                "key": "語り口",
+                "value": "穏やか"
+              }
+            ],
+            "sourceRefs": [
+              {
+                "documentId": "goal",
+                "section": "1. 最終到達点",
+                "sha256": "a79eb266a618f3ac1a4d59643a1a955cb4ea207c098d4d5358ac1d5d29ae076f",
+                "revision": "Mindwise Rebuild Rev 2"
+              }
+            ]
+          },
+          {
+            "id": "goal",
+            "title": "架空ゲーム完成（接続検証）",
+            "version": 2,
+            "body": "機能の接続を検証する架空案件。実案件の受入ではありません。",
+            "specs": [],
+            "sourceRefs": []
+          }
+        ],
+        "changes": [
+          {
+            "field": "artifact",
+            "before": "",
+            "after": "artifacts/57dcb812-9e50-40d4-b249-08b391127676/clocktower.md"
+          }
+        ],
+        "relations": null
+      },
+      {
+        "revision": 18,
+        "operationId": "ai-settings-82e883a2-8fbb-47a0-b44d-e01414ec41b0",
+        "kind": "change",
+        "at": "2026-10-25T11:28:02.821Z",
+        "undone": false,
+        "actor": "codex",
+        "reason": "対象本文に「舞台は琥珀の時計塔、案内役はミオ、語り口は穏やかにする」と明示されているため、その意味に沿って設定値を提案した。現在の局所設定は空で、保持すべき他の項目はない。本文は機能検証用の架空構想であり、実案件の承認を示すものではない。",
+        "runId": "82e883a2-8fbb-47a0-b44d-e01414ec41b0",
+        "sourceRefs": [
+          {
+            "documentId": "goal",
+            "section": "1. 最終到達点",
+            "sha256": "a79eb266a618f3ac1a4d59643a1a955cb4ea207c098d4d5358ac1d5d29ae076f",
+            "revision": "Mindwise Rebuild Rev 2",
+            "status": "current",
+            "text": "## 1. 最終到達点\n\n人とCodexが、構想・設計・プロセス・タスク・進捗・成果物を、同じ地図から扱える汎用の制作・開発空間を完成させる。\n\nMindwise自身の作業画面で全体を考え、枝を自由に増やし、切り離し、付け替え、関係を結ぶ。全体から個別の仕事へ降り、対象を選んでAIと相談・設計・制作を進める。同じ仕事を地図、領域別のレーン、構想から現物への具体化、工程、タスク一覧、数値から見られ、変更と制作結果が共有する地図へ戻る。表示やセッションを替えても、何を扱っているかと、なぜそうしたかが途切れない。\n\n航海が進むにつれて、探索した設計、判断、資料、現物、検証が主題ごとにつながり、海図が充実する。枝数は完成度ではない。できた部分、未探索、変更の影響、未反映、判断待ちを見分け、完成までの位置を把握できることが価値である。\n\n利用者はオーナー本人、自宅Windows環境を対象とする。ゲーム、取引システム、本などで共通の仕組みを使い、用途に応じて内容と表示を変える。MindManagerの外観や本体の常時使用には固定しない。既存データ・有用な機能や設計の知見は活かす。\n\nGoal Forgeは戦略契約を形成し、オーナーは重要な価値・戦略・権限を決める。Codexはその範囲で制作を担い、Mindwiseは共通の作業空間と持続する文脈を担う。",
+            "documentStatus": "approved",
+            "currentSha256": "a79eb266a618f3ac1a4d59643a1a955cb4ea207c098d4d5358ac1d5d29ae076f",
+            "currentRevision": "Mindwise Rebuild Rev 2"
+          }
+        ],
+        "inputs": [
+          {
+            "id": "4d1ee4db-8747-45cc-8d91-b4785ec6b608",
+            "title": "琥珀の時計塔（出所・設定の接続検証）",
+            "version": 3,
+            "body": "架空の短編の構想。舞台は琥珀の時計塔、案内役はミオ、語り口は穏やかにする。実案件の承認ではなく機能検証用。",
+            "specs": [],
+            "sourceRefs": [
+              {
+                "documentId": "goal",
+                "section": "1. 最終到達点",
+                "sha256": "a79eb266a618f3ac1a4d59643a1a955cb4ea207c098d4d5358ac1d5d29ae076f",
+                "revision": "Mindwise Rebuild Rev 2"
+              }
+            ]
+          },
+          {
+            "id": "goal",
+            "title": "架空ゲーム完成（接続検証）",
+            "version": 2,
+            "body": "機能の接続を検証する架空案件。実案件の受入ではありません。",
+            "specs": [],
+            "sourceRefs": []
+          }
+        ],
+        "changes": [
+          {
+            "field": "specs",
+            "before": [],
+            "after": [
+              {
+                "key": "舞台",
+                "value": "琥珀の時計塔"
+              },
+              {
+                "key": "案内役",
+                "value": "ミオ"
+              },
+              {
+                "key": "語り口",
+                "value": "穏やか"
+              }
+            ]
+          }
+        ],
+        "relations": null
+      },
+      {
+        "revision": 17,
+        "operationId": "93f415a4-7a09-4a4c-b0a9-55ecb1ed4d84",
+        "kind": "change",
+        "at": "2026-10-25T11:27:00.111Z",
+        "undone": false,
+        "actor": "owner",
+        "reason": null,
+        "runId": null,
+        "sourceRefs": [],
+        "inputs": [],
+        "changes": [
+          {
+            "field": "sourceRefs",
+            "before": [],
+            "after": [
+              {
+                "documentId": "goal",
+                "section": "1. 最終到達点",
+                "sha256": "a79eb266a618f3ac1a4d59643a1a955cb4ea207c098d4d5358ac1d5d29ae076f",
+                "revision": "Mindwise Rebuild Rev 2"
+              }
+            ]
+          }
+        ],
+        "relations": null
+      },
+      {
+        "revision": 16,
+        "operationId": "f466c6f0-de71-49a9-a873-4d7f8d9c1a70",
+        "kind": "change",
+        "at": "2026-10-25T11:26:43.082Z",
+        "undone": false,
+        "actor": "owner",
+        "reason": null,
+        "runId": null,
+        "sourceRefs": [],
+        "inputs": [],
+        "changes": [
+          {
+            "field": "title",
+            "before": "新しい枝",
+            "after": "琥珀の時計塔（出所・設定の接続検証）"
+          },
+          {
+            "field": "body",
+            "before": "",
+            "after": "架空の短編の構想。舞台は琥珀の時計塔、案内役はミオ、語り口は穏やかにする。実案件の承認ではなく機能検証用。"
+          },
+          {
+            "field": "domain",
+            "before": "全体",
+            "after": "短編の接続検証"
+          }
+        ],
+        "relations": null
+      },
+      {
+        "revision": 15,
+        "operationId": "82cfae07-ce14-4063-935c-e25ab14626ea",
+        "kind": "change",
+        "at": "2026-10-25T11:26:29.652Z",
+        "undone": false,
+        "actor": "owner",
+        "reason": null,
+        "runId": null,
+        "sourceRefs": [],
+        "inputs": [],
+        "changes": [
+          {
+            "field": "id",
+            "before": null,
+            "after": "4d1ee4db-8747-45cc-8d91-b4785ec6b608"
+          },
+          {
+            "field": "parentId",
+            "before": null,
+            "after": "goal"
+          },
+          {
+            "field": "title",
+            "before": null,
+            "after": "新しい枝"
+          },
+          {
+            "field": "body",
+            "before": null,
+            "after": ""
+          },
+          {
+            "field": "domain",
+            "before": null,
+            "after": "全体"
+          },
+          {
+            "field": "depth",
+            "before": null,
+            "after": 1
+          },
+          {
+            "field": "status",
+            "before": null,
+            "after": "planned"
+          },
+          {
+            "field": "progress",
+            "before": null,
+            "after": 0
+          },
+          {
+            "field": "start",
+            "before": null,
+            "after": ""
+          },
+          {
+            "field": "due",
+            "before": null,
+            "after": ""
+          },
+          {
+            "field": "x",
+            "before": null,
+            "after": 285
+          },
+          {
+            "field": "y",
+            "before": null,
+            "after": 350
+          },
+          {
+            "field": "kind",
+            "before": null,
+            "after": "concept"
+          },
+          {
+            "field": "unit",
+            "before": null,
+            "after": ""
+          },
+          {
+            "field": "value",
+            "before": null,
+            "after": null
+          },
+          {
+            "field": "formula",
+            "before": null,
+            "after": ""
+          },
+          {
+            "field": "artifact",
+            "before": null,
+            "after": ""
+          },
+          {
+            "field": "criteria",
+            "before": null,
+            "after": ""
+          },
+          {
+            "field": "verified",
+            "before": null,
+            "after": false
+          },
+          {
+            "field": "specs",
+            "before": null,
+            "after": []
+          },
+          {
+            "field": "required",
+            "before": null,
+            "after": false
+          },
+          {
+            "field": "weight",
+            "before": null,
+            "after": null
+          },
+          {
+            "field": "sourceRefs",
+            "before": null,
+            "after": []
+          }
+        ],
+        "relations": null
+      }
+    ],
+    "limit": 100,
+    "runs": [
+      {
+        "id": "82e883a2-8fbb-47a0-b44d-e01414ec41b0",
+        "status": "adopted",
+        "mode": "settings",
+        "startedAt": "2026-10-25T11:27:14.084Z",
+        "targetVersion": 3,
+        "prompt": "本文に明示された舞台・案内役・語り口の3項目を設定案にしてください。キーは「舞台」「案内役」「語り口」。本文の意味を変えず、採用理由を記録してください。",
+        "reply": "本文に明示された3項目の設定案です。採用前に差分と影響をご確認ください。",
+        "decisionReason": "対象本文に「舞台は琥珀の時計塔、案内役はミオ、語り口は穏やかにする」と明示されているため、その意味に沿って設定値を提案した。現在の局所設定は空で、保持すべき他の項目はない。本文は機能検証用の架空構想であり、実案件の承認を示すものではない。",
+        "adoptedRevision": 18
+      },
+      {
+        "id": "57dcb812-9e50-40d4-b249-08b391127676",
+        "status": "completed",
+        "mode": "production",
+        "startedAt": "2026-10-25T11:28:12.188Z",
+        "targetVersion": 4,
+        "prompt": "採用された有効設定の舞台・案内役・語り口を使い、琥珀の時計塔でミオが案内する短編を150文字以内で制作してください。成果物名は clocktower.md。本文の構想は改訂せず、子の枝は不要です。",
+        "reply": "有効設定に沿って、150文字以内の短編を用意しました。",
+        "decisionReason": "有効設定の「舞台：琥珀の時計塔」「案内役：ミオ」「語り口：穏やか」はいずれも対象枝を出所とし、本文の構想とも一致するため、短編に反映した。"
+      }
+    ],
+    "sources": {
+      "revision": "Mindwise Rebuild Rev 2",
+      "status": "approved",
+      "documents": [
+        {
+          "id": "goal",
+          "path": "GOAL.md",
+          "title": "到達点と完成条件",
+          "revision": "Mindwise Rebuild Rev 2",
+          "declaredStatus": "ACTIVE（2026-10-25のレビュー・修正委譲と条件付き実装GOに基づく。実Codex検証の利用範囲を追加確認済み）",
+          "status": "approved",
+          "sha256": "a79eb266a618f3ac1a4d59643a1a955cb4ea207c098d4d5358ac1d5d29ae076f",
+          "approval": {
+            "documentId": "discovery",
+            "section": "7. 引継ぎ後の全面レビューと実装GO（2026-10-25）",
+            "sha256": "594edaa39cde4d691901f144f37ef9dea9451ecc38cbdfb9ed4eaf44d5a57e01",
+            "normalization": "UTF-8 / LF",
+            "status": "current",
+            "note": "既存のレビュー・修正委譲と条件付き実装GOの記録（DISCOVERY_LOG第7節）。2026-10-25の新セッションでオーナーがRev 2 / ACTIVEと実装GO取得済みを再確認。これは既存承認への照合登録であり、新たな承認や権限付与ではない。"
+          },
+          "issues": []
+        },
+        {
+          "id": "design",
+          "path": "DESIGN_STANDARD.md",
+          "title": "設計と品質の基準",
+          "revision": "Mindwise Rebuild Rev 2",
+          "declaredStatus": "ACTIVE（2026-10-25のレビュー・修正委譲により補正。個人用ChatGPTの既存枠内で新ルート試験資料を使う実装・検証GO）",
+          "status": "approved",
+          "sha256": "11885ee9b45e42b994fae00183c677daa128c82a640c01fdac4cec9ca8fdd241",
+          "approval": {
+            "documentId": "discovery",
+            "section": "7. 引継ぎ後の全面レビューと実装GO（2026-10-25）",
+            "sha256": "594edaa39cde4d691901f144f37ef9dea9451ecc38cbdfb9ed4eaf44d5a57e01",
+            "normalization": "UTF-8 / LF",
+            "status": "current",
+            "note": "既存のレビュー・修正委譲と条件付き実装GOの記録（DISCOVERY_LOG第7節）。2026-10-25の新セッションでオーナーがRev 2 / ACTIVEと実装GO取得済みを再確認。これは既存承認への照合登録であり、新たな承認や権限付与ではない。"
+          },
+          "issues": []
+        },
+        {
+          "id": "discovery",
+          "path": "DISCOVERY_LOG.md",
+          "title": "判断と承認の記録",
+          "revision": "Mindwise Rebuild Rev 2",
+          "declaredStatus": "ACTIVE（Rev 1の起草記録を保持。Rev 2の修正委譲・条件付きGO・利用範囲の確認は末尾7節）",
+          "status": "record",
+          "sha256": "8485ea2a2f55d2f85157939b9ac6f34f2c0410b96f46c73a066b3e9b74a1f887",
+          "issues": []
+        }
+      ],
+      "references": [
+        {
+          "documentId": "goal",
+          "section": "1. 最終到達点",
+          "sha256": "a79eb266a618f3ac1a4d59643a1a955cb4ea207c098d4d5358ac1d5d29ae076f",
+          "revision": "Mindwise Rebuild Rev 2",
+          "status": "current",
+          "text": "## 1. 最終到達点\n\n人とCodexが、構想・設計・プロセス・タスク・進捗・成果物を、同じ地図から扱える汎用の制作・開発空間を完成させる。\n\nMindwise自身の作業画面で全体を考え、枝を自由に増やし、切り離し、付け替え、関係を結ぶ。全体から個別の仕事へ降り、対象を選んでAIと相談・設計・制作を進める。同じ仕事を地図、領域別のレーン、構想から現物への具体化、工程、タスク一覧、数値から見られ、変更と制作結果が共有する地図へ戻る。表示やセッションを替えても、何を扱っているかと、なぜそうしたかが途切れない。\n\n航海が進むにつれて、探索した設計、判断、資料、現物、検証が主題ごとにつながり、海図が充実する。枝数は完成度ではない。できた部分、未探索、変更の影響、未反映、判断待ちを見分け、完成までの位置を把握できることが価値である。\n\n利用者はオーナー本人、自宅Windows環境を対象とする。ゲーム、取引システム、本などで共通の仕組みを使い、用途に応じて内容と表示を変える。MindManagerの外観や本体の常時使用には固定しない。既存データ・有用な機能や設計の知見は活かす。\n\nGoal Forgeは戦略契約を形成し、オーナーは重要な価値・戦略・権限を決める。Codexはその範囲で制作を担い、Mindwiseは共通の作業空間と持続する文脈を担う。",
+          "documentStatus": "approved",
+          "currentSha256": "a79eb266a618f3ac1a4d59643a1a955cb4ea207c098d4d5358ac1d5d29ae076f",
+          "currentRevision": "Mindwise Rebuild Rev 2"
+        }
+      ],
+      "issues": [],
+      "authority": "契約の原文と既存承認記録の照合表示です。実行権限を新たに付与しません。"
+    }
+  },
+  "contracts": {
+    "revision": "Mindwise Rebuild Rev 2",
+    "status": "approved",
+    "documents": [
+      {
+        "id": "goal",
+        "path": "GOAL.md",
+        "revision": "Mindwise Rebuild Rev 2",
+        "status": "approved",
+        "sha256": "a79eb266a618f3ac1a4d59643a1a955cb4ea207c098d4d5358ac1d5d29ae076f",
+        "approval": {
+          "documentId": "discovery",
+          "section": "7. 引継ぎ後の全面レビューと実装GO（2026-10-25）",
+          "sha256": "594edaa39cde4d691901f144f37ef9dea9451ecc38cbdfb9ed4eaf44d5a57e01",
+          "normalization": "UTF-8 / LF",
+          "status": "current",
+          "note": "既存のレビュー・修正委譲と条件付き実装GOの記録（DISCOVERY_LOG第7節）。2026-10-25の新セッションでオーナーがRev 2 / ACTIVEと実装GO取得済みを再確認。これは既存承認への照合登録であり、新たな承認や権限付与ではない。"
+        }
+      },
+      {
+        "id": "design",
+        "path": "DESIGN_STANDARD.md",
+        "revision": "Mindwise Rebuild Rev 2",
+        "status": "approved",
+        "sha256": "11885ee9b45e42b994fae00183c677daa128c82a640c01fdac4cec9ca8fdd241",
+        "approval": {
+          "documentId": "discovery",
+          "section": "7. 引継ぎ後の全面レビューと実装GO（2026-10-25）",
+          "sha256": "594edaa39cde4d691901f144f37ef9dea9451ecc38cbdfb9ed4eaf44d5a57e01",
+          "normalization": "UTF-8 / LF",
+          "status": "current",
+          "note": "既存のレビュー・修正委譲と条件付き実装GOの記録（DISCOVERY_LOG第7節）。2026-10-25の新セッションでオーナーがRev 2 / ACTIVEと実装GO取得済みを再確認。これは既存承認への照合登録であり、新たな承認や権限付与ではない。"
+        }
+      },
+      {
+        "id": "discovery",
+        "path": "DISCOVERY_LOG.md",
+        "revision": "Mindwise Rebuild Rev 2",
+        "status": "record",
+        "sha256": "8485ea2a2f55d2f85157939b9ac6f34f2c0410b96f46c73a066b3e9b74a1f887"
+      }
+    ]
+  },
+  "checks": {
+    "sameThread": true,
+    "actualFileMatches": true,
+    "acceptanceStillUnverified": true,
+    "restartRetainedAdoption": true
+  },
+  "sourceHashes": {
+    "src/store.mjs": "f7c68a334d773a856a27ef64c17c09bfb13f21edb0bf2f8ac2b8d739464ecad6",
+    "src/semantics.mjs": "1845ec984d465de7b7a5a52a4133f104fb700f07dc8a36d080280eb89d19707e",
+    "src/artifacts.mjs": "7933024cbf811468bcbc402252410cbd910cfa81f0d5fb82fc60c6e0a3a13657",
+    "src/codex.mjs": "ad797b4328087fe283190f7af6934f40c1a501606c0eafcb66bfe33510eb4437",
+    "src/server.mjs": "e81e90c71c6a6e547cf4a7d2b161efb62bb50b950f1c9e2035ace11071ff720d",
+    "src/contracts.mjs": "9e5b9d00191c3b19cc03713e800c95e64217dab32a8a238fe37690a08e4fd435",
+    "contract-registry.json": "944e9d50dc64190702c88481859d21877cb1684720d7ddc86f8c954d46662bd8",
+    "public/app.js": "7d0566fc14731731d69965c9547b05718248b262f04051c6a7270716bdab3ddd",
+    "public/sources.js": "249c5301cfbfbc1d5654e714d6f12cfdfce3e3ecb97a7e837e570801543f3f78",
+    "public/index.html": "67b6dfe1823372f428f8f4a36133971d13a81972f90485b4fd5f809510ce494e",
+    "public/style.css": "667e392c7f009010520a15bbcd00361f9c772d61bf687be5608053d2aa2f507c"
+  }
+}

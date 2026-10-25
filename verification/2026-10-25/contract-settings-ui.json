@@ -1,0 +1,49 @@
+{
+  "capturedAt": "2026-10-25T11:31:19.078Z",
+  "viewChecks": [
+    {
+      "view": "☷ 階層",
+      "retainedTarget": true,
+      "retainedArtifact": true,
+      "selectedTab": "\t\t\t13 tab (selected, settable, boolean) ☷ 階層, Value: 1"
+    },
+    {
+      "view": "▥ 領域",
+      "retainedTarget": true,
+      "retainedArtifact": true,
+      "selectedTab": "\t\t\t14 tab (selected, settable, boolean) ▥ 領域, Value: 1"
+    },
+    {
+      "view": "⇢ プロセス",
+      "retainedTarget": true,
+      "retainedArtifact": true,
+      "selectedTab": "\t\t\t15 tab (selected, settable, boolean) ⇢ プロセス, Value: 1"
+    },
+    {
+      "view": "▤ タスク",
+      "retainedTarget": true,
+      "retainedArtifact": true,
+      "selectedTab": "\t\t\t16 tab (selected, settable, boolean) ▤ タスク, Value: 1"
+    },
+    {
+      "view": "▰ ガント",
+      "retainedTarget": true,
+      "retainedArtifact": true,
+      "selectedTab": "\t\t\t17 tab (selected, settable, boolean) ▰ ガント, Value: 1"
+    },
+    {
+      "view": "＃ 数値",
+      "retainedTarget": true,
+      "retainedArtifact": true,
+      "selectedTab": "\t\t\t18 tab (selected, settable, boolean) ＃ 数値, Value: 1"
+    },
+    {
+      "view": "◈ 地図",
+      "retainedTarget": true,
+      "retainedArtifact": true,
+      "selectedTab": "\t\t\t12 tab (selected, settable, boolean) ◈ 地図, Value: 1"
+    }
+  ],
+  "provenanceAx": "Browser tab: 1, Title: \"Mindwise — 制作の地図\", URL: \"http://127.0.0.1:4316/\".\n1 AXWebArea Mindwise — 制作の地図, URL: 127.0.0.1:4316/\n\t2 container provenanceDialog\n\t\t3 heading 琥珀の時計塔（出所・設定の接続検証） · 判断と変更の出所, Value: 2, ID: provenanceTitle\n\t\t\t4 text 琥珀の時計塔（出所・設定の接続検証） · 判断と変更の出所\n\t\t5 button 閉じる, ID: closeProvenance\n\t\t6 container provenanceList\n\t\t\t7 heading 契約への参照, Value: 3\n\t\t\t\t8 text 契約への参照\n\t\t\t9 text goal · 参照時の版と一致 · 承認済み原文と一致\n\t\t\t10 text 参照時の版 Mindwise Rebuild Rev 2 / 指紋 a79eb266a618f3ac1a4d59643a1a955cb4ea207c098d4d5358ac1d5d29ae076f\n\t\t\t11 button 現在の原文へ\n\t\t\t12 text ## 1. 最終到達点\n\n人とCodexが、構想・設計・プロセス・タスク・進捗・成果物を、同じ地図から扱える汎用の制作・開発空間を完成させる。\n\nMindwise自身の作業画面で全体を考え、枝を自由に増やし、切り離し、付け替え、関係を結ぶ。全体から個別の仕事へ降り、対象を選んでAIと相談・設計・制作を進める。同じ仕事を地図、領域別のレーン、構想から現物への具体化、工程、タスク一覧、数値から見られ、変更と制作結果が共有する地図へ戻る。表示やセッションを替えても、何を扱っているかと、なぜそうしたかが途切れない。\n\n航海が進むにつれて、探索した設計、判断、資料、現物、検証が主題ごとにつながり、海図が充実する。枝数は完成度ではない。できた部分、未探索、変更の影響、未反映、判断待ちを見分け、完成までの位置を把握できることが価値である。\n\n利用者はオーナー本人、自宅Windows環境を対象とする。ゲーム、取引システム、本などで共通の仕組みを使い、用途に応じて内容と表示を変える。MindManagerの外観や本体の常時使用には固定しない。既存データ・有用な機能や設計の知見は活かす。\n\nGoal Forgeは戦略契約を形成し、オーナーは重要な価値・戦略・権限を決める。Codexはその範囲で制作を担い、Mindwiseは共通の作業空間と持続する文脈を担う。\n\t\t\t13 heading 採用された変更と理由, Value: 3\n\t\t\t\t14 text 採用された変更と理由\n\t\t\t15 text 保存版 19 · Codex\n\t\t\t16 text 2026-10-25T11:28:29.820Z · ai-57dcb812-9e50-40d4-b249-08b391127676\n\t\t\t17 text 理由：有効設定の「舞台：琥珀の時計塔」「案内役：ミオ」「語り口：穏やか」はいずれも対象枝を出所とし、本文の構想とも一致するため、短編に反映した。\n\t\t\t18 button (collapsed) 変更前後と参照した入力, Secondary Actions: Expand\n\t\t\t\t19 text 変更前後と参照した入力\n\t\t\t20 text 保存版 18 · Codex\n\t\t\t21 text 2026-10-25T11:28:02.821Z · ai-settings-82e883a2-8fbb-47a0-b44d-e01414ec41b0\n\t\t\t22 text 理由：対象本文に「舞台は琥珀の時計塔、案内役はミオ、語り口は穏やかにする」と明示されているため、その意味に沿って設定値を提案した。現在の局所設定は空で、保持すべき他の項目はない。本文は機能検証用の架空構想であり、実案件の承認を示すものではない。\n\t\t\t48 container\n\t\t\t\t49 button (expanded) 変更前後と参照した入力, Secondary Actions: Collapse\n\t\t\t\t\t50 text 変更前後と参照した入力\n\t\t\t\t51 text specs\n変更前：[]\n変更後：[\n  {\n    \"key\": \"舞台\",\n    \"value\": \"琥珀の時計塔\"\n  },\n  {\n    \"key\": \"案内役\",\n    \"value\": \"ミオ\"\n  },\n  {\n    \"key\": \"語り口\",\n    \"value\": \"穏やか\"\n  }\n] 入力：琥珀の時計塔（出所・設定の接続検証） · 版 3\n架空の短編の構想。舞台は琥珀の時計塔、案内役はミオ、語り口は穏やかにする。実案件の承認ではなく機能検証用。 入力：架空ゲーム完成（接続検証） · 版 2\n機能の接続を検証する架空案件。実案件の受入ではありません。 実行時の参照記録：goal · Mindwise Rebuild Rev 2 · a79eb266a618f3ac1a4d59643a1a955cb4ea207c098d4d5358ac1d5d29ae076f\n## 1. 最終到達点\n\n人とCodexが、構想・設計・プロセス・タスク・進捗・成果物を、同じ地図から扱える汎用の制作・開発空間を完成させる。\n\nMindwise自身の作業画面で全体を考え、枝を自由に増やし、切り離し、付け替え、関係を結ぶ。全体から個別の仕事へ降り、対象を選んでAIと相談・設計・制作を進める。同じ仕事を地図、領域別のレーン、構想から現物への具体化、工程、タスク一覧、数値から見られ、変更と制作結果が共有する地図へ戻る。表示やセッションを替えても、何を扱っているかと、なぜそうしたかが途切れない。\n\n航海が進むにつれて、探索した設計、判断、資料、現物、検証が主題ごとにつながり、海図が充実する。枝数は完成度ではない。できた部分、未探索、変更の影響、未反映、判断待ちを見分け、完成までの位置を把握できることが価値である。\n\n利用者はオーナー本人、自宅Windows環境を対象とする。ゲーム、取引システム、本などで共通の仕組みを使い、用途に応じて内容と表示を変える。MindManagerの外観や本体の常時使用には固定しない。既存データ・有用な機能や設計の知見は活かす。\n\nGoal Forgeは戦略契約を形成し、オーナーは重要な価値・戦略・権限を決める。Codexはその範囲で制作を担い、Mindwiseは共通の作業空間と持続する文脈を担う。\n\t\t\t25 text 保存版 17 · 直接操作\n\t\t\t26 text 2026-10-25T11:27:00.111Z · 93f415a4-7a09-4a4c-b0a9-55ecb1ed4d84\n\t\t\t27 text 理由：記録なし・不明（操作差分から理由を推測しません）\n\t\t\t28 button (collapsed) 変更前後と参照した入力, Secondary Actions: Expand\n\t\t\t\t29 text 変更前後と参照した入力\n\t\t\t30 text 保存版 16 · 直接操作\n\t\t\t31 text 2026-10-25T11:26:43.082Z · f466c6f0-de71-49a9-a873-4d7f8d9c1a70\n\t\t\t32 text 理由：記録なし・不明（操作差分から理由を推測しません）\n\t\t\t33 button (collapsed) 変更前後と参照した入力, Secondary Actions: Expand\n\t\t\t\t34 text 変更前後と参照した入力\n\t\t\t35 text 保存版 15 · 直接操作\n\t\t\t36 text 2026-10-25T11:26:29.652Z · 82cfae07-ce14-4063-935c-e25ab14626ea\n\t\t\t37 text 理由：記録なし・不明（操作差分から理由を推測しません）\n\t\t\t38 button (collapsed) 変更前後と参照した入力, Secondary Actions: Expand\n\t\t\t\t39 text 変更前後と参照した入力\n\t\t\t40 heading 制作・未採用の提案, Value: 3\n\t\t\t\t41 text 制作・未採用の提案\n\t\t\t42 text 2026-10-25T11:27:14.084Z · adopted · 開始時の版 3\n\t\t\t43 text 依頼：本文に明示された舞台・案内役・語り口の3項目を設定案にしてください。キーは「舞台」「案内役」「語り口」。本文の意味を変えず、採用理由を記録してください。\n\t\t\t44 text 判断理由：対象本文に「舞台は琥珀の時計塔、案内役はミオ、語り口は穏やかにする」と明示されているため、その意味に沿って設定値を提案した。現在の局所設定は空で、保持すべき他の項目はない。本文は機能検証用の架空構想であり、実案件の承認を示すものではない。\n\t\t\t45 text 2026-10-25T11:28:12.188Z · completed · 開始時の版 4\n\t\t\t46 text 依頼：採用された有効設定の舞台・案内役・語り口を使い、琥珀の時計塔でミオが案内する短編を150文字以内で制作してください。成果物名は clocktower.md。本文の構想は改訂せず、子の枝は不要です。\n\t\t\t47 text 判断理由：有効設定の「舞台：琥珀の時計塔」「案内役：ミオ」「語り口：穏やか」はいずれも対象枝を出所とし、本文の構想とも一致するため、短編に反映した。\n\nThe focused UI element is 49 button (expanded) 変更前後と参照した入力, Secondary Actions: Collapse",
+  "scope": "架空素材の実画面操作。全操作・実用規模・オーナー実案件受入の証拠ではない。"
+}

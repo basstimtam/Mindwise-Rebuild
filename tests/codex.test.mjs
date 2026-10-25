@@ -6,6 +6,8 @@ import { createInterface } from 'node:readline';
 import { mkdtempSync, rmSync, readFileSync, existsSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
+import { createHash } from 'node:crypto';
+import { writeFileSync } from 'node:fs';
 import { createStore } from '../src/store.mjs';
 import { createCodexService, artifactPath, disabledMcpOverrides } from '../src/codex.mjs';
 
@@ -34,6 +36,63 @@ function setup(t, {resolveMcpOverrides=async()=>[]}={}) {
   return {root,store,ai,requests,get args(){return args;},emit,complete};
 }
 const output=()=>({reply:'制作しました',updatedBody:null,decisionReason:'現在の仕様に従った',children:[],artifacts:[{name:'intro.md',content:'現在の仕様の主人公'}]});
+const settings=()=>({reply:'本文から設定案を作成',updatedBody:null,decisionReason:'対象本文に明示された色を設定へ整理',settings:[{key:'色',value:'青'}],children:[],artifacts:[]});
+
+test('settings remain a proposal until previewed adoption, share impact/history, and retry only once',async t=>{
+ const f=setup(t);
+ f.store.change({baseRevision:1,operationId:'apply',ops:[{type:'add',node:{id:'child',title:'描写'}},{type:'link',link:{from:'a',to:'child',type:'applies_to'}}]});
+ await f.ai.start({targetId:'a',prompt:'本文から色を設定へ整理',mode:'settings'});
+ f.complete(settings());await new Promise(r=>setImmediate(r));
+ const run=f.ai.status().run;
+ assert.equal(run.status,'proposed');assert.deepEqual(f.store.getState().nodes[0].specs,[]);assert.ok(!existsSync(join(f.root,'artifacts')));
+ const preview=f.ai.previewProposal({runId:run.id});assert.ok(preview.impact.affected.includes('child'));
+ const adopted=f.ai.adoptProposal({runId:run.id,baseRevision:preview.baseRevision});
+ assert.equal(adopted.run.status,'adopted');assert.deepEqual(adopted.state.nodes[0].specs,settings().settings);
+ assert.equal(f.store.operationReceipt(`ai-settings-${run.id}`).after.runs.at(-1).status,'adopted','adoption and status commit together');
+ const revision=adopted.state.revision;f.ai.adoptProposal({runId:run.id,baseRevision:preview.baseRevision});assert.equal(f.store.getState().revision,revision);
+ const entry=f.store.provenance('a').entries[0];assert.equal(entry.actor,'codex');assert.equal(entry.reason,settings().decisionReason);assert.equal(entry.inputs[0].body,'現在の仕様');
+ f.store.change({baseRevision:revision,operationId:'undo-settings',ops:[{type:'undo'}]});assert.deepEqual(f.store.getState().nodes[0].specs,[]);
+});
+
+test('stale settings proposals or a map change after preview cannot overwrite a correction',async t=>{
+ const f=setup(t);await f.ai.start({targetId:'a',prompt:'整理',mode:'settings'});f.complete(settings());await new Promise(r=>setImmediate(r));
+ const run=f.ai.status().run,preview=f.ai.previewProposal({runId:run.id});
+ f.store.change({baseRevision:preview.baseRevision,operationId:'unrelated',ops:[{type:'add',node:{id:'other'}}]});
+ assert.throws(()=>f.ai.adoptProposal({runId:run.id,baseRevision:preview.baseRevision}),/影響確認後/);
+ const fresh=f.ai.previewProposal({runId:run.id});
+ f.store.change({baseRevision:fresh.baseRevision,operationId:'correction',ops:[{type:'update',id:'a',patch:{body:'訂正した構想'}}]});
+ assert.throws(()=>f.ai.previewProposal({runId:run.id}),/出所が変わって/);assert.deepEqual(f.store.getState().nodes[0].specs,[]);
+});
+
+test('invalid settings output and mixed file production cannot alter any state',async t=>{
+ const f=setup(t);await f.ai.start({targetId:'a',prompt:'設定',mode:'settings'});
+ f.complete({...settings(),artifacts:output().artifacts});await new Promise(r=>setImmediate(r));
+ assert.equal(f.ai.status().run.status,'failed');assert.deepEqual(f.store.getState().nodes[0].specs,[]);assert.ok(!existsSync(join(f.root,'artifacts')));
+});
+
+test('settings proposals survive service restart and adopted settings feed the next real production context',async t=>{
+ const f=setup(t);await f.ai.start({targetId:'a',prompt:'設定',mode:'settings'});f.complete(settings());await new Promise(r=>setImmediate(r));
+ const id=f.ai.status().run.id,reader=createCodexService({root:f.root,store:f.store});
+ const preview=reader.previewProposal({runId:id});reader.adoptProposal({runId:id,baseRevision:preview.baseRevision});reader.close();
+ await f.ai.start({targetId:'a',prompt:'設定を使って制作',threadId:'thread-a'});
+ const request=f.requests.filter(r=>r.method==='turn/start').at(-1);
+ assert.match(request.params.input[0].text,/対象本文に明示された色/);assert.match(request.params.input[0].text,/"value":"青"/);
+});
+
+test('matching current DRAFT reference is blocked, including a late-saved target with many references',async t=>{
+ const f=setup(t),text='# GOAL\n\n- **共通契約リビジョン**: Draft Rev\n- **状態**: DRAFT\n\n## 原文\n構想';
+ writeFileSync(join(f.root,'GOAL.md'),text);
+ const ref={documentId:'goal',section:'原文',revision:'Draft Rev',sha256:createHash('sha256').update(text).digest('hex')};
+ f.store.change({baseRevision:1,operationId:'draft-source',ops:[{type:'update',id:'a',patch:{sourceRefs:[ref]}}]});
+ await assert.rejects(()=>f.ai.start({targetId:'a',prompt:'設定',mode:'settings'}),/承認状態/);assert.equal(f.args,undefined);
+});
+
+test('oversized semantic context stops explicitly before silently dropping source references',async t=>{
+ const f=setup(t),ops=[];
+ for(let i=0;i<81;i++)ops.push({type:'add',node:{id:`s${i}`,body:'明示参照'}},{type:'link',link:{from:`s${i}`,to:'a',type:'applies_to'}});
+ f.store.change({baseRevision:1,operationId:'large-context',ops});
+ await assert.rejects(()=>f.ai.start({targetId:'a',prompt:'制作'}),/80件/);assert.equal(f.args,undefined);
+});
 
 test('stdio production uses supported stable parameters and returns real artifacts to the bound node',async t=>{
   const f=setup(t);await f.ai.start({targetId:'a',prompt:'紹介文を作成'});

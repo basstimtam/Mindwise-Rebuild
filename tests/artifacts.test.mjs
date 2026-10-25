@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { mkdtempSync, mkdirSync, writeFileSync, rmSync, symlinkSync } from 'node:fs';
+import { mkdtempSync, mkdirSync, writeFileSync, rmSync, symlinkSync, copyFileSync, readFileSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { createStore } from '../src/store.mjs';
@@ -112,4 +113,21 @@ test('HTTP review refuses unresolved specifications and does not affect unrelate
   const {body:analysis}=await f.get('/api/analysis?targetId=alias');
   assert.equal(analysis.specification.status,'resolved');assert.equal(analysis.verificationById.a.status,'conflict');
   assert.equal(f.store.getState().nodes.find(n=>n.id==='a').verified,false);
+});
+
+test('contract original changes invalidate dependent acceptance and refuse a newly recorded pass',async t=>{
+ const f=await httpFixture(t);
+ for(const name of ['GOAL.md','DESIGN_STANDARD.md','DISCOVERY_LOG.md','contract-registry.json'])copyFileSync(fileURLToPath(new URL(`../${name}`,import.meta.url)),join(f.root,name));
+ const catalog=(await f.get('/api/contracts')).body,doc=catalog.documents.find(d=>d.id==='goal');assert.equal(catalog.status,'approved');
+ const ref={documentId:'goal',section:'1. 最終到達点',sha256:doc.sha256,revision:doc.revision};
+ assert.equal((await f.post('/api/change',{baseRevision:1,operationId:'source-ref',ops:[{type:'update',id:'common',patch:{sourceRefs:[ref]}}]})).status,200);
+ const view=(await f.get('/api/artifact?nodeId=a')).body;assert.equal(view.sourceStatus,'current');assert.ok(view.sourceHash);
+ assert.equal((await f.post('/api/verify',{...f.confirmation(view,'no-source-hash')})).status,409);
+ assert.equal((await f.post('/api/verify',{...f.confirmation(view,'accepted-source'),sourceHash:view.sourceHash})).status,200);
+ assert.equal((await f.get('/api/analysis?targetId=a')).body.verificationById.a.status,'verified');
+ writeFileSync(join(f.root,'GOAL.md'),readFileSync(join(f.root,'GOAL.md'),'utf8')+'\nUnapproved source edit\n');
+ const analysis=(await f.get('/api/analysis?targetId=a')).body;assert.equal(analysis.verificationById.a.status,'stale');assert.equal(analysis.progress.verifiedWeight,0);
+ const changedView=(await f.get('/api/artifact?nodeId=a')).body;assert.equal(changedView.sourceStatus,'unresolved');
+ assert.equal((await f.post('/api/verify',{...f.confirmation(changedView,'reject-changed'),sourceHash:changedView.sourceHash})).status,409);
+ rmSync(join(f.root,'GOAL.md'));assert.equal((await f.get('/api/analysis?targetId=a')).body.verificationById.a.status,'stale');
 });

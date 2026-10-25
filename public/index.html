@@ -6,7 +6,7 @@
  <div class="project-tag"><span class="live-dot"></span> PERSONAL WORKSPACE</div>
  <button id="allDomains" class="nav-item active">◈ <span>プロジェクト全体</span></button>
  <div class="sidebar-label">完成に必要な領域</div><nav id="domains" aria-label="領域"></nav>
- <div class="sidebar-label">探す・つなぐ</div><input id="search" class="search" placeholder="枝のタイトルを検索" aria-label="枝を検索"><div id="searchResults"></div>
+ <div class="sidebar-label">探す・つなぐ</div><button id="contractsButton" class="nav-item">▧ 契約と判断の出所</button><input id="search" class="search" placeholder="枝のタイトルを検索" aria-label="枝を検索"><div id="searchResults"></div>
  <div class="sidebar-foot"><span class="live-dot"></span> ローカル保存<div id="connectionText">接続を確認中</div><button id="backup">バックアップ</button><button id="export">書き出す</button><button id="import">読み込む</button><input type="file" id="importFile" accept="application/json,.json" hidden></div>
 </aside>
 <main>
@@ -18,6 +18,8 @@
 </main>
 <div id="toast" role="status" hidden></div><dialog id="historyDialog"><div class="dialog-head"><h2>変更履歴</h2><button id="closeHistory">閉じる</button></div><div id="historyList"></div></dialog>
 <dialog id="artifactDialog"><div class="dialog-head"><h2>制作結果を読む</h2><button id="closeArtifact">閉じる</button></div><p id="artifactPath"></p><p id="artifactFreshness"></p><h3 class="section-title">受入条件</h3><p id="artifactCriteria"></p><pre id="artifactContent"></pre><div id="artifactReview" hidden><label class="check-field"><input type="checkbox" id="artifactReviewed"><span>受入条件を現物で確認した</span></label><p class="small-note">AIの制作終了とは別の、あなたによる内容確認の記録です。</p><button id="verifyArtifact" class="primary" disabled>確認結果を保存</button></div></dialog>
-<dialog id="impactDialog"><div class="dialog-head"><h2>変更前に影響を確認</h2></div><p class="small-note">明示した設定と関係から判明した範囲です。未知の影響は再確認として残します。</p><div id="impactList"></div><div class="dialog-actions"><button id="impactCancel">戻って編集する</button><button id="impactContinue" class="primary">この変更を保存</button></div></dialog>
+<dialog id="impactDialog"><div class="dialog-head"><h2 id="impactHeading">変更前に影響を確認</h2></div><div id="impactChanges"></div><p class="small-note">明示した設定と関係から判明した範囲です。未知の影響は再確認として残します。</p><div id="impactList"></div><div class="dialog-actions"><button id="impactCancel">戻る</button><button id="impactContinue" class="primary">この変更を保存</button></div></dialog>
 <dialog id="progressDialog"><div class="dialog-head"><h2>領域別の成果と進捗</h2><button id="closeProgress">閉じる</button></div><div id="progressList"></div></dialog>
+<dialog id="contractsDialog"><div class="dialog-head"><h2>契約と判断の出所</h2><button id="closeContracts">閉じる</button></div><p class="small-note">この案件に登録された原文です。承認の根拠と現在の内容を照合して表示します。</p><div id="contractDocuments" class="source-tabs"></div><div id="contractMetadata"></div><label class="field"><span>原文の見出し</span><select id="contractSection"></select></label><div class="button-row"><button id="contractApproval">承認の記録へ</button><button id="attachContract" class="primary">この出所を選択中の枝へ結ぶ</button></div><p id="contractBinding" class="small-note"></p><pre id="contractText" class="source-text"></pre></dialog>
+<dialog id="provenanceDialog"><div class="dialog-head"><h2 id="provenanceTitle">判断と変更の出所</h2><button id="closeProvenance">閉じる</button></div><div id="provenanceList"></div></dialog>
 </body></html>

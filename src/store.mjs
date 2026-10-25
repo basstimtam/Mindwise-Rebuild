@@ -10,9 +10,9 @@ export class StoreError extends Error {
 }
 const clone = value => structuredClone(value);
 const hash = value => createHash('sha256').update(typeof value === 'string' ? value : JSON.stringify(value)).digest('hex');
-const nodeFields = new Set('id parentId title body domain depth status progress start due x y kind unit value formula artifact criteria verified version evidence source scope specs required weight'.split(' '));
+const nodeFields = new Set('id parentId title body domain depth status progress start due x y kind unit value formula artifact criteria verified version evidence source scope specs required weight sourceRefs'.split(' '));
 const linkFields = new Set(['id', 'from', 'to', 'type', 'reason']);
-const meaningfulFields = new Set(['title','body','kind','unit','value','formula','artifact','criteria','scope','specs']);
+const meaningfulFields = new Set(['title','body','kind','unit','value','formula','artifact','criteria','scope','specs','sourceRefs']);
 const assert = (condition, message, status = 400) => { if (!condition) throw new StoreError(message, status); };
 function identifier(value) { return typeof value === 'string' && /^[\p{L}\p{N}_:.-]{1,160}$/u.test(value); }
 function object(value) { return value && typeof value === 'object' && !Array.isArray(value); }
@@ -20,7 +20,7 @@ function node(input) {
   assert(object(input), '枝の入力がオブジェクトではありません。');
   const unknown = Object.keys(input).filter(key => !nodeFields.has(key));
   assert(!unknown.length, `未対応の枝属性: ${unknown.join(', ')}`);
-  const n = { id: randomUUID(), parentId:null,title:'新しい枝',body:'',domain:'',depth:0,status:'planned',progress:0,start:'',due:'',x:0,y:0,kind:'concept',unit:'',value:null,formula:'',artifact:'',criteria:'',verified:false,version:1,specs:[],required:false,weight:null,...input };
+  const n = { id: randomUUID(), parentId:null,title:'新しい枝',body:'',domain:'',depth:0,status:'planned',progress:0,start:'',due:'',x:0,y:0,kind:'concept',unit:'',value:null,formula:'',artifact:'',criteria:'',verified:false,version:1,specs:[],required:false,weight:null,sourceRefs:[],...input };
   assert(identifier(n.id), '枝IDが不正です。');
   assert(n.parentId === null || identifier(n.parentId), '親IDが不正です。');
   for (const key of ['title','body','domain','status','start','due','kind','unit','formula','artifact','criteria']) assert(typeof n[key] === 'string' && n[key].length <= 100000, `${key} は文字列（10万文字以内）にしてください。`);
@@ -37,6 +37,8 @@ function node(input) {
     assert(object(spec)&&Object.keys(spec).every(k=>['key','value'].includes(k))&&typeof spec.key==='string'&&spec.key.trim()&&spec.key.length<=120&&typeof spec.value==='string'&&spec.value.length<=10000,'設定は名前と値の組にしてください。');
     const key=spec.key.trim();assert(!specKeys.has(key),'同じ設定名が重複しています。');specKeys.add(key);return {key,value:spec.value};
   });
+  assert(Array.isArray(n.sourceRefs)&&n.sourceRefs.length<=30,'契約の参照は30件以内にしてください。');
+  for(const ref of n.sourceRefs) assert(object(ref)&&Object.keys(ref).every(k=>['documentId','section','sha256','revision'].includes(k))&&['goal','design','discovery'].includes(ref.documentId)&&typeof ref.section==='string'&&ref.section.length<=500&&typeof ref.revision==='string'&&ref.revision.length<=200&&/^[a-f0-9]{64}$/.test(ref.sha256||''),'契約の参照形式を確認してください。');
   for (const key of ['start','due']) assert(!n[key] || /^\d{4}-\d{2}-\d{2}$/.test(n[key]) && !Number.isNaN(Date.parse(n[key])), '日付は YYYY-MM-DD です。');
   assert(!n.start || !n.due || n.start <= n.due, '開始日が期限を超えています。');
   if (n.verified !== false) {
@@ -82,6 +84,7 @@ export function createStore({ root = process.cwd(), dataDir } = {}) {
   mkdirSync(dataDir, {recursive:true});
   const db = new DatabaseSync(join(dataDir,'mindwise.sqlite'));
   db.exec('PRAGMA journal_mode=WAL; PRAGMA synchronous=FULL; PRAGMA busy_timeout=5000; CREATE TABLE IF NOT EXISTS state (id INTEGER PRIMARY KEY CHECK(id=1), body TEXT NOT NULL); CREATE TABLE IF NOT EXISTS mutations (revision INTEGER PRIMARY KEY, operation_id TEXT UNIQUE NOT NULL, request_hash TEXT NOT NULL, before_json TEXT NOT NULL, after_json TEXT NOT NULL, kind TEXT NOT NULL, at TEXT NOT NULL, undone INTEGER NOT NULL DEFAULT 0);');
+  db.exec('CREATE TABLE IF NOT EXISTS mutation_context (operation_id TEXT PRIMARY KEY, body TEXT NOT NULL);');
   const initial = {schemaVersion:1,projectId,revision:0,nodes:[],links:[],runs:[]};
   db.prepare('INSERT OR IGNORE INTO state (id,body) VALUES (1,?)').run(JSON.stringify(initial));
   function raw() { return JSON.parse(db.prepare('SELECT body FROM state WHERE id=1').get().body); }
@@ -92,6 +95,22 @@ export function createStore({ root = process.cwd(), dataDir } = {}) {
   for (const run of recovered.runs) if (['connecting','applying','running','starting','in_progress','pending','waiting'].includes(run.status)) { run.status='interrupted'; run.recovery='前回停止後の実行結果は未照合です。自動再送していません。'; run.updatedAt=new Date().toISOString(); recovery=true; }
   if (recovery) transaction(() => save(recovered));
   function history() { return db.prepare('SELECT revision, operation_id AS operationId, kind, at, undone FROM mutations ORDER BY revision DESC').all(); }
+  function provenance(targetId) {
+    assert(raw().nodes.some(n=>n.id===targetId),'対象が見つかりません。',404);
+    const entries=[];
+    for(const row of db.prepare('SELECT m.*, c.body AS context FROM mutations m LEFT JOIN mutation_context c ON c.operation_id=m.operation_id ORDER BY revision DESC').iterate()) {
+      const before=JSON.parse(row.before_json),after=JSON.parse(row.after_json),a=before.nodes.find(n=>n.id===targetId),b=after.nodes.find(n=>n.id===targetId);
+      const fields=[...new Set([...Object.keys(a||{}),...Object.keys(b||{})])].filter(k=>k!=='version'&&JSON.stringify(a?.[k])!==JSON.stringify(b?.[k]));
+      const links=state=>state.links.filter(l=>l.from===targetId||l.to===targetId);
+      const relationsChanged=JSON.stringify(links(before))!==JSON.stringify(links(after));
+      if(!fields.length&&!relationsChanged)continue;
+      const context=row.context?JSON.parse(row.context):null;
+      const legacyRun=raw().runs.find(r=>`ai-${r.id}`===row.operation_id);
+      entries.push({revision:row.revision,operationId:row.operation_id,kind:row.kind,at:row.at,undone:Boolean(row.undone),actor:context?.actor|| (legacyRun?'codex':'unknown'),reason:context?.reason||legacyRun?.decisionReason||null,runId:context?.runId||legacyRun?.id||null,sourceRefs:context?.sourceRefs||[],inputs:context?.inputs||[],changes:fields.map(field=>({field,before:a?.[field]??null,after:b?.[field]??null})),relations:relationsChanged?{before:links(before),after:links(after)}:null});
+      if(entries.length>=100)break;
+    }
+    return {targetId,entries,limit:100,runs:raw().runs.filter(r=>r.targetId===targetId).map(({id,status,mode,startedAt,targetVersion,prompt,reply,decisionReason,adoptedRevision})=>({id,status,mode,startedAt,targetVersion,prompt,reply,decisionReason,adoptedRevision}))};
+  }
   function operationReceipt(operationId) {
     const row=db.prepare('SELECT revision,kind,after_json FROM mutations WHERE operation_id=?').get(operationId);
     return row?{revision:row.revision,kind:row.kind,after:JSON.parse(row.after_json)}:null;
@@ -99,6 +118,10 @@ export function createStore({ root = process.cwd(), dataDir } = {}) {
   function getState() { const state=raw();state.nodes=state.nodes.map(node);return {...state,history:history()}; }
   function mutate(payload, kind, transform) {
     assert(object(payload) && identifier(payload.operationId), '一意の operationId が必要です。');
+    if(payload.meta!==undefined) {
+      const meta=payload.meta;
+      assert(object(meta)&&Object.keys(meta).every(k=>['actor','reason','runId','sourceRefs','inputs'].includes(k))&&['owner','codex'].includes(meta.actor)&& (meta.reason===null||typeof meta.reason==='string'&&meta.reason.length<=20000)&&JSON.stringify(meta).length<=1000000&& (meta.inputs===undefined||Array.isArray(meta.inputs)&&meta.inputs.length<=80)&& (meta.sourceRefs===undefined||Array.isArray(meta.sourceRefs)&&meta.sourceRefs.length<=100),'変更の出所形式を確認してください。');
+    }
     const requestHash = hash(payload);
     transaction(() => {
       const old = db.prepare('SELECT request_hash FROM mutations WHERE operation_id=?').get(payload.operationId);
@@ -108,6 +131,7 @@ export function createStore({ root = process.cwd(), dataDir } = {}) {
       const after = transform(clone(before)); validate(after); after.revision=before.revision+1;
       const at = new Date().toISOString();
       db.prepare('INSERT INTO mutations (revision,operation_id,request_hash,before_json,after_json,kind,at) VALUES (?,?,?,?,?,?,?)').run(after.revision,payload.operationId,requestHash,JSON.stringify(before),JSON.stringify(after),kind,at);
+      if(payload.meta)db.prepare('INSERT INTO mutation_context (operation_id,body) VALUES (?,?)').run(payload.operationId,JSON.stringify(payload.meta));
       save(after);
     });
     return getState();
@@ -150,7 +174,7 @@ export function createStore({ root = process.cwd(), dataDir } = {}) {
     const state=raw();assert(Number.isInteger(payload.baseRevision)&&payload.baseRevision===state.revision,'別の変更が先に保存されました。最新状態を取得してください。',409);
     return {baseRevision:state.revision,impact:applyOperations(clone(state),payload.ops).impact};
   }
-  function change(payload) {
+  function change(payload,{runUpdate}={}) {
     const isUndo=checkOps(payload);
     return mutate(payload,isUndo?'undo':'change',state=>{
       if(isUndo) {
@@ -163,7 +187,13 @@ export function createStore({ root = process.cwd(), dataDir } = {}) {
         db.prepare('UPDATE mutations SET undone=1 WHERE revision=?').run(target.revision);
         return state;
       }
-      return applyOperations(state,payload.ops).state;
+      const changed=applyOperations(state,payload.ops).state;
+      if(runUpdate) {
+        const i=changed.runs.findIndex(r=>r.id===runUpdate.id);
+        assert(i>=0&&runUpdate.status==='adopted'&&changed.runs[i].mode==='settings'&&changed.runs[i].status==='proposed','設定案の採用記録が一致しません。',409);
+        changed.runs[i]={...changed.runs[i],status:'adopted',adoptedAt:runUpdate.adoptedAt,adoptedRevision:state.revision+1};
+      }
+      return changed;
     });
   }
   function recordRun(run) {
@@ -192,5 +222,5 @@ export function createStore({ root = process.cwd(), dataDir } = {}) {
     try { assert(Object.values(check.prepare('PRAGMA integrity_check').get())[0]==='ok','バックアップ照合に失敗しました。',500); assert(check.prepare('SELECT body FROM state WHERE id=1').get().body===JSON.stringify(raw()),'バックアップの内容が一致しません。',500); } finally { check.close(); }
     return {path:file,sha256:createHash('sha256').update(readFileSync(file)).digest('hex'),revision:raw().revision,scope:'作業モデル・全変更履歴・実行記録。外部成果物と認証情報は含みません。',createdAt:new Date().toISOString()};
   }
-  return {getState,change,preview,operationReceipt,recordRun,exportState,importState,backup,history,dataDir,projectId,close:()=>db.close()};
+  return {getState,change,preview,operationReceipt,recordRun,exportState,importState,backup,history,provenance,dataDir,projectId,close:()=>db.close()};
 }

@@ -5,7 +5,7 @@ const compare = (a, b) => String(a).localeCompare(String(b), 'en');
 const sorted = values => [...values].sort(compare);
 const mapOf = state => new Map((state.nodes || []).map(node => [node.id, node]));
 const application = link => link.type === 'applies_to' || link.type === 'applies';
-const contentFields = ['title', 'body', 'specs', 'kind', 'unit', 'value', 'formula', 'artifact', 'criteria', 'source', 'scope'];
+const contentFields = ['title', 'body', 'specs', 'kind', 'unit', 'value', 'formula', 'artifact', 'criteria', 'source', 'scope', 'sourceRefs'];
 
 // Iterative DFS keeps a valid, very deep map from exhausting the JS call stack.
 function walkGraph(startIds, adjacency) {
@@ -51,7 +51,7 @@ export function resolveSpecifications(state, targetId) {
   for (const id of sorted(reachable.reached)) {
     const source = nodes.get(id);
     if (!source) { result.conflicts.push({ key: null, candidates: [{ sourceId: id }], type: 'missing-source' }); continue; }
-    if (source.specs?.length || source.body?.trim()) result.sources.push({ id, title: source.title || id });
+    if (source.specs?.length || source.body?.trim() || source.sourceRefs?.length) result.sources.push({ id, title: source.title || id });
     for (const spec of source.specs || []) {
       if (typeof spec.key !== 'string' || !spec.key.trim() || typeof spec.value !== 'string') {
         result.conflicts.push({ key: null, candidates: [{ sourceId: id }], type: 'invalid-specification' }); continue;

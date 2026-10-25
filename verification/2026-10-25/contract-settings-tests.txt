@@ -1,0 +1,66 @@
+(node:29772) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ verification follows live artifact, acceptance criteria and effective specs, independent of layout/version changes (10.5446ms)
+✔ declared artifact reads refuse outside roots, escaping links, binary types and excessive data (6.5685ms)
+✔ HTTP review binds viewed version/hash/criteria, persists once on retry, and counts shared artifacts once (133.6346ms)
+✔ HTTP review refuses unresolved specifications and does not affect unrelated targets (35.3553ms)
+✔ contract original changes invalidate dependent acceptance and refuse a newly recorded pass (86.4673ms)
+(node:30100) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ settings remain a proposal until previewed adoption, share impact/history, and retry only once (38.5419ms)
+✔ stale settings proposals or a map change after preview cannot overwrite a correction (22.6624ms)
+✔ invalid settings output and mixed file production cannot alter any state (18.0139ms)
+✔ settings proposals survive service restart and adopted settings feed the next real production context (22.1026ms)
+✔ matching current DRAFT reference is blocked, including a late-saved target with many references (12.7646ms)
+✔ oversized semantic context stops explicitly before silently dropping source references (17.2858ms)
+✔ stdio production uses supported stable parameters and returns real artifacts to the bound node (31.0437ms)
+✔ an old target version produces a preserved proposal, never a current-model overwrite or file write (14.1691ms)
+✔ restart retains the last execution evidence and resume supplies corrected context plus prior reason (24.4173ms)
+✔ artifact paths reject traversal, alternate streams and reserved Windows names (10.0102ms)
+✔ MCP restrictions replace resolved transports, verify disablement and reject unverified output (0.3488ms)
+✔ coordinate changes and unrelated edits do not discard production for an unchanged semantic context (19.1441ms)
+✔ interrupt during asynchronous connection preflight cannot start a late turn or corrupt a retry (14.8255ms)
+✔ completion arriving after an interrupt request cannot write artifacts (14.5857ms)
+✔ effective local exception is supplied to Codex and remains valid when the overridden common value changes (19.4067ms)
+✔ conflicting applicable specifications block only that target before any Codex connection (13.8984ms)
+✔ transitively applied free-body references are supplied as data without inventing structured settings (12.9087ms)
+✔ contract sources return original text, revision and traceable existing approval without promoting the log to a contract (13.117ms)
+✔ DRAFT, missing status, missing source and another revision never appear approved (13.7383ms)
+✔ matching ACTIVE metadata is insufficient after an unapproved source or approval record change (10.7645ms)
+✔ append-only discovery updates keep the original approval binding valid (9.4473ms)
+✔ approval section identity survives Git line-ending normalization while original bytes remain visible (10.2196ms)
+✔ unknown or absent registry cannot confer approval, and registry file paths cannot redirect reads (13.6224ms)
+✔ references retain current, stale, missing and unknown distinctions and carry only the requested section (7.2374ms)
+✔ duplicate headings or metadata are ambiguous and fenced Markdown headings cannot masquerade as source sections (9.3934ms)
+﹣ contract source link substitution is rejected before foreign source content is read (5.6837ms) # Windows account cannot create file symlinks
+✔ oversized registered sources are explicit unreadable entries, not silent omission (9.1132ms)
+✔ explicit application and local exception produce effective values and traceable sources (6.5683ms)
+✔ local values never win implicitly; identical values merge and explicit priority chains resolve (0.3855ms)
+✔ application and exception cycles, missing exception reasons, and missing targets stay unresolved (0.8517ms)
+✔ common setting changes affect the normal branch and preserve the exact local exception (0.6728ms)
+✔ unstructured source changes and semantic dependencies demand recheck instead of an invented no-effect claim (0.354ms)
+✔ layout, bookkeeping versions, verification, and row ordering do not create semantic changes (0.1842ms)
+✔ a removed application invalidates only the former application path (0.208ms)
+✔ deleting or disconnecting a body-only source preserves unknown impact on its work, not unrelated nodes (0.3199ms)
+✔ removing a prose source or an empty intermediary application rechecks its downstream work (0.3209ms)
+✔ weighted progress counts a shared artifact once and excludes unknown or stale proof (0.5216ms)
+✔ canonical artifact aliases deduplicate, conflicting estimates remain unknown, and no denominator yields no rate (0.1211ms)
+(node:11196) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ atomic batch, version conflict and payload-bound idempotency (18.1567ms)
+✔ detach/delete preserves children and undo restores graph without undoing runs (20.1108ms)
+✔ explicit dependencies invalidate verified evidence, display changes do not (13.4059ms)
+✔ backup restores dedup/history and interrupted run is not rerun (26.8941ms)
+✔ import rejects unknown shape, duplicate IDs, and strips foreign verification (9.4841ms)
+✔ loopback API rejects cross-origin and missing token writes (54.3371ms)
+✔ UI relation semantics invalidate the dependent and explicitly applied work, not unrelated branches (14.033ms)
+✔ artifact preview returns text and actual fingerprints, detects changes, and rejects registered path escape (32.314ms)
+✔ preview and save share the same impact while preserving verified local exceptions (12.4259ms)
+ℹ tests 52
+ℹ suites 0
+ℹ pass 51
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 1
+ℹ todo 0
+ℹ duration_ms 407.7377

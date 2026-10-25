@@ -4,8 +4,9 @@ import { resolve, dirname, relative, isAbsolute, extname } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { randomBytes, timingSafeEqual, createHash } from 'node:crypto';
 import { createStore, StoreError } from './store.mjs';
-import { readNodeArtifact, evaluateVerification } from './artifacts.mjs';
+import { readNodeArtifact, evaluateVerification, assessSources } from './artifacts.mjs';
 import { resolveSpecifications, summarizeProgress } from './semantics.mjs';
+import { readContracts, contractContext } from './contracts.mjs';
 
 const rootDefault = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const mime = {'.html':'text/html; charset=utf-8','.js':'text/javascript; charset=utf-8','.mjs':'text/javascript; charset=utf-8','.css':'text/css; charset=utf-8','.svg':'image/svg+xml','.png':'image/png','.ico':'image/x-icon','.json':'application/json; charset=utf-8'};
@@ -43,12 +44,18 @@ export async function createServer({root=rootDefault,dataDir,port=Number(process
       if(url.pathname==='/api/session' && req.method==='GET') return json({token,projectId:store.projectId});
       if(url.pathname==='/api/state' && req.method==='GET') return json(store.getState());
       if(url.pathname==='/api/history' && req.method==='GET') return json(store.history());
+      if(url.pathname==='/api/contracts' && req.method==='GET') return json(readContracts(root));
+      if(url.pathname==='/api/provenance' && req.method==='GET') {
+        const targetId=url.searchParams.get('targetId'),state=store.getState(),node=state.nodes.find(n=>n.id===targetId);
+        if(!node)throw new StoreError('対象が見つかりません。',404);
+        return json({...store.provenance(targetId),sources:contractContext(root,node.sourceRefs||[])});
+      }
       if(url.pathname==='/api/analysis' && req.method==='GET') {
-        const state=store.getState(), targetId=url.searchParams.get('targetId');
+        const state=store.getState(), targetId=url.searchParams.get('targetId'),catalog=readContracts(root);
         if(targetId&&!state.nodes.some(n=>n.id===targetId)) throw new StoreError('対象が見つかりません。',404);
         const verificationById=Object.create(null), artifactKeys=Object.create(null);
         for(const node of state.nodes) {
-          const observation=evaluateVerification(root,state,node);
+          const observation=evaluateVerification(root,state,node,{catalog});
           verificationById[node.id]=observation;
           if(observation.canonicalKey) artifactKeys[node.id]=observation.canonicalKey;
         }
@@ -60,7 +67,8 @@ export async function createServer({root=rootDefault,dataDir,port=Number(process
           const state=store.getState(), node=state.nodes.find(n=>n.id===nodeId);
           if(!node) throw new StoreError('対象が見つかりません。',404);
           const artifact=readNodeArtifact(root,node), specification=resolveSpecifications(state,nodeId);
-          return json({...artifact,revision:state.revision,targetId:nodeId,targetVersion:node.version,criteria:node.criteria,specHash:specification.fingerprint,specificationStatus:specification.status,verification:evaluateVerification(root,state,node,{artifact,specification})});
+          const sources=assessSources(root,state,node,specification);
+          return json({...artifact,revision:state.revision,targetId:nodeId,targetVersion:node.version,criteria:node.criteria,specHash:specification.fingerprint,sourceHash:sources.fingerprint,sourceStatus:sources.status,specificationStatus:specification.status,verification:evaluateVerification(root,state,node,{artifact,specification})});
         }
         const run=store.getState().runs.find(r=>r.id===url.searchParams.get('runId'));
         const index=Number(url.searchParams.get('index'));
@@ -77,7 +85,7 @@ export async function createServer({root=rootDefault,dataDir,port=Number(process
       if(url.pathname==='/api/preview' && req.method==='POST') return json(store.preview(await body(req)));
       if(url.pathname==='/api/verify' && req.method==='POST') {
         const input=await body(req);
-        const fields=new Set(['baseRevision','operationId','targetId','targetVersion','artifactHash','criteria','method','result','note']);
+        const fields=new Set(['baseRevision','operationId','targetId','targetVersion','artifactHash','criteria','sourceHash','method','result','note']);
         if(!input||typeof input!=='object'||Array.isArray(input)||Object.keys(input).some(key=>!fields.has(key))) throw new StoreError('確認記録の形式を確認してください。');
         if(!Number.isInteger(input.baseRevision)||!Number.isInteger(input.targetVersion)||input.targetVersion<1||typeof input.operationId!=='string'||!/^[\p{L}\p{N}_:.-]{1,160}$/u.test(input.operationId)||typeof input.targetId!=='string') throw new StoreError('確認した対象版と操作IDが必要です。');
         if(input.method!=='owner-review'||input.result!=='passed'||typeof input.criteria!=='string'||!input.criteria.trim()||typeof input.artifactHash!=='string'||!(/^[a-f0-9]{64}$/i.test(input.artifactHash))) throw new StoreError('現物と受入条件を確認し、確認方法と合格結果を明示してください。');
@@ -93,9 +101,11 @@ export async function createServer({root=rootDefault,dataDir,port=Number(process
         if(state.revision!==input.baseRevision||node.version!==input.targetVersion||node.criteria!==input.criteria) throw new StoreError('確認画面を開いてから対象が変わりました。最新の内容を読み直してください。',409);
         const specification=resolveSpecifications(state,node.id);
         if(specification.status!=='resolved') throw new StoreError('仕様の衝突または循環を解決してから確認してください。',409);
+        const sources=assessSources(root,state,node,specification);
+        if(sources.status!=='current'||(input.sourceHash??null)!==sources.fingerprint)throw new StoreError('確認画面の契約原文・版・承認状態が変わっています。出所を照合してから開き直してください。',409);
         const artifact=readNodeArtifact(root,node);
         if(artifact.sha256!==input.artifactHash.toLowerCase()) throw new StoreError('確認画面を開いてから現物が変わりました。読み直してください。',409);
-        const proof={artifactHash:artifact.sha256,artifact:node.artifact,criteria:node.criteria,specHash:specification.fingerprint,method:input.method,result:input.result,at:new Date().toISOString(),targetVersion:node.version,reviewer:'owner',operationId:input.operationId,requestHash,...(input.note?{note:input.note}:{})};
+        const proof={artifactHash:artifact.sha256,artifact:node.artifact,criteria:node.criteria,specHash:specification.fingerprint,sourceHash:sources.fingerprint,method:input.method,result:input.result,at:new Date().toISOString(),targetVersion:node.version,reviewer:'owner',operationId:input.operationId,requestHash,...(input.note?{note:input.note}:{})};
         return json(store.change({baseRevision:state.revision,operationId:input.operationId,ops:[{type:'update',id:node.id,patch:{verified:proof}}]}));
       }
       if(url.pathname==='/api/import' && req.method==='POST') return json(store.importState(await body(req)));
@@ -103,6 +113,8 @@ export async function createServer({root=rootDefault,dataDir,port=Number(process
       if(url.pathname==='/api/ai/status' && req.method==='GET') return json(await ai.status());
       if(url.pathname==='/api/ai/events' && req.method==='GET') return json(await ai.events());
       if(url.pathname==='/api/ai/start' && req.method==='POST') return json(await ai.start(await body(req)));
+      if(url.pathname==='/api/ai/proposal' && req.method==='POST') return json(await ai.previewProposal(await body(req)));
+      if(url.pathname==='/api/ai/adopt' && req.method==='POST') return json(await ai.adoptProposal(await body(req)));
       if(url.pathname==='/api/ai/interrupt' && req.method==='POST') return json(await ai.interrupt());
       if(url.pathname.startsWith('/api/')) throw new StoreError('APIが見つかりません。',404);
       if(req.method!=='GET' && req.method!=='HEAD') throw new StoreError('未対応の操作です。',405);

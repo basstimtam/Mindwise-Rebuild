@@ -1,0 +1,30 @@
+{
+  "at": "2026-10-25T11:35:20.835Z",
+  "originalEvidence": "contract-settings-workflow.json",
+  "sourceHashes": {
+    "src/store.mjs": "f7c68a334d773a856a27ef64c17c09bfb13f21edb0bf2f8ac2b8d739464ecad6",
+    "src/semantics.mjs": "1845ec984d465de7b7a5a52a4133f104fb700f07dc8a36d080280eb89d19707e",
+    "src/artifacts.mjs": "7933024cbf811468bcbc402252410cbd910cfa81f0d5fb82fc60c6e0a3a13657",
+    "src/codex.mjs": "ad797b4328087fe283190f7af6934f40c1a501606c0eafcb66bfe33510eb4437",
+    "src/server.mjs": "e81e90c71c6a6e547cf4a7d2b161efb62bb50b950f1c9e2035ace11071ff720d",
+    "src/contracts.mjs": "9e5b9d00191c3b19cc03713e800c95e64217dab32a8a238fe37690a08e4fd435",
+    "contract-registry.json": "944e9d50dc64190702c88481859d21877cb1684720d7ddc86f8c954d46662bd8",
+    "public/app.js": "7d0566fc14731731d69965c9547b05718248b262f04051c6a7270716bdab3ddd",
+    "public/sources.js": "372f56d15298bd6b8cb5f9e4e337e925daee40aa705ef3e6464f9c95064f4c97",
+    "public/index.html": "67b6dfe1823372f428f8f4a36133971d13a81972f90485b4fd5f809510ce494e",
+    "public/style.css": "667e392c7f009010520a15bbcd00361f9c772d61bf687be5608053d2aa2f507c"
+  },
+  "delta": "原証拠保存後は出所表示に、古い参照時の原文と現在原文を取り違えない注記のみ追加。制作/設定/保存処理は変更なし。",
+  "checks": {
+    "contractApproved": true,
+    "modelUnchanged": true,
+    "actualFileUnchanged": true
+  },
+  "testEvidence": "contract-settings-tests.txt",
+  "tests": {
+    "total": 52,
+    "pass": 51,
+    "skip": 1,
+    "fail": 0
+  }
+}
