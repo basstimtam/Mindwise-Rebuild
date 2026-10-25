@@ -3,6 +3,8 @@
 - 参照契約: Mindwise Rebuild Rev 2 / ACTIVE
 - 検証基準点: 2026-10-25 17:59 JST。仕様・成果確認・進捗の接続を現物へ照合。全製品未完成。Git: origin=basstimtam/Mindwise-Rebuild、codex/rebuild。
 
+- セッション移管確認: 2026-10-25。製品コード `1cfcb5c` とGitHub同SHAを確認。移管時の差分は文書のみ。旧版チャットの現在地から新版の戦術を再開しない。
+
 ## 探索済み領域
 
 | ID | Goalとの関係 | 正本・証拠 | 判明した現在像 |
