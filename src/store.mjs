@@ -3,22 +3,16 @@ import { mkdirSync, realpathSync, writeFileSync, readFileSync } from 'node:fs';
 import { resolve, join } from 'node:path';
 import { createHash, randomUUID } from 'node:crypto';
 import { homedir } from 'node:os';
+import { analyzeChange } from './semantics.mjs';
 
 export class StoreError extends Error {
   constructor(message, status = 400, details = undefined) { super(message); this.status = status; this.details = details; }
 }
 const clone = value => structuredClone(value);
 const hash = value => createHash('sha256').update(typeof value === 'string' ? value : JSON.stringify(value)).digest('hex');
-const nodeFields = new Set('id parentId title body domain depth status progress start due x y kind unit value formula artifact criteria verified version evidence source scope'.split(' '));
-const linkFields = new Set(['id', 'from', 'to', 'type']);
-const meaningfulFields = new Set(['title','body','kind','unit','value','formula','artifact','criteria','scope']);
-// "A depends_on B" means that changing B affects A. Other causal links
-// are written source -> affected. Display parents and related links do not apply specs.
-function impactPair(link) {
-  if (link.type === 'depends_on') return [link.to, link.from];
-  if (['depends','applies','applies_to','implements','realizes','verifies','exception_to','依存'].includes(link.type)) return [link.from, link.to];
-  return null;
-}
+const nodeFields = new Set('id parentId title body domain depth status progress start due x y kind unit value formula artifact criteria verified version evidence source scope specs required weight'.split(' '));
+const linkFields = new Set(['id', 'from', 'to', 'type', 'reason']);
+const meaningfulFields = new Set(['title','body','kind','unit','value','formula','artifact','criteria','scope','specs']);
 const assert = (condition, message, status = 400) => { if (!condition) throw new StoreError(message, status); };
 function identifier(value) { return typeof value === 'string' && /^[\p{L}\p{N}_:.-]{1,160}$/u.test(value); }
 function object(value) { return value && typeof value === 'object' && !Array.isArray(value); }
@@ -26,7 +20,7 @@ function node(input) {
   assert(object(input), '枝の入力がオブジェクトではありません。');
   const unknown = Object.keys(input).filter(key => !nodeFields.has(key));
   assert(!unknown.length, `未対応の枝属性: ${unknown.join(', ')}`);
-  const n = { id: randomUUID(), parentId:null,title:'新しい枝',body:'',domain:'',depth:0,status:'planned',progress:0,start:'',due:'',x:0,y:0,kind:'concept',unit:'',value:null,formula:'',artifact:'',criteria:'',verified:false,version:1,...input };
+  const n = { id: randomUUID(), parentId:null,title:'新しい枝',body:'',domain:'',depth:0,status:'planned',progress:0,start:'',due:'',x:0,y:0,kind:'concept',unit:'',value:null,formula:'',artifact:'',criteria:'',verified:false,version:1,specs:[],required:false,weight:null,...input };
   assert(identifier(n.id), '枝IDが不正です。');
   assert(n.parentId === null || identifier(n.parentId), '親IDが不正です。');
   for (const key of ['title','body','domain','status','start','due','kind','unit','formula','artifact','criteria']) assert(typeof n[key] === 'string' && n[key].length <= 100000, `${key} は文字列（10万文字以内）にしてください。`);
@@ -35,6 +29,14 @@ function node(input) {
   assert(Number.isInteger(n.depth) && n.depth >= 0 && Number.isInteger(n.version) && n.version > 0, '深さ・版は有効な整数にしてください。');
   assert(n.progress >= 0 && n.progress <= 100, '計画進捗は0〜100です。');
   assert(n.value === null || Number.isFinite(n.value), '数値は有限値または未入力にしてください。');
+  assert(typeof n.required === 'boolean', '必要な成果の指定は真偽値にしてください。');
+  assert(n.weight === null || Number.isFinite(n.weight) && n.weight > 0, '成果の重みは正の数、未見積りは空欄にしてください。');
+  assert(Array.isArray(n.specs) && n.specs.length <= 100, '設定は100件以内にしてください。');
+  const specKeys=new Set();
+  n.specs=n.specs.map(spec=>{
+    assert(object(spec)&&Object.keys(spec).every(k=>['key','value'].includes(k))&&typeof spec.key==='string'&&spec.key.trim()&&spec.key.length<=120&&typeof spec.value==='string'&&spec.value.length<=10000,'設定は名前と値の組にしてください。');
+    const key=spec.key.trim();assert(!specKeys.has(key),'同じ設定名が重複しています。');specKeys.add(key);return {key,value:spec.value};
+  });
   for (const key of ['start','due']) assert(!n[key] || /^\d{4}-\d{2}-\d{2}$/.test(n[key]) && !Number.isNaN(Date.parse(n[key])), '日付は YYYY-MM-DD です。');
   assert(!n.start || !n.due || n.start <= n.due, '開始日が期限を超えています。');
   if (n.verified !== false) {
@@ -61,6 +63,8 @@ function validate(state) {
     assert(identifier(l.id) && ids.has(l.from) && ids.has(l.to) && typeof l.type === 'string' && l.type.length > 0 && l.type.length < 100, '関係ID・対象・種類が不正です。');
     assert(!linkIds.has(l.id), '関係IDが重複しています。'); linkIds.add(l.id);
     assert(l.from !== l.to, '自分自身への関係は作成できません。');
+    assert(l.reason===undefined || typeof l.reason==='string' && l.reason.length<=20000,'関係の理由は文字列にしてください。');
+    assert(l.type!=='exception_to' || typeof l.reason==='string' && l.reason.trim(),'局所例外には置き換える理由が必要です。');
   }
   // Temporal precedence must be acyclic; semantic relationships may form cycles.
   const adjacency = new Map();
@@ -88,7 +92,11 @@ export function createStore({ root = process.cwd(), dataDir } = {}) {
   for (const run of recovered.runs) if (['connecting','applying','running','starting','in_progress','pending','waiting'].includes(run.status)) { run.status='interrupted'; run.recovery='前回停止後の実行結果は未照合です。自動再送していません。'; run.updatedAt=new Date().toISOString(); recovery=true; }
   if (recovery) transaction(() => save(recovered));
   function history() { return db.prepare('SELECT revision, operation_id AS operationId, kind, at, undone FROM mutations ORDER BY revision DESC').all(); }
-  function getState() { return {...raw(),history:history()}; }
+  function operationReceipt(operationId) {
+    const row=db.prepare('SELECT revision,kind,after_json FROM mutations WHERE operation_id=?').get(operationId);
+    return row?{revision:row.revision,kind:row.kind,after:JSON.parse(row.after_json)}:null;
+  }
+  function getState() { const state=raw();state.nodes=state.nodes.map(node);return {...state,history:history()}; }
   function mutate(payload, kind, transform) {
     assert(object(payload) && identifier(payload.operationId), '一意の operationId が必要です。');
     const requestHash = hash(payload);
@@ -104,46 +112,58 @@ export function createStore({ root = process.cwd(), dataDir } = {}) {
     });
     return getState();
   }
-  function change(payload) {
+  function checkOps(payload) {
     assert(object(payload) && Array.isArray(payload.ops) && payload.ops.length > 0 && payload.ops.length <= 10000, '1〜10000件の変更操作が必要です。');
-    const isUndo = payload.ops.some(op => op.type === 'undo');
-    assert(!isUndo || payload.ops.length === 1, '取消は単独で実行してください。');
-    return mutate(payload,isUndo?'undo':'change',state => {
-      if (isUndo) {
+    const isUndo=payload.ops.some(op=>op?.type==='undo');
+    assert(!isUndo || payload.ops.length===1, '取消は単独で実行してください。');
+    return isUndo;
+  }
+  function applyOperations(state,ops) {
+    state.nodes=state.nodes.map(node);
+    const before=clone(state);
+    for(const op of ops) {
+      assert(object(op),'変更操作が不正です。');
+      if(op.type==='add') {
+        const n=node(op.node || {});assert(!state.nodes.some(x=>x.id===n.id),'その枝IDは存在します。',409);state.nodes.push(n);
+      } else if(op.type==='update') {
+        const i=state.nodes.findIndex(n=>n.id===op.id);assert(i>=0,'変更する枝がありません。',404);
+        assert(object(op.patch)&&!('id' in op.patch)&&!('version' in op.patch),'IDや版は変更できません。');
+        const previous=state.nodes[i], substantive=Object.keys(op.patch).some(k=>meaningfulFields.has(k)&&JSON.stringify(previous[k])!==JSON.stringify(op.patch[k]));
+        state.nodes[i]=node({...previous,...op.patch,version:previous.version+1,...(substantive?{verified:false}:{})});
+      } else if(op.type==='delete') {
+        assert(state.nodes.some(n=>n.id===op.id),'削除する枝がありません。',404);
+        state.nodes=state.nodes.filter(n=>n.id!==op.id).map(n=>n.parentId===op.id?{...n,parentId:null,version:n.version+1}:n);
+        state.links=state.links.filter(l=>l.from!==op.id&&l.to!==op.id);
+      } else if(op.type==='link') state.links.push({id:randomUUID(),...op.link});
+      else if(op.type==='unlink') {
+        assert(state.links.some(l=>l.id===op.id),'解除する関係がありません。',404);state.links=state.links.filter(l=>l.id!==op.id);
+      } else throw new StoreError(`未対応の操作: ${op.type}`);
+    }
+    validate(state);
+    const impact=analyzeChange(before,state), invalidate=new Set([...impact.affected,...impact.unknown]);
+    state.nodes=state.nodes.map(n=>invalidate.has(n.id)&&n.verified?{...n,verified:false,version:n.version+1}:n);
+    return {state,impact};
+  }
+  function preview(payload) {
+    const isUndo=checkOps(payload);assert(!isUndo,'取消は変更履歴から実行してください。');
+    assert(identifier(payload.operationId),'一意の operationId が必要です。');
+    const state=raw();assert(Number.isInteger(payload.baseRevision)&&payload.baseRevision===state.revision,'別の変更が先に保存されました。最新状態を取得してください。',409);
+    return {baseRevision:state.revision,impact:applyOperations(clone(state),payload.ops).impact};
+  }
+  function change(payload) {
+    const isUndo=checkOps(payload);
+    return mutate(payload,isUndo?'undo':'change',state=>{
+      if(isUndo) {
         const target=db.prepare("SELECT * FROM mutations WHERE kind != 'undo' AND undone=0 ORDER BY revision DESC LIMIT 1").get();
         assert(target,'取り消せる変更がありません。',409);
-        const previous=JSON.parse(target.before_json);
-        const now= new Map(state.nodes.map(n => [n.id,n]));
-        state.nodes=previous.nodes.map(n => ({...n,version:(now.get(n.id)?.version || n.version)+1,verified:false}));
-        state.links=previous.links;
+        const previous=JSON.parse(target.before_json),current=new Map(state.nodes.map(n=>[n.id,n]));
+        // Restore the model's recorded evidence, not external bytes. Its actual
+        // file/criteria/spec freshness is checked independently by /api/analysis.
+        state.nodes=previous.nodes.map(n=>({...n,version:(current.get(n.id)?.version||n.version)+1}));state.links=previous.links;
         db.prepare('UPDATE mutations SET undone=1 WHERE revision=?').run(target.revision);
         return state;
       }
-      const changed = new Set();
-      for (const op of payload.ops) {
-        assert(object(op),'変更操作が不正です。');
-        if (op.type === 'add') { const n=node(op.node || {}); assert(!state.nodes.some(x=>x.id===n.id),'その枝IDは存在します。',409); state.nodes.push(n); }
-        else if (op.type === 'update') {
-          const i=state.nodes.findIndex(n=>n.id===op.id); assert(i>=0,'変更する枝がありません。',404);
-          assert(object(op.patch) && !('id' in op.patch) && !('version' in op.patch),'IDや版は変更できません。');
-          const previous=state.nodes[i];
-          const substantive=Object.keys(op.patch).some(k=>meaningfulFields.has(k) && JSON.stringify(previous[k])!==JSON.stringify(op.patch[k]));
-          state.nodes[i]=node({...previous,...op.patch,version:previous.version+1,...(substantive?{verified:false}: {})});
-          if (substantive) changed.add(op.id);
-        } else if (op.type === 'delete') {
-          assert(state.nodes.some(n=>n.id===op.id),'削除する枝がありません。',404);
-          state.nodes=state.nodes.filter(n=>n.id!==op.id).map(n=>n.parentId===op.id?{...n,parentId:null,version:n.version+1}:n);
-          for (const l of state.links) { const pair=impactPair(l); if(pair?.[0]===op.id) changed.add(pair[1]); }
-          state.links=state.links.filter(l=>l.from!==op.id && l.to!==op.id);
-        } else if (op.type === 'link') { const l={id:randomUUID(),...op.link}; state.links.push(l); const pair=impactPair(l); if(pair) changed.add(pair[1]); }
-        else if (op.type === 'unlink') { const l=state.links.find(l=>l.id===op.id); assert(l,'解除する関係がありません。',404); const pair=impactPair(l); if(pair) changed.add(pair[1]); state.links=state.links.filter(l=>l.id!==op.id); }
-        else throw new StoreError(`未対応の操作: ${op.type}`);
-      }
-      // Explicit source→affected relationships propagate stale evidence, never contents.
-      const queue=[...changed];
-      while(queue.length) { const from=queue.shift(); for(const l of state.links) { const pair=impactPair(l); if(pair?.[0]===from && !changed.has(pair[1])) { changed.add(pair[1]); queue.push(pair[1]); } } }
-      state.nodes=state.nodes.map(n=>changed.has(n.id)&&n.verified?{...n,verified:false,version:n.version+1}:n);
-      return state;
+      return applyOperations(state,payload.ops).state;
     });
   }
   function recordRun(run) {
@@ -172,5 +192,5 @@ export function createStore({ root = process.cwd(), dataDir } = {}) {
     try { assert(Object.values(check.prepare('PRAGMA integrity_check').get())[0]==='ok','バックアップ照合に失敗しました。',500); assert(check.prepare('SELECT body FROM state WHERE id=1').get().body===JSON.stringify(raw()),'バックアップの内容が一致しません。',500); } finally { check.close(); }
     return {path:file,sha256:createHash('sha256').update(readFileSync(file)).digest('hex'),revision:raw().revision,scope:'作業モデル・全変更履歴・実行記録。外部成果物と認証情報は含みません。',createdAt:new Date().toISOString()};
   }
-  return {getState,change,recordRun,exportState,importState,backup,history,dataDir,projectId,close:()=>db.close()};
+  return {getState,change,preview,operationReceipt,recordRun,exportState,importState,backup,history,dataDir,projectId,close:()=>db.close()};
 }

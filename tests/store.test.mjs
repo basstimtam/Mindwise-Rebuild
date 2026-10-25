@@ -83,3 +83,28 @@ test('artifact preview returns text and actual fingerprints, detects changes, an
   assert.equal((await fetch(app.url+'/api/artifact?runId=run-preview&index=1')).status,403);
   assert.equal((await fetch(app.url+'/api/artifact?runId=unregistered&index=0')).status,404);
 });
+
+test('preview and save share the same impact while preserving verified local exceptions',t=>{
+  const {store}=fixture(t);
+  apply(store,[
+    {type:'add',node:{id:'common',specs:[{key:'色',value:'青'}]}},
+    {type:'add',node:{id:'regular',artifact:'regular.md',criteria:'有効な色で制作'}},
+    {type:'add',node:{id:'local',specs:[{key:'色',value:'赤'}],artifact:'local.md',criteria:'有効な色で制作'}},
+    {type:'link',link:{id:'common-regular',from:'common',to:'regular',type:'applies_to'}},
+    {type:'link',link:{id:'common-local',from:'common',to:'local',type:'applies_to'}},
+    {type:'link',link:{id:'local-exception',from:'local',to:'common',type:'exception_to',reason:'この対象だけ赤を使う'}}
+  ]);
+  const proof={artifactHash:'a'.repeat(64),criteria:'有効な色で制作',method:'test',result:'passed',at:new Date().toISOString()};
+  apply(store,['regular','local'].map(id=>({type:'update',id,patch:{verified:proof}})));
+  const before=store.getState(),payload={baseRevision:before.revision,operationId:'change-common',ops:[{type:'update',id:'common',patch:{specs:[{key:'色',value:'緑'}]}}]};
+  const preview=store.preview(payload);
+  assert.deepEqual(store.getState(),before);
+  assert.ok(preview.impact.affected.includes('regular'));assert.ok(preview.impact.exempt.includes('local'));
+  store.change(payload);
+  assert.equal(store.getState().nodes.find(n=>n.id==='regular').verified,false);
+  assert.deepEqual(store.getState().nodes.find(n=>n.id==='local').verified,proof);
+  assert.throws(()=>store.preview(payload),/別の変更/);
+  const stable=store.getState();
+  assert.throws(()=>store.preview({baseRevision:stable.revision,operationId:'invalid',ops:[{type:'update',id:'common',patch:{specs:[{key:'色',value:'青'},{key:'色',value:'赤'}]}}]}),/重複/);
+  assert.deepEqual(store.getState(),stable);
+});

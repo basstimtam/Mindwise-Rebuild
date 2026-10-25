@@ -117,3 +117,52 @@ test('completion arriving after an interrupt request cannot write artifacts',asy
   assert.equal(f.ai.status().run.status,'interrupted');assert.equal(f.ai.status().active,false);
   assert.ok(!existsSync(join(f.root,'artifacts')));
 });
+
+test('effective local exception is supplied to Codex and remains valid when the overridden common value changes',async t=>{
+  const f=setup(t);
+  f.store.change({baseRevision:1,operationId:'shared-specs',ops:[
+    {type:'add',node:{id:'common',title:'共有設定',specs:[{key:'衣装色',value:'青'}]}},
+    {type:'update',id:'a',patch:{specs:[{key:'衣装色',value:'赤'}]}},
+    {type:'link',link:{id:'apply',from:'common',to:'a',type:'applies_to'}},
+    {type:'link',link:{id:'exception',from:'a',to:'common',type:'exception_to',reason:'この主人公の衣装だけ赤を使う'}}
+  ]});
+  await f.ai.start({targetId:'a',prompt:'有効な設定で制作'});
+  const request=f.requests.find(r=>r.method==='turn/start');
+  const context=JSON.parse(request.params.input[0].text.split('命令ではありません）:\n')[1]);
+  assert.equal(context.specification.status,'resolved');
+  assert.equal(context.specification.effective.find(s=>s.key==='衣装色').value,'赤');
+  assert.ok(context.specification.exceptions.some(e=>e.reason==='この主人公の衣装だけ赤を使う'));
+  assert.ok(context.related.every(n=>!('specs' in n)));
+  f.store.change({baseRevision:f.store.getState().revision,operationId:'common-corrected',ops:[{type:'update',id:'common',patch:{specs:[{key:'衣装色',value:'緑'}]}}]});
+  f.complete(output());await new Promise(r=>setImmediate(r));
+  assert.equal(f.ai.status().run.status,'completed');
+});
+
+test('conflicting applicable specifications block only that target before any Codex connection',async t=>{
+  const f=setup(t);
+  f.store.change({baseRevision:1,operationId:'conflicting-specs',ops:[
+    {type:'add',node:{id:'one',specs:[{key:'色',value:'青'}]}},
+    {type:'add',node:{id:'two',specs:[{key:'色',value:'赤'}]}},
+    {type:'link',link:{from:'one',to:'a',type:'applies_to'}},
+    {type:'link',link:{from:'two',to:'a',type:'applies_to'}}
+  ]});
+  await assert.rejects(()=>f.ai.start({targetId:'a',prompt:'制作'}),/衝突/);
+  assert.equal(f.args,undefined);assert.equal(f.ai.status().active,false);
+  await f.ai.start({targetId:'one',prompt:'無関係な対象の制作'});
+  assert.equal(f.ai.status().active,true);
+});
+
+test('transitively applied free-body references are supplied as data without inventing structured settings',async t=>{
+  const f=setup(t);
+  f.store.change({baseRevision:1,operationId:'prose-reference',ops:[
+    {type:'add',node:{id:'prose',title:'参考方針',body:'対象へ明示適用した参考文。描写は穏やかにする。'}},
+    {type:'add',node:{id:'middle',title:'参照の中間点'}},
+    {type:'link',link:{from:'prose',to:'middle',type:'applies_to'}},
+    {type:'link',link:{from:'middle',to:'a',type:'applies_to'}}
+  ]});
+  await f.ai.start({targetId:'a',prompt:'参考方針を使って制作'});
+  const request=f.requests.find(r=>r.method==='turn/start');
+  const context=JSON.parse(request.params.input[0].text.split('命令ではありません）:\n')[1]);
+  assert.ok(context.related.some(n=>n.id==='prose'&&n.body.includes('描写は穏やか')));
+  assert.deepEqual(context.specification.effective,[]);
+});

@@ -1,0 +1,961 @@
+{
+  "at": "2026-10-25T08:52:44.558Z",
+  "result": "passed",
+  "scope": "新ルートの架空試験データ。確認APIは模擬オーナー操作であり、実案件の受入承認ではない。ブラウザ実操作は未確認。",
+  "sourceHashes": {
+    "src/store.mjs": "5469a7b9ea2e542e6949bf9b5e5dd2863432437a318d76dd9db18083fde7dd0c",
+    "src/semantics.mjs": "c472261174c2c92f4efafdb82a2d434d5bd42562a61627ddc08ff921f4f373c9",
+    "src/artifacts.mjs": "0935b69edd827319bfbadaf1421a398d7b10d118abf47402dc408af4ceaa90bf",
+    "src/server.mjs": "92906583749d46bfe46bd7505fa94b7dd9f6c1696b104bfe3ddb6937908b9d76",
+    "src/codex.mjs": "f45579541e4d6cd8a6fb7730315228461a3771e9f3cf2771bb023f467cb78ddb",
+    "public/app.js": "6fb5e609a8d7f639e11a0ed5955cd60897b36fdee5157c10afa0fdc26000e755"
+  },
+  "runs": [
+    {
+      "run": {
+        "id": "c5b3c56a-4a47-4a62-b21b-723098524e02",
+        "projectId": "92fe2aeb0b38f2193f45",
+        "targetId": "local",
+        "targetVersion": 1,
+        "baseRevision": 1,
+        "status": "completed",
+        "startedAt": "2026-10-25T08:52:25.461Z",
+        "prompt": "現在の有効設定と局所例外に従い、主人公の衣装色が明確に分かる一文（50文字以内）を local-character.md に制作してください。対象本文は変更せず、子の枝も不要です。有効設定の出所と採用理由を短く示してください。外部ツールは使いません。",
+        "artifacts": [
+          {
+            "path": "artifacts/c5b3c56a-4a47-4a62-b21b-723098524e02/local-character.md",
+            "sha256": "8e773c28114523f5ee810296d0c866b8c8dc9992310480cb4b879deae15a6589",
+            "bytes": 55
+          }
+        ],
+        "threadId": "01a17242-d99a-7372-b137-66e02bdc4610",
+        "contextHash": "0368ed2e54f11be5877ff206260026d452b0fb0f5f43cfb645cabf5e98a5d80b",
+        "contextFingerprint": "0067401eeae6fbe5ea43cc71df40f601e48551a9695af4c4decc9a075eb9023a",
+        "turnId": "01a17242-da10-7d02-a2c1-7821266c0a10",
+        "reply": "local-character.md 用の一文を制作しました。",
+        "decisionReason": "有効設定の出所は local「局所例外の主人公紹介」。局所例外「この登場人物だけ赤の衣装を使う」に従い、衣装色に赤を採用しました。",
+        "proposal": {
+          "reply": "local-character.md 用の一文を制作しました。",
+          "updatedBody": null,
+          "decisionReason": "有効設定の出所は local「局所例外の主人公紹介」。局所例外「この登場人物だけ赤の衣装を使う」に従い、衣装色に赤を採用しました。",
+          "children": [],
+          "artifacts": [
+            {
+              "name": "local-character.md",
+              "content": "主人公は赤い衣装を身にまとっている。\n"
+            }
+          ]
+        },
+        "finishedAt": "2026-10-25T08:52:31.978Z"
+      },
+      "artifact": {
+        "path": "artifacts/c5b3c56a-4a47-4a62-b21b-723098524e02/local-character.md",
+        "text": "主人公は赤い衣装を身にまとっている。\n",
+        "sha256": "8e773c28114523f5ee810296d0c866b8c8dc9992310480cb4b879deae15a6589",
+        "canonicalKey": "c:/users/basst/dropbox/ai project/16.mindwise-rebuild/artifacts/c5b3c56a-4a47-4a62-b21b-723098524e02/local-character.md",
+        "bytes": 55,
+        "observedAt": "2026-10-25T08:52:32.413Z",
+        "revision": 2,
+        "targetId": "local",
+        "targetVersion": 2,
+        "criteria": "衣装色を一文で明記し、現在の有効設定と一致する。",
+        "specHash": "12c7d3a4ad9aace9f2146a59038f29cebd48eb47c060da94bfbd0e75ebe27dab",
+        "specificationStatus": "resolved",
+        "verification": {
+          "canonicalKey": "c:/users/basst/dropbox/ai project/16.mindwise-rebuild/artifacts/c5b3c56a-4a47-4a62-b21b-723098524e02/local-character.md",
+          "artifactHash": "8e773c28114523f5ee810296d0c866b8c8dc9992310480cb4b879deae15a6589",
+          "checkedAt": "2026-10-25T08:52:32.413Z",
+          "status": "unverified",
+          "reason": "受入確認はまだ記録されていません。"
+        }
+      }
+    },
+    {
+      "run": {
+        "id": "7ce09d75-2ead-45b6-a104-4ea4ff8c6df4",
+        "projectId": "92fe2aeb0b38f2193f45",
+        "targetId": "regular",
+        "targetVersion": 1,
+        "baseRevision": 2,
+        "status": "completed",
+        "startedAt": "2026-10-25T08:52:32.416Z",
+        "prompt": "現在の有効設定と局所例外に従い、主人公の衣装色が明確に分かる一文（50文字以内）を regular-character.md に制作してください。対象本文は変更せず、子の枝も不要です。有効設定の出所と採用理由を短く示してください。外部ツールは使いません。",
+        "artifacts": [
+          {
+            "path": "artifacts/7ce09d75-2ead-45b6-a104-4ea4ff8c6df4/regular-character.md",
+            "sha256": "e0f58b2cfff1c786623992648e9af58f44e6eccb419322a9a9168e738a02c24b",
+            "bytes": 54
+          }
+        ],
+        "threadId": "01a17242-f225-7d12-a6a4-b300948045d8",
+        "contextHash": "091c7b5f2484d1e94fcff7e25dd8a4e3c1a3d92331852edb21a4bcabeab7b1df",
+        "contextFingerprint": "c2fa0425372705b7706b0a6ac5b58a3b4ea219c81c2e940e84c4d6b792fd735a",
+        "turnId": "01a17242-f2a0-7310-90aa-505fbb12ef6f",
+        "reply": "regular-character.md 用の一文を制作しました。",
+        "decisionReason": "有効設定の出所は「共有する衣装設定」（shared）。衣装色は「青」で、局所例外がないため採用しました。",
+        "proposal": {
+          "reply": "regular-character.md 用の一文を制作しました。",
+          "updatedBody": null,
+          "decisionReason": "有効設定の出所は「共有する衣装設定」（shared）。衣装色は「青」で、局所例外がないため採用しました。",
+          "children": [],
+          "artifacts": [
+            {
+              "name": "regular-character.md",
+              "content": "主人公は青い衣装を身にまとっている。"
+            }
+          ]
+        },
+        "finishedAt": "2026-10-25T08:52:37.842Z"
+      },
+      "artifact": {
+        "path": "artifacts/7ce09d75-2ead-45b6-a104-4ea4ff8c6df4/regular-character.md",
+        "text": "主人公は青い衣装を身にまとっている。",
+        "sha256": "e0f58b2cfff1c786623992648e9af58f44e6eccb419322a9a9168e738a02c24b",
+        "canonicalKey": "c:/users/basst/dropbox/ai project/16.mindwise-rebuild/artifacts/7ce09d75-2ead-45b6-a104-4ea4ff8c6df4/regular-character.md",
+        "bytes": 54,
+        "observedAt": "2026-10-25T08:52:38.180Z",
+        "revision": 3,
+        "targetId": "regular",
+        "targetVersion": 2,
+        "criteria": "衣装色を一文で明記し、現在の有効設定と一致する。",
+        "specHash": "36b0329e9a00200c01facd6c02b76f4fd28559fc7b1a03366b60b46f4999dda0",
+        "specificationStatus": "resolved",
+        "verification": {
+          "canonicalKey": "c:/users/basst/dropbox/ai project/16.mindwise-rebuild/artifacts/7ce09d75-2ead-45b6-a104-4ea4ff8c6df4/regular-character.md",
+          "artifactHash": "e0f58b2cfff1c786623992648e9af58f44e6eccb419322a9a9168e738a02c24b",
+          "checkedAt": "2026-10-25T08:52:38.180Z",
+          "status": "unverified",
+          "reason": "受入確認はまだ記録されていません。"
+        }
+      }
+    },
+    {
+      "run": {
+        "id": "af2f6ca9-ea5d-4e76-932c-1c789d859ef0",
+        "projectId": "92fe2aeb0b38f2193f45",
+        "targetId": "regular",
+        "targetVersion": 4,
+        "baseRevision": 8,
+        "status": "completed",
+        "startedAt": "2026-10-25T08:52:38.244Z",
+        "prompt": "現在の有効設定と局所例外に従い、主人公の衣装色が明確に分かる一文（50文字以内）を regular-character-revised.md に制作してください。対象本文は変更せず、子の枝も不要です。有効設定の出所と採用理由を短く示してください。外部ツールは使いません。",
+        "artifacts": [
+          {
+            "path": "artifacts/af2f6ca9-ea5d-4e76-932c-1c789d859ef0/regular-character-revised.md",
+            "sha256": "11e34e6a1e8fd48abaf9cbaf9db8d2a974d0dd857a9d76f9e4b9af237a4d4beb",
+            "bytes": 57
+          }
+        ],
+        "threadId": "01a17243-08e9-7372-93cf-2cf475e95b6a",
+        "contextHash": "2327c1c75cb06259a1d97e250627d55b2973486dddfd02452127889ffad8f883",
+        "contextFingerprint": "0fd4d60c03e3033cb7e3bd474157325830df570d37c7dfca079b0998c3a4b675",
+        "turnId": "01a17243-0958-7673-a7aa-48432db05621",
+        "reply": "衣装色を明記した50文字以内の一文を制作しました。",
+        "decisionReason": "出所は「共有する衣装設定」（shared）。現在の有効設定は「緑」で、局所例外がないため採用しました。",
+        "proposal": {
+          "reply": "衣装色を明記した50文字以内の一文を制作しました。",
+          "updatedBody": null,
+          "decisionReason": "出所は「共有する衣装設定」（shared）。現在の有効設定は「緑」で、局所例外がないため採用しました。",
+          "children": [],
+          "artifacts": [
+            {
+              "name": "regular-character-revised.md",
+              "content": "主人公は緑色の衣装を身にまとっている。"
+            }
+          ]
+        },
+        "finishedAt": "2026-10-25T08:52:44.192Z"
+      },
+      "artifact": {
+        "path": "artifacts/af2f6ca9-ea5d-4e76-932c-1c789d859ef0/regular-character-revised.md",
+        "text": "主人公は緑色の衣装を身にまとっている。",
+        "sha256": "11e34e6a1e8fd48abaf9cbaf9db8d2a974d0dd857a9d76f9e4b9af237a4d4beb",
+        "canonicalKey": "c:/users/basst/dropbox/ai project/16.mindwise-rebuild/artifacts/af2f6ca9-ea5d-4e76-932c-1c789d859ef0/regular-character-revised.md",
+        "bytes": 57,
+        "observedAt": "2026-10-25T08:52:44.527Z",
+        "revision": 9,
+        "targetId": "regular",
+        "targetVersion": 5,
+        "criteria": "衣装色を一文で明記し、現在の有効設定と一致する。",
+        "specHash": "43102b9f075b98b10afaf622be429d7ba604485f820e9e09a85a03ffb71164ff",
+        "specificationStatus": "resolved",
+        "verification": {
+          "canonicalKey": "c:/users/basst/dropbox/ai project/16.mindwise-rebuild/artifacts/af2f6ca9-ea5d-4e76-932c-1c789d859ef0/regular-character-revised.md",
+          "artifactHash": "11e34e6a1e8fd48abaf9cbaf9db8d2a974d0dd857a9d76f9e4b9af237a4d4beb",
+          "checkedAt": "2026-10-25T08:52:44.527Z",
+          "status": "unverified",
+          "reason": "受入確認はまだ記録されていません。"
+        }
+      }
+    }
+  ],
+  "observations": [
+    {
+      "step": "initial verified required work, shared artifact counted once",
+      "analysis": {
+        "revision": 7,
+        "specification": {
+          "targetId": "regular",
+          "status": "resolved",
+          "effective": [
+            {
+              "key": "衣装色",
+              "value": "青",
+              "sourceIds": [
+                "shared"
+              ]
+            }
+          ],
+          "conflicts": [],
+          "sources": [
+            {
+              "id": "shared",
+              "title": "共有する衣装設定"
+            }
+          ],
+          "fingerprint": "36b0329e9a00200c01facd6c02b76f4fd28559fc7b1a03366b60b46f4999dda0",
+          "exceptions": [],
+          "cycles": []
+        },
+        "verificationById": {
+          "goal": {
+            "status": "unverified",
+            "reason": "成果物が未設定です。",
+            "checkedAt": "2026-10-25T08:52:38.220Z"
+          },
+          "shared": {
+            "status": "unverified",
+            "reason": "成果物が未設定です。",
+            "checkedAt": "2026-10-25T08:52:38.220Z"
+          },
+          "regular": {
+            "canonicalKey": "c:/users/basst/dropbox/ai project/16.mindwise-rebuild/artifacts/7ce09d75-2ead-45b6-a104-4ea4ff8c6df4/regular-character.md",
+            "artifactHash": "e0f58b2cfff1c786623992648e9af58f44e6eccb419322a9a9168e738a02c24b",
+            "checkedAt": "2026-10-25T08:52:38.220Z",
+            "status": "verified",
+            "reason": "現物・受入条件・有効仕様が確認証拠と一致しています。",
+            "recordedAt": "2026-10-25T08:52:38.208Z",
+            "method": "owner-review"
+          },
+          "local": {
+            "canonicalKey": "c:/users/basst/dropbox/ai project/16.mindwise-rebuild/artifacts/c5b3c56a-4a47-4a62-b21b-723098524e02/local-character.md",
+            "artifactHash": "8e773c28114523f5ee810296d0c866b8c8dc9992310480cb4b879deae15a6589",
+            "checkedAt": "2026-10-25T08:52:38.221Z",
+            "status": "verified",
+            "reason": "現物・受入条件・有効仕様が確認証拠と一致しています。",
+            "recordedAt": "2026-10-25T08:52:38.199Z",
+            "method": "owner-review"
+          },
+          "unexplored": {
+            "status": "unverified",
+            "reason": "成果物が未設定です。",
+            "checkedAt": "2026-10-25T08:52:38.221Z"
+          },
+          "alias": {
+            "canonicalKey": "c:/users/basst/dropbox/ai project/16.mindwise-rebuild/artifacts/7ce09d75-2ead-45b6-a104-4ea4ff8c6df4/regular-character.md",
+            "artifactHash": "e0f58b2cfff1c786623992648e9af58f44e6eccb419322a9a9168e738a02c24b",
+            "checkedAt": "2026-10-25T08:52:38.221Z",
+            "status": "verified",
+            "reason": "現物・受入条件・有効仕様が確認証拠と一致しています。",
+            "recordedAt": "2026-10-25T08:52:38.215Z",
+            "method": "owner-review"
+          }
+        },
+        "progress": {
+          "knownRate": 100,
+          "knownWeight": 3,
+          "verifiedWeight": 3,
+          "unknownWeightCount": 0,
+          "requiredCount": 2,
+          "requiredNodeCount": 3,
+          "groups": [
+            {
+              "key": "artifact:c:/users/basst/dropbox/ai project/16.mindwise-rebuild/artifacts/7ce09d75-2ead-45b6-a104-4ea4ff8c6df4/regular-character.md",
+              "nodeIds": [
+                "alias",
+                "regular"
+              ],
+              "title": "通常の主人公紹介",
+              "domains": [
+                "UI・表現",
+                "キャラクター"
+              ],
+              "weight": 2,
+              "verified": true,
+              "status": "verified"
+            },
+            {
+              "key": "artifact:c:/users/basst/dropbox/ai project/16.mindwise-rebuild/artifacts/c5b3c56a-4a47-4a62-b21b-723098524e02/local-character.md",
+              "nodeIds": [
+                "local"
+              ],
+              "title": "局所例外の主人公紹介",
+              "domains": [
+                "物語"
+              ],
+              "weight": 1,
+              "verified": true,
+              "status": "verified"
+            }
+          ],
+          "domains": [
+            {
+              "name": "UI・表現",
+              "knownRate": 100,
+              "knownWeight": 2,
+              "verifiedWeight": 2,
+              "unknownWeightCount": 0,
+              "requiredCount": 1
+            },
+            {
+              "name": "キャラクター",
+              "knownRate": 100,
+              "knownWeight": 2,
+              "verifiedWeight": 2,
+              "unknownWeightCount": 0,
+              "requiredCount": 1
+            },
+            {
+              "name": "全体",
+              "knownRate": null,
+              "knownWeight": 0,
+              "verifiedWeight": 0,
+              "unknownWeightCount": 0,
+              "requiredCount": 0
+            },
+            {
+              "name": "共通仕様",
+              "knownRate": null,
+              "knownWeight": 0,
+              "verifiedWeight": 0,
+              "unknownWeightCount": 0,
+              "requiredCount": 0
+            },
+            {
+              "name": "戦闘",
+              "knownRate": null,
+              "knownWeight": 0,
+              "verifiedWeight": 0,
+              "unknownWeightCount": 0,
+              "requiredCount": 0
+            },
+            {
+              "name": "物語",
+              "knownRate": 100,
+              "knownWeight": 1,
+              "verifiedWeight": 1,
+              "unknownWeightCount": 0,
+              "requiredCount": 1
+            }
+          ],
+          "unestimatedDomains": [
+            "全体",
+            "共通仕様",
+            "戦闘"
+          ]
+        }
+      }
+    },
+    {
+      "step": "pre-save impact, no persistence",
+      "preview": {
+        "baseRevision": 7,
+        "impact": {
+          "changed": [
+            "shared"
+          ],
+          "affected": [
+            "alias",
+            "regular",
+            "shared"
+          ],
+          "exempt": [
+            "local"
+          ],
+          "unknown": [],
+          "conflicts": [],
+          "details": [
+            {
+              "targetId": "alias",
+              "title": "UIから参照する同じ主人公紹介",
+              "domain": "UI・表現",
+              "effect": "affected",
+              "reasons": [
+                "有効な設定または明示された適用・例外が変わります。"
+              ],
+              "beforeSpecHash": "36b0329e9a00200c01facd6c02b76f4fd28559fc7b1a03366b60b46f4999dda0",
+              "afterSpecHash": "43102b9f075b98b10afaf622be429d7ba604485f820e9e09a85a03ffb71164ff"
+            },
+            {
+              "targetId": "goal",
+              "title": "架空ゲーム完成（接続検証）",
+              "domain": "全体",
+              "effect": "unchanged",
+              "reasons": [
+                "明示された影響経路なし。未記録の影響は保証しません。"
+              ],
+              "beforeSpecHash": null,
+              "afterSpecHash": null
+            },
+            {
+              "targetId": "local",
+              "title": "局所例外の主人公紹介",
+              "domain": "物語",
+              "effect": "exempt",
+              "reasons": [
+                "明示した局所例外により、有効な設定は変わりません。"
+              ],
+              "beforeSpecHash": "12c7d3a4ad9aace9f2146a59038f29cebd48eb47c060da94bfbd0e75ebe27dab",
+              "afterSpecHash": "12c7d3a4ad9aace9f2146a59038f29cebd48eb47c060da94bfbd0e75ebe27dab"
+            },
+            {
+              "targetId": "regular",
+              "title": "通常の主人公紹介",
+              "domain": "キャラクター",
+              "effect": "affected",
+              "reasons": [
+                "有効な設定または明示された適用・例外が変わります。"
+              ],
+              "beforeSpecHash": "36b0329e9a00200c01facd6c02b76f4fd28559fc7b1a03366b60b46f4999dda0",
+              "afterSpecHash": "43102b9f075b98b10afaf622be429d7ba604485f820e9e09a85a03ffb71164ff"
+            },
+            {
+              "targetId": "shared",
+              "title": "共有する衣装設定",
+              "domain": "共通仕様",
+              "effect": "affected",
+              "reasons": [
+                "有効な設定または明示された適用・例外が変わります。"
+              ],
+              "beforeSpecHash": "36b0329e9a00200c01facd6c02b76f4fd28559fc7b1a03366b60b46f4999dda0",
+              "afterSpecHash": "43102b9f075b98b10afaf622be429d7ba604485f820e9e09a85a03ffb71164ff"
+            },
+            {
+              "targetId": "unexplored",
+              "title": "戦闘は未具体化",
+              "domain": "戦闘",
+              "effect": "unchanged",
+              "reasons": [
+                "明示された影響経路なし。未記録の影響は保証しません。"
+              ],
+              "beforeSpecHash": null,
+              "afterSpecHash": null
+            }
+          ]
+        }
+      }
+    },
+    {
+      "step": "shared correction invalidates ordinary work, local exception retained",
+      "analysis": {
+        "revision": 8,
+        "specification": {
+          "targetId": "local",
+          "status": "resolved",
+          "effective": [
+            {
+              "key": "衣装色",
+              "value": "赤",
+              "sourceIds": [
+                "local"
+              ]
+            }
+          ],
+          "conflicts": [],
+          "sources": [
+            {
+              "id": "local",
+              "title": "局所例外の主人公紹介"
+            },
+            {
+              "id": "shared",
+              "title": "共有する衣装設定"
+            }
+          ],
+          "fingerprint": "12c7d3a4ad9aace9f2146a59038f29cebd48eb47c060da94bfbd0e75ebe27dab",
+          "exceptions": [
+            {
+              "key": "衣装色",
+              "from": "local",
+              "to": "shared",
+              "reason": "この登場人物だけ赤の衣装を使う"
+            }
+          ],
+          "cycles": []
+        },
+        "verificationById": {
+          "goal": {
+            "status": "unverified",
+            "reason": "成果物が未設定です。",
+            "checkedAt": "2026-10-25T08:52:38.236Z"
+          },
+          "shared": {
+            "status": "unverified",
+            "reason": "成果物が未設定です。",
+            "checkedAt": "2026-10-25T08:52:38.236Z"
+          },
+          "regular": {
+            "canonicalKey": "c:/users/basst/dropbox/ai project/16.mindwise-rebuild/artifacts/7ce09d75-2ead-45b6-a104-4ea4ff8c6df4/regular-character.md",
+            "artifactHash": "e0f58b2cfff1c786623992648e9af58f44e6eccb419322a9a9168e738a02c24b",
+            "checkedAt": "2026-10-25T08:52:38.236Z",
+            "status": "unverified",
+            "reason": "受入確認はまだ記録されていません。"
+          },
+          "local": {
+            "canonicalKey": "c:/users/basst/dropbox/ai project/16.mindwise-rebuild/artifacts/c5b3c56a-4a47-4a62-b21b-723098524e02/local-character.md",
+            "artifactHash": "8e773c28114523f5ee810296d0c866b8c8dc9992310480cb4b879deae15a6589",
+            "checkedAt": "2026-10-25T08:52:38.236Z",
+            "status": "verified",
+            "reason": "現物・受入条件・有効仕様が確認証拠と一致しています。",
+            "recordedAt": "2026-10-25T08:52:38.199Z",
+            "method": "owner-review"
+          },
+          "unexplored": {
+            "status": "unverified",
+            "reason": "成果物が未設定です。",
+            "checkedAt": "2026-10-25T08:52:38.237Z"
+          },
+          "alias": {
+            "canonicalKey": "c:/users/basst/dropbox/ai project/16.mindwise-rebuild/artifacts/7ce09d75-2ead-45b6-a104-4ea4ff8c6df4/regular-character.md",
+            "artifactHash": "e0f58b2cfff1c786623992648e9af58f44e6eccb419322a9a9168e738a02c24b",
+            "checkedAt": "2026-10-25T08:52:38.237Z",
+            "status": "unverified",
+            "reason": "受入確認はまだ記録されていません。"
+          }
+        },
+        "progress": {
+          "knownRate": 33.33333333333333,
+          "knownWeight": 3,
+          "verifiedWeight": 1,
+          "unknownWeightCount": 0,
+          "requiredCount": 2,
+          "requiredNodeCount": 3,
+          "groups": [
+            {
+              "key": "artifact:c:/users/basst/dropbox/ai project/16.mindwise-rebuild/artifacts/7ce09d75-2ead-45b6-a104-4ea4ff8c6df4/regular-character.md",
+              "nodeIds": [
+                "alias",
+                "regular"
+              ],
+              "title": "通常の主人公紹介",
+              "domains": [
+                "UI・表現",
+                "キャラクター"
+              ],
+              "weight": 2,
+              "verified": false,
+              "status": "unverified"
+            },
+            {
+              "key": "artifact:c:/users/basst/dropbox/ai project/16.mindwise-rebuild/artifacts/c5b3c56a-4a47-4a62-b21b-723098524e02/local-character.md",
+              "nodeIds": [
+                "local"
+              ],
+              "title": "局所例外の主人公紹介",
+              "domains": [
+                "物語"
+              ],
+              "weight": 1,
+              "verified": true,
+              "status": "verified"
+            }
+          ],
+          "domains": [
+            {
+              "name": "UI・表現",
+              "knownRate": 0,
+              "knownWeight": 2,
+              "verifiedWeight": 0,
+              "unknownWeightCount": 0,
+              "requiredCount": 1
+            },
+            {
+              "name": "キャラクター",
+              "knownRate": 0,
+              "knownWeight": 2,
+              "verifiedWeight": 0,
+              "unknownWeightCount": 0,
+              "requiredCount": 1
+            },
+            {
+              "name": "全体",
+              "knownRate": null,
+              "knownWeight": 0,
+              "verifiedWeight": 0,
+              "unknownWeightCount": 0,
+              "requiredCount": 0
+            },
+            {
+              "name": "共通仕様",
+              "knownRate": null,
+              "knownWeight": 0,
+              "verifiedWeight": 0,
+              "unknownWeightCount": 0,
+              "requiredCount": 0
+            },
+            {
+              "name": "戦闘",
+              "knownRate": null,
+              "knownWeight": 0,
+              "verifiedWeight": 0,
+              "unknownWeightCount": 0,
+              "requiredCount": 0
+            },
+            {
+              "name": "物語",
+              "knownRate": 100,
+              "knownWeight": 1,
+              "verifiedWeight": 1,
+              "unknownWeightCount": 0,
+              "requiredCount": 1
+            }
+          ],
+          "unestimatedDomains": [
+            "全体",
+            "共通仕様",
+            "戦闘"
+          ]
+        }
+      }
+    },
+    {
+      "step": "changed file is excluded from verified progress",
+      "analysis": {
+        "revision": 8,
+        "specification": {
+          "targetId": "local",
+          "status": "resolved",
+          "effective": [
+            {
+              "key": "衣装色",
+              "value": "赤",
+              "sourceIds": [
+                "local"
+              ]
+            }
+          ],
+          "conflicts": [],
+          "sources": [
+            {
+              "id": "local",
+              "title": "局所例外の主人公紹介"
+            },
+            {
+              "id": "shared",
+              "title": "共有する衣装設定"
+            }
+          ],
+          "fingerprint": "12c7d3a4ad9aace9f2146a59038f29cebd48eb47c060da94bfbd0e75ebe27dab",
+          "exceptions": [
+            {
+              "key": "衣装色",
+              "from": "local",
+              "to": "shared",
+              "reason": "この登場人物だけ赤の衣装を使う"
+            }
+          ],
+          "cycles": []
+        },
+        "verificationById": {
+          "goal": {
+            "status": "unverified",
+            "reason": "成果物が未設定です。",
+            "checkedAt": "2026-10-25T08:52:38.240Z"
+          },
+          "shared": {
+            "status": "unverified",
+            "reason": "成果物が未設定です。",
+            "checkedAt": "2026-10-25T08:52:38.240Z"
+          },
+          "regular": {
+            "canonicalKey": "c:/users/basst/dropbox/ai project/16.mindwise-rebuild/artifacts/7ce09d75-2ead-45b6-a104-4ea4ff8c6df4/regular-character.md",
+            "artifactHash": "e0f58b2cfff1c786623992648e9af58f44e6eccb419322a9a9168e738a02c24b",
+            "checkedAt": "2026-10-25T08:52:38.240Z",
+            "status": "unverified",
+            "reason": "受入確認はまだ記録されていません。"
+          },
+          "local": {
+            "canonicalKey": "c:/users/basst/dropbox/ai project/16.mindwise-rebuild/artifacts/c5b3c56a-4a47-4a62-b21b-723098524e02/local-character.md",
+            "artifactHash": "4ba595607f951b3aae8a8fb071723eb6d33576b66542f0a6b0e5be1c0ef77ff6",
+            "checkedAt": "2026-10-25T08:52:38.241Z",
+            "status": "stale",
+            "reason": "成果物が確認時から変わっています。",
+            "recordedAt": "2026-10-25T08:52:38.199Z"
+          },
+          "unexplored": {
+            "status": "unverified",
+            "reason": "成果物が未設定です。",
+            "checkedAt": "2026-10-25T08:52:38.241Z"
+          },
+          "alias": {
+            "canonicalKey": "c:/users/basst/dropbox/ai project/16.mindwise-rebuild/artifacts/7ce09d75-2ead-45b6-a104-4ea4ff8c6df4/regular-character.md",
+            "artifactHash": "e0f58b2cfff1c786623992648e9af58f44e6eccb419322a9a9168e738a02c24b",
+            "checkedAt": "2026-10-25T08:52:38.241Z",
+            "status": "unverified",
+            "reason": "受入確認はまだ記録されていません。"
+          }
+        },
+        "progress": {
+          "knownRate": 0,
+          "knownWeight": 3,
+          "verifiedWeight": 0,
+          "unknownWeightCount": 0,
+          "requiredCount": 2,
+          "requiredNodeCount": 3,
+          "groups": [
+            {
+              "key": "artifact:c:/users/basst/dropbox/ai project/16.mindwise-rebuild/artifacts/7ce09d75-2ead-45b6-a104-4ea4ff8c6df4/regular-character.md",
+              "nodeIds": [
+                "alias",
+                "regular"
+              ],
+              "title": "通常の主人公紹介",
+              "domains": [
+                "UI・表現",
+                "キャラクター"
+              ],
+              "weight": 2,
+              "verified": false,
+              "status": "unverified"
+            },
+            {
+              "key": "artifact:c:/users/basst/dropbox/ai project/16.mindwise-rebuild/artifacts/c5b3c56a-4a47-4a62-b21b-723098524e02/local-character.md",
+              "nodeIds": [
+                "local"
+              ],
+              "title": "局所例外の主人公紹介",
+              "domains": [
+                "物語"
+              ],
+              "weight": 1,
+              "verified": false,
+              "status": "stale"
+            }
+          ],
+          "domains": [
+            {
+              "name": "UI・表現",
+              "knownRate": 0,
+              "knownWeight": 2,
+              "verifiedWeight": 0,
+              "unknownWeightCount": 0,
+              "requiredCount": 1
+            },
+            {
+              "name": "キャラクター",
+              "knownRate": 0,
+              "knownWeight": 2,
+              "verifiedWeight": 0,
+              "unknownWeightCount": 0,
+              "requiredCount": 1
+            },
+            {
+              "name": "全体",
+              "knownRate": null,
+              "knownWeight": 0,
+              "verifiedWeight": 0,
+              "unknownWeightCount": 0,
+              "requiredCount": 0
+            },
+            {
+              "name": "共通仕様",
+              "knownRate": null,
+              "knownWeight": 0,
+              "verifiedWeight": 0,
+              "unknownWeightCount": 0,
+              "requiredCount": 0
+            },
+            {
+              "name": "戦闘",
+              "knownRate": null,
+              "knownWeight": 0,
+              "verifiedWeight": 0,
+              "unknownWeightCount": 0,
+              "requiredCount": 0
+            },
+            {
+              "name": "物語",
+              "knownRate": 0,
+              "knownWeight": 1,
+              "verifiedWeight": 0,
+              "unknownWeightCount": 0,
+              "requiredCount": 1
+            }
+          ],
+          "unestimatedDomains": [
+            "全体",
+            "共通仕様",
+            "戦闘"
+          ]
+        }
+      }
+    },
+    {
+      "step": "reproduced with corrected effective specification and reconciled alias",
+      "analysis": {
+        "revision": 12,
+        "specification": {
+          "targetId": "regular",
+          "status": "resolved",
+          "effective": [
+            {
+              "key": "衣装色",
+              "value": "緑",
+              "sourceIds": [
+                "shared"
+              ]
+            }
+          ],
+          "conflicts": [],
+          "sources": [
+            {
+              "id": "shared",
+              "title": "共有する衣装設定"
+            }
+          ],
+          "fingerprint": "43102b9f075b98b10afaf622be429d7ba604485f820e9e09a85a03ffb71164ff",
+          "exceptions": [],
+          "cycles": []
+        },
+        "verificationById": {
+          "goal": {
+            "status": "unverified",
+            "reason": "成果物が未設定です。",
+            "checkedAt": "2026-10-25T08:52:44.555Z"
+          },
+          "shared": {
+            "status": "unverified",
+            "reason": "成果物が未設定です。",
+            "checkedAt": "2026-10-25T08:52:44.555Z"
+          },
+          "regular": {
+            "canonicalKey": "c:/users/basst/dropbox/ai project/16.mindwise-rebuild/artifacts/af2f6ca9-ea5d-4e76-932c-1c789d859ef0/regular-character-revised.md",
+            "artifactHash": "11e34e6a1e8fd48abaf9cbaf9db8d2a974d0dd857a9d76f9e4b9af237a4d4beb",
+            "checkedAt": "2026-10-25T08:52:44.555Z",
+            "status": "verified",
+            "reason": "現物・受入条件・有効仕様が確認証拠と一致しています。",
+            "recordedAt": "2026-10-25T08:52:44.543Z",
+            "method": "owner-review"
+          },
+          "local": {
+            "canonicalKey": "c:/users/basst/dropbox/ai project/16.mindwise-rebuild/artifacts/c5b3c56a-4a47-4a62-b21b-723098524e02/local-character.md",
+            "artifactHash": "8e773c28114523f5ee810296d0c866b8c8dc9992310480cb4b879deae15a6589",
+            "checkedAt": "2026-10-25T08:52:44.556Z",
+            "status": "verified",
+            "reason": "現物・受入条件・有効仕様が確認証拠と一致しています。",
+            "recordedAt": "2026-10-25T08:52:38.199Z",
+            "method": "owner-review"
+          },
+          "unexplored": {
+            "status": "unverified",
+            "reason": "成果物が未設定です。",
+            "checkedAt": "2026-10-25T08:52:44.556Z"
+          },
+          "alias": {
+            "canonicalKey": "c:/users/basst/dropbox/ai project/16.mindwise-rebuild/artifacts/af2f6ca9-ea5d-4e76-932c-1c789d859ef0/regular-character-revised.md",
+            "artifactHash": "11e34e6a1e8fd48abaf9cbaf9db8d2a974d0dd857a9d76f9e4b9af237a4d4beb",
+            "checkedAt": "2026-10-25T08:52:44.556Z",
+            "status": "verified",
+            "reason": "現物・受入条件・有効仕様が確認証拠と一致しています。",
+            "recordedAt": "2026-10-25T08:52:44.550Z",
+            "method": "owner-review"
+          }
+        },
+        "progress": {
+          "knownRate": 100,
+          "knownWeight": 3,
+          "verifiedWeight": 3,
+          "unknownWeightCount": 0,
+          "requiredCount": 2,
+          "requiredNodeCount": 3,
+          "groups": [
+            {
+              "key": "artifact:c:/users/basst/dropbox/ai project/16.mindwise-rebuild/artifacts/af2f6ca9-ea5d-4e76-932c-1c789d859ef0/regular-character-revised.md",
+              "nodeIds": [
+                "alias",
+                "regular"
+              ],
+              "title": "通常の主人公紹介",
+              "domains": [
+                "UI・表現",
+                "キャラクター"
+              ],
+              "weight": 2,
+              "verified": true,
+              "status": "verified"
+            },
+            {
+              "key": "artifact:c:/users/basst/dropbox/ai project/16.mindwise-rebuild/artifacts/c5b3c56a-4a47-4a62-b21b-723098524e02/local-character.md",
+              "nodeIds": [
+                "local"
+              ],
+              "title": "局所例外の主人公紹介",
+              "domains": [
+                "物語"
+              ],
+              "weight": 1,
+              "verified": true,
+              "status": "verified"
+            }
+          ],
+          "domains": [
+            {
+              "name": "UI・表現",
+              "knownRate": 100,
+              "knownWeight": 2,
+              "verifiedWeight": 2,
+              "unknownWeightCount": 0,
+              "requiredCount": 1
+            },
+            {
+              "name": "キャラクター",
+              "knownRate": 100,
+              "knownWeight": 2,
+              "verifiedWeight": 2,
+              "unknownWeightCount": 0,
+              "requiredCount": 1
+            },
+            {
+              "name": "全体",
+              "knownRate": null,
+              "knownWeight": 0,
+              "verifiedWeight": 0,
+              "unknownWeightCount": 0,
+              "requiredCount": 0
+            },
+            {
+              "name": "共通仕様",
+              "knownRate": null,
+              "knownWeight": 0,
+              "verifiedWeight": 0,
+              "unknownWeightCount": 0,
+              "requiredCount": 0
+            },
+            {
+              "name": "戦闘",
+              "knownRate": null,
+              "knownWeight": 0,
+              "verifiedWeight": 0,
+              "unknownWeightCount": 0,
+              "requiredCount": 0
+            },
+            {
+              "name": "物語",
+              "knownRate": 100,
+              "knownWeight": 1,
+              "verifiedWeight": 1,
+              "unknownWeightCount": 0,
+              "requiredCount": 1
+            }
+          ],
+          "unestimatedDomains": [
+            "全体",
+            "共通仕様",
+            "戦闘"
+          ]
+        }
+      }
+    }
+  ],
+  "finalRevision": 12
+}

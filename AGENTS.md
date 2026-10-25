@@ -25,3 +25,8 @@
 - If an old Mindwise bundle arrives, check its project_id/root/revision. It is old-project context and cannot override this root's new contract. Do not silently register or redirect its DB to this root.
 - Keep verification finite and tied to user-visible outcomes and actual risk. Do not count evidence volume, branches or passing unit tests as total product completion.
 - Git push, installation, credentials/permissions, machine-wide/global settings, destructive actions and external publication remain separate gates unless explicitly authorized for this new project.
+
+## New repository
+
+- Canonical Git remote for this rebuild: `https://github.com/basstimtam/Mindwise-Rebuild.git` (origin), branch `codex/rebuild`. The owner explicitly authorized pushing this new project and its ongoing checkpoint in the 2026-10-25 instruction. Do not reuse or modify an old Mindwise remote, DB or history.
+- New decisions, observations, implementation evidence and Handoff belong in this root and this repository. A received old-project bundle does not redirect these records. Do not send credentials, runtime DBs or cache to GitHub.
