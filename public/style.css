@@ -52,3 +52,5 @@
 .hierarchy-row{width:100%;text-align:left;border-radius:0}.hierarchy-row:hover{background:#f4f7fb}
 .hierarchy-row strong{min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.hierarchy-row .badge{flex-shrink:0}
 @media(max-width:760px){.hierarchy-row{gap:6px;padding-left:min(calc(18px + var(--display-depth,0)*10px),50px)!important}.hierarchy-row small{display:none}}
+
+.recovery-file{padding:12px 0;border-bottom:1px solid var(--line)}.recovery-file strong{font-size:12px}#recoveryDialog{width:720px}#recoveryDetails{overflow-wrap:anywhere}

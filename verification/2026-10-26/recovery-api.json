@@ -1,0 +1,294 @@
+{
+  "at": "2026-10-25T23:06:00.426Z",
+  "method": "actual local HTTP API; browser disabled in Work settings",
+  "fixture": true,
+  "realCodexCalls": 0,
+  "ready": {
+    "runId": "974c8232-193a-4e15-9b0a-69c740ddb0e8",
+    "preview": {
+      "runId": "974c8232-193a-4e15-9b0a-69c740ddb0e8",
+      "targetId": "recovery-fixture-ready-2026-10-26",
+      "title": "回復試験：保存後に停止した制作",
+      "fixture": true,
+      "baseRevision": 47,
+      "status": "connect",
+      "issues": [],
+      "files": [
+        {
+          "name": "recovery-check.md",
+          "path": "artifacts/974c8232-193a-4e15-9b0a-69c740ddb0e8/recovery-check.md",
+          "sha256": "6fa75a907ce6d90e339a7f66565cbd481aacdd111cbc5cf8085770ec9fb9ec79",
+          "bytes": 212,
+          "expectedHash": "6fa75a907ce6d90e339a7f66565cbd481aacdd111cbc5cf8085770ec9fb9ec79",
+          "status": "matched",
+          "text": "# 架空の部分結果回復試験\n\nこの本文は故障試験用の固定データです。実Codexの制作ではありません。\n現物を再作成せず、モデルへの接続だけを回復します。\n",
+          "textTruncated": false
+        }
+      ],
+      "impact": {
+        "changed": [
+          "974c8232-193a-4e15-9b0a-69c740ddb0e8:child:0",
+          "recovery-fixture-ready-2026-10-26"
+        ],
+        "affected": [
+          "974c8232-193a-4e15-9b0a-69c740ddb0e8:child:0",
+          "recovery-fixture-ready-2026-10-26"
+        ],
+        "exempt": [],
+        "unknown": [],
+        "inputRecheck": [],
+        "conflicts": [],
+        "details": [
+          {
+            "targetId": "10492290-2234-4555-94f1-83f5e60bbff3",
+            "title": "試験：見積り時間",
+            "domain": "数値の接続検証",
+            "effect": "unchanged",
+            "reasons": [
+              "明示された影響経路なし。未記録の影響は保証しません。"
+            ],
+            "beforeSpecHash": null,
+            "afterSpecHash": null
+          },
+          {
+            "targetId": "2af665d2-8eb8-448c-aeb2-00a6b510b605",
+            "title": "構造試験：資料メモ",
+            "domain": "数値の接続検証",
+            "effect": "unchanged",
+            "reasons": [
+              "明示された影響経路なし。未記録の影響は保証しません。"
+            ],
+            "beforeSpecHash": null,
+            "afterSpecHash": null
+          },
+          {
+            "targetId": "4d1ee4db-8747-45cc-8d91-b4785ec6b608",
+            "title": "琥珀の時計塔（出所・設定の接続検証）",
+            "domain": "短編の接続検証",
+            "effect": "unchanged",
+            "reasons": [
+              "明示された影響経路なし。未記録の影響は保証しません。"
+            ],
+            "beforeSpecHash": null,
+            "afterSpecHash": null
+          },
+          {
+            "targetId": "971a7b19-9a2e-4f39-8758-1327a1968678",
+            "title": "試験：時間あたり見積り",
+            "domain": "数値の接続検証",
+            "effect": "unchanged",
+            "reasons": [
+              "明示された影響経路なし。未記録の影響は保証しません。"
+            ],
+            "beforeSpecHash": null,
+            "afterSpecHash": null
+          },
+          {
+            "targetId": "974c8232-193a-4e15-9b0a-69c740ddb0e8:child:0",
+            "title": "回復で接続する資料メモ",
+            "domain": "回復の架空試験",
+            "effect": "affected",
+            "reasons": [
+              "対象の内容・条件・参照が変更されます。"
+            ],
+            "beforeSpecHash": "d057e43bf722e2e857ac4c13e960ad29d4ff2a1c8f1789757bc7bd55c1291b24",
+            "afterSpecHash": "c05dadc38ab5969835828fec87797619df57e2a15a78cb6beade93af65acb9a2"
+          },
+          {
+            "targetId": "alias",
+            "title": "UIから参照する同じ主人公紹介",
+            "domain": "UI・表現",
+            "effect": "unchanged",
+            "reasons": [
+              "明示された影響経路なし。未記録の影響は保証しません。"
+            ],
+            "beforeSpecHash": null,
+            "afterSpecHash": null
+          },
+          {
+            "targetId": "fa2f7bcf-ef72-4b39-af97-9c68b0c25e84",
+            "title": "試験：短編の見積り合計",
+            "domain": "数値の接続検証",
+            "effect": "unchanged",
+            "reasons": [
+              "明示された影響経路なし。未記録の影響は保証しません。"
+            ],
+            "beforeSpecHash": null,
+            "afterSpecHash": null
+          },
+          {
+            "targetId": "goal",
+            "title": "架空ゲーム完成（接続検証）",
+            "domain": "全体",
+            "effect": "unchanged",
+            "reasons": [
+              "明示された影響経路なし。未記録の影響は保証しません。"
+            ],
+            "beforeSpecHash": null,
+            "afterSpecHash": null
+          },
+          {
+            "targetId": "local",
+            "title": "局所例外の主人公紹介",
+            "domain": "物語",
+            "effect": "unchanged",
+            "reasons": [
+              "明示された影響経路なし。未記録の影響は保証しません。"
+            ],
+            "beforeSpecHash": null,
+            "afterSpecHash": null
+          },
+          {
+            "targetId": "recovery-fixture-missing-2026-10-26",
+            "title": "回復試験：現物欠落で保留",
+            "domain": "回復の架空試験",
+            "effect": "unchanged",
+            "reasons": [
+              "明示された影響経路なし。未記録の影響は保証しません。"
+            ],
+            "beforeSpecHash": null,
+            "afterSpecHash": null
+          },
+          {
+            "targetId": "recovery-fixture-ready-2026-10-26",
+            "title": "回復試験：保存後に停止した制作",
+            "domain": "回復の架空試験",
+            "effect": "affected",
+            "reasons": [
+              "対象の内容・条件・参照が変更されます。"
+            ],
+            "beforeSpecHash": "c05dadc38ab5969835828fec87797619df57e2a15a78cb6beade93af65acb9a2",
+            "afterSpecHash": "c05dadc38ab5969835828fec87797619df57e2a15a78cb6beade93af65acb9a2"
+          },
+          {
+            "targetId": "regular",
+            "title": "通常の主人公紹介",
+            "domain": "キャラクター",
+            "effect": "unchanged",
+            "reasons": [
+              "明示された影響経路なし。未記録の影響は保証しません。"
+            ],
+            "beforeSpecHash": null,
+            "afterSpecHash": null
+          },
+          {
+            "targetId": "shared",
+            "title": "共有する衣装設定",
+            "domain": "共通仕様",
+            "effect": "unchanged",
+            "reasons": [
+              "明示された影響経路なし。未記録の影響は保証しません。"
+            ],
+            "beforeSpecHash": null,
+            "afterSpecHash": null
+          },
+          {
+            "targetId": "unexplored",
+            "title": "戦闘は未具体化",
+            "domain": "戦闘",
+            "effect": "unchanged",
+            "reasons": [
+              "明示された影響経路なし。未記録の影響は保証しません。"
+            ],
+            "beforeSpecHash": null,
+            "afterSpecHash": null
+          }
+        ]
+      },
+      "modelReceipt": null,
+      "changes": {
+        "beforeBody": "部分制作の回復を確認する架空の故障試験。応答は試験用の固定データであり、実Codexの制作や認証成立の証拠ではない。",
+        "updatedBody": null,
+        "children": [
+          {
+            "title": "回復で接続する資料メモ",
+            "body": "架空の回復試験。接続が重複しないことを確認する。",
+            "domain": "回復の架空試験"
+          }
+        ],
+        "artifact": "artifacts/974c8232-193a-4e15-9b0a-69c740ddb0e8/recovery-check.md"
+      },
+      "signature": "2587b417b7301ddb28c535212eb4dc7077103de9fbf116a908e3bb179ab466a9"
+    },
+    "receivedStatus": 200,
+    "retained": false,
+    "revision": 48,
+    "receiptCount": 1,
+    "children": [
+      {
+        "id": "974c8232-193a-4e15-9b0a-69c740ddb0e8:child:0",
+        "parentId": "recovery-fixture-ready-2026-10-26",
+        "title": "回復で接続する資料メモ",
+        "body": "架空の回復試験。接続が重複しないことを確認する。",
+        "domain": "回復の架空試験",
+        "depth": 1,
+        "status": "planned",
+        "progress": 0,
+        "start": "",
+        "due": "",
+        "x": 245,
+        "y": 100,
+        "kind": "concept",
+        "unit": "",
+        "value": null,
+        "formula": "",
+        "artifact": "",
+        "criteria": "",
+        "verified": false,
+        "version": 1,
+        "specs": [],
+        "required": false,
+        "weight": null,
+        "sourceRefs": [],
+        "metricInputs": [],
+        "metricSource": "",
+        "metricFreshness": "unknown"
+      }
+    ]
+  },
+  "missing": {
+    "runId": "42125fa8-e54c-4138-967e-700448d74153",
+    "preview": {
+      "runId": "42125fa8-e54c-4138-967e-700448d74153",
+      "targetId": "recovery-fixture-missing-2026-10-26",
+      "title": "回復試験：現物欠落で保留",
+      "fixture": true,
+      "baseRevision": 48,
+      "status": "held",
+      "issues": [
+        "全成果物の現物が提案時の指紋と一致していません。再作成・上書きはしていません。"
+      ],
+      "files": [
+        {
+          "name": "recovery-check.md",
+          "path": "artifacts/42125fa8-e54c-4138-967e-700448d74153/recovery-check.md",
+          "sha256": "6fa75a907ce6d90e339a7f66565cbd481aacdd111cbc5cf8085770ec9fb9ec79",
+          "bytes": 212,
+          "expectedHash": "6fa75a907ce6d90e339a7f66565cbd481aacdd111cbc5cf8085770ec9fb9ec79",
+          "status": "matched",
+          "text": "# 架空の部分結果回復試験\n\nこの本文は故障試験用の固定データです。実Codexの制作ではありません。\n現物を再作成せず、モデルへの接続だけを回復します。\n",
+          "textTruncated": false
+        },
+        {
+          "name": "missing-check.md",
+          "path": "artifacts/42125fa8-e54c-4138-967e-700448d74153/missing-check.md",
+          "sha256": null,
+          "bytes": 54,
+          "expectedHash": "0f7d5d433e0c5c8ef91394791f548d9d6e0ab8b7ef8e9385f394e75ac0fae904",
+          "status": "missing",
+          "text": null,
+          "error": "ENOENT: no such file or directory, lstat 'C:\\Users\\basst\\Dropbox\\AI Project\\16.Mindwise-Rebuild\\artifacts\\42125fa8-e54c-4138-967e-700448d74153\\missing-check.md'"
+        }
+      ],
+      "impact": null,
+      "modelReceipt": null,
+      "changes": null,
+      "signature": "cba72e95ff53bc1b16b9a0a164ffe1c8739def4e5ebe966f478567fe31928227"
+    },
+    "refusedStatus": 409,
+    "error": {
+      "error": "全成果物の現物が提案時の指紋と一致していません。再作成・上書きはしていません。"
+    }
+  },
+  "uiVerified": false
+}

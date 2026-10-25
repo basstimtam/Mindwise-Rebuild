@@ -1,0 +1,44 @@
+{
+  "fixture": true,
+  "realCodexCalls": 0,
+  "protocolAdapter": "simulated test adapter",
+  "createdAt": "2026-10-25T23:04:09.538Z",
+  "cases": [
+    {
+      "kind": "ready",
+      "targetId": "recovery-fixture-ready-2026-10-26",
+      "title": "回復試験：保存後に停止した制作",
+      "runId": "974c8232-193a-4e15-9b0a-69c740ddb0e8",
+      "expectedArtifacts": [
+        {
+          "path": "artifacts/974c8232-193a-4e15-9b0a-69c740ddb0e8/recovery-check.md",
+          "sha256": "6fa75a907ce6d90e339a7f66565cbd481aacdd111cbc5cf8085770ec9fb9ec79",
+          "bytes": 212
+        }
+      ],
+      "expectedChildId": "974c8232-193a-4e15-9b0a-69c740ddb0e8:child:0",
+      "expectedChildTitle": "回復で接続する資料メモ"
+    },
+    {
+      "kind": "missing",
+      "targetId": "recovery-fixture-missing-2026-10-26",
+      "title": "回復試験：現物欠落で保留",
+      "runId": "42125fa8-e54c-4138-967e-700448d74153",
+      "expectedArtifacts": [
+        {
+          "path": "artifacts/42125fa8-e54c-4138-967e-700448d74153/recovery-check.md",
+          "sha256": "6fa75a907ce6d90e339a7f66565cbd481aacdd111cbc5cf8085770ec9fb9ec79",
+          "bytes": 212
+        },
+        {
+          "path": "artifacts/42125fa8-e54c-4138-967e-700448d74153/missing-check.md",
+          "sha256": "0f7d5d433e0c5c8ef91394791f548d9d6e0ab8b7ef8e9385f394e75ac0fae904",
+          "bytes": 54
+        }
+      ],
+      "expectedChildId": "42125fa8-e54c-4138-967e-700448d74153:child:0",
+      "expectedChildTitle": "回復で接続する資料メモ"
+    }
+  ],
+  "revision": 47
+}

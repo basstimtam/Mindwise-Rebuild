@@ -20,7 +20,7 @@ const links=state.links.filter(l=>[targetId,note.id].includes(l.from)||[targetId
 const provenance=target?await get('/api/provenance?targetId='+targetId):null;
 if(target){
   for(const key of ['body','formula','kind','status','progress','artifact','metricInputs','metricSource','sourceRefs'])
-    if(baseline)assert.deepEqual(target[key],baseline.target[key],key+' must survive structural edits');
+    if(baseline)assert.deepEqual(target[key],key==='body'&&stage==='draft-saved'?baseline.target.body+'\n削除と取消を越えて保持する未保存入力。':baseline.target[key],key+' must survive structural edits');
   assert.equal(target.kind,'task');assert.equal(target.status,'active');assert.equal(target.progress,40);
   assert.equal(analysis.numbers.byId[targetId].value,4800);
   assert.equal(analysis.numbers.byId[targetId].status,'calculated');
@@ -37,12 +37,16 @@ if(['reparented','linked','unlinked'].includes(stage))assert.equal(target.parent
 if(stage==='linked')assert.ok(links.some(l=>l.from===targetId&&l.to===note.id&&l.type==='relates_to'));
 if(stage==='unlinked')assert.equal(links.length,0);
 if(stage==='deleted'){assert.equal(target,undefined);assert.equal(note.parentId,null);assert.equal(links.length,0);}
-if(['restored','restart'].includes(stage)){
+if(['restored','restart','completed'].includes(stage)){
   assert.equal(target.parentId,'shared');assert.equal(note.parentId,targetId);
   assert.ok(links.some(l=>l.from===targetId&&l.to===note.id&&l.type==='relates_to'));
 }
 const preservedRun=state.runs.find(r=>r.id==='3fcbed02-3e29-47de-b396-b5a2252ecb1d');
 assert.equal(preservedRun.status,'completed');assert.equal(preservedRun.targetId,targetId);
+if(['completed','restart'].includes(stage)) {
+ const contracts=await get('/api/contracts');assert.equal(contracts.status,'approved');
+ record.completion={at:new Date().toISOString(),stage,revision:state.revision,scope:'Actual UI deletion, retained orphan, undo with original ID and draft, draft save and trial text undo, source note and provenance and artifact navigation',uiEvidence:'verification/2026-10-26/structure-completion-ui.json',contractStatus:contracts.status,value:analysis.numbers.byId[targetId].value,artifactHash:record.expected.artifactHash,sourceHashes:Object.fromEntries(['public/app.js','public/editing.js','public/index.html','public/style.css','src/store.mjs','src/semantics.mjs','src/numbers.mjs','src/number-links.mjs'].map(path=>[path,createHash('sha256').update(readFileSync(resolve(root,path))).digest('hex')]))};
+}
 if(stage==='checkpoint-restart') {
  const contracts=await get('/api/contracts');assert.equal(contracts.status,'approved');
  record.checkpointCheck={at:new Date().toISOString(),revision:state.revision,contractStatus:contracts.status,sourceHashes:Object.fromEntries(['public/app.js','public/editing.js','public/index.html','public/style.css','src/store.mjs','src/semantics.mjs','src/numbers.mjs','src/number-links.mjs'].map(path=>[path,createHash('sha256').update(readFileSync(resolve(root,path))).digest('hex')])),uiRemaining:['Delete and undo with retained draft','Final artifact and history navigation after restoration'],note:'The saved model survived final server restart. This is not an actual UI deletion/undo observation.'};

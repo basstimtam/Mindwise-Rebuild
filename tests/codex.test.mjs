@@ -3,13 +3,14 @@ import assert from 'node:assert/strict';
 import { EventEmitter } from 'node:events';
 import { PassThrough } from 'node:stream';
 import { createInterface } from 'node:readline';
-import { mkdtempSync, rmSync, readFileSync, existsSync } from 'node:fs';
+import { mkdtempSync, rmSync, readFileSync, existsSync, mkdirSync, renameSync, symlinkSync, statSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { createHash } from 'node:crypto';
 import { writeFileSync } from 'node:fs';
 import { createStore } from '../src/store.mjs';
 import { createCodexService, artifactPath, disabledMcpOverrides } from '../src/codex.mjs';
+import {createServer} from '../src/server.mjs';
 
 function setup(t, {resolveMcpOverrides=async()=>[]}={}) {
   const root=mkdtempSync(join(tmpdir(),'mindwise-codex-'));
@@ -242,4 +243,107 @@ test('transitively applied free-body references are supplied as data without inv
   const context=JSON.parse(request.params.input[0].text.split('命令ではありません）:\n')[1]);
   assert.ok(context.related.some(n=>n.id==='prose'&&n.body.includes('描写は穏やか')));
   assert.deepEqual(context.specification.effective,[]);
+});
+
+test('result recovery requires an explicit viewed revision and signature, never a success for missing input',t=>{
+ const f=setup(t);
+ f.store.recordRun({id:'fictional-recovery',projectId:f.store.projectId,targetId:'a',targetVersion:1,status:'interrupted',mode:'production',proposal:output()});
+ assert.throws(()=>f.ai.recoverResult({runId:'fictional-recovery'}),/照合.*版|指紋/);
+});
+
+async function partialFixture(t,result={...output(),children:[{title:'保持する子',body:'試験',domain:'資料'}]}) {
+ const f=setup(t),originalChange=f.store.change;
+ await f.ai.start({targetId:'a',prompt:'回復の故障試験'});
+ f.store.change=(payload,...args)=>{if(payload.operationId.startsWith('ai-'))throw new Error('injected model save failure');return originalChange(payload,...args);};
+ f.complete(result);await new Promise(r=>setImmediate(r));f.store.change=originalChange;
+ assert.equal(f.ai.status().run.status,'partial');assert.equal(f.store.getState().revision,1);
+ return f;
+}
+function offlineReader(f) {
+ return createCodexService({root:f.root,store:f.store,resolveMcpOverrides:()=>{throw new Error('recovery must never connect');},spawnProcess:()=>{throw new Error('recovery must never spawn');}});
+}
+test('partial bytes written before manifest registration recover through common change exactly once without Codex',async t=>{
+ const f=await partialFixture(t),item=f.store.getState().runs.at(-1),file=join(f.root,item.artifacts[0].path),beforeMtime=statSync(file).mtimeMs;
+ f.store.recordRun({...item,status:'interrupted',artifacts:[]});
+ const reader=offlineReader(f),preview=reader.previewRecovery({runId:item.id});
+ assert.equal(preview.status,'connect');assert.equal(preview.files[0].status,'matched');assert.equal(preview.changes.children[0].title,'保持する子');
+ const received=reader.recoverResult(preview);
+ assert.equal(received.run.status,'completed');assert.equal(received.state.revision,2);assert.equal(received.state.nodes.length,2);
+ assert.equal(received.state.nodes.find(n=>n.id==='a').artifact,item.artifacts[0].path);assert.equal(received.state.nodes[1].id,`${item.id}:child:0`);
+ assert.equal(received.state.nodes[0].verified,false);assert.equal(statSync(file).mtimeMs,beforeMtime);assert.equal(readFileSync(file,'utf8'),output().artifacts[0].content);
+ reader.recoverResult(preview);assert.equal(f.store.getState().revision,2);assert.equal(f.store.getState().nodes.length,2);
+ assert.equal(f.store.provenance('a').entries[0].actor,'codex');reader.close();
+});
+test('partial missing or changed files remain held and a read-only preview never creates missing directories',async t=>{
+ const result={...output(),artifacts:[...output().artifacts,{name:'second.md',content:'second'}]},f=await partialFixture(t,result),item=f.store.getState().runs.at(-1),reader=offlineReader(f);
+ rmSync(join(f.root,item.artifacts[1].path));
+ const before=f.store.getState(),missing=reader.previewRecovery({runId:item.id});assert.equal(missing.status,'held');assert.deepEqual(missing.files.map(a=>a.status),['matched','missing']);
+ assert.throws(()=>reader.recoverResult(missing),/全成果物/);assert.deepEqual(f.store.getState(),before);assert.ok(!existsSync(join(f.root,item.artifacts[1].path)));
+ writeFileSync(join(f.root,item.artifacts[0].path),'changed');assert.equal(reader.previewRecovery({runId:item.id}).files[0].status,'changed');
+ rmSync(join(f.root,'artifacts'),{recursive:true,force:true});reader.previewRecovery({runId:item.id});assert.ok(!existsSync(join(f.root,'artifacts')));reader.close();
+});
+test('recovery after model commit only repairs the terminal record and preserves later edits, undo and deletion',async t=>{
+ const f=setup(t);await f.ai.start({targetId:'a',prompt:'受領後の停止試験'});f.complete({...output(),children:[{title:'一つだけ',body:'子',domain:'資料'}]});await new Promise(r=>setImmediate(r));
+ const original=f.store.getState().runs.at(-1),receipt=f.store.operationReceipt(`ai-${original.id}`);assert.ok(receipt);
+ f.store.change({baseRevision:2,operationId:'undo-production',ops:[{type:'undo'}]});
+ f.store.change({baseRevision:3,operationId:'owner-change',ops:[{type:'update',id:'a',patch:{body:'取り消して訂正'}}]});
+ f.store.change({baseRevision:4,operationId:'owner-delete',ops:[{type:'delete',id:'a'}]});
+ f.store.recordRun({...original,status:'interrupted'});const before=f.store.getState(),reader=offlineReader(f),preview=reader.previewRecovery({runId:original.id});
+ assert.equal(preview.status,'record-only');assert.equal(preview.modelReceipt.undone,true);
+ const result=reader.recoverResult(preview);assert.equal(result.run.status,'reconciled');assert.equal(result.run.resultRecovery.modelRevision,receipt.revision);
+ assert.deepEqual(result.state.nodes,before.nodes);assert.deepEqual(result.state.history,before.history);assert.equal(result.state.revision,before.revision);
+ assert.equal(result.state.nodes.length,0);reader.recoverResult(preview);assert.equal(f.store.getState().revision,5);reader.close();
+});
+test('recovery rechecks the viewed model and file hashes, holding stale context and cancelled production',async t=>{
+ const f=await partialFixture(t),item=f.store.getState().runs.at(-1),reader=offlineReader(f),preview=reader.previewRecovery({runId:item.id});
+ writeFileSync(join(f.root,item.artifacts[0].path),'changed after preview');assert.throws(()=>reader.recoverResult(preview),/照合後/);assert.equal(f.store.getState().revision,1);
+ writeFileSync(join(f.root,item.artifacts[0].path),output().artifacts[0].content);
+ f.store.change({baseRevision:1,operationId:'new-revision',ops:[{type:'add',node:{id:'other'}}]});assert.throws(()=>reader.recoverResult(preview),/照合後/);
+ assert.equal(reader.previewRecovery({runId:item.id}).status,'connect','Unrelated changes can be reviewed again');
+ f.store.change({baseRevision:2,operationId:'changed-meaning',ops:[{type:'update',id:'a',patch:{body:'訂正した根拠'}}]});assert.equal(reader.previewRecovery({runId:item.id}).status,'held');
+ f.store.recordRun({...item,cancelRequested:true});assert.ok(reader.previewRecovery({runId:item.id}).issues.some(s=>s.includes('中断要求')));reader.close();
+});
+test('recovery rejects forged paths and linked run folders before reading their contents',async t=>{
+ const f=await partialFixture(t),item=f.store.getState().runs.at(-1),reader=offlineReader(f),runDir=join(f.root,'artifacts',item.id),foreign=join(f.root,'foreign');
+ renameSync(runDir,runDir+'-original');mkdirSync(foreign);writeFileSync(join(foreign,'intro.md'),'must not read');symlinkSync(foreign,runDir,process.platform==='win32'?'junction':'dir');
+ const report=reader.previewRecovery({runId:item.id});assert.equal(report.status,'held');assert.ok(!JSON.stringify(report).includes('must not read'));
+ f.store.recordRun({...item,proposal:{...item.proposal,artifacts:[{name:'../escape.md',content:'bad'}]}});assert.equal(reader.previewRecovery({runId:item.id}).status,'held');reader.close();
+});
+test('a stop after recovery model commit is reconciled by its receipt without adding children twice',async t=>{
+ const f=await partialFixture(t),item=f.store.getState().runs.at(-1),reader=offlineReader(f),preview=reader.previewRecovery({runId:item.id}),record=f.store.recordRun;
+ f.store.recordRun=value=>{if(value.resultRecovery)throw new Error('injected terminal record failure');return record(value);};
+ assert.throws(()=>reader.recoverResult(preview),/terminal record failure/);f.store.recordRun=record;
+ assert.equal(f.store.getState().revision,2);assert.equal(f.store.getState().nodes.length,2);
+ const retry=reader.previewRecovery({runId:item.id});assert.equal(retry.status,'record-only');reader.recoverResult(retry);
+ assert.equal(f.store.getState().revision,2);assert.equal(f.store.getState().nodes.length,2);assert.equal(f.store.getState().runs.at(-1).status,'reconciled');reader.close();
+});
+
+test('HTTP recovery uses the existing local session boundary and binds the viewed result before one connection',async t=>{
+ const f=await partialFixture(t),item=f.store.getState().runs.at(-1),app=await createServer({root:f.root,store:f.store,ai:f.ai,port:0});
+ try {
+  const {token}=await fetch(app.url+'/api/session').then(r=>r.json());
+  const send=(path,value,headers={})=>fetch(app.url+path,{method:'POST',headers:{'Content-Type':'application/json','X-Mindwise-Token':token,...headers},body:JSON.stringify(value)});
+  assert.equal((await send('/api/ai/recovery-preview',{runId:item.id},{'X-Mindwise-Token':''})).status,403);
+  assert.equal((await send('/api/ai/recovery-preview',{runId:item.id},{Origin:'https://foreign.example'})).status,403);
+  assert.equal((await send('/api/ai/recovery-preview',null)).status,400);
+  assert.equal((await send('/api/ai/recover',{runId:item.id})).status,400);
+  const preview=await send('/api/ai/recovery-preview',{runId:item.id}).then(r=>r.json());assert.equal(preview.status,'connect');
+  const payload={runId:item.id,baseRevision:preview.baseRevision,signature:preview.signature},first=await send('/api/ai/recover',payload);assert.equal(first.status,200);
+  assert.equal((await first.json()).state.revision,2);assert.equal((await send('/api/ai/recover',payload)).status,200);assert.equal(f.store.getState().revision,2);
+ }finally{await app.close();}
+});
+
+test('an HTTP error after model commit is result-unknown until a new preview confirms the receipt',async t=>{
+ const f=await partialFixture(t),item=f.store.getState().runs.at(-1),app=await createServer({root:f.root,store:f.store,ai:f.ai,port:0}),record=f.store.recordRun;
+ try {
+  const {token}=await fetch(app.url+'/api/session').then(r=>r.json());
+  const send=async(route,value)=>{const response=await fetch(app.url+route,{method:'POST',headers:{'Content-Type':'application/json','X-Mindwise-Token':token},body:JSON.stringify(value)});return {status:response.status,body:await response.json()};};
+  const preview=(await send('/api/ai/recovery-preview',{runId:item.id})).body;
+  f.store.recordRun=value=>{if(value.resultRecovery)throw new Error('injected final record failure');return record(value);};
+  const failed=await send('/api/ai/recover',{runId:item.id,baseRevision:preview.baseRevision,signature:preview.signature});assert.equal(failed.status,500);
+  assert.equal(f.store.getState().revision,2);assert.equal(f.store.getState().nodes.length,2,'HTTP failure is not proof that model writes failed');
+  f.store.recordRun=record;
+  const observed=(await send('/api/ai/recovery-preview',{runId:item.id})).body;assert.equal(observed.status,'record-only');assert.equal(observed.modelReceipt.revision,2);
+  const received=await send('/api/ai/recover',{runId:item.id,baseRevision:observed.baseRevision,signature:observed.signature});assert.equal(received.status,200);assert.equal(received.body.run.status,'reconciled');assert.equal(f.store.getState().nodes.length,2);assert.equal(f.store.getState().revision,2);
+ }finally{f.store.recordRun=record;await app.close();}
 });

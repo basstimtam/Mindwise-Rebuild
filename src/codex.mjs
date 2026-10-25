@@ -7,6 +7,7 @@ import { promisify } from 'node:util';
 import { resolveSpecifications } from './semantics.mjs';
 import { contractContext } from './contracts.mjs';
 import { calculateNumbers, numberContext } from './numbers.mjs';
+import { readNodeArtifact } from './artifacts.mjs';
 
 const hash = value => createHash('sha256').update(typeof value === 'string' ? value : JSON.stringify(value)).digest('hex');
 const now = () => new Date().toISOString();
@@ -63,7 +64,7 @@ const outputSchema = {
 };
 
 // Only text artifacts under this application's dedicated output root are accepted.
-export function artifactPath(root, runId, name) {
+export function artifactPath(root, runId, name, {create=true}={}) {
   if (!/^[a-zA-Z0-9_-]{1,80}$/.test(runId) || !/^[\p{L}\p{N} _.-]{1,100}$/u.test(name) || name === '.' || name === '..' || /[. ]$/.test(name) || /^(con|prn|aux|nul|com[1-9]|lpt[1-9])(\.|$)/i.test(name)) throw new Error('成果物名が不正です');
   if (!/\.(md|txt|json|csv|html|css|js|mjs|py|svg|xml)$/i.test(name)) throw new Error('この制作口はテキスト成果物のみ対応しています');
   const base = realpathSync(root);
@@ -71,9 +72,11 @@ export function artifactPath(root, runId, name) {
   for (const part of ['artifacts', runId]) {
     parent = path.join(parent, part);
     if (existsSync(parent) && lstatSync(parent).isSymbolicLink()) throw new Error('成果物保存先のリンク越境を拒否しました');
-    mkdirSync(parent, { recursive: true });
-    const resolved = realpathSync(parent);
-    if (!resolved.toLowerCase().startsWith((base + path.sep).toLowerCase())) throw new Error('成果物保存先が案件外です');
+    if(create)mkdirSync(parent, { recursive: true });
+    if(existsSync(parent)) {
+      const resolved = realpathSync(parent);
+      if (!resolved.toLowerCase().startsWith((base + path.sep).toLowerCase())) throw new Error('成果物保存先が案件外です');
+    }
   }
   return path.join(parent, name);
 }
@@ -92,8 +95,8 @@ export function validateOutput(value) {
     }
   }
   if (value.children.length > 30 || value.artifacts.length > 10 || JSON.stringify(value).length > 500_000) throw new Error('一度の制作上限を超えました');
-  for (const n of value.children) if (![n.title, n.body, n.domain].every(x => typeof x === 'string') || !n.title.trim()) throw new Error('子枝の内容が不正です');
-  for (const a of value.artifacts) if (typeof a.name !== 'string' || typeof a.content !== 'string') throw new Error('成果物の形式が不正です');
+  for (const n of value.children) if (!n || Object.keys(n).some(k=>!['title','body','domain'].includes(k)) || ![n.title, n.body, n.domain].every(x => typeof x === 'string') || !n.title.trim()) throw new Error('子枝の内容が不正です');
+  for (const a of value.artifacts) if (!a || Object.keys(a).some(k=>!['name','content'].includes(k)) || typeof a.name !== 'string' || typeof a.content !== 'string') throw new Error('成果物の形式が不正です');
   if (new Set(value.artifacts.map(a => a.name.toLowerCase())).size !== value.artifacts.length) throw new Error('成果物名が重複しています');
   return value;
 }
@@ -213,15 +216,21 @@ export function createCodexService({ store, root, spawnProcess = spawn, resolveM
       writeFileSync(a.path, a.content, { encoding: 'utf8', flag: 'wx' });
       run.artifacts.push({ path: path.relative(root, a.path).replaceAll('\\', '/'), sha256: hash(a.content), bytes: Buffer.byteLength(a.content) }); persist();
     }
-    const ops = [];
-    const patch = {};
-    if (result.updatedBody !== null) patch.body = result.updatedBody;
-    if (run.artifacts.length) patch.artifact = run.artifacts[0].path;
-    if (Object.keys(patch).length) ops.push({ type: 'update', id: run.targetId, patch });
-    for (const [i, child] of result.children.entries()) ops.push({ type: 'add', node: { ...child, id: randomUUID(), parentId: run.targetId, depth: (current.depth || 0) + 1, status: 'planned', kind: 'concept', x: current.x + 245, y: current.y + (i + 1) * 100 } });
+    const ops=productionOps(run,state,result,run.artifacts);
     if (ops.length) store.change({ baseRevision: state.revision, operationId: `ai-${run.id}`, ops,meta:runMeta(run) });
     run.status = 'completed'; run.finishedAt = now(); delete run.output;
     event('message', result.reply); event('status', '制作結果を接続しました。受入確認は別です'); persist(); active = false;
+  }
+
+  function productionOps(item,state,result,artifacts) {
+    const current=state.nodes.find(n=>n.id===item.targetId),ops=[];
+    if(!current)throw new Error('制作対象がありません');
+    const patch = {};
+    if (result.updatedBody !== null) patch.body = result.updatedBody;
+    if (artifacts.length) patch.artifact = artifacts[0].path;
+    if (Object.keys(patch).length) ops.push({ type: 'update', id: item.targetId, patch });
+    for (const [i, child] of result.children.entries()) ops.push({ type: 'add', node: { title:child.title,body:child.body,domain:child.domain, id:`${item.id}:child:${i}`, parentId:item.targetId, depth:(current.depth||0)+1, status:'planned',kind:'concept',x:current.x+245,y:current.y+(i+1)*100 } });
+    return ops;
   }
 
   function runMeta(item) { return {actor:'codex',reason:item.decisionReason||null,runId:item.id,sourceRefs:item.sourceRefs||[],inputs:item.inputs||[]}; }
@@ -241,10 +250,80 @@ export function createCodexService({ store, root, spawnProcess = spawn, resolveM
     return {runId,baseRevision:state.revision,targetId:item.targetId,before:state.nodes.find(n=>n.id===item.targetId).specs,after:item.proposal.settings,reason:item.decisionReason,impact:preview.impact};
   }
 
+  function inspectRecovery(runId) {
+    if(active||starting)throw new Error('制作の終了後に部分結果を照合してください');
+    const state=store.getState(),item=state.runs.find(r=>r.id===runId);
+    if(!item||item.projectId!==state.projectId)throw new Error('この案件の実行記録がありません');
+    const report={runId,targetId:item.targetId,title:item.inputs?.find(n=>n.id===item.targetId)?.title||'制作対象',fixture:Boolean(item.fixture),baseRevision:state.revision,status:'held',issues:[],files:[],impact:null,modelReceipt:null,changes:null};
+    let result,ops=[],expected=[];
+    try {
+      if(item.mode==='settings'||!['partial','interrupted','failed','applying','reconciled'].includes(item.status)&&!item.resultRecovery)throw new Error('部分制作の照合対象ではありません');
+      if(!item.proposal)throw new Error('回復に必要な保存済み応答がありません。結果不明の操作を再送していません。');
+      result=validateOutput(structuredClone(item.proposal));
+      if(result.settings!==null&&result.settings!==undefined)throw new Error('設定案はこの回復口では接続できません');
+      expected=result.artifacts.map(a=>{
+        // Validate location without creating a directory or trusting recorded paths.
+        const actual=artifactPath(root,item.id,a.name,{create:false});
+        return {name:a.name,path:path.relative(root,actual).replaceAll('\\','/'),sha256:hash(a.content),bytes:Buffer.byteLength(a.content)};
+      });
+      for(const a of expected) {
+        const file={...a,expectedHash:a.sha256,status:'missing',sha256:null,text:null};
+        try {
+          const actual=artifactPath(root,item.id,a.name,{create:false});
+          if(lstatSync(actual).isSymbolicLink())throw new Error('成果物ファイルのリンクは回復に使用できません');
+          const observed=readNodeArtifact(root,{artifact:a.path});
+          Object.assign(file,{sha256:observed.sha256,bytes:observed.bytes,status:observed.sha256===a.sha256&&observed.bytes===a.bytes?'matched':'changed',text:observed.text.slice(0,observed.sha256===a.sha256?500000:4000),textTruncated:observed.sha256!==a.sha256&&observed.text.length>4000});
+        }catch(error){file.error=error.message;file.status=error.code==='ENOENT'||error.code==='ENOTDIR'||error.status===404?'missing':'unreadable';}
+        report.files.push(file);
+      }
+      const receipt=store.operationReceipt(`ai-${item.id}`);
+      if(receipt) {
+        const recorded=receipt.after.runs.find(r=>r.id===item.id);
+        if(!recorded||recorded.targetId!==item.targetId||recorded.contextFingerprint!==item.contextFingerprint||hash(recorded.proposal)!==hash(item.proposal))throw new Error('モデルの受領と実行記録が一致しません');
+        report.modelReceipt={revision:receipt.revision,undone:Boolean(state.history.find(h=>h.operationId===`ai-${item.id}`)?.undone),laterChanges:state.revision>receipt.revision};
+        report.status='record-only';
+      } else {
+        if(item.cancelRequested)report.issues.push('中断要求のある結果は自動で採用を再開しません。現物照合だけを行います。');
+        if(!report.files.every(f=>f.status==='matched'))report.issues.push('全成果物の現物が提案時の指紋と一致していません。再作成・上書きはしていません。');
+        if(!state.nodes.some(n=>n.id===item.targetId))report.issues.push('制作対象が削除されています。');
+        else if(contextFingerprint(contextFor(state,item.targetId,root,'production'))!==item.contextFingerprint)report.issues.push('制作時から対象・仕様・出所・数値等の文脈が変わっています。');
+        if(!report.issues.length) {
+          ops=productionOps(item,state,result,expected);
+          report.impact=ops.length?store.preview({baseRevision:state.revision,operationId:`ai-${item.id}`,ops,meta:runMeta(item)}).impact:null;
+          report.status='connect';
+          report.changes={beforeBody:state.nodes.find(n=>n.id===item.targetId).body,updatedBody:result.updatedBody,children:result.children,artifact:expected[0]?.path||null};
+        }
+      }
+      if(item.resultRecovery)report.status='done';
+    }catch(error){report.status='held';report.issues.push(error.message);}
+    report.signature=hash({runId,status:item.status,cancelRequested:item.cancelRequested||false,proposal:item.proposal,context:item.contextFingerprint,baseRevision:state.revision,files:report.files.map(({path,status,sha256,bytes,error})=>({path,status,sha256,bytes,error})),receipt:report.modelReceipt,outcome:report.status,issues:report.issues});
+    return {report,item,result,ops,expected};
+  }
+
+  function recoverResult({runId,baseRevision,signature}={}) {
+    if(typeof runId!=='string'||!Number.isInteger(baseRevision)||baseRevision<0||typeof signature!=='string'||!/^[a-f0-9]{64}$/.test(signature))throw Object.assign(new Error('照合した版と指紋が必要です'),{status:400});
+    if(active||starting)throw new Error('制作の終了後に部分結果を照合してください');
+    const existing=store.getState().runs.find(r=>r.id===runId);
+    if(existing?.projectId===store.projectId&&existing.resultRecovery?.signature===signature)return {state:store.getState(),run:existing};
+    const plan=inspectRecovery(runId),{report,item,result,ops,expected}=plan;
+    if(report.baseRevision!==baseRevision||report.signature!==signature)throw Object.assign(new Error('照合後にモデル・実行・現物が変わりました。もう一度照合してください'),{status:409});
+    if(!['connect','record-only'].includes(report.status))throw Object.assign(new Error(report.issues.join(' / ')||'この結果は既に照合済みです'),{status:409});
+    let revision=report.modelReceipt?.revision||null;
+    if(report.status==='connect'&&ops.length)revision=store.change({baseRevision,operationId:`ai-${item.id}`,ops,meta:runMeta(item)}).revision;
+    const at=now(),message=report.status==='record-only'?`モデル接続の受領を確認し、実行記録だけを回復しました。${report.modelReceipt.undone?'元の接続は取消済みです。':''}後続の枝や現物は変更していません。現物の一致 ${report.files.filter(f=>f.status==='matched').length}/${report.files.length} 件。`:'保存済みの応答と現物を照合し、モデルへの接続を回復しました。Codexの再実行・ファイルの再作成はしていません。受入確認は別です。';
+    const recovered={...item,status:report.status==='record-only'?'reconciled':'completed',artifacts:expected,reply:result.reply,decisionReason:result.decisionReason,recovery:message,resultRecovery:{at,signature,kind:report.status,modelRevision:revision,modelUndone:report.modelReceipt?.undone||false,files:report.files.map(({path,status,sha256})=>({path,status,sha256}))}};
+    // If this final record write is interrupted, the common change receipt above
+    // makes the next reconciliation record-only. It cannot duplicate children.
+    store.recordRun(recovered);run=store.getState().runs.find(r=>r.id===runId);buffer=run.events||[];
+    return {state:store.getState(),run};
+  }
+
   return {
     status() { return { connected: initialized, accountType, active, lastError, mode: 'bounded-text-production', guarantee: '対象の文脈を送信し、構造化応答を検証して枝とテキスト成果物へ反映。任意shell実行なし。', run }; },
     events() { const state=store.getState(), latest=run || state.runs.at(-1) || null; return { events: buffer.length ? buffer : latest?.events || [], run: latest, revision: state.revision }; },
     previewProposal,
+    previewRecovery({runId}) {return inspectRecovery(runId).report;},
+    recoverResult,
     adoptProposal({runId,baseRevision}) {
       const item=proposalFor(runId),receipt=store.operationReceipt(`ai-settings-${item.id}`);
       if(receipt)return {state:store.getState(),run:item};

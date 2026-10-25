@@ -119,6 +119,11 @@ export async function createServer({root=rootDefault,dataDir,port=Number(process
       if(url.pathname==='/api/ai/start' && req.method==='POST') return json(await ai.start(await body(req)));
       if(url.pathname==='/api/ai/proposal' && req.method==='POST') return json(await ai.previewProposal(await body(req)));
       if(url.pathname==='/api/ai/adopt' && req.method==='POST') return json(await ai.adoptProposal(await body(req)));
+      if(['/api/ai/recovery-preview','/api/ai/recover'].includes(url.pathname) && req.method==='POST') {
+        const input=await body(req),preview=url.pathname.endsWith('recovery-preview'),allowed=new Set(preview?['runId']:['runId','baseRevision','signature']);
+        if(!input||typeof input!=='object'||Array.isArray(input)||Object.keys(input).some(k=>!allowed.has(k))||typeof input.runId!=='string'||!/^[a-zA-Z0-9_-]{1,80}$/.test(input.runId))throw new StoreError('回復照合の入力形式を確認してください。');
+        return json(await (preview?ai.previewRecovery(input):ai.recoverResult(input)));
+      }
       if(url.pathname==='/api/ai/interrupt' && req.method==='POST') return json(await ai.interrupt());
       if(url.pathname.startsWith('/api/')) throw new StoreError('APIが見つかりません。',404);
       if(req.method!=='GET' && req.method!=='HEAD') throw new StoreError('未対応の操作です。',405);

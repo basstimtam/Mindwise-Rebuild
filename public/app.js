@@ -1,5 +1,6 @@
 import {createSourcesUi} from './sources.js';
 import {createNumbersUi} from './numbers.js';
+import {createRecoveryUi} from './recovery.js';
 import {rebaseDraft,parentCandidates,selectionAfterChange} from './editing.js';
 const $ = (q, parent = document) => parent.querySelector(q);
 const $$ = (q, parent = document) => [...parent.querySelectorAll(q)];
@@ -13,6 +14,7 @@ let camera = { x: 20, y: 30, scale: 1 }, toastTimer, aiEvents = [], aiRun = null
 const freshConversationTargets = new Set();
 const detailDrafts = new Map(), relationDrafts = new Map();
 const sourcesUi=createSourcesUi({api,getNode:node,change,toast});
+const recoveryUi=createRecoveryUi({api,el,toast,onRecovered:async result=>{state=result.state;aiRun=result.run;render();await refreshAnalysis();await pollAi();},onUncertain:async()=>{state=await api('/api/state');render();await refreshAnalysis();await pollAi();}});
 const numbersUi=createNumbersUi({el,button,field,getState:()=>state,getAnalysis:currentAnalysis,getSelected:()=>selected,choose});
 let analysis = null, analysisTarget = null, analysisSequence = 0, analysisFetch = null, analysisAt = 0, analysisError = '', reviewedArtifact = null, verificationPending = false;
 function currentAnalysis() { return analysis?.revision === state.revision && analysisTarget === (selected || '') ? analysis : null; }
@@ -240,7 +242,7 @@ function renderProgress() {
  $('#progressDetail').textContent = progress ? `全体完成は未判定 · 重み未定 ${progress.unknownWeightCount ?? 0} 件 · 未見積り領域 ${(progress.unestimatedDomains || []).length} 件 · 同じ成果物は全体で一度だけ集計` : '必要な成果と重みを定義すると、現物の確認結果から集計します。';
  $('#progressButton').disabled = !progress;
  const run = aiRun || [...(state.runs || [])].at(-1), recent = $('#recentRun');recent.replaceChildren(el('span','eyebrow','セッションをつなぐ'));
- if(run)recent.append(el('strong','',`${title(run.targetId)} · ${run.status || '状態未取得'}`),el('small','',run.status==='completed'?'AI制作の終了。成果物の受入確認は別に行います。':'実行開始時の対象と版を保持'));
+ if(run)recent.append(el('strong','',`${title(run.targetId)} · ${run.status || '状態未取得'}`),el('small','',run.fixture?'故障試験の固定応答。実Codexの制作ではありません。':run.status==='reconciled'?'接続の受領を照合しました。現物の受入は別です。':run.status==='completed'?'AI制作の終了。成果物の受入確認は別に行います。':'実行開始時の対象と版を保持'));
  else recent.append(el('strong','','制作の記録が、ここに戻ります'),el('small','','対象・成果物・理由を同じ地図へ'));
  if($('#progressDialog').open)renderProgressDetails();
 }
@@ -276,7 +278,7 @@ function renderAiTarget() {
  $('#interrupt').disabled = !executing;
  if(numbersUnresolved&&$('#aiMode').value!=='settings')$('#aiSpecStatus').textContent='関連する数値が未解決です。数値表示で欠損・単位・出所・鮮度を確認してください。';
  if($('#aiMode').value==='settings'&&!unresolved)$('#aiSpecStatus').textContent='選択中の本文と設定から案を作ります。差分と影響を確認してから採用できます。';
- if (aiRun) $('#aiStatus').textContent = `${title(aiRun.targetId)} · ` + ({connecting:'Codexへ接続中',running:'制作中',applying:'制作結果を保存中',completed:'制作結果を保存しました。内容の受入は未確認です。',failed:'制作に失敗しました',interrupted:'前回の制作は中断しています。自動再送していません。',needs_review:'対象が更新されたため、元の版への提案として保存しています。',partial:'部分結果があります。自動再送していません。'}[aiRun.status] || aiRun.status) + (aiRun.error ? `：${aiRun.error}` : '');
+ if (aiRun) $('#aiStatus').textContent = `${title(aiRun.targetId)} · ` + ({connecting:'Codexへ接続中',running:'制作中',applying:'制作結果を保存中',completed:'制作結果を保存しました。内容の受入は未確認です。',failed:'制作に失敗しました',interrupted:'前回の制作は中断しています。自動再送していません。',needs_review:'対象が更新されたため、元の版への提案として保存しています。',partial:'部分結果があります。自動再送していません。',reconciled:'モデルの受領を照合し、実行記録を回復しました。現物の受入は別です。'}[aiRun.status] || aiRun.status) + (aiRun.error ? `：${aiRun.error}` : '');
  if(aiRun?.status==='proposed')$('#aiStatus').textContent=`${title(aiRun.targetId)} · 設定案は未採用です。差分と影響を確認できます。`;
  if(aiRun?.status==='adopted')$('#aiStatus').textContent=`${title(aiRun.targetId)} · 設定案を採用しました。制作と成果確認はこれからです。`;
 }
@@ -353,6 +355,8 @@ async function pollAi() {
    proposal?.artifacts?.forEach(a=>box.append(button(`成果物案を読む：${a.name}`,()=>show(a.name,a.content),'artifact-button')));
    proposal?.children?.forEach(a=>box.append(button(`枝の追加案を読む：${a.title}`,()=>show(a.title,a.body),'artifact-button')));
   }
+  for(const item of state.runs.filter(r=>r.mode!=='settings'&&['partial','interrupted','failed'].includes(r.status)))box.append(button(`${item.inputs?.find(n=>n.id===item.targetId)?.title||title(item.targetId)} の部分結果を照合`,()=>recoveryUi.open(item.id),'artifact-button'));
+  if(aiRun?.fixture)box.append(el('p','conflict-note','この実行は故障試験用の保存応答です。Codexの実制作ではありません。'));
   if (aiRun?.recovery) box.append(el('p', 'small-note', aiRun.recovery));
   aiRun?.artifacts?.forEach((artifact,index)=>box.append(button(`成果物を読む：${artifact.path.split('/').at(-1)}`,()=>openArtifact(aiRun.id,index),'artifact-button')));
   if (oldScroll) box.scrollTop = box.scrollHeight;
