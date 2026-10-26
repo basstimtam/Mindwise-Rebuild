@@ -4,6 +4,7 @@ import { createHash } from 'node:crypto';
 import { resolveSpecifications } from './semantics.mjs';
 import { contractContext } from './contracts.mjs';
 import { calculateNumbers, assessNumbers } from './numbers.mjs';
+import {assessKnowledge} from './knowledge.mjs';
 
 const maxArtifactBytes = 2 * 1024 * 1024;
 const textExtensions = new Set('.md .txt .json .csv .html .css .js .mjs .py .svg .xml .ts .tsx .jsx .yaml .yml .toml'.split(' '));
@@ -58,11 +59,15 @@ export function readNodeArtifact(root, node) {
 /** Verify freshness from live bytes and effective specs; an AI/task completion is not proof. */
 export function assessSources(root,state,node,specification=resolveSpecifications(state,node.id),catalog) {
   const ids=new Set([node.id,...specification.sources.map(s=>s.id)]);
+  for(const id of assessKnowledge(state,ids).contextIds)ids.add(id);
   const refs=[...new Map(state.nodes.filter(n=>ids.has(n.id)).flatMap(n=>n.sourceRefs||[]).map(ref=>[JSON.stringify(ref),ref])).values()];
   if(!refs.length)return {status:'current',fingerprint:null,count:0};
   if(refs.length>100)return {status:'unresolved',fingerprint:null,count:refs.length};
   const context=contractContext(root,refs,catalog);
   return {status:context.references.every(r=>r.status==='current'&&['approved','record'].includes(r.documentStatus))?'current':'unresolved',fingerprint:fingerprint(JSON.stringify(context.references)),count:refs.length};
+}
+export function assessCurrentKnowledge(root,state,node,specification=resolveSpecifications(state,node.id)) {
+  return assessKnowledge(state,[node.id,...specification.sources.map(s=>s.id)],{observeArtifact:n=>readNodeArtifact(root,n)});
 }
 export function evaluateVerification(root, state, node, { specification, artifact, catalog, calculations } = {}) {
   const checkedAt = new Date().toISOString();
@@ -86,6 +91,8 @@ export function evaluateVerification(root, state, node, { specification, artifac
   if (spec.status !== 'resolved') return { ...common, status: 'conflict', reason: '適用仕様に未解決の衝突または循環があります。' };
   const sources=assessSources(root,state,node,spec,catalog);
   if(sources.status!=='current')return {...common,status:'stale',reason:'参照した契約の原文・版・承認状態を再確認してください。'};
+  const knowledge=assessCurrentKnowledge(root,state,node,spec);
+  if(knowledge.status!=='current')return {...common,status:'stale',reason:'判断または根拠が未採用・変更・欠落しています。知識の記録を再確認してください。'};
   const numbers=assessNumbers(state,node.id,calculations||calculateNumbers(state,{root,catalog}),spec.sources.map(s=>s.id));
   if(numbers.status!=='current')return {...common,status:'stale',reason:'関連する数値に欠損・単位違い・古い入力等があります。計算根拠を再確認してください。'};
   const proof = node.verified;
@@ -99,6 +106,7 @@ export function evaluateVerification(root, state, node, { specification, artifac
   if (proof.specHash !== spec.fingerprint) changed.push('有効な仕様');
   if ((proof.sourceHash??null) !== sources.fingerprint) changed.push('契約の出所');
   if ((proof.numberHash??null) !== numbers.fingerprint) changed.push('数値の根拠');
+  if ((proof.knowledgeHash??null) !== knowledge.fingerprint) changed.push('判断と根拠');
   if (changed.length) return { ...common, status: 'stale', reason: `${changed.join('・')}が確認時から変わっています。`, recordedAt: proof.at };
   return { ...common, status: 'verified', reason: '現物・受入条件・有効仕様が確認証拠と一致しています。', recordedAt: proof.at, method: proof.method };
 }

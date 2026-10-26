@@ -6,15 +6,17 @@ import { homedir } from 'node:os';
 import { analyzeChange } from './semantics.mjs';
 import { validMetricName, hasNumber } from './numbers.mjs';
 import {inspectExchange,exchangeHash,MAX_EXCHANGE_BYTES} from './exchange.mjs';
+import {validateKnowledge,recordKnowledge,assessKnowledge,knowledgeModelHash} from './knowledge.mjs';
+import {readNodeArtifact} from './artifacts.mjs';
 
 export class StoreError extends Error {
   constructor(message, status = 400, details = undefined) { super(message); this.status = status; this.details = details; }
 }
 const clone = value => structuredClone(value);
 const hash = value => createHash('sha256').update(typeof value === 'string' ? value : JSON.stringify(value)).digest('hex');
-const nodeFields = new Set('id parentId title body domain depth status progress start due x y kind unit value formula artifact criteria verified version evidence source scope specs required weight sourceRefs metricInputs metricSource metricFreshness'.split(' '));
+const nodeFields = new Set('id parentId title body domain depth status progress start due x y kind unit value formula artifact criteria verified version evidence source scope specs required weight sourceRefs metricInputs metricSource metricFreshness knowledge'.split(' '));
 const linkFields = new Set(['id', 'from', 'to', 'type', 'reason']);
-const meaningfulFields = new Set(['title','body','kind','unit','value','formula','artifact','criteria','scope','specs','sourceRefs','metricInputs','metricSource','metricFreshness']);
+const meaningfulFields = new Set(['title','body','kind','unit','value','formula','artifact','criteria','scope','specs','sourceRefs','metricInputs','metricSource','metricFreshness','knowledge']);
 const assert = (condition, message, status = 400) => { if (!condition) throw new StoreError(message, status); };
 function identifier(value) { return typeof value === 'string' && /^[\p{L}\p{N}_:.-]{1,160}$/u.test(value); }
 function object(value) { return value && typeof value === 'object' && !Array.isArray(value); }
@@ -24,6 +26,7 @@ function node(input) {
   assert(!unknown.length, `未対応の枝属性: ${unknown.join(', ')}`);
   const n = { id: randomUUID(), parentId:null,title:'新しい枝',body:'',domain:'',depth:0,status:'planned',progress:0,start:'',due:'',x:0,y:0,kind:'concept',unit:'',value:null,formula:'',artifact:'',criteria:'',verified:false,version:1,specs:[],required:false,weight:null,sourceRefs:[],metricInputs:[],metricSource:'',metricFreshness:'unknown',...input };
   assert(identifier(n.id), '枝IDが不正です。');
+  validateKnowledge(n.knowledge,assert);
   assert(n.parentId === null || identifier(n.parentId), '親IDが不正です。');
   for (const key of ['title','body','domain','status','start','due','kind','unit','formula','artifact','criteria']) assert(typeof n[key] === 'string' && n[key].length <= 100000, `${key} は文字列（10万文字以内）にしてください。`);
   assert(n.title.trim().length, '枝の名前を入力してください。');
@@ -166,9 +169,22 @@ export function createStore({ root = process.cwd(), dataDir } = {}) {
       const before = raw();
       assert(Number.isInteger(payload.baseRevision) && before.revision === payload.baseRevision, '別の変更が先に保存されました。最新状態を取得して変更を確認してください。',409);
       const after = transform(clone(before)); validate(after); after.revision=before.revision+1;
+      const knowledgeOps=(payload.ops||[]).filter(op=>op.type==='knowledge');
+      let context=payload.meta;
+      if(knowledgeOps.length){
+        const evidenceIds=new Set(knowledgeOps.flatMap(op=>op.evidenceIds));
+        const inputs=after.nodes.filter(n=>evidenceIds.has(n.id)).map(n=>({...n,modelHash:knowledgeModelHash(n),...(n.artifact?{artifactObservation:readNodeArtifact(root,n)}:{})}));
+        for(const op of knowledgeOps)for(const ref of after.nodes.find(n=>n.id===op.id).knowledge.evidence){
+          const input=inputs.find(n=>n.id===ref.nodeId);
+          assert(input&&input.modelHash===ref.modelHash&&input.version===ref.version,'保存時の根拠と入力記録が一致しません。同じ変更内で根拠を後から変更しないでください。',409);
+          if(ref.artifactHash)assert(input.artifactObservation?.sha256===ref.artifactHash,'保存照合中に根拠の現物が変わりました。',409);
+        }
+        context={...context,actor:context?.actor||'owner',reason:knowledgeOps.map(op=>op.reason).filter(Boolean).join('\n')||null,inputs};
+        assert(inputs.length<=80&&JSON.stringify(context).length<=1000000,'知識記録の根拠が保存上限を超えています。範囲を絞ってください。');
+      }
       const at = new Date().toISOString();
       db.prepare('INSERT INTO mutations (revision,operation_id,request_hash,before_json,after_json,kind,at) VALUES (?,?,?,?,?,?,?)').run(after.revision,payload.operationId,requestHash,JSON.stringify(before),JSON.stringify(after),kind,at);
-      if(payload.meta)db.prepare('INSERT INTO mutation_context (operation_id,body) VALUES (?,?)').run(payload.operationId,JSON.stringify(payload.meta));
+      if(context)db.prepare('INSERT INTO mutation_context (operation_id,body) VALUES (?,?)').run(payload.operationId,JSON.stringify(context));
       save(after);
       afterSave?.();
     });
@@ -178,20 +194,26 @@ export function createStore({ root = process.cwd(), dataDir } = {}) {
     assert(object(payload) && Array.isArray(payload.ops) && payload.ops.length > 0 && payload.ops.length <= 10000, '1〜10000件の変更操作が必要です。');
     const isUndo=payload.ops.some(op=>op?.type==='undo');
     assert(!isUndo || payload.ops.length===1, '取消は単独で実行してください。');
+    const records=payload.ops.filter(op=>op?.type==='knowledge');assert(new Set(records.map(op=>op.id)).size===records.length,'一つの主題の知識記録は一変更に一度だけです。');
     return isUndo;
   }
-  function applyOperations(state,ops) {
+  function applyOperations(state,ops,operationId) {
     state.nodes=state.nodes.map(node);
     const before=clone(state);
     for(const op of ops) {
       assert(object(op),'変更操作が不正です。');
       if(op.type==='add') {
+        assert(!op.node?.knowledge,'知識記録は主題の記録操作から保存してください。');
         const n=node(op.node || {});assert(!state.nodes.some(x=>x.id===n.id),'その枝IDは存在します。',409);state.nodes.push(n);
       } else if(op.type==='update') {
         const i=state.nodes.findIndex(n=>n.id===op.id);assert(i>=0,'変更する枝がありません。',404);
         assert(object(op.patch)&&!('id' in op.patch)&&!('version' in op.patch),'IDや版は変更できません。');
+        assert(!('knowledge' in op.patch),'知識記録は主題の記録操作から保存してください。');
         const previous=state.nodes[i], substantive=Object.keys(op.patch).some(k=>meaningfulFields.has(k)&&JSON.stringify(previous[k])!==JSON.stringify(op.patch[k]));
         state.nodes[i]=node({...previous,...op.patch,version:previous.version+1,...(substantive?{verified:false}:{})});
+      } else if(op.type==='knowledge') {
+        const candidate=recordKnowledge(state,op,operationId,{assert,observeArtifact:n=>readNodeArtifact(root,n)});
+        state.nodes=state.nodes.map(n=>n.id===op.id?node(candidate):n);
       } else if(op.type==='delete') {
         assert(state.nodes.some(n=>n.id===op.id),'削除する枝がありません。',404);
         state.nodes=state.nodes.filter(n=>n.id!==op.id).map(n=>n.parentId===op.id?{...n,parentId:null,version:n.version+1}:n);
@@ -202,6 +224,7 @@ export function createStore({ root = process.cwd(), dataDir } = {}) {
       } else throw new StoreError(`未対応の操作: ${op.type}`);
     }
     validate(state);
+    for(const op of ops.filter(o=>o.type==='knowledge'&&o.state==='adopted'))assert(assessKnowledge(state,[op.id],{observeArtifact:n=>readNodeArtifact(root,n)}).status==='current','同じ変更内で採用判断の根拠が変わりました。',409);
     const impact=analyzeChange(before,state), invalidate=new Set([...impact.affected,...impact.unknown]),inputRecheck=new Set(impact.inputRecheck);
     const numericEdits=new Set(ops.filter(op=>op.type==='add'||op.type==='update'&&Object.keys(op.patch).some(key=>['value','unit','formula','metricInputs','metricSource','metricFreshness'].includes(key))).map(op=>op.id||op.node?.id));
     state.nodes=state.nodes.map(n=>{
@@ -210,14 +233,21 @@ export function createStore({ root = process.cwd(), dataDir } = {}) {
     });
     return {state,impact};
   }
+  function changeReport(payload,before,after,impact){
+    const report={baseRevision:before.revision,impact,knowledgeChanges:payload.ops.filter(op=>op.type==='knowledge').map(op=>({id:op.id,before:before.nodes.find(n=>n.id===op.id)||null,after:after.nodes.find(n=>n.id===op.id)}))};
+    if(report.knowledgeChanges.length)report.knowledgeSignature=hash({baseRevision:payload.baseRevision,operationId:payload.operationId,ops:payload.ops,meta:payload.meta,report});
+    return report;
+  }
   function preview(payload) {
     const isUndo=checkOps(payload);assert(!isUndo,'取消は変更履歴から実行してください。');
     assert(identifier(payload.operationId),'一意の operationId が必要です。');
     const state=raw();assert(Number.isInteger(payload.baseRevision)&&payload.baseRevision===state.revision,'別の変更が先に保存されました。最新状態を取得してください。',409);
-    return {baseRevision:state.revision,impact:applyOperations(clone(state),payload.ops).impact};
+    const applied=applyOperations(clone(state),payload.ops,payload.operationId);
+    return changeReport(payload,state,applied.state,applied.impact);
   }
   function change(payload,{runUpdate}={}) {
     const isUndo=checkOps(payload);
+    if(payload.ops.some(op=>op.type==='knowledge')&&!operationReceipt(payload.operationId))assert(typeof payload.knowledgeSignature==='string'&&payload.knowledgeSignature===preview(payload).knowledgeSignature,'判断と根拠・影響を照合してから保存してください。内容・版・現物が変わった場合は再照合が必要です。',409);
     return mutate(payload,isUndo?'undo':'change',state=>{
       if(isUndo) {
         const target=db.prepare("SELECT * FROM mutations WHERE kind != 'undo' AND undone=0 ORDER BY revision DESC LIMIT 1").get();
@@ -229,7 +259,8 @@ export function createStore({ root = process.cwd(), dataDir } = {}) {
         db.prepare('UPDATE mutations SET undone=1 WHERE revision=?').run(target.revision);
         return state;
       }
-      const changed=applyOperations(state,payload.ops).state;
+      const recorded=payload.ops.some(op=>op.type==='knowledge'),before=recorded?clone(state):null,applied=applyOperations(state,payload.ops,payload.operationId),changed=applied.state;
+      if(recorded)assert(changeReport(payload,before,changed,applied.impact).knowledgeSignature===payload.knowledgeSignature,'保存直前に判断・根拠・影響が変わりました。再照合してください。',409);
       if(runUpdate) {
         const i=changed.runs.findIndex(r=>r.id===runUpdate.id);
         assert(i>=0&&runUpdate.status==='adopted'&&['settings','relations'].includes(changed.runs[i].mode)&&changed.runs[i].status==='proposed','設定・関係案の採用記録が一致しません。',409);
@@ -262,12 +293,13 @@ export function createStore({ root = process.cwd(), dataDir } = {}) {
     assert(Number.isInteger(payload.baseRevision)&&payload.baseRevision===current.revision,'別の変更が先に保存されました。最新状態を取得してください。',409);
     assert(!current.runs.some(r=>['connecting','applying','running','starting','in_progress','pending','waiting'].includes(r.status)),'制作中は読み込めません。終了または中断してから照合してください。',409);
     const imported=validate(clone(core)),old=new Map(current.nodes.map(n=>[n.id,n])),next=new Map(imported.nodes.map(n=>[n.id,n]));
-    imported.nodes=imported.nodes.map(n=>({...n,version:old.has(n.id)?Math.max(old.get(n.id).version,n.version)+1:n.version,verified:false}));
+    imported.nodes=imported.nodes.map(n=>({...n,version:old.has(n.id)?Math.max(old.get(n.id).version,n.version)+1:n.version,verified:false,...(n.knowledge?{knowledge:{...n.knowledge,needsAdoption:true}}:{})}));
     const collisions=imported.nodes.filter(n=>old.has(n.id)).map(n=>({id:n.id,before:old.get(n.id).title,after:n.title}));
     const removed=current.nodes.filter(n=>!next.has(n.id)).map(n=>({id:n.id,title:n.title}));
     const added=imported.nodes.filter(n=>!old.has(n.id)).map(n=>({id:n.id,title:n.title}));
     const warnings=['枝と関係を全置換します。現在の変更履歴は保持し、通常の取消でモデルを戻せます。','取込元の確認済み表示を解除します。外部成果物は含まず、自動取得しません。.mmapの原ZIPと同梱資源は閲覧専用の出所に保持します。','現在と取込元の会話/実行は閲覧専用の出所へ保管し、制作の再開・採用・回復や実行権限には使いません。','同じIDの記録も元案件と保管指紋を区別します。指紋は承認者の真正性を証明しません。'];
     if(core.schemaVersion===1)warnings.push('旧形式1：元ファイルに変更差分や理由がなければ復元できません。元の要約/実行記録を保管します。');
+    if(imported.nodes.some(n=>n.knowledge))warnings.push('取込元の知識状態・理由・指紋は保持しますが、現在の採用判断にはしません。主題の記録から根拠を照合して採用してください。');
     return {core,imported,bundles,packageHash,report:{baseRevision:current.revision,packageHash,signature:hash({state:payload.state,revision:current.revision,runs:current.runs}),sourceProjectId:core.projectId??null,sourceRevision:core.revision??null,schemaVersion:core.schemaVersion,collisions,removed,added,beforeLinks:current.links,afterLinks:imported.links,changes:imported.nodes.filter(n=>old.has(n.id)).map(n=>({id:n.id,before:old.get(n.id),after:{...n,verified:false}})),warnings,events:(core.events||[]).length,runs:(core.runs||[]).length,archives:bundles.size,...(core.sourceDocument?{sourceDocument:{name:core.sourceDocument.name,sha256:core.sourceDocument.sha256,report:core.sourceDocument.report}}:{})}};
   }
   function previewImport(payload) { return inspectImport(payload).report; }
@@ -295,7 +327,7 @@ export function createStore({ root = process.cwd(), dataDir } = {}) {
       const local=exportCore();inspected.bundles.set(exchangeHash(local),local);
       for(const [sha256,data] of inspected.bundles)db.prepare('INSERT OR IGNORE INTO exchange_archives (sha256,body) VALUES (?,?)').run(sha256,JSON.stringify(data));
       assert(db.prepare('SELECT COUNT(*) AS n FROM exchange_archives').get().n<=100,'出所保管の上限100件を超えるため中止しました。');
-      state.nodes=inspected.imported.nodes.map(n=>({...n,verified:false}));state.links=inspected.imported.links;state.runs=[];
+      state.nodes=inspected.imported.nodes.map(n=>({...n,verified:false,...(n.knowledge?{knowledge:{...n.knowledge,needsAdoption:true}}:{})}));state.links=inspected.imported.links;state.runs=[];
       return state;
     },()=>exportSnapshot());
   }

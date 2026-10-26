@@ -1,12 +1,13 @@
 import { createHash } from 'node:crypto';
 import { numericDependencies,numberContextDependencies,hasNumber } from './number-links.mjs';
+import {assessKnowledge,knowledgeDependencies} from './knowledge.mjs';
 
 const hash = value => createHash('sha256').update(JSON.stringify(value)).digest('hex');
 const compare = (a, b) => String(a).localeCompare(String(b), 'en');
 const sorted = values => [...values].sort(compare);
 const mapOf = state => new Map((state.nodes || []).map(node => [node.id, node]));
 const application = link => link.type === 'applies_to' || link.type === 'applies';
-const contentFields = ['title', 'body', 'specs', 'kind', 'unit', 'value', 'formula', 'artifact', 'criteria', 'source', 'scope', 'sourceRefs', 'metricInputs','metricSource','metricFreshness'];
+const contentFields = ['title', 'body', 'specs', 'kind', 'unit', 'value', 'formula', 'artifact', 'criteria', 'source', 'scope', 'sourceRefs', 'metricInputs','metricSource','metricFreshness','knowledge'];
 
 // Iterative DFS keeps a valid, very deep map from exhausting the JS call stack.
 function walkGraph(startIds, adjacency) {
@@ -47,12 +48,15 @@ export function resolveSpecifications(state, targetId) {
   }
   for (const link of links) if (application(link)) addEdge(incoming, link.to, link.from);
   const reachable = walkGraph([targetId], incoming);
+  const knowledge=assessKnowledge(state,[...reachable.reached]);
+  for(const issue of knowledge.issues)result.conflicts.push({key:null,candidates:[{sourceId:issue.nodeId}],type:'knowledge-'+issue.type});
   result.cycles = reachable.cycles.map(nodeIds => ({ type: 'application', nodeIds }));
   const candidates = new Map();
   for (const id of sorted(reachable.reached)) {
     const source = nodes.get(id);
     if (!source) { result.conflicts.push({ key: null, candidates: [{ sourceId: id }], type: 'missing-source' }); continue; }
     if (source.specs?.length || source.body?.trim() || source.sourceRefs?.length) result.sources.push({ id, title: source.title || id });
+    if(source.knowledge&&assessKnowledge(state,[id]).status!=='current')continue;
     for (const spec of source.specs || []) {
       if (typeof spec.key !== 'string' || !spec.key.trim() || typeof spec.value !== 'string') {
         result.conflicts.push({ key: null, candidates: [{ sourceId: id }], type: 'invalid-specification' }); continue;
@@ -138,6 +142,10 @@ export function analyzeChange(before, after) {
     if (pair) { if (!graph.has(pair[0])) graph.set(pair[0], []); graph.get(pair[0]).push({ to: pair[1], dependency: true }); }
   }
   const numberEdges=[...numberContextDependencies(before),...numberContextDependencies(after)];
+  for(const edge of [...knowledgeDependencies(before),...knowledgeDependencies(after)]){
+    if(!graph.has(edge.from))graph.set(edge.from,[]);
+    graph.get(edge.from).push({to:edge.to,dependency:true});
+  }
   for(const edge of [...numericDependencies(before),...numericDependencies(after)]) {
     if(!graph.has(edge.from))graph.set(edge.from,[]);
     graph.get(edge.from).push({to:edge.to,dependency:true});

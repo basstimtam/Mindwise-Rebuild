@@ -52,7 +52,7 @@ export function createSourcesUi({api,getNode,change,toast}) {
   }
   box.append(button('契約の原文から出所を結ぶ',()=>void openContracts().catch(e=>toast(e.message,true))));return box;
  }
- async function openProvenance(targetId) {
+ async function openProvenance(targetId,operationId) {
   const result=await api(`/api/provenance?targetId=${encodeURIComponent(targetId)}`),host=$('#provenanceList');host.replaceChildren();
   $('#provenanceTitle').textContent=`${getNode(targetId)?.title||'対象'} · 判断と変更の出所`;
   host.append(el('h3','section-title','契約への参照'));
@@ -62,11 +62,11 @@ export function createSourcesUi({api,getNode,change,toast}) {
   if(!result.sources.references.length)host.append(el('p','small-note','契約への参照は未登録です。'));
   host.append(el('h3','section-title','この保存先の変更と理由（取込前を含む）'));
   for(const entry of result.entries) {
-   const row=el('div','provenance-entry');row.append(el('strong','',`保存版 ${entry.revision} · ${{codex:'Codex',owner:'直接操作',unknown:'記録者不明'}[entry.actor]}${entry.undone?' · 取消済み':''}`),el('small','',`${entry.at} · ${entry.operationId}`),el('p','',`理由：${entry.reason||'記録なし・不明（操作差分から理由を推測しません）'}`));
+   const row=el('div','provenance-entry');row.dataset.operationId=entry.operationId;row.append(el('strong','',`保存版 ${entry.revision} · ${{codex:'Codex',owner:'直接操作',unknown:'記録者不明'}[entry.actor]}${entry.undone?' · 取消済み':''}`),el('small','',`${entry.at} · ${entry.operationId}`),el('p','',`理由：${entry.reason||'記録なし・不明（操作差分から理由を推測しません）'}`));
    const details=el('details');details.append(el('summary','','変更前後と参照した入力'));
    for(const item of entry.changes)details.append(el('pre','source-excerpt',`${item.field}\n変更前：${JSON.stringify(item.before,null,2)}\n変更後：${JSON.stringify(item.after,null,2)}`));
    if(entry.relations)details.append(el('pre','source-excerpt',JSON.stringify(entry.relations,null,2)));
-   for(const input of entry.inputs){details.append(el('pre','source-excerpt',`入力：${input.title} · 版 ${input.version}\n${input.body||''}`));if(input.number)details.append(el('pre','source-excerpt',`制作時の数値・式・参照元・鮮度\n${JSON.stringify(input.number,null,2)}`));}
+   for(const input of entry.inputs){details.append(el('pre','source-excerpt',`入力：${input.title} · 版 ${input.version}\n${input.body||''}`));if(input.knowledge)details.append(el('pre','source-excerpt',`入力時の知識状態と理由・根拠\n${JSON.stringify(input.knowledge,null,2)}`));if(input.artifactObservation)details.append(el('pre','source-excerpt',`入力時に読んだ現物：${input.artifactObservation.path} · ${input.artifactObservation.sha256}\n${input.artifactObservation.text}`));if(input.number)details.append(el('pre','source-excerpt',`制作時の数値・式・参照元・鮮度\n${JSON.stringify(input.number,null,2)}`));}
    for(const ref of entry.sourceRefs)if(ref.text)details.append(el('pre','source-excerpt',`実行時の参照記録：${ref.documentId} · ${ref.revision} · ${ref.sha256}\n${ref.text}`));
    row.append(details);host.append(row);
   }
@@ -83,6 +83,7 @@ export function createSourcesUi({api,getNode,change,toast}) {
    const detail=el('details');detail.append(el('summary','',`元の対象・変更詳細 ${archive.events.length}件・実行記録 ${archive.runs.length}件`),el('pre','source-excerpt',JSON.stringify({node:archive.node,events:archive.events,runs:archive.runs},null,2)));row.append(detail);host.append(row);
   }
   if(!$('#provenanceDialog').open)$('#provenanceDialog').showModal();
+  if(operationId){const row=[...host.querySelectorAll('[data-operation-id]')].find(r=>r.dataset.operationId===operationId);if(row){row.querySelector('details').open=true;row.scrollIntoView({block:'start'});}else host.prepend(el('p','small-note','参照した訂正前の操作は現在表示する100件の外、または取込元の原記録です。保管した出所・書出/バックアップにも記録を保持します。'));}
  }
  $('#closeProvenance').onclick=()=>$('#provenanceDialog').close();
  return {openContracts,openProvenance,renderTarget};

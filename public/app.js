@@ -4,6 +4,7 @@ import {createRecoveryUi} from './recovery.js';
 import {createExchangeUi} from './exchange.js';
 import {reconcileAiState} from './ai-state.js';
 import {createRelationScopeUi} from './relation-scope.js';
+import {createKnowledgeUi} from './knowledge.js';
 import {rebaseDraft,parentCandidates,selectionAfterChange} from './editing.js';
 const $ = (q, parent = document) => parent.querySelector(q);
 const $$ = (q, parent = document) => [...parent.querySelectorAll(q)];
@@ -17,9 +18,10 @@ let camera = { x: 20, y: 30, scale: 1 }, toastTimer, aiEvents = [], aiRun = null
 const freshConversationTargets = new Set();
 const detailDrafts = new Map(), relationDrafts = new Map();
 const sourcesUi=createSourcesUi({api,getNode:node,change,toast});
+const knowledgeUi=createKnowledgeUi({api,el,field,button,getState:()=>state,getNode:node,getAnalysis:currentAnalysis,change,choose,openProvenance:sourcesUi.openProvenance,toast});
 const recoveryUi=createRecoveryUi({api,el,toast,onRecovered:async result=>{state=result.state;aiRun=result.run;render();await refreshAnalysis();await pollAi();},onUncertain:async()=>{state=await api('/api/state');render();await refreshAnalysis();await pollAi();}});
 const numbersUi=createNumbersUi({el,button,field,getState:()=>state,getAnalysis:currentAnalysis,getSelected:()=>selected,choose});
-createExchangeUi({api,el,toast,getState:()=>state,onImported:async result=>{state=result;detailDrafts.clear();relationDrafts.clear();relationScopeUi.clear();aiThreads={};freshConversationTargets.clear();localStorage.setItem('mindwise.threads','{}');selected=state.nodes[0]?.id||null;domain='';query='';$('#search').value='';analysis=null;render();await refreshAnalysis();await pollAi();},onUncertain:async()=>{state=await api('/api/state');render();await refreshAnalysis();await pollAi();}});
+createExchangeUi({api,el,toast,getState:()=>state,onImported:async result=>{state=result;detailDrafts.clear();relationDrafts.clear();relationScopeUi.clear();knowledgeUi.clear();aiThreads={};freshConversationTargets.clear();localStorage.setItem('mindwise.threads','{}');selected=state.nodes[0]?.id||null;domain='';query='';$('#search').value='';analysis=null;render();await refreshAnalysis();await pollAi();},onUncertain:async()=>{state=await api('/api/state');render();await refreshAnalysis();await pollAi();}});
 let analysis = null, analysisTarget = null, analysisSequence = 0, analysisFetch = null, analysisAt = 0, analysisError = '', reviewedArtifact = null, verificationPending = false;
 function currentAnalysis() { return analysis?.revision === state.revision && analysisTarget === (selected || '') ? analysis : null; }
 function verificationText(id) { return ({verified:'現物確認済み',stale:'変更後の再確認が必要',missing:'成果物が見つかりません',conflict:'仕様の衝突を解決してください',unverified:'受入は未確認'})[currentAnalysis()?.verificationById?.[id]?.status] || '現物との照合待ち'; }
@@ -32,7 +34,7 @@ async function refreshAnalysis() {
    const result = await api(`/api/analysis${targetId ? '?targetId=' + encodeURIComponent(targetId) : ''}`);
    if (sequence !== analysisSequence || targetId !== (selected || '') || revision !== state.revision || result.revision !== state.revision) return;
    analysis = result; analysisTarget = targetId; analysisAt = Date.now(); analysisError = '';
-   renderSpecification(); renderVerification(); renderProgress(); renderAiTarget(); updateVerificationLabels();renderNumbers();
+   renderSpecification(); renderVerification(); renderProgress(); renderAiTarget(); updateVerificationLabels();renderNumbers();renderKnowledge();
   } catch (error) {
    if (sequence !== analysisSequence) return;
    analysisError = error.message; analysis = null;
@@ -47,38 +49,51 @@ async function api(path, data, method) { const r = await fetch(path, { method: m
 function node(id = selected) { return state.nodes.find(n => n.id === id); }
 function nodes() { return state.nodes.filter(n => (!domain || n.domain === domain) && (!query || `${n.title} ${n.body || ''}`.toLowerCase().includes(query.toLowerCase()))); }
 function title(id) { return node(id)?.title || '対象がありません'; }
-async function change(ops) {
+async function change(ops,options={}) {
  if (busy) return false;
- busy = true; let saved = false, cancelled = false;
+ busy = true; let saved = false, cancelled = false, uncertain=false;
+ const before=state,payload = {baseRevision:state.revision,operationId:crypto.randomUUID(),ops,meta:{actor:'owner',reason:options.reason||null}};
  $('#saveState').textContent = '○ 変更を確認中';
  try {
-  const payload = {baseRevision:state.revision,operationId:crypto.randomUUID(),ops,meta:{actor:'owner',reason:null}};
-  const substantive = ops.some(op => op.type === 'link' || op.type === 'unlink' || op.type === 'delete' || op.type === 'update' && Object.keys(op.patch).some(key => !['x','y','parentId','depth','domain','start','due','status','progress'].includes(key)));
+  const substantive = ops.some(op => op.type==='knowledge'||op.type === 'link' || op.type === 'unlink' || op.type === 'delete' || op.type === 'update' && Object.keys(op.patch).some(key => !['x','y','parentId','depth','domain','start','due','status','progress'].includes(key)));
   if (substantive) {
    const preview = await api('/api/preview', payload);
+   if(preview.knowledgeSignature)payload.knowledgeSignature=preview.knowledgeSignature;
    const edited = new Set(ops.flatMap(op => op.id ? [op.id] : op.link ? [op.link.from] : []));
    const impact = preview.impact || {};
    const meaningful = (impact.details || []).filter(row => row.effect !== 'unchanged' && !edited.has(row.targetId));
-   if ((meaningful.length || impact.conflicts?.length) && !await confirmImpact(impact, edited)) { cancelled = true; return false; }
+   if ((options.review||meaningful.length || impact.conflicts?.length) && !await confirmImpact(impact, edited,options.review?{...options.review,knowledgeChanges:preview.knowledgeChanges}:undefined)) { cancelled = true; return false; }
   }
   $('#saveState').textContent = '○ 保存中';
-  const before=state;
   state = await api('/api/change', payload);
   for(const [id,draft] of detailDrafts)detailDrafts.set(id,rebaseDraft(draft,before.nodes.find(n=>n.id===id),node(id)));
   selected=selectionAfterChange(before,state,selected,ops);
   localStorage.setItem('mindwise.selected',selected||'');
   render(); await refreshAnalysis(); saved = true; return true;
- } catch (error) { toast(error.message, true); return false; }
- finally { busy = false; $('#saveState').textContent = saved ? '● 保存済み' : cancelled ? '○ 変更は未保存' : '○ 保存できませんでした'; }
+ } catch (error) {
+  // A failed HTTP response is not evidence that the common transaction failed.
+  try{const live=await api('/api/state');state=live;if(live.history.some(h=>h.operationId===payload.operationId)){
+   for(const [id,draft] of detailDrafts)detailDrafts.set(id,rebaseDraft(draft,before.nodes.find(n=>n.id===id),node(id)));
+   selected=selectionAfterChange(before,state,selected,ops);localStorage.setItem('mindwise.selected',selected||'');render();await refreshAnalysis();saved=true;toast('保存受領を確認しました。変更を重ねて適用していません。');return true;
+  }render();await refreshAnalysis();}catch{uncertain=true;}
+  toast(uncertain?`保存結果を確認できません。入力を保持しています：${error.message}`:error.message,true);return false;
+ }
+ finally { busy = false; $('#saveState').textContent = saved ? '● 保存済み' : cancelled ? '○ 変更は未保存' : uncertain?'○ 保存結果は未確認':'○ 保存できませんでした'; }
 }
 function confirmImpact(impact, edited, proposal) {
  const dialog = $('#impactDialog'), list = $('#impactList'); list.replaceChildren();
- $('#impactHeading').textContent=proposal?.mode==='relations'?'関係案の差分と影響を確認':proposal?'設定案の差分と影響を確認':'変更前に影響を確認';
- $('#impactContinue').textContent=proposal?.mode==='relations'?'この関係案を採用':proposal?'この設定案を採用':'この変更を保存';
+ $('#impactHeading').textContent=proposal?.mode==='knowledge'?'主題の判断と根拠・影響を確認':proposal?.mode==='relations'?'関係案の差分と影響を確認':proposal?'設定案の差分と影響を確認':'変更前に影響を確認';
+ $('#impactContinue').textContent=proposal?.mode==='knowledge'?'この主題の記録を保存':proposal?.mode==='relations'?'この関係案を採用':proposal?'この設定案を採用':'この変更を保存';
  const changes=$('#impactChanges');changes.replaceChildren();
  if(proposal) {
-  changes.append(el('strong','',title(proposal.targetId)),el('p','small-note',`採用理由：${proposal.reason}`));
-  if(proposal.mode==='relations') {
+  changes.append(el('strong','',proposal.mode==='knowledge'?proposal.knowledgeChanges?.[0]?.after?.title||title(proposal.targetId):title(proposal.targetId)),el('p','small-note',`${proposal.mode==='knowledge'?'今回の理由':'採用理由'}：${proposal.reason||'記録なし・不明'}`));
+  if(proposal.mode==='knowledge'){
+   for(const row of proposal.knowledgeChanges||[])for(const [label,n] of [['訂正前（原記録を保持）',row.before],['今回の主題',row.after]]){
+    const k=n?.knowledge,text=n?`${n.title}\n${n.body}\n設定：${n.specs?.map(s=>`${s.key} = ${s.value}`).join(' / ')||'なし'}\n知識状態：${({unorganized:'未整理',unknown:'不明',hypothesis:'仮説',adopted:'採用判断'})[k?.state]||'未記録'}\n記録理由：${k?.reason||'記録なし・不明'}\n根拠：${k?.evidence.map(e=>`${title(e.nodeId)}（記録時の版 ${e.version}）`).join('、')||'枝としての登録なし'}`:'新しい主題';
+    changes.append(el('pre','source-excerpt',`${label}\n${text}`));
+   }
+   changes.append(el('p','small-note','根拠の原情報と以前の理由を保持します。採用判断は成果物の受入確認や契約の承認ではありません。'));
+  }else if(proposal.mode==='relations') {
    changes.append(el('p','small-note',`操作候補：${proposal.scopeNodeIds.map(title).join('、')}。候補外も影響先になり得ます。`));
    for(const row of proposal.relationChanges) {const link=row.before||row.after;changes.append(el('pre','source-excerpt',`${row.action==='add'?'追加':'解除'}：${title(link.from)} → ${title(link.to)}\n${relations[link.type]||link.type}\n${row.action==='remove'&&link.reason?'元の理由：'+link.reason+'\n':''}今回の理由：${row.reason}`));}
   } else for(const [label,specs] of [['変更前',proposal.before],['設定案',proposal.after]])changes.append(el('pre','source-excerpt',`${label}\n${specs.map(s=>`${s.key} = ${s.value}`).join('\n')||'設定なし'}`));
@@ -199,11 +214,13 @@ function renderInspector() {
  const draft = detailDrafts.get(n.id);
  if(draft){for(const input of $$('[name]',form))if(input.name in draft.values){if(input.type==='checkbox')input.checked = Boolean(draft.values[input.name]);else input.value = draft.values[input.name];}box.append(el('p','small-note',draft.baseVersion===n.version?'未保存の入力を保持しています。':'別の更新があります。未保存の入力は保持しています。保存前に最新内容を確認してください。'));}
  form.addEventListener('input',()=>detailDrafts.set(n.id,{baseVersion:detailDrafts.get(n.id)?.baseVersion ?? n.version,values:formValues(form)}));
- box.append(sourcesUi.renderTarget(n),form,numbersUi.details(n,currentAnalysis()?.numbers?.byId[n.id]));
+ const knowledgeBox=el('section','analysis-section');knowledgeBox.id='knowledgeDetails';knowledgeBox.append(knowledgeUi.renderTarget(n));
+ box.append(sourcesUi.renderTarget(n),knowledgeBox,form,numbersUi.details(n,currentAnalysis()?.numbers?.byId[n.id]));
  const specificationBox = el('section','analysis-section');specificationBox.id = 'specificationDetails';box.append(specificationBox);
  const verificationBox = el('section','analysis-section');verificationBox.id = 'verificationDetails';box.append(verificationBox);
  const actions2 = el('div','button-row');actions2.append(button('入力を取り消して最新へ',()=>{if(!detailDrafts.has(n.id)||confirm('未保存の入力を取り消し、最新の保存内容を表示しますか？')){detailDrafts.delete(n.id);renderInspector();renderSpecification();renderVerification();}}),button('枝を削除',async()=>{if(!await confirmDeletion(n))return;if(node(n.id)?.version!==n.version)return toast('削除の確認中に対象が変わりました。最新内容を確認してから開き直してください。',true);await change([{type:'delete',id:n.id}]);},'danger'));box.append(actions2);renderRelations(box,n);renderSpecification();renderVerification();
 }
+function renderKnowledge(){const host=$('#knowledgeDetails'),n=node();if(host&&n)host.replaceChildren(knowledgeUi.renderTarget(n));}
 function renderSpecification() {
  const box = $('#specificationDetails');if(!box)return;box.replaceChildren(el('div','section-title','この対象で有効な設定'));
  const current = currentAnalysis(), specification = current?.specification;
@@ -212,7 +229,7 @@ function renderSpecification() {
  if(specification.status === 'conflict')box.append(el('p','conflict-note','設定が未解決です。この対象の制作は、衝突や循環を解決してから開始できます。'));
  for(const conflict of specification.conflicts || []) {
   const item = el('div','spec-conflict');item.append(el('strong','',conflict.key || '未解決の設定'));
-  for(const candidate of conflict.candidates || [])item.append(el('p','',`${title(candidate.sourceId)}：${candidate.value}`));box.append(item);
+  for(const candidate of conflict.candidates || [])item.append(el('p','',`${title(candidate.sourceId)}：${candidate.value??(conflict.type?.startsWith('knowledge-')?'判断・根拠の未解決（主題の記録で確認）':conflict.type)}`));box.append(item);
  }
  if(specification.cycles?.length)box.append(el('p','conflict-note','仕様の適用・例外関係に循環があります。関係を確認してください。'));
  if(!specification.effective?.length && specification.status !== 'conflict')box.append(el('p','small-note','明示された設定はありません。本文に書いた構想は設定の優先順位として自動解釈しません。'));
@@ -279,13 +296,14 @@ function renderAiTarget() {
  const analysisNow=currentAnalysis(), numberIds=new Set([selected,...(analysisNow?.specification?.sources||[]).map(s=>s.id)]);
  for(const link of state.links)if(link.from===selected||link.to===selected){numberIds.add(link.from);numberIds.add(link.to);}
  const numbersUnresolved=[...numberIds].some(id=>analysisNow?.numbers?.byId[id]?.status==='unresolved');
- const mode=$('#aiMode').value,unresolved = !analysisNow || (mode==='production' && (analysisNow?.specification?.status === 'conflict'||numbersUnresolved));
+ const mode=$('#aiMode').value,knowledgeUnresolved=analysisNow?.knowledge?.status==='unresolved',unresolved = !analysisNow || (mode==='production' && (analysisNow?.specification?.status === 'conflict'||numbersUnresolved||knowledgeUnresolved));
  relationScopeUi.render(mode==='relations');
  const scopeInvalid=mode==='relations'&&(relationScopeUi.ids().length<1||relationScopeUi.ids().length>19);
  $('#sendAi').disabled = !n || executing || aiRequestPending || unresolved || scopeInvalid;
  $('#aiSpecStatus').textContent = !n ? '制作対象を選択してください。' : !currentAnalysis() ? '制作前に現在の設定を照合しています。' : unresolved ? '仕様が未解決です。詳細で衝突・例外・循環を確認してください。' : '現在の有効設定と出所を使って制作します。';
  $('#interrupt').disabled = !executing;
  if(numbersUnresolved&&mode==='production')$('#aiSpecStatus').textContent='関連する数値が未解決です。数値表示で欠損・単位・出所・鮮度を確認してください。';
+ if(knowledgeUnresolved&&mode==='production')$('#aiSpecStatus').textContent='判断・根拠が未採用または変更されています。詳細の「主題の知識」で訂正・照合してから制作できます。';
  if($('#aiMode').value==='settings'&&!unresolved)$('#aiSpecStatus').textContent='選択中の本文と設定から案を作ります。差分と影響を確認してから採用できます。';
  if(mode==='relations'&&!unresolved)$('#aiSpecStatus').textContent='選択対象と候補の間の関係案を作ります。本文や設定を変えず、方向・理由・影響を確認してから採用できます。';
  if (aiRun) $('#aiStatus').textContent = `${title(aiRun.targetId)} · ` + ({connecting:'Codexへ接続中',running:'制作中',applying:'制作結果を保存中',completed:'制作結果を保存しました。内容の受入は未確認です。',failed:'制作に失敗しました',interrupted:'前回の制作は中断しています。自動再送していません。',needs_review:'対象が更新されたため、元の版への提案として保存しています。',partial:'部分結果があります。自動再送していません。',reconciled:'モデルの受領を照合し、実行記録を回復しました。現物の受入は別です。'}[aiRun.status] || aiRun.status) + (aiRun.error && !(aiRun.resultRecovery&&['completed','reconciled'].includes(aiRun.status)) ? `：${aiRun.error}` : '');
@@ -314,8 +332,8 @@ async function openNodeArtifact(targetId) {
  try {
   const artifact = await api(`/api/artifact?nodeId=${encodeURIComponent(targetId)}`), target = node(targetId);
   if(!target)throw new Error('確認する対象が見つかりません。');
- const review = {baseRevision:artifact.revision ?? state.revision,targetId,targetVersion:artifact.targetVersion,artifactHash:artifact.sha256,criteria:artifact.criteria,sourceHash:artifact.sourceHash,numberHash:artifact.numberHash};
-  const ready = Boolean(artifact.criteria?.trim()) && artifact.sourceStatus==='current' && artifact.numberStatus==='current' && artifact.specificationStatus === 'resolved' && selected === targetId && Boolean(currentAnalysis()) && currentAnalysis().specification?.status !== 'conflict';
+ const review = {baseRevision:artifact.revision ?? state.revision,targetId,targetVersion:artifact.targetVersion,artifactHash:artifact.sha256,criteria:artifact.criteria,sourceHash:artifact.sourceHash,numberHash:artifact.numberHash,knowledgeHash:artifact.knowledgeHash};
+  const ready = Boolean(artifact.criteria?.trim()) && artifact.sourceStatus==='current' && artifact.numberStatus==='current' && artifact.knowledgeStatus==='current' && artifact.specificationStatus === 'resolved' && selected === targetId && Boolean(currentAnalysis()) && currentAnalysis().specification?.status !== 'conflict';
   showArtifactText({path:artifact.path,text:artifact.text,criteria:artifact.criteria,message:ready?`確認対象：${target.title}。現物と受入条件を読み、満たしている場合に記録します。保存後は現物・条件・有効設定の変更を照合します。`:'受入条件の定義と仕様の照合が必要です。内容は読めますが、確認済みの記録はまだできません。',review:ready?review:null});
  }catch(error){toast(error.message,true);}
 }
