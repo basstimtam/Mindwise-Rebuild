@@ -1,4 +1,5 @@
 import {createHash} from 'node:crypto';
+import {mmapSourceBytes} from './mmap.mjs';
 
 export const MAX_EXCHANGE_BYTES=6*1024*1024;
 export const exchangeHash=value=>createHash('sha256').update(JSON.stringify(value)).digest('hex');
@@ -15,9 +16,10 @@ export function inspectExchange(input,{validate,assert}) {
   assert(Array.isArray(records)&&records.length<=100,'出所保管は100件以内にしてください。');
   function check(data) {
     assert(object(data)&&[1,2].includes(data.schemaVersion),'未対応の交換形式です。schemaVersion 1 / 2 が必要です。');
-    const allowed=new Set(['schemaVersion','projectId','revision','nodes','links','runs','history','events','archiveRefs','exportedAt','backupScope']);
+    const allowed=new Set(['schemaVersion','projectId','revision','nodes','links','runs','history','events','archiveRefs','exportedAt','backupScope','sourceDocument']);
     const unknown=Object.keys(data).filter(k=>!allowed.has(k));
     assert(!unknown.length,`未対応項目のため取込を中止: ${unknown.join(', ')}`);
+    if(data.sourceDocument!==undefined)mmapSourceBytes(data.sourceDocument);
     assert(Array.isArray(data.nodes)&&data.nodes.every(n=>object(n)&&typeof n.id==='string'),'取込元の各枝には明示IDが必要です。');
     validate(structuredClone(data));
     assert(data.runs===undefined||Array.isArray(data.runs)&&data.runs.every(object),'実行記録は配列にしてください。');

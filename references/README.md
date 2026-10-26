@@ -24,6 +24,11 @@
 - 本体はこのフォルダへ複製していません。インストール先に資料を追加・移動していません。
 - 今回の参照許可を、実行・改変・再配布の承認へ拡張しません。
 
+## 有限な.mmap読込
+
+- [実装した対応表・上限・原本保管と未対応範囲](MMAP_IMPORT_PROFILE.md)
+- 上記の許可済みインストール先からJPN/Mindjet.mmapとJPN/Whats New.mmapを読取専用の形式標本として選定。原本/全文をGitへ複製せず、オーナーの実案件での受入とは分けます。
+
 ## Teachme Process
 
 - 公式製品ページ: https://biz.teachme.jp/products/process/

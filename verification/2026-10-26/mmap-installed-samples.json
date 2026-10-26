@@ -1,0 +1,36 @@
+{
+  "at": "2026-10-26T06:02:12.146Z",
+  "scope": "Installed distribution references read-only. Counts/identities also checked independently with .NET ZIP/XML and reviewer. Not user-original acceptance, no notes/tasks coverage; no original bytes/text redistributed.",
+  "results": [
+    {
+      "name": "Mindjet.mmap",
+      "bytes": 38298,
+      "sha256": "8eced9f808a466d9e306622017e0d84cdb66435582c37e6501e94510ba3093aa",
+      "topics": 31,
+      "links": 1,
+      "floating": 1,
+      "path": "C:\\Program Files (x86)\\Mindjet\\MindManager 19\\JPN\\Mindjet.mmap",
+      "zipEntries": 9,
+      "expandedBytes": 242134,
+      "documentBytes": 50529,
+      "unresolvedRelationships": 0,
+      "notesAndTasksPresent": false,
+      "mtimeUnchanged": true
+    },
+    {
+      "name": "Whats New.mmap",
+      "bytes": 38118,
+      "sha256": "7c8e4021b954366fa6885af31a584e78359b420ee273592b7f02e348098eeb15",
+      "topics": 40,
+      "links": 1,
+      "floating": 0,
+      "path": "C:\\Program Files (x86)\\Mindjet\\MindManager 19\\JPN\\Whats New.mmap",
+      "zipEntries": 9,
+      "expandedBytes": 236423,
+      "documentBytes": 52741,
+      "unresolvedRelationships": 0,
+      "notesAndTasksPresent": false,
+      "mtimeUnchanged": true
+    }
+  ]
+}

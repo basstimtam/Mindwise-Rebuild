@@ -1,0 +1,11 @@
+import assert from 'node:assert/strict';
+import {readFileSync,writeFileSync} from 'node:fs';
+import {resolve,join} from 'node:path';
+import {createHash} from 'node:crypto';
+const root=resolve(import.meta.dirname,'../..'),url='http://127.0.0.1:4316',get=path=>fetch(url+path).then(r=>{assert.equal(r.status,200);return r.json();}),sha=b=>createHash('sha256').update(b).digest('hex');
+const state=await get('/api/state'),contracts=await get('/api/contracts'),analysis=await get('/api/analysis');assert.equal(state.revision,48);assert.equal(state.nodes.length,14);assert.equal(contracts.documents.find(d=>d.id==='goal').status,'approved');assert.equal(contracts.documents.find(d=>d.id==='design').status,'approved');
+const metric=analysis.numbers.byId['fa2f7bcf-ef72-4b39-af97-9c68b0c25e84'];assert.equal(metric.value,4800);
+const token=(await get('/api/session')).token,bytes=readFileSync(join(root,'.runtime/mmap-evidence/fictional.mmap')),downloaded=readFileSync(join(root,'.runtime/mmap-evidence/downloaded.mmap'));assert.deepEqual(bytes,downloaded);
+const converted=await fetch(url+'/api/mmap-convert',{method:'POST',headers:{'Content-Type':'application/json','X-Mindwise-Token':token},body:JSON.stringify({name:'fictional.mmap',base64:bytes.toString('base64')})}).then(r=>{assert.equal(r.status,200);return r.json();});assert.equal(converted.nodes.length,3);assert.equal((await get('/api/state')).revision,48,'conversion does not save into main model');
+const artifactHash=sha(readFileSync(join(root,'artifacts/3fcbed02-3e29-47de-b396-b5a2252ecb1d/numbers-check.md')));assert.equal(artifactHash,'8cd9650051d851cb3f8c3fd270fa78c5a0b6269bd895b3daee37608ae8869edf');
+const files=['src/mmap.mjs','src/exchange.mjs','src/store.mjs','src/server.mjs','public/exchange.js','public/sources.js','public/index.html'],evidence={at:new Date().toISOString(),main:{url,revision:state.revision,nodes:state.nodes.length,value:metric.value,goal:'approved',design:'approved',artifactHash},convertOnly:{nodes:converted.nodes.length,sourceHash:sha(bytes),downloadMatches:true,saved:false},sourceHashes:Object.fromEntries(files.map(p=>[p,sha(readFileSync(join(root,p)))]))};writeFileSync(join(import.meta.dirname,'mmap-final-check.json'),JSON.stringify(evidence,null,2));console.log(JSON.stringify(evidence));

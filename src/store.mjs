@@ -127,7 +127,8 @@ export function createStore({ root = process.cwd(), dataDir } = {}) {
     for(const row of db.prepare('SELECT sha256,body FROM exchange_archives ORDER BY sha256').iterate()) {
       const data=JSON.parse(row.body),events=(data.events||[]).filter(e=>e.targets.some(t=>t.targetId===targetId)),runs=(data.runs||[]).filter(r=>r.targetId===targetId||r.nodeId===targetId);
       if(!data.nodes.some(n=>n.id===targetId)&&!events.length&&!runs.length)continue;
-      sources.push({sha256:row.sha256,projectId:data.projectId??null,revision:data.revision??null,exportedAt:data.exportedAt??null,legacy:data.schemaVersion===1,events,runs,node:data.nodes.find(n=>n.id===targetId)??null});
+      const source=data.sourceDocument;
+      sources.push({sha256:row.sha256,projectId:data.projectId??null,revision:data.revision??null,exportedAt:data.exportedAt??null,legacy:data.schemaVersion===1,events,runs,node:data.nodes.find(n=>n.id===targetId)??null,...(source?{sourceDocument:{format:source.format,name:source.name,sha256:source.sha256,mapping:source.report.mapping?.find(m=>m.nodeId===targetId)??null}}:{})});
     }
     return sources;
   }
@@ -264,9 +265,9 @@ export function createStore({ root = process.cwd(), dataDir } = {}) {
     const collisions=imported.nodes.filter(n=>old.has(n.id)).map(n=>({id:n.id,before:old.get(n.id).title,after:n.title}));
     const removed=current.nodes.filter(n=>!next.has(n.id)).map(n=>({id:n.id,title:n.title}));
     const added=imported.nodes.filter(n=>!old.has(n.id)).map(n=>({id:n.id,title:n.title}));
-    const warnings=['枝と関係を全置換します。現在の変更履歴は保持し、通常の取消でモデルを戻せます。','取込元の確認済み表示を解除します。現物ファイルは含まず、自動取得しません。','現在と取込元の会話/実行は閲覧専用の出所へ保管し、制作の再開・採用・回復や実行権限には使いません。','同じIDの記録も元案件と保管指紋を区別します。指紋は承認者の真正性を証明しません。'];
+    const warnings=['枝と関係を全置換します。現在の変更履歴は保持し、通常の取消でモデルを戻せます。','取込元の確認済み表示を解除します。外部成果物は含まず、自動取得しません。.mmapの原ZIPと同梱資源は閲覧専用の出所に保持します。','現在と取込元の会話/実行は閲覧専用の出所へ保管し、制作の再開・採用・回復や実行権限には使いません。','同じIDの記録も元案件と保管指紋を区別します。指紋は承認者の真正性を証明しません。'];
     if(core.schemaVersion===1)warnings.push('旧形式1：元ファイルに変更差分や理由がなければ復元できません。元の要約/実行記録を保管します。');
-    return {core,imported,bundles,packageHash,report:{baseRevision:current.revision,packageHash,signature:hash({state:payload.state,revision:current.revision,runs:current.runs}),sourceProjectId:core.projectId??null,sourceRevision:core.revision??null,schemaVersion:core.schemaVersion,collisions,removed,added,beforeLinks:current.links,afterLinks:imported.links,changes:imported.nodes.filter(n=>old.has(n.id)).map(n=>({id:n.id,before:old.get(n.id),after:{...n,verified:false}})),warnings,events:(core.events||[]).length,runs:(core.runs||[]).length,archives:bundles.size}};
+    return {core,imported,bundles,packageHash,report:{baseRevision:current.revision,packageHash,signature:hash({state:payload.state,revision:current.revision,runs:current.runs}),sourceProjectId:core.projectId??null,sourceRevision:core.revision??null,schemaVersion:core.schemaVersion,collisions,removed,added,beforeLinks:current.links,afterLinks:imported.links,changes:imported.nodes.filter(n=>old.has(n.id)).map(n=>({id:n.id,before:old.get(n.id),after:{...n,verified:false}})),warnings,events:(core.events||[]).length,runs:(core.runs||[]).length,archives:bundles.size,...(core.sourceDocument?{sourceDocument:{name:core.sourceDocument.name,sha256:core.sourceDocument.sha256,report:core.sourceDocument.report}}:{})}};
   }
   function previewImport(payload) { return inspectImport(payload).report; }
   function archiveState(sha256) {
@@ -280,7 +281,7 @@ export function createStore({ root = process.cwd(), dataDir } = {}) {
     }
     return {...data,archives};
   }
-  function archiveList() {return db.prepare('SELECT sha256,body FROM exchange_archives ORDER BY sha256').all().map(row=>{const data=JSON.parse(row.body);return {sha256:row.sha256,projectId:data.projectId??null,revision:data.revision??null,exportedAt:data.exportedAt??null,nodes:data.nodes.length,events:data.events?.length??0,runs:data.runs?.length??0};});}
+  function archiveList() {return db.prepare('SELECT sha256,body FROM exchange_archives ORDER BY sha256').all().map(row=>{const data=JSON.parse(row.body);return {sha256:row.sha256,projectId:data.projectId??null,revision:data.revision??null,exportedAt:data.exportedAt??null,nodes:data.nodes.length,events:data.events?.length??0,runs:data.runs?.length??0,...(data.sourceDocument?{sourceDocument:{format:data.sourceDocument.format,name:data.sourceDocument.name,sha256:data.sourceDocument.sha256}}:{})};});}
   function importState(payload) {
     assert(object(payload)&&identifier(payload.operationId),'取込内容と操作IDが必要です。');
     const existing=db.prepare('SELECT request_hash FROM mutations WHERE operation_id=?').get(payload.operationId);

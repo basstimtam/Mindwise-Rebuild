@@ -8,6 +8,7 @@ import { readNodeArtifact, evaluateVerification, assessSources } from './artifac
 import { resolveSpecifications, summarizeProgress } from './semantics.mjs';
 import { readContracts, contractContext } from './contracts.mjs';
 import { calculateNumbers, assessNumbers } from './numbers.mjs';
+import {convertMmap,MMAP_LIMITS} from './mmap.mjs';
 
 const rootDefault = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const mime = {'.html':'text/html; charset=utf-8','.js':'text/javascript; charset=utf-8','.mjs':'text/javascript; charset=utf-8','.css':'text/css; charset=utf-8','.svg':'image/svg+xml','.png':'image/png','.ico':'image/x-icon','.json':'application/json; charset=utf-8'};
@@ -114,6 +115,13 @@ export async function createServer({root=rootDefault,dataDir,port=Number(process
       }
       if(url.pathname==='/api/import' && req.method==='POST') return json(store.importState(await body(req)));
       if(url.pathname==='/api/import-preview' && req.method==='POST') return json(store.previewImport(await body(req)));
+      if(url.pathname==='/api/mmap-convert' && req.method==='POST') {
+        const input=await body(req);
+        if(!input||typeof input!=='object'||Array.isArray(input)||Object.keys(input).some(k=>!['name','base64'].includes(k))||typeof input.name!=='string'||typeof input.base64!=='string'||input.base64.length>Math.ceil(MMAP_LIMITS.bytes/3)*4)throw new StoreError('.mmap変換の入力は1MiB以下の原ファイルと名前にしてください。');
+        const bytes=Buffer.from(input.base64,'base64');
+        if(bytes.toString('base64')!==input.base64)throw new StoreError('原ファイルのbase64が不正です。');
+        return json(convertMmap(bytes,input.name));
+      }
       if(url.pathname==='/api/exchange/sources' && req.method==='GET') return json(store.archiveList());
       if(url.pathname==='/api/exchange/source' && req.method==='GET') return json(store.archiveState(url.searchParams.get('sha256')));
       if(url.pathname==='/api/backup' && req.method==='POST') return json(store.backup());

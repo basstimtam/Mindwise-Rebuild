@@ -1,0 +1,27 @@
+{
+  "at": "2026-10-26T06:08:52.761Z",
+  "main": {
+    "url": "http://127.0.0.1:4316",
+    "revision": 48,
+    "nodes": 14,
+    "value": 4800,
+    "goal": "approved",
+    "design": "approved",
+    "artifactHash": "8cd9650051d851cb3f8c3fd270fa78c5a0b6269bd895b3daee37608ae8869edf"
+  },
+  "convertOnly": {
+    "nodes": 3,
+    "sourceHash": "5d8075eb810c6f5cd87c1a74945671e04d49f99d9665b8a431126cc8a6d43d87",
+    "downloadMatches": true,
+    "saved": false
+  },
+  "sourceHashes": {
+    "src/mmap.mjs": "3334a0b8336c6c8ee75374b73a8fb36ca5e284365163301b142f43424b5a0742",
+    "src/exchange.mjs": "f7c25eb577e26bed01b5a49916c7191ff389659ae6b4f21db230641ebad39fc7",
+    "src/store.mjs": "df60b332fc52b501158e1ae21961a13f623810ee9fd3a50cb675c0153105825e",
+    "src/server.mjs": "e49b2cf5d0691ed76d1984f00e904607f6f69186b8ee9f8ac88f0ad52b4f18cc",
+    "public/exchange.js": "df24d8af137fe7bd076ad568f996ebe649eba2a4405408c5f8765db1e6522b6e",
+    "public/sources.js": "064435b8f89f076263a9b2be09dde00e9366f0f0fd2bc086c0f2c15e3ffea134",
+    "public/index.html": "7c992c6f2ad00a44de5e69302afc9e28dfc4ea46d156b0c254c97c32da957a3b"
+  }
+}

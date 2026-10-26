@@ -1,0 +1,19 @@
+{
+  "fixture": "fictional bounded mmap, no real Codex/no owner acceptance",
+  "dataDir": "C:\\Users\\basst\\Dropbox\\AI Project\\16.Mindwise-Rebuild\\.runtime\\mmap-workflow",
+  "path": "C:\\Users\\basst\\Dropbox\\AI Project\\16.Mindwise-Rebuild\\.runtime\\mmap-evidence\\fictional.mmap",
+  "bytes": 1099,
+  "sha256": "5d8075eb810c6f5cd87c1a74945671e04d49f99d9665b8a431126cc8a6d43d87",
+  "mtimeMs": 1792994288823.1416,
+  "expected": {
+    "topics": 3,
+    "links": 1,
+    "unresolvedRelationships": 1,
+    "floating": 1,
+    "progress": 42
+  },
+  "main": {
+    "revision": 48,
+    "nodes": 14
+  }
+}

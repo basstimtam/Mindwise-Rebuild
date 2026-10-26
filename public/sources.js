@@ -77,6 +77,7 @@ export function createSourcesUi({api,getNode,change,toast}) {
   for(const archive of result.archives||[]) {
    const row=el('section','provenance-entry');row.append(el('strong','',`元案件 ${archive.projectId||'不明'} · 元保存版 ${archive.revision??'不明'}`),el('small','source-hash',archive.sha256));
    if(archive.legacy)row.append(el('p','conflict-note','旧形式：元ファイルに変更差分や理由がなければ復元できません。'));
+   if(archive.sourceDocument)row.append(el('p','',`原.mmap：${archive.sourceDocument.name} · ${archive.sourceDocument.sha256}`),el('pre','source-excerpt',JSON.stringify(archive.sourceDocument.mapping,null,2)),el('p','small-note','原ZIPと全対応表/未対応一覧は「保管した出所」から取り出せます。取込は契約承認・仕様依存・成果受入を与えません。'));
    for(const event of archive.events.slice(0,100))row.append(el('p','',`元保存版 ${event.revision??'不明'}${event.undone?' · 取消済み':''}：${typeof event.context?.reason==='string'&&event.context.reason.trim()?event.context.reason:'理由の記録なし・不明'}`));
    if(archive.events.length>100)row.append(el('p','small-note','理由の一覧は先頭100件です。以下の原記録には全件を保持しています。'));
    const detail=el('details');detail.append(el('summary','',`元の対象・変更詳細 ${archive.events.length}件・実行記録 ${archive.runs.length}件`),el('pre','source-excerpt',JSON.stringify({node:archive.node,events:archive.events,runs:archive.runs},null,2)));row.append(detail);host.append(row);
