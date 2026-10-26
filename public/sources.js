@@ -70,8 +70,8 @@ export function createSourcesUi({api,getNode,change,toast}) {
    for(const ref of entry.sourceRefs)if(ref.text)details.append(el('pre','source-excerpt',`実行時の参照記録：${ref.documentId} · ${ref.revision} · ${ref.sha256}\n${ref.text}`));
    row.append(details);host.append(row);
   }
-  host.append(el('h3','section-title','制作・未採用の提案'));
-  for(const run of result.runs) {const row=el('div','provenance-entry');row.append(el('strong','',`${run.startedAt} · ${runLabels[run.status]||'状態未確認'} · 開始時の版 ${run.targetVersion}`),el('p','',`依頼：${run.prompt}`),el('p','',`判断理由：${run.decisionReason||'記録なし・不明'}`));host.append(row);}
+  host.append(el('h3','section-title','制作・提案の記録'));
+  for(const run of result.runs) {const kind=run.mode==='relations'?'関係案':'設定案',label=run.status==='proposed'?`${kind}・未採用`:run.status==='adopted'?`${kind}・${run.adoptionUndone?'採用取消済み':'採用済み'}`:runLabels[run.status]||'状態未確認';const row=el('div','provenance-entry');row.append(el('strong','',`${run.startedAt} · ${label} · 開始時の版 ${run.targetVersion}`),el('p','',`依頼：${run.prompt}`),el('p','',`判断理由：${run.decisionReason||'記録なし・不明'}`));host.append(row);}
   host.append(el('h3','section-title','交換で保管した出所・判断'));
   if(result.archives?.length)host.append(el('p','small-note','以下は同じIDを持つ元記録です。現在の対象との内容一致や承認の真正性は保証しません。取込元の申告を閲覧するだけで、制作の再開・権限・現物受入には使いません。'));
   for(const archive of result.archives||[]) {

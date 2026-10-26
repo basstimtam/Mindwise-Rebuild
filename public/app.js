@@ -3,6 +3,7 @@ import {createNumbersUi} from './numbers.js';
 import {createRecoveryUi} from './recovery.js';
 import {createExchangeUi} from './exchange.js';
 import {reconcileAiState} from './ai-state.js';
+import {createRelationScopeUi} from './relation-scope.js';
 import {rebaseDraft,parentCandidates,selectionAfterChange} from './editing.js';
 const $ = (q, parent = document) => parent.querySelector(q);
 const $$ = (q, parent = document) => [...parent.querySelectorAll(q)];
@@ -18,7 +19,7 @@ const detailDrafts = new Map(), relationDrafts = new Map();
 const sourcesUi=createSourcesUi({api,getNode:node,change,toast});
 const recoveryUi=createRecoveryUi({api,el,toast,onRecovered:async result=>{state=result.state;aiRun=result.run;render();await refreshAnalysis();await pollAi();},onUncertain:async()=>{state=await api('/api/state');render();await refreshAnalysis();await pollAi();}});
 const numbersUi=createNumbersUi({el,button,field,getState:()=>state,getAnalysis:currentAnalysis,getSelected:()=>selected,choose});
-createExchangeUi({api,el,toast,getState:()=>state,onImported:async result=>{state=result;detailDrafts.clear();relationDrafts.clear();aiThreads={};freshConversationTargets.clear();localStorage.setItem('mindwise.threads','{}');selected=state.nodes[0]?.id||null;domain='';query='';$('#search').value='';analysis=null;render();await refreshAnalysis();await pollAi();},onUncertain:async()=>{state=await api('/api/state');render();await refreshAnalysis();await pollAi();}});
+createExchangeUi({api,el,toast,getState:()=>state,onImported:async result=>{state=result;detailDrafts.clear();relationDrafts.clear();relationScopeUi.clear();aiThreads={};freshConversationTargets.clear();localStorage.setItem('mindwise.threads','{}');selected=state.nodes[0]?.id||null;domain='';query='';$('#search').value='';analysis=null;render();await refreshAnalysis();await pollAi();},onUncertain:async()=>{state=await api('/api/state');render();await refreshAnalysis();await pollAi();}});
 let analysis = null, analysisTarget = null, analysisSequence = 0, analysisFetch = null, analysisAt = 0, analysisError = '', reviewedArtifact = null, verificationPending = false;
 function currentAnalysis() { return analysis?.revision === state.revision && analysisTarget === (selected || '') ? analysis : null; }
 function verificationText(id) { return ({verified:'現物確認済み',stale:'変更後の再確認が必要',missing:'成果物が見つかりません',conflict:'仕様の衝突を解決してください',unverified:'受入は未確認'})[currentAnalysis()?.verificationById?.[id]?.status] || '現物との照合待ち'; }
@@ -72,12 +73,15 @@ async function change(ops) {
 }
 function confirmImpact(impact, edited, proposal) {
  const dialog = $('#impactDialog'), list = $('#impactList'); list.replaceChildren();
- $('#impactHeading').textContent=proposal?'設定案の差分と影響を確認':'変更前に影響を確認';
- $('#impactContinue').textContent=proposal?'この設定案を採用':'この変更を保存';
+ $('#impactHeading').textContent=proposal?.mode==='relations'?'関係案の差分と影響を確認':proposal?'設定案の差分と影響を確認':'変更前に影響を確認';
+ $('#impactContinue').textContent=proposal?.mode==='relations'?'この関係案を採用':proposal?'この設定案を採用':'この変更を保存';
  const changes=$('#impactChanges');changes.replaceChildren();
  if(proposal) {
   changes.append(el('strong','',title(proposal.targetId)),el('p','small-note',`採用理由：${proposal.reason}`));
-  for(const [label,specs] of [['変更前',proposal.before],['設定案',proposal.after]])changes.append(el('pre','source-excerpt',`${label}\n${specs.map(s=>`${s.key} = ${s.value}`).join('\n')||'設定なし'}`));
+  if(proposal.mode==='relations') {
+   changes.append(el('p','small-note',`操作候補：${proposal.scopeNodeIds.map(title).join('、')}。候補外も影響先になり得ます。`));
+   for(const row of proposal.relationChanges) {const link=row.before||row.after;changes.append(el('pre','source-excerpt',`${row.action==='add'?'追加':'解除'}：${title(link.from)} → ${title(link.to)}\n${relations[link.type]||link.type}\n${row.action==='remove'&&link.reason?'元の理由：'+link.reason+'\n':''}今回の理由：${row.reason}`));}
+  } else for(const [label,specs] of [['変更前',proposal.before],['設定案',proposal.after]])changes.append(el('pre','source-excerpt',`${label}\n${specs.map(s=>`${s.key} = ${s.value}`).join('\n')||'設定なし'}`));
  }
  const labels = {affected:'設定が変わる対象',exempt:'例外を保つ対象',unknown:'影響の再確認が必要',unchanged:'設定は変わりません'};
  const rows = (impact.details || []).filter(row => row.effect !== 'unchanged');
@@ -275,15 +279,18 @@ function renderAiTarget() {
  const analysisNow=currentAnalysis(), numberIds=new Set([selected,...(analysisNow?.specification?.sources||[]).map(s=>s.id)]);
  for(const link of state.links)if(link.from===selected||link.to===selected){numberIds.add(link.from);numberIds.add(link.to);}
  const numbersUnresolved=[...numberIds].some(id=>analysisNow?.numbers?.byId[id]?.status==='unresolved');
- const unresolved = !analysisNow || ($('#aiMode').value!=='settings' && (analysisNow?.specification?.status === 'conflict'||numbersUnresolved));
- $('#sendAi').disabled = !n || executing || aiRequestPending || unresolved;
+ const mode=$('#aiMode').value,unresolved = !analysisNow || (mode==='production' && (analysisNow?.specification?.status === 'conflict'||numbersUnresolved));
+ relationScopeUi.render(mode==='relations');
+ const scopeInvalid=mode==='relations'&&(relationScopeUi.ids().length<1||relationScopeUi.ids().length>19);
+ $('#sendAi').disabled = !n || executing || aiRequestPending || unresolved || scopeInvalid;
  $('#aiSpecStatus').textContent = !n ? '制作対象を選択してください。' : !currentAnalysis() ? '制作前に現在の設定を照合しています。' : unresolved ? '仕様が未解決です。詳細で衝突・例外・循環を確認してください。' : '現在の有効設定と出所を使って制作します。';
  $('#interrupt').disabled = !executing;
- if(numbersUnresolved&&$('#aiMode').value!=='settings')$('#aiSpecStatus').textContent='関連する数値が未解決です。数値表示で欠損・単位・出所・鮮度を確認してください。';
+ if(numbersUnresolved&&mode==='production')$('#aiSpecStatus').textContent='関連する数値が未解決です。数値表示で欠損・単位・出所・鮮度を確認してください。';
  if($('#aiMode').value==='settings'&&!unresolved)$('#aiSpecStatus').textContent='選択中の本文と設定から案を作ります。差分と影響を確認してから採用できます。';
+ if(mode==='relations'&&!unresolved)$('#aiSpecStatus').textContent='選択対象と候補の間の関係案を作ります。本文や設定を変えず、方向・理由・影響を確認してから採用できます。';
  if (aiRun) $('#aiStatus').textContent = `${title(aiRun.targetId)} · ` + ({connecting:'Codexへ接続中',running:'制作中',applying:'制作結果を保存中',completed:'制作結果を保存しました。内容の受入は未確認です。',failed:'制作に失敗しました',interrupted:'前回の制作は中断しています。自動再送していません。',needs_review:'対象が更新されたため、元の版への提案として保存しています。',partial:'部分結果があります。自動再送していません。',reconciled:'モデルの受領を照合し、実行記録を回復しました。現物の受入は別です。'}[aiRun.status] || aiRun.status) + (aiRun.error && !(aiRun.resultRecovery&&['completed','reconciled'].includes(aiRun.status)) ? `：${aiRun.error}` : '');
- if(aiRun?.status==='proposed')$('#aiStatus').textContent=`${title(aiRun.targetId)} · 設定案は未採用です。差分と影響を確認できます。`;
- if(aiRun?.status==='adopted')$('#aiStatus').textContent=`${title(aiRun.targetId)} · 設定案を採用しました。制作と成果確認はこれからです。`;
+ if(aiRun?.status==='proposed')$('#aiStatus').textContent=`${title(aiRun.targetId)} · ${aiRun.mode==='relations'?'関係':'設定'}案は未採用です。差分と影響を確認できます。`;
+ if(aiRun?.status==='adopted')$('#aiStatus').textContent=`${title(aiRun.targetId)} · ${aiRun.mode==='relations'?'関係':'設定'}案を採用しました。${state.history.some(h=>h.operationId===`ai-${aiRun.mode}-${aiRun.id}`&&h.undone)?'この採用は取消済みです。':''}制作と成果確認はこれからです。`;
 }
 function showArtifactText({path,text,message,criteria,review}) {
  reviewedArtifact = review || null;
@@ -351,7 +358,7 @@ async function pollAi() {
    if (stream) box.append(el('div', 'ai-message', stream));
   }
   if (aiRun?.decisionReason) box.append(el('div', 'ai-message', `制作判断の理由：${aiRun.decisionReason}`));
-  for(const proposal of state.runs.filter(r=>r.mode==='settings'&&r.status==='proposed'&&r.targetId===selected))box.append(button('設定案の差分と影響を確認',()=>reviewSettings(proposal.id),'artifact-button'));
+  for(const proposal of state.runs.filter(r=>['settings','relations'].includes(r.mode)&&r.status==='proposed'&&r.targetId===selected))box.append(button(`${proposal.mode==='relations'?'関係':'設定'}案の差分と影響を確認`,()=>reviewSettings(proposal.id),'artifact-button'));
   if (aiRun?.status === 'needs_review') {
    if (aiRun.reply) box.append(el('div', 'ai-message', aiRun.reply));
    const proposal = aiRun.proposal;
@@ -359,8 +366,9 @@ async function pollAi() {
    if (proposal?.updatedBody !== null && proposal?.updatedBody !== undefined) box.append(button('本文の改訂案を読む',()=>show('本文',proposal.updatedBody)));
    proposal?.artifacts?.forEach(a=>box.append(button(`成果物案を読む：${a.name}`,()=>show(a.name,a.content),'artifact-button')));
    proposal?.children?.forEach(a=>box.append(button(`枝の追加案を読む：${a.title}`,()=>show(a.title,a.body),'artifact-button')));
+   if(proposal?.relationChanges)box.append(button('元の版への関係案を読む',()=>show('関係',JSON.stringify(proposal.relationChanges,null,2))));
   }
-  for(const item of state.runs.filter(r=>r.mode!=='settings'&&(['partial','interrupted','failed','reconciled'].includes(r.status)||r.resultRecovery)))box.append(button(`${item.inputs?.find(n=>n.id===item.targetId)?.title||title(item.targetId)} の${item.resultRecovery?'照合済み結果を確認':'部分結果を照合'}`,()=>recoveryUi.open(item.id),'artifact-button'));
+  for(const item of state.runs.filter(r=>!['settings','relations'].includes(r.mode)&&(['partial','interrupted','failed','reconciled'].includes(r.status)||r.resultRecovery)))box.append(button(`${item.inputs?.find(n=>n.id===item.targetId)?.title||title(item.targetId)} の${item.resultRecovery?'照合済み結果を確認':'部分結果を照合'}`,()=>recoveryUi.open(item.id),'artifact-button'));
   if(aiRun?.fixture)box.append(el('p','conflict-note','この実行は故障試験用の保存応答です。Codexの実制作ではありません。'));
   if (aiRun?.recovery) box.append(el('p', 'small-note', aiRun.recovery));
   if (aiRun?.resultRecovery&&['completed','reconciled'].includes(aiRun.status)&&aiRun.error) box.append(el('p','small-note',`回復前の停止記録：${aiRun.error}`));
@@ -378,8 +386,8 @@ $('#aiForm').addEventListener('submit',async event=>{
  try {
   await refreshAnalysis();
   const mode=$('#aiMode').value;
-  if(selected!==targetId || !currentAnalysis() || mode!=='settings'&&currentAnalysis().specification?.status==='conflict')throw new Error('制作対象と現在の設定を確認してから開始してください。');
-  const result = await api('/api/ai/start',{targetId,prompt,mode,...(aiThreads[targetId]?{threadId:aiThreads[targetId]}:{})});
+  if(selected!==targetId || !currentAnalysis() || mode==='production'&&currentAnalysis().specification?.status==='conflict')throw new Error('制作対象と現在の設定を確認してから開始してください。');
+  const result = await api('/api/ai/start',{targetId,prompt,mode,...(mode==='relations'?{relationNodeIds:relationScopeUi.ids()}:{}),...(aiThreads[targetId]?{threadId:aiThreads[targetId]}:{})});
   aiRun = result.run || result;freshConversationTargets.delete(targetId);
   if(aiRun.threadId){aiThreads[targetId]=aiRun.threadId;localStorage.setItem('mindwise.threads',JSON.stringify(aiThreads));}
   $('#aiPrompt').value='';toast('選択対象を固定して制作を開始しました');await pollAi();
@@ -404,11 +412,16 @@ async function reviewSettings(runId) {
  try {
   const proposal=await api('/api/ai/proposal',{runId});
   if(!await confirmImpact(proposal.impact,new Set([proposal.targetId]),proposal))return;
-  const adopted=await api('/api/ai/adopt',{runId,baseRevision:proposal.baseRevision});
-  state=adopted.state;aiRun=adopted.run;render();await refreshAnalysis();await pollAi();toast('設定案を採用しました。影響先の制作・検証は再確認として保持します。');
- }catch(e){toast(e.message,true);}finally{busy=false;}
+  const adopted=await api('/api/ai/adopt',{runId,baseRevision:proposal.baseRevision,...(proposal.signature?{signature:proposal.signature}:{})});
+  state=adopted.state;aiRun=adopted.run;render();await refreshAnalysis();await pollAi();toast(`${proposal.mode==='relations'?'関係':'設定'}案を採用しました。影響先の制作・検証は再確認として保持します。`);
+ }catch(e){
+  try{state=await api('/api/state');render();await refreshAnalysis();await pollAi();}catch{}
+  const saved=state.runs.find(r=>r.id===runId),received=state.history.some(h=>h.operationId===`ai-${saved?.mode}-${runId}`);
+  toast(received?'採用の保存受領を確認しました。二重に適用していません。':`採用結果を確認してください：${e.message}`,!received);
+ }finally{busy=false;}
 }
-const modeField=field('Codexに依頼すること','mode','production','select',[['production','この仕様で制作・相談'],['settings','本文から設定案を作る']]);
-const modeInput=$('[name="mode"]',modeField);modeInput.id='aiMode';modeInput.onchange=()=>{renderAiTarget();$('#sendAi').textContent=modeInput.value==='settings'?'設定案を作る ↗':'制作を始める ↗';};
-$('#aiForm').prepend(modeField);
+const modeField=field('Codexに依頼すること','mode','production','select',[['production','この仕様で制作・相談'],['settings','本文から設定案を作る'],['relations','関係・局所例外の案を作る']]);
+const modeInput=$('[name="mode"]',modeField);modeInput.id='aiMode';modeInput.onchange=()=>{renderAiTarget();$('#sendAi').textContent=modeInput.value==='relations'?'関係案を作る ↗':modeInput.value==='settings'?'設定案を作る ↗':'制作を始める ↗';};
+const relationScopeUi=createRelationScopeUi({el,field,button,getState:()=>state,getSelected:()=>selected,onChanged:renderAiTarget});
+$('#aiForm').prepend(modeField,relationScopeUi.host);
 boot();

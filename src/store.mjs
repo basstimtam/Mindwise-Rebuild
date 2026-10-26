@@ -134,7 +134,7 @@ export function createStore({ root = process.cwd(), dataDir } = {}) {
   }
   function provenance(targetId) {
     assert(raw().nodes.some(n=>n.id===targetId),'対象が見つかりません。',404);
-    const entries=[];
+    const entries=[],undone=new Set(history().filter(h=>h.undone).map(h=>h.operationId));
     for(const row of db.prepare('SELECT m.*, c.body AS context FROM mutations m LEFT JOIN mutation_context c ON c.operation_id=m.operation_id ORDER BY revision DESC').iterate()) {
       const before=JSON.parse(row.before_json),after=JSON.parse(row.after_json),a=before.nodes.find(n=>n.id===targetId),b=after.nodes.find(n=>n.id===targetId);
       const fields=[...new Set([...Object.keys(a||{}),...Object.keys(b||{})])].filter(k=>k!=='version'&&JSON.stringify(a?.[k])!==JSON.stringify(b?.[k]));
@@ -146,7 +146,7 @@ export function createStore({ root = process.cwd(), dataDir } = {}) {
       entries.push({revision:row.revision,operationId:row.operation_id,kind:row.kind,at:row.at,undone:Boolean(row.undone),actor:context?.actor|| (legacyRun?'codex':'unknown'),reason:context?.reason||legacyRun?.decisionReason||null,runId:context?.runId||legacyRun?.id||null,sourceRefs:context?.sourceRefs||[],inputs:context?.inputs||[],changes:fields.map(field=>({field,before:a?.[field]??null,after:b?.[field]??null})),relations:relationsChanged?{before:links(before),after:links(after)}:null});
       if(entries.length>=100)break;
     }
-    return {targetId,entries,limit:100,archives:archivedSources(targetId),runs:raw().runs.filter(r=>r.targetId===targetId).map(({id,status,mode,startedAt,targetVersion,prompt,reply,decisionReason,adoptedRevision})=>({id,status,mode,startedAt,targetVersion,prompt,reply,decisionReason,adoptedRevision}))};
+    return {targetId,entries,limit:100,archives:archivedSources(targetId),runs:raw().runs.filter(r=>r.targetId===targetId).map(({id,status,mode,startedAt,targetVersion,prompt,reply,decisionReason,adoptedRevision})=>({id,status,mode,startedAt,targetVersion,prompt,reply,decisionReason,adoptedRevision,adoptionUndone:undone.has(`ai-${mode}-${id}`)}))};
   }
   function operationReceipt(operationId) {
     const row=db.prepare('SELECT revision,kind,after_json FROM mutations WHERE operation_id=?').get(operationId);
@@ -232,8 +232,9 @@ export function createStore({ root = process.cwd(), dataDir } = {}) {
       const changed=applyOperations(state,payload.ops).state;
       if(runUpdate) {
         const i=changed.runs.findIndex(r=>r.id===runUpdate.id);
-        assert(i>=0&&runUpdate.status==='adopted'&&changed.runs[i].mode==='settings'&&changed.runs[i].status==='proposed','設定案の採用記録が一致しません。',409);
-        changed.runs[i]={...changed.runs[i],status:'adopted',adoptedAt:runUpdate.adoptedAt,adoptedRevision:state.revision+1};
+        assert(i>=0&&runUpdate.status==='adopted'&&['settings','relations'].includes(changed.runs[i].mode)&&changed.runs[i].status==='proposed','設定・関係案の採用記録が一致しません。',409);
+        if(changed.runs[i].mode==='relations')assert(/^[a-f0-9]{64}$/.test(runUpdate.adoptedSignature||''),'確認した関係案の指紋が必要です。',409);
+        changed.runs[i]={...changed.runs[i],status:'adopted',adoptedAt:runUpdate.adoptedAt,adoptedRevision:state.revision+1,...(changed.runs[i].mode==='relations'?{adoptedSignature:runUpdate.adoptedSignature}:{})};
       }
       return changed;
     });

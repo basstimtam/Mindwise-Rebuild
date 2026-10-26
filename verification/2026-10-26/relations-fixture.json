@@ -1,0 +1,243 @@
+{
+  "fictional": true,
+  "realCodexCallsAtSeed": 0,
+  "createdAt": "2026-10-26T07:56:48.520Z",
+  "dataDir": ".runtime/relations-workflow",
+  "port": 4317,
+  "revision": 1,
+  "nodes": [
+    {
+      "id": "rel-p",
+      "parentId": null,
+      "title": "雨港の環境（架空）",
+      "body": "架空短編の資料。天候は雨。実案件の受入ではない。",
+      "domain": "関係案の架空短編",
+      "depth": 0,
+      "status": "planned",
+      "progress": 0,
+      "start": "",
+      "due": "",
+      "x": 80,
+      "y": 80,
+      "kind": "concept",
+      "unit": "",
+      "value": null,
+      "formula": "",
+      "artifact": "",
+      "criteria": "",
+      "verified": false,
+      "version": 1,
+      "specs": [
+        {
+          "key": "天候",
+          "value": "雨"
+        }
+      ],
+      "required": false,
+      "weight": null,
+      "sourceRefs": [],
+      "metricInputs": [],
+      "metricSource": "",
+      "metricFreshness": "unknown"
+    },
+    {
+      "id": "rel-s",
+      "parentId": null,
+      "title": "共通の衣装設定（架空）",
+      "body": "架空短編の共通衣装は赤。通常の人物に適用する。夜警の局所設定を変える理由はない。",
+      "domain": "関係案の架空短編",
+      "depth": 0,
+      "status": "planned",
+      "progress": 0,
+      "start": "",
+      "due": "",
+      "x": 340,
+      "y": 80,
+      "kind": "concept",
+      "unit": "",
+      "value": null,
+      "formula": "",
+      "artifact": "",
+      "criteria": "",
+      "verified": false,
+      "version": 1,
+      "specs": [
+        {
+          "key": "衣装",
+          "value": "赤"
+        }
+      ],
+      "required": false,
+      "weight": null,
+      "sourceRefs": [],
+      "metricInputs": [],
+      "metricSource": "",
+      "metricFreshness": "unknown"
+    },
+    {
+      "id": "rel-t",
+      "parentId": null,
+      "title": "夜警の局所設定（架空）",
+      "body": "架空短編の夜警だけは雨の港でも視認できる青の衣装にする。そのため、夜警の局所設定で共通の赤を置き換える明示例外が必要。夜警設定が適用される短編も青を使う。通常の人物紹介は共通の赤を保つ。理由の出所はこの本文であり、実案件の戦略承認ではない。",
+      "domain": "関係案の架空短編",
+      "depth": 0,
+      "status": "planned",
+      "progress": 0,
+      "start": "",
+      "due": "",
+      "x": 600,
+      "y": 80,
+      "kind": "concept",
+      "unit": "",
+      "value": null,
+      "formula": "",
+      "artifact": "",
+      "criteria": "",
+      "verified": false,
+      "version": 1,
+      "specs": [
+        {
+          "key": "衣装",
+          "value": "青"
+        }
+      ],
+      "required": false,
+      "weight": null,
+      "sourceRefs": [
+        {
+          "documentId": "goal",
+          "section": "3. 観測可能な完成条件",
+          "revision": "Mindwise Rebuild Rev 2",
+          "sha256": "a79eb266a618f3ac1a4d59643a1a955cb4ea207c098d4d5358ac1d5d29ae076f"
+        }
+      ],
+      "metricInputs": [],
+      "metricSource": "",
+      "metricFreshness": "unknown"
+    },
+    {
+      "id": "rel-u",
+      "parentId": null,
+      "title": "夜警の短編を制作（架空）",
+      "body": "夜警の設定と共通設定を受ける架空の短編。現在の有効設定と理由を利用して制作する。",
+      "domain": "関係案の架空短編",
+      "depth": 0,
+      "status": "planned",
+      "progress": 0,
+      "start": "",
+      "due": "",
+      "x": 80,
+      "y": 260,
+      "kind": "concept",
+      "unit": "",
+      "value": null,
+      "formula": "",
+      "artifact": "",
+      "criteria": "",
+      "verified": false,
+      "version": 1,
+      "specs": [],
+      "required": false,
+      "weight": null,
+      "sourceRefs": [],
+      "metricInputs": [],
+      "metricSource": "",
+      "metricFreshness": "unknown"
+    },
+    {
+      "id": "rel-v",
+      "parentId": null,
+      "title": "通常の人物紹介（架空）",
+      "body": "共通設定だけを使う人物紹介。夜警の局所例外を適用しない。",
+      "domain": "関係案の架空短編",
+      "depth": 0,
+      "status": "planned",
+      "progress": 0,
+      "start": "",
+      "due": "",
+      "x": 340,
+      "y": 260,
+      "kind": "concept",
+      "unit": "",
+      "value": null,
+      "formula": "",
+      "artifact": "",
+      "criteria": "",
+      "verified": false,
+      "version": 1,
+      "specs": [],
+      "required": false,
+      "weight": null,
+      "sourceRefs": [],
+      "metricInputs": [],
+      "metricSource": "",
+      "metricFreshness": "unknown"
+    },
+    {
+      "id": "rel-w",
+      "parentId": null,
+      "title": "独立した資料（架空）",
+      "body": "関係を結んでいない資料。今回変更しない。",
+      "domain": "関係案の架空短編",
+      "depth": 0,
+      "status": "planned",
+      "progress": 0,
+      "start": "",
+      "due": "",
+      "x": 600,
+      "y": 260,
+      "kind": "concept",
+      "unit": "",
+      "value": null,
+      "formula": "",
+      "artifact": "",
+      "criteria": "",
+      "verified": false,
+      "version": 1,
+      "specs": [],
+      "required": false,
+      "weight": null,
+      "sourceRefs": [],
+      "metricInputs": [],
+      "metricSource": "",
+      "metricFreshness": "unknown"
+    }
+  ],
+  "links": [
+    {
+      "id": "p-s",
+      "from": "rel-p",
+      "to": "rel-s",
+      "type": "applies_to"
+    },
+    {
+      "id": "s-t",
+      "from": "rel-s",
+      "to": "rel-t",
+      "type": "applies_to"
+    },
+    {
+      "id": "s-u",
+      "from": "rel-s",
+      "to": "rel-u",
+      "type": "applies_to"
+    },
+    {
+      "id": "t-u",
+      "from": "rel-t",
+      "to": "rel-u",
+      "type": "applies_to"
+    },
+    {
+      "id": "s-v",
+      "from": "rel-s",
+      "to": "rel-v",
+      "type": "applies_to"
+    }
+  ],
+  "expectations": {
+    "proposal": "T exception_to S only, T/U become blue; V stays red; W unchanged",
+    "removal": "exact original exception ID, U conflict again, undo restores ID",
+    "acceptance": "No owner acceptance"
+  }
+}
