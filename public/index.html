@@ -7,7 +7,7 @@
  <button id="allDomains" class="nav-item active">◈ <span>プロジェクト全体</span></button>
  <div class="sidebar-label">完成に必要な領域</div><nav id="domains" aria-label="領域"></nav>
  <div class="sidebar-label">探す・つなぐ</div><button id="contractsButton" class="nav-item">▧ 契約と判断の出所</button><input id="search" class="search" placeholder="枝のタイトルを検索" aria-label="枝を検索"><div id="searchResults"></div>
- <div class="sidebar-foot"><span class="live-dot"></span> ローカル保存<div id="connectionText">接続を確認中</div><button id="backup">バックアップ</button><button id="export">書き出す</button><button id="import">読み込む</button><input type="file" id="importFile" accept="application/json,.json" hidden></div>
+ <div class="sidebar-foot"><span class="live-dot"></span> ローカル保存<div id="connectionText">接続を確認中</div><button id="backup">バックアップ</button><button id="export">書き出す</button><button id="import">読み込む</button><button id="exchangeSources">保管した出所</button><input type="file" id="importFile" accept="application/json,.json" hidden></div>
 </aside>
 <main>
  <header class="topbar"><div><div class="eyebrow">WORKSPACE <span>/</span> MINDWISE REBUILD</div><h1>構想から、完成まで。</h1></div><div class="top-actions"><span id="saveState" class="saved">● 保存済み</span><button id="undo" title="モデルの最後の変更を取り消す">↶ 取り消す</button><button id="addNode" class="primary">＋ 枝をつくる</button></div></header>
@@ -22,6 +22,7 @@
 <dialog id="progressDialog"><div class="dialog-head"><h2>領域別の成果と進捗</h2><button id="closeProgress">閉じる</button></div><div id="progressList"></div></dialog>
 <dialog id="contractsDialog"><div class="dialog-head"><h2>契約と判断の出所</h2><button id="closeContracts">閉じる</button></div><p class="small-note">この案件に登録された原文です。承認の根拠と現在の内容を照合して表示します。</p><div id="contractDocuments" class="source-tabs"></div><div id="contractMetadata"></div><label class="field"><span>原文の見出し</span><select id="contractSection"></select></label><div class="button-row"><button id="contractApproval">承認の記録へ</button><button id="attachContract" class="primary">この出所を選択中の枝へ結ぶ</button></div><p id="contractBinding" class="small-note"></p><pre id="contractText" class="source-text"></pre></dialog>
 <dialog id="provenanceDialog"><div class="dialog-head"><h2 id="provenanceTitle">判断と変更の出所</h2><button id="closeProvenance">閉じる</button></div><div id="provenanceList"></div></dialog>
+<dialog id="exchangeDialog"><div class="dialog-head"><h2 id="exchangeTitle">交換データ</h2><button id="closeExchange">戻る</button></div><div id="exchangeContent"></div><div class="dialog-actions"><button id="exchangeApply" class="primary" hidden>この内容で置換して出所を保管</button></div></dialog>
 <dialog id="deleteDialog"><div class="dialog-head"><h2>枝を削除</h2></div><p id="deleteTarget"></p><div class="dialog-actions"><button id="deleteCancel">戻る</button><button id="deleteContinue" class="danger">この枝を削除</button></div></dialog>
 <dialog id="recoveryDialog"><div class="dialog-head"><h2>部分結果と現物を照合</h2><button id="closeRecovery">閉じる</button></div><div id="recoveryDetails"></div><div class="dialog-actions"><button id="recoverResult" class="primary" disabled>この結果を地図へ接続</button></div></dialog>
 </body></html>

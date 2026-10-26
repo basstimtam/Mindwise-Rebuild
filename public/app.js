@@ -1,6 +1,8 @@
 import {createSourcesUi} from './sources.js';
 import {createNumbersUi} from './numbers.js';
 import {createRecoveryUi} from './recovery.js';
+import {createExchangeUi} from './exchange.js';
+import {reconcileAiState} from './ai-state.js';
 import {rebaseDraft,parentCandidates,selectionAfterChange} from './editing.js';
 const $ = (q, parent = document) => parent.querySelector(q);
 const $$ = (q, parent = document) => [...parent.querySelectorAll(q)];
@@ -16,6 +18,7 @@ const detailDrafts = new Map(), relationDrafts = new Map();
 const sourcesUi=createSourcesUi({api,getNode:node,change,toast});
 const recoveryUi=createRecoveryUi({api,el,toast,onRecovered:async result=>{state=result.state;aiRun=result.run;render();await refreshAnalysis();await pollAi();},onUncertain:async()=>{state=await api('/api/state');render();await refreshAnalysis();await pollAi();}});
 const numbersUi=createNumbersUi({el,button,field,getState:()=>state,getAnalysis:currentAnalysis,getSelected:()=>selected,choose});
+createExchangeUi({api,el,toast,getState:()=>state,onImported:async result=>{state=result;detailDrafts.clear();relationDrafts.clear();aiThreads={};freshConversationTargets.clear();localStorage.setItem('mindwise.threads','{}');selected=state.nodes[0]?.id||null;domain='';query='';$('#search').value='';analysis=null;render();await refreshAnalysis();await pollAi();},onUncertain:async()=>{state=await api('/api/state');render();await refreshAnalysis();await pollAi();}});
 let analysis = null, analysisTarget = null, analysisSequence = 0, analysisFetch = null, analysisAt = 0, analysisError = '', reviewedArtifact = null, verificationPending = false;
 function currentAnalysis() { return analysis?.revision === state.revision && analysisTarget === (selected || '') ? analysis : null; }
 function verificationText(id) { return ({verified:'現物確認済み',stale:'変更後の再確認が必要',missing:'成果物が見つかりません',conflict:'仕様の衝突を解決してください',unverified:'受入は未確認'})[currentAnalysis()?.verificationById?.[id]?.status] || '現物との照合待ち'; }
@@ -325,14 +328,16 @@ async function pollAi() {
  polling = true;
  try {
   const response = await api('/api/ai/events');
-  aiRun = response.run || aiRun;
-  if(aiRun)state.runs=[...state.runs.filter(r=>r.id!==aiRun.id),aiRun];
-  aiEvents = response.events || [];
-  if (response.revision !== undefined && response.revision !== state.revision) {
-   state = await api('/api/state');
+  const observed=await reconcileAiState(state,response,()=>api('/api/state'));
+  if(observed.state!==state) {
+   state=observed.state;
    if (!node()) selected = state.nodes[0]?.id || null;
    render();
   }
+  aiRun = observed.run;
+  if(aiRun)state.runs=[...state.runs.filter(r=>r.id!==aiRun.id),aiRun];
+  aiEvents = observed.events;
+  for(const [targetId,threadId] of Object.entries(aiThreads))if(!state.runs.some(r=>r.targetId===targetId&&r.threadId===threadId))delete aiThreads[targetId];
   if (aiRun?.threadId && aiRun?.targetId && !freshConversationTargets.has(aiRun.targetId)) aiThreads[aiRun.targetId] = aiRun.threadId;
   const box = $('#aiMessages'), oldScroll = box.scrollHeight - box.scrollTop - box.clientHeight < 50;
   box.replaceChildren();
@@ -355,7 +360,7 @@ async function pollAi() {
    proposal?.artifacts?.forEach(a=>box.append(button(`成果物案を読む：${a.name}`,()=>show(a.name,a.content),'artifact-button')));
    proposal?.children?.forEach(a=>box.append(button(`枝の追加案を読む：${a.title}`,()=>show(a.title,a.body),'artifact-button')));
   }
-  for(const item of state.runs.filter(r=>r.mode!=='settings'&&['partial','interrupted','failed'].includes(r.status)))box.append(button(`${item.inputs?.find(n=>n.id===item.targetId)?.title||title(item.targetId)} の部分結果を照合`,()=>recoveryUi.open(item.id),'artifact-button'));
+  for(const item of state.runs.filter(r=>r.mode!=='settings'&&(['partial','interrupted','failed','reconciled'].includes(r.status)||r.resultRecovery)))box.append(button(`${item.inputs?.find(n=>n.id===item.targetId)?.title||title(item.targetId)} の${item.resultRecovery?'照合済み結果を確認':'部分結果を照合'}`,()=>recoveryUi.open(item.id),'artifact-button'));
   if(aiRun?.fixture)box.append(el('p','conflict-note','この実行は故障試験用の保存応答です。Codexの実制作ではありません。'));
   if (aiRun?.recovery) box.append(el('p', 'small-note', aiRun.recovery));
   aiRun?.artifacts?.forEach((artifact,index)=>box.append(button(`成果物を読む：${artifact.path.split('/').at(-1)}`,()=>openArtifact(aiRun.id,index),'artifact-button')));
@@ -385,8 +390,6 @@ $('#newConversation').onclick = () => { if (selected) { freshConversationTargets
 $('#allDomains').onclick = () => { domain = ''; render(); }; $('#search').oninput = e => { query = e.target.value; renderDomains(); renderView(); $('#modelSummary').textContent = `表示 ${nodes().length} 対象 / 全 ${state.nodes.length} 対象 · 保存版 ${state.revision}`; };
 $$('.tabs button').forEach(b => b.onclick = () => { view = b.dataset.view; localStorage.setItem('mindwise.view', view); render(); }); $('#detailTab').onclick = () => panel('detail'); $('#aiTab').onclick = () => panel('ai'); $('#addNode').onclick = () => addNode(!!node()); $('#undo').onclick = () => change([{ type: 'undo' }]); $('#fit').onclick = fit; $('#zoomIn').onclick = () => { camera.scale = Math.min(2.5, camera.scale * 1.2); renderView(); }; $('#zoomOut').onclick = () => { camera.scale = Math.max(.25, camera.scale / 1.2); renderView(); };
 $('#backup').onclick = async () => { try { const result = await api('/api/backup', {}); toast(`バックアップを保存しました${result.path ? '：' + result.path : ''}`); } catch (e) { toast(e.message, true); } };
-$('#export').onclick = async () => { try { const data = await api('/api/export'), url = URL.createObjectURL(new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' })), a = el('a'); a.href = url; a.download = `mindwise-${new Date().toISOString().slice(0,10)}.json`; a.click(); setTimeout(() => URL.revokeObjectURL(url), 1000); } catch (e) { toast(e.message, true); } };
-$('#import').onclick = () => $('#importFile').click(); $('#importFile').onchange = async e => { const file = e.target.files[0]; if (!file) return; try { if (file.size > 10 * 1024 * 1024) throw new Error('10 MB以下の交換ファイルを選んでください'); const data = JSON.parse(await file.text()); if (!confirm('交換データを読み込みます。既存データとの扱いはサーバーで検査します。続けますか？')) return; state = await api('/api/import', {state:data,baseRevision:state.revision,operationId:crypto.randomUUID()}); selected = state.nodes?.[0]?.id || null; analysis = null; render(); await refreshAnalysis(); toast('読み込みました。取込元の承認状態は実行権限にはなりません。'); } catch (e) { toast(e.message, true); } finally { e.target.value = ''; } };
 $('#historyButton').onclick = async () => { try { const response = await api('/api/history'), list = Array.isArray(response) ? response : response.history || state.history || [], host = $('#historyList'); host.replaceChildren(); for (const item of list.slice(0, 100)) { const row = el('div', 'history-item'); row.append(el('small', '', `版 ${item.revision ?? '—'} · ${item.at || item.timestamp || item.createdAt || ''}`), el('div', '', item.summary || JSON.stringify(item.ops || item.operation || item, null, 2))); host.append(row); } if (!list.length) host.append(el('p', 'muted', '変更履歴はまだありません。')); $('#historyDialog').showModal(); } catch (e) { toast(e.message, true); } }; $('#closeHistory').onclick = () => $('#historyDialog').close();
 async function boot() { try { const session = await api('/api/session'); token = session.token; state = await api('/api/state'); aiThreads = Object.fromEntries(state.runs.filter(r=>r.threadId && r.targetId).map(r=>[r.targetId,r.threadId])); if (!node()) selected = state.nodes[0]?.id || null; $('#connectionText').textContent = 'このPCの作業データへ接続中'; render(); if (state.nodes.length && view === 'map') fit(); try { const status = await api('/api/ai/status'); $('#aiStatus').textContent = status.message || status.status || (status.available ? 'Codex 接続可能' : '制作を開始すると接続します'); } catch { $('#aiStatus').textContent = 'Codex接続は未確認です'; } await pollAi(); setInterval(pollAi, 2000); } catch (e) { $('#connectionText').textContent = '接続できません'; $('#saveState').textContent = '○ 未接続'; $('#view').append(empty('作業データへ接続できません', e.message, button('再接続', () => location.reload(), 'primary'))); toast(e.message, true); } }
 $('#closeArtifact').onclick = () => $('#artifactDialog').close();

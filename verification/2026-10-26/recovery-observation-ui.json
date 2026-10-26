@@ -1,0 +1,15 @@
+{
+  "kind": "recovery-ui-observation",
+  "actualCodexCalls": 0,
+  "modelMutation": false,
+  "stages": [
+    {
+      "stage": "completed-receipt",
+      "text": "回復試験：保存後に停止した制作\n\n保存版 48 のモデルと現物を照合しました。現物の再作成・上書きやCodexの再実行は行いません。\n\n故障試験用の保存応答です。Codexの実制作の証拠ではありません。\n\nこの実行は照合済みです。現物の受入確認は別です。\n\n接続の受領：保存版 48。\n\nrecovery-check.md · 現物一致\n\nartifacts/974c8232-193a-4e15-9b0a-69c740ddb0e8/recovery-check.md\n\n指紋と現物の本文"
+    },
+    {
+      "stage": "held-missing",
+      "text": "回復試験：現物欠落で保留\n\n保存版 48 のモデルと現物を照合しました。現物の再作成・上書きやCodexの再実行は行いません。\n\n故障試験用の保存応答です。Codexの実制作の証拠ではありません。\n\n回復を保留しています。保存済みの状態と現物を保持しています。\n\n全成果物の現物が提案時の指紋と一致していません。再作成・上書きはしていません。\n\n制作時から対象・仕様・出所・数値等の文脈が変わっています。\n\nrecovery-check.md · 現物一致\n\nartifacts/42125fa8-e54c-4138-967e-700448d74153/recovery-check.md\n\n指紋と現物の本文\nmissing-check.md · 現物なし\n\nartifacts/42125fa8-e54c-4138-967e-700448d74153/missing-check.md\n\nENOENT: no such file or directory, lstat 'C:\\Users\\basst\\Dropbox\\AI Project\\16.Mindwise-Rebuild\\artifacts\\42125fa8-e54c-4138-967e-700448d74153\\missing-check.md'\n\n指紋と現物の本文"
+    }
+  ]
+}

@@ -1,0 +1,114 @@
+[
+  {
+    "at": "2026-10-26T02:24:41.973Z",
+    "stage": "undone",
+    "revision": 3,
+    "ids": [
+      "exchange-same",
+      "exchange-removed"
+    ],
+    "activeRuns": 0,
+    "archiveCount": 2,
+    "sourceHash": "d51902fb1484cebafce02df32f51a331e49de2630c1fd145fa22dc9d8e4b2897",
+    "exportSchema": 2,
+    "exportBytes": 21478,
+    "inputSha256": "5fe5455f1d3a7f05c0b745e3b20759d4b3beed79c935c3a922e7691c12ec1edb",
+    "inputMtime": 1792981316894.0344,
+    "mainRevision": 48,
+    "mainNodes": 14,
+    "originalArtifactSha256": "8cd9650051d851cb3f8c3fd270fa78c5a0b6269bd895b3daee37608ae8869edf",
+    "actualCodexCalls": 0
+  },
+  {
+    "at": "2026-10-26T02:25:58.102Z",
+    "stage": "roundtrip",
+    "revision": 4,
+    "ids": [
+      "exchange-same",
+      "exchange-added"
+    ],
+    "activeRuns": 0,
+    "archiveCount": 4,
+    "sourceHash": "d51902fb1484cebafce02df32f51a331e49de2630c1fd145fa22dc9d8e4b2897",
+    "exportSchema": 2,
+    "exportBytes": 44496,
+    "inputSha256": "5fe5455f1d3a7f05c0b745e3b20759d4b3beed79c935c3a922e7691c12ec1edb",
+    "inputMtime": 1792981316894.0344,
+    "mainRevision": 48,
+    "mainNodes": 14,
+    "originalArtifactSha256": "8cd9650051d851cb3f8c3fd270fa78c5a0b6269bd895b3daee37608ae8869edf",
+    "actualCodexCalls": 0
+  },
+  {
+    "at": "2026-10-26T02:26:59.279Z",
+    "stage": "response-rechecked",
+    "revision": 5,
+    "ids": [
+      "exchange-same",
+      "exchange-added"
+    ],
+    "activeRuns": 0,
+    "archiveCount": 5,
+    "sourceHash": "d51902fb1484cebafce02df32f51a331e49de2630c1fd145fa22dc9d8e4b2897",
+    "exportSchema": 2,
+    "exportBytes": 59866,
+    "inputSha256": "5fe5455f1d3a7f05c0b745e3b20759d4b3beed79c935c3a922e7691c12ec1edb",
+    "inputMtime": 1792981316894.0344,
+    "mainRevision": 48,
+    "mainNodes": 14,
+    "originalArtifactSha256": "8cd9650051d851cb3f8c3fd270fa78c5a0b6269bd895b3daee37608ae8869edf",
+    "actualCodexCalls": 0
+  },
+  {
+    "at": "2026-10-26T02:28:03.235Z",
+    "stage": "restarted",
+    "revision": 5,
+    "ids": [
+      "exchange-same",
+      "exchange-added"
+    ],
+    "activeRuns": 0,
+    "archiveCount": 5,
+    "sourceHash": "d51902fb1484cebafce02df32f51a331e49de2630c1fd145fa22dc9d8e4b2897",
+    "exportSchema": 2,
+    "exportBytes": 59866,
+    "inputSha256": "5fe5455f1d3a7f05c0b745e3b20759d4b3beed79c935c3a922e7691c12ec1edb",
+    "inputMtime": 1792981316894.0344,
+    "mainRevision": 48,
+    "mainNodes": 14,
+    "originalArtifactSha256": "8cd9650051d851cb3f8c3fd270fa78c5a0b6269bd895b3daee37608ae8869edf",
+    "actualCodexCalls": 0
+  },
+  {
+    "at": "2026-10-26T02:33:48.742Z",
+    "stage": "final",
+    "revision": 5,
+    "ids": [
+      "exchange-same",
+      "exchange-added"
+    ],
+    "activeRuns": 0,
+    "archiveCount": 5,
+    "sourceHash": "d51902fb1484cebafce02df32f51a331e49de2630c1fd145fa22dc9d8e4b2897",
+    "exportSchema": 2,
+    "exportBytes": 60275,
+    "inputSha256": "5fe5455f1d3a7f05c0b745e3b20759d4b3beed79c935c3a922e7691c12ec1edb",
+    "inputMtime": 1792981316894.0344,
+    "mainRevision": 48,
+    "mainNodes": 14,
+    "originalArtifactSha256": "8cd9650051d851cb3f8c3fd270fa78c5a0b6269bd895b3daee37608ae8869edf",
+    "actualCodexCalls": 0,
+    "numericValue": 4800,
+    "sourceHashes": {
+      "src/store.mjs": "8a53144f29010c1f7ef12949af9f2619979c1c6ebaf7a41fe8dc940233541f8a",
+      "src/exchange.mjs": "134cecb296618491740cbf1fb2d7d56065825232d297b0e82186c07de2cdf130",
+      "src/server.mjs": "8b21ff3e418c165c5de239fc9c691f00ca0a3004ebf0026e66410f8b5bbbff46",
+      "src/codex.mjs": "ee3d0c60d415619f1e50ee274c63bb9a19913d56249dd82baf03b32de38ff54e",
+      "public/app.js": "442c6c16a4723bc7de7c54f75146b6515522b1d8e09d58943d0f93ee2064dea6",
+      "public/exchange.js": "71c9051342f997fdd56cf24566701c2c859a66bd8d4f0c762b033cda3915c0d6",
+      "public/ai-state.js": "69882a41e7bc33c977f82bd66da6610036c105d900985edbedfa42770976a4b5",
+      "public/sources.js": "9854079fa23d2beb180cc9b2f61e525c2c3298b088daf61e190514c8a50e16e8",
+      "public/index.html": "e54ff10f59c69f95a9eed9897c80b900d5ffd28d8eb8edef564ce9b3f6a6ccfe"
+    }
+  }
+]

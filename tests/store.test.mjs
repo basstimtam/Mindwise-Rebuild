@@ -42,7 +42,7 @@ test('import rejects unknown shape, duplicate IDs, and strips foreign verificati
   const {store}=fixture(t);const state={schemaVersion:1,nodes:[{id:'a'}],links:[]};
   assert.throws(()=>store.importState({baseRevision:0,operationId:'i',state:{...state,bogus:3}}),/未対応/);
   assert.throws(()=>store.importState({baseRevision:0,operationId:'j',state:{...state,nodes:[{id:'a'},{id:'a'}]}}),/重複/);
-  store.importState({baseRevision:0,operationId:'k',state});assert.equal(store.getState().nodes.length,1);
+  const preview=store.previewImport({baseRevision:0,state});store.importState({baseRevision:0,operationId:'k',state,signature:preview.signature});assert.equal(store.getState().nodes.length,1);
 });
 test('loopback API rejects cross-origin and missing token writes',async t=>{
   const {store,root}=fixture(t);const ai={status:()=>({connected:false}),events:()=>[],start:()=>({}),interrupt:()=>({}),close:()=>{}};
@@ -54,7 +54,8 @@ test('loopback API rejects cross-origin and missing token writes',async t=>{
   assert.equal((await fetch(app.url+'/api/change',{...options,headers:{...options.headers,'X-Mindwise-Token':session.token,Origin:'https://evil.example'}})).status,403);
   assert.equal((await fetch(app.url+'/api/change',{...options,headers:{...options.headers,'X-Mindwise-Token':session.token}})).status,200);
   const exported=await fetch(app.url+'/api/export').then(r=>r.json());
-  const imported=await fetch(app.url+'/api/import',{...options,headers:{...options.headers,'X-Mindwise-Token':session.token},body:JSON.stringify({baseRevision:1,operationId:'round-trip',state:exported})});
+  const preview=store.previewImport({baseRevision:1,state:exported});
+  const imported=await fetch(app.url+'/api/import',{...options,headers:{...options.headers,'X-Mindwise-Token':session.token},body:JSON.stringify({baseRevision:1,operationId:'round-trip',state:exported,signature:preview.signature})});
   assert.equal(imported.status,200);assert.equal((await imported.json()).nodes[0].id,'a');
 });
 

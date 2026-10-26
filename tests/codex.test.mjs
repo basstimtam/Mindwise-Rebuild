@@ -39,6 +39,14 @@ function setup(t, {resolveMcpOverrides=async()=>[]}={}) {
 const output=()=>({reply:'制作しました',updatedBody:null,decisionReason:'現在の仕様に従った',children:[],artifacts:[{name:'intro.md',content:'現在の仕様の主人公'}]});
 const settings=()=>({reply:'本文から設定案を作成',updatedBody:null,decisionReason:'対象本文に明示された色を設定へ整理',settings:[{key:'色',value:'青'}],children:[],artifacts:[]});
 
+test('import archives a finished conversation and events cannot revive it from process memory',async t=>{
+ const f=setup(t);await f.ai.start({targetId:'a',prompt:'archive test'});f.complete(output());await new Promise(r=>setImmediate(r));assert.equal(f.ai.events().run.threadId,'thread-a');
+ const data={schemaVersion:1,projectId:'foreign',nodes:[{id:'a',body:'foreign model'}],links:[]},baseRevision=f.store.getState().revision,preview=f.store.previewImport({state:data,baseRevision});
+ f.store.importState({state:data,baseRevision,signature:preview.signature,operationId:'import-conversation'});assert.equal(f.ai.events().run,null);assert.deepEqual(f.ai.events().events,[]);assert.equal(f.ai.status().run,null);
+ await assert.rejects(f.ai.start({targetId:'a',prompt:'do not revive',threadId:'thread-a'}),/未登録/);
+ await f.ai.start({targetId:'a',prompt:'new production'});assert.equal(f.requests.filter(r=>r.method==='thread/resume').length,0);assert.match(f.requests.filter(r=>r.method==='turn/start').at(-1).params.input[0].text,/foreign model/);
+});
+
 test('production receives recalculated values and source versions; missing or changed inputs cannot be used as current',async t=>{
  const f=setup(t);
  f.store.change({baseRevision:1,operationId:'numbers',ops:[

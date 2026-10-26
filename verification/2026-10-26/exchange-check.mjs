@@ -1,0 +1,17 @@
+import assert from 'node:assert/strict';
+import {readFileSync,writeFileSync,statSync} from 'node:fs';
+import {createHash} from 'node:crypto';
+import {resolve} from 'node:path';
+const stage=process.argv[2]||'roundtrip',root=process.cwd(),base='http://127.0.0.1:4317',get=async(path,origin=base)=>{const response=await fetch(origin+path);assert.equal(response.status,200,path);return response.json();};
+const state=await get('/api/state'),sources=await get('/api/exchange/sources'),provenance=await get('/api/provenance?targetId=exchange-same'),exported=await get('/api/export');
+assert.equal(state.runs.length,0);assert.equal((await get('/api/ai/events')).run,null);
+assert.deepEqual(state.nodes.map(n=>n.id).sort(),stage==='undone'?['exchange-removed','exchange-same']:['exchange-added','exchange-same']);
+assert.equal(state.nodes.find(n=>n.id==='exchange-same').body,stage==='undone'?'置換前の本文。':'主人公の呼称を「ナギ」に統一。架空の交換試験。');
+const source=provenance.archives.find(a=>a.projectId==='fictional-source-project');assert.ok(source);assert.equal(source.events.find(e=>e.operationId==='fixture-decision').context.inputs[0].body,'元の本文は「ナミ」。');assert.match(source.events.find(e=>e.operationId==='fixture-decision').context.sourceRefs[0].text,/架空資料/);assert.equal(source.runs[0].threadId,'fictional-do-not-resume');
+const input=JSON.parse(readFileSync(resolve(root,'.runtime/exchange-evidence/input.json'),'utf8')),inputCore=structuredClone(input);delete inputCore.archives;
+assert.deepEqual(exported.archives.find(a=>a.sha256===source.sha256).data,inputCore);assert.ok(exported.archives.every(a=>!('archives' in a.data)));
+const main=await get('/api/state','http://127.0.0.1:4316');assert.equal(main.revision,48);assert.equal(main.nodes.length,14);const artifact=await get('/api/artifact?runId=3fcbed02-3e29-47de-b396-b5a2252ecb1d&index=0','http://127.0.0.1:4316');assert.equal(artifact.sha256,'8cd9650051d851cb3f8c3fd270fa78c5a0b6269bd895b3daee37608ae8869edf');
+const calculation=await get('/api/analysis?targetId=fa2f7bcf-ef72-4b39-af97-9c68b0c25e84','http://127.0.0.1:4316');assert.equal(calculation.numbers.byId['fa2f7bcf-ef72-4b39-af97-9c68b0c25e84'].value,4800);
+const observed={at:new Date().toISOString(),stage,revision:state.revision,ids:state.nodes.map(n=>n.id),activeRuns:state.runs.length,archiveCount:sources.length,sourceHash:source.sha256,exportSchema:exported.schemaVersion,exportBytes:Buffer.byteLength(JSON.stringify(exported)),inputSha256:createHash('sha256').update(readFileSync(resolve(root,'.runtime/exchange-evidence/input.json'))).digest('hex'),inputMtime:statSync(resolve(root,'.runtime/exchange-evidence/input.json')).mtimeMs,mainRevision:main.revision,mainNodes:main.nodes.length,originalArtifactSha256:artifact.sha256,actualCodexCalls:0};
+observed.numericValue=4800;observed.sourceHashes=Object.fromEntries(['src/store.mjs','src/exchange.mjs','src/server.mjs','src/codex.mjs','public/app.js','public/exchange.js','public/ai-state.js','public/sources.js','public/index.html'].map(path=>[path,createHash('sha256').update(readFileSync(resolve(root,path))).digest('hex')]));
+const file=resolve(root,'verification/2026-10-26/exchange-workflow.json');let records=[];try{records=JSON.parse(readFileSync(file,'utf8'));}catch{}records.push(observed);writeFileSync(file,JSON.stringify(records,null,2));console.log(JSON.stringify(observed));

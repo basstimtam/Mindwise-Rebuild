@@ -113,6 +113,9 @@ export async function createServer({root=rootDefault,dataDir,port=Number(process
         return json(store.change({baseRevision:state.revision,operationId:input.operationId,ops:[{type:'update',id:node.id,patch:{verified:proof}}]}));
       }
       if(url.pathname==='/api/import' && req.method==='POST') return json(store.importState(await body(req)));
+      if(url.pathname==='/api/import-preview' && req.method==='POST') return json(store.previewImport(await body(req)));
+      if(url.pathname==='/api/exchange/sources' && req.method==='GET') return json(store.archiveList());
+      if(url.pathname==='/api/exchange/source' && req.method==='GET') return json(store.archiveState(url.searchParams.get('sha256')));
       if(url.pathname==='/api/backup' && req.method==='POST') return json(store.backup());
       if(url.pathname==='/api/ai/status' && req.method==='GET') return json(await ai.status());
       if(url.pathname==='/api/ai/events' && req.method==='GET') return json(await ai.events());

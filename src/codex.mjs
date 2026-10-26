@@ -319,8 +319,8 @@ export function createCodexService({ store, root, spawnProcess = spawn, resolveM
   }
 
   return {
-    status() { return { connected: initialized, accountType, active, lastError, mode: 'bounded-text-production', guarantee: '対象の文脈を送信し、構造化応答を検証して枝とテキスト成果物へ反映。任意shell実行なし。', run }; },
-    events() { const state=store.getState(), latest=run || state.runs.at(-1) || null; return { events: buffer.length ? buffer : latest?.events || [], run: latest, revision: state.revision }; },
+    status() { const saved=run?store.getState().runs.find(r=>r.id===run.id):null;return { connected: initialized, accountType, active, lastError, mode: 'bounded-text-production', guarantee: '対象の文脈を送信し、構造化応答を検証して枝とテキスト成果物へ反映。任意shell実行なし。', run:saved||null }; },
+    events() { const state=store.getState(),saved=run&&state.runs.find(r=>r.id===run.id),latest=saved || state.runs.at(-1) || null; return { events: saved&&buffer.length ? buffer : latest?.events || [], run: latest, revision: state.revision }; },
     previewProposal,
     previewRecovery({runId}) {return inspectRecovery(runId).report;},
     recoverResult,

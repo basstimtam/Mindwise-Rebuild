@@ -60,7 +60,7 @@ export function createSourcesUi({api,getNode,change,toast}) {
    const row=el('div','provenance-entry');row.append(el('strong','',`${ref.documentId} · ${labels[ref.status]||ref.status} · ${labels[ref.documentStatus]||ref.documentStatus||''}`),el('p','small-note',`参照時の版 ${ref.revision} / 指紋 ${ref.sha256}`),button('現在の原文へ',()=>void openContracts(ref.documentId,ref.section).catch(e=>toast(e.message,true))));if(ref.text){if(ref.status!=='current')row.append(el('p','conflict-note','以下は現在の原文です。参照時の原文としては扱いません。'));row.append(el('pre','source-excerpt',ref.text));}host.append(row);
   }
   if(!result.sources.references.length)host.append(el('p','small-note','契約への参照は未登録です。'));
-  host.append(el('h3','section-title','採用された変更と理由'));
+  host.append(el('h3','section-title','この保存先の変更と理由（取込前を含む）'));
   for(const entry of result.entries) {
    const row=el('div','provenance-entry');row.append(el('strong','',`保存版 ${entry.revision} · ${{codex:'Codex',owner:'直接操作',unknown:'記録者不明'}[entry.actor]}${entry.undone?' · 取消済み':''}`),el('small','',`${entry.at} · ${entry.operationId}`),el('p','',`理由：${entry.reason||'記録なし・不明（操作差分から理由を推測しません）'}`));
    const details=el('details');details.append(el('summary','','変更前後と参照した入力'));
@@ -72,6 +72,15 @@ export function createSourcesUi({api,getNode,change,toast}) {
   }
   host.append(el('h3','section-title','制作・未採用の提案'));
   for(const run of result.runs) {const row=el('div','provenance-entry');row.append(el('strong','',`${run.startedAt} · ${runLabels[run.status]||'状態未確認'} · 開始時の版 ${run.targetVersion}`),el('p','',`依頼：${run.prompt}`),el('p','',`判断理由：${run.decisionReason||'記録なし・不明'}`));host.append(row);}
+  host.append(el('h3','section-title','交換で保管した出所・判断'));
+  if(result.archives?.length)host.append(el('p','small-note','以下は同じIDを持つ元記録です。現在の対象との内容一致や承認の真正性は保証しません。取込元の申告を閲覧するだけで、制作の再開・権限・現物受入には使いません。'));
+  for(const archive of result.archives||[]) {
+   const row=el('section','provenance-entry');row.append(el('strong','',`元案件 ${archive.projectId||'不明'} · 元保存版 ${archive.revision??'不明'}`),el('small','source-hash',archive.sha256));
+   if(archive.legacy)row.append(el('p','conflict-note','旧形式：元ファイルに変更差分や理由がなければ復元できません。'));
+   for(const event of archive.events.slice(0,100))row.append(el('p','',`元保存版 ${event.revision??'不明'}${event.undone?' · 取消済み':''}：${typeof event.context?.reason==='string'&&event.context.reason.trim()?event.context.reason:'理由の記録なし・不明'}`));
+   if(archive.events.length>100)row.append(el('p','small-note','理由の一覧は先頭100件です。以下の原記録には全件を保持しています。'));
+   const detail=el('details');detail.append(el('summary','',`元の対象・変更詳細 ${archive.events.length}件・実行記録 ${archive.runs.length}件`),el('pre','source-excerpt',JSON.stringify({node:archive.node,events:archive.events,runs:archive.runs},null,2)));row.append(detail);host.append(row);
+  }
   if(!$('#provenanceDialog').open)$('#provenanceDialog').showModal();
  }
  $('#closeProvenance').onclick=()=>$('#provenanceDialog').close();

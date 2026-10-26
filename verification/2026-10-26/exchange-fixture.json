@@ -1,0 +1,14 @@
+{
+  "kind": "fictional-exchange-fixture",
+  "actualCodexCalls": 0,
+  "sourceProjectId": "fictional-source-project",
+  "sourceRevision": 2,
+  "targetRevision": 1,
+  "sourceEvents": 2,
+  "sourceRuns": 1,
+  "targetIds": [
+    "exchange-same",
+    "exchange-removed"
+  ],
+  "inputFile": ".runtime/exchange-evidence/input.json"
+}
