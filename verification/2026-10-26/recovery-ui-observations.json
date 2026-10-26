@@ -1,0 +1,97 @@
+{
+  "fixture": true,
+  "realCodexCalls": 0,
+  "stages": [
+    {
+      "stage": "connect-preview",
+      "at": "2026-10-26T06:54:56.343Z",
+      "ax": "Browser tab: 4, Title: \"Mindwise — 制作の地図\", URL: \"http://127.0.0.1:4317/\".\nThere has been no change in the accessibility tree.\nThe focused UI element is 13 button (expanded) 指紋と現物の本文, Secondary Actions: Collapse"
+    },
+    {
+      "stage": "connected",
+      "at": "2026-10-26T06:54:59.641Z",
+      "ax": "Browser tab: 4, Title: \"Mindwise — 制作の地図\", URL: \"http://127.0.0.1:4317/\".\nThere has been no change in the accessibility tree.\nThe focused UI element is 0 AXWebArea Mindwise — 制作の地図, URL: 127.0.0.1:4317/"
+    },
+    {
+      "stage": "record-only-preview",
+      "at": "2026-10-26T06:55:28.788Z",
+      "ax": "Browser tab: 4, Title: \"Mindwise — 制作の地図\", URL: \"http://127.0.0.1:4317/\".\nThere has been no change in the accessibility tree.\nThe focused UI element is 4 button 閉じる, ID: closeRecovery"
+    },
+    {
+      "stage": "record-only",
+      "at": "2026-10-26T06:55:31.594Z",
+      "ax": "Browser tab: 4, Title: \"Mindwise — 制作の地図\", URL: \"http://127.0.0.1:4317/\".\nThere has been no change in the accessibility tree.\nThe focused UI element is 0 AXWebArea Mindwise — 制作の地図, URL: 127.0.0.1:4317/"
+    },
+    {
+      "stage": "loss-record-preview",
+      "at": "2026-10-26T06:55:41.962Z",
+      "ax": "Browser tab: 4, Title: \"Mindwise — 制作の地図\", URL: \"http://127.0.0.1:4317/\".\nThere has been no change in the accessibility tree.\nThe focused UI element is 4 button 閉じる, ID: closeRecovery"
+    },
+    {
+      "stage": "loss-record",
+      "at": "2026-10-26T06:55:42.286Z",
+      "ax": "Browser tab: 4, Title: \"Mindwise — 制作の地図\", URL: \"http://127.0.0.1:4317/\".\nThere has been no change in the accessibility tree.\nThe focused UI element is 0 AXWebArea Mindwise — 制作の地図, URL: 127.0.0.1:4317/"
+    },
+    {
+      "stage": "record-only-final-status",
+      "at": "2026-10-26T06:56:22.940Z",
+      "ax": "Browser tab: 4, Title: \"Mindwise — 制作の地図\", URL: \"http://127.0.0.1:4317/\".\nThe following is a diff from the previous accessibility tree with ~ and + representing changed and added elements, respectively. Removed elements are summarized by ID range.\nRemoved element IDs: 228-229, 231-233, 239, 241-242, 244-260\n+\t\t\t273 text 回復画面試験：通常の接続 · 版 3\n+\t\t\t274 text 現在の有効設定と出所を使って制作します。\n+\t\t\t275 text 回復画面試験：取消と後続編集を保つ · モデルの受領を照合し、実行記録を回復しました。現物の受入は別です。\n+\t\t\t\t276 text status · 15:53:52\n+\t\t\t\t277 text 回復画面試験：取消と後続編集を保つ の制作を開始\n+\t\t\t\t278 text message · 15:53:52\n+\t\t\t\t279 text 架空の回復画面試験応答です。実Codexの制作ではありません。\n+\t\t\t\t280 text status · 15:53:52\n+\t\t\t\t281 text 制作結果を接続しました。受入確認は別です\n+\t\t\t\t282 text error · 15:53:52\n+\t\t\t\t283 text 架空試験：モデル受領後、終端記録前に停止\n+\t\t\t\t284 text 制作判断の理由：A5/A9の保存境界を固定応答で調べるための架空資料。\n+\t\t\t\t285 button 回復画面試験：通常の接続 の照合済み結果を確認\n+\t\t\t\t286 button 回復画面試験：接続受領後に応答失敗 の部分結果を照合\n+\t\t\t\t287 button 回復画面試験：回復記録保存後に応答失敗 の部分結果を照合\n+\t\t\t\t288 button 回復画面試験：取消と後続編集を保つ の照合済み結果を確認\n+\t\t\t\t289 text この実行は故障試験用の保存応答です。Codexの実制作ではありません。\n+\t\t\t\t290 text モデル接続の受領を確認し、実行記録だけを回復しました。元の接続は取消済みです。後続の枝や現物は変更していません。現物の一致 1/1 件。\n+\t\t\t\t291 text 回復前の停止記録：架空試験：モデル受領後、終端記録前に停止\n+\t\t\t\t292 button 成果物を読む：recovery-ui.md\n+\t\t293 text 見積り済み範囲 未見積り · 確認済み重み 0 / 0\n+\t\t294 text 全体完成は未判定 · 重み未定 0 件 · 未見積り領域 1 件 · 同じ成果物は全体で一度だけ集計\n+\t\t\t295 text セッションをつなぐ\n+\t\t\t296 text 回復画面試験：取消と後続編集を保つ · reconciled\n+\t\t\t297 text 故障試験の固定応答。実Codexの制作ではありません。\nThe focused UI element is 77 button Codexと制作 ✧, ID: aiTab"
+    },
+    {
+      "stage": "loss-record-reopened",
+      "at": "2026-10-26T06:56:23.321Z",
+      "ax": "Browser tab: 4, Title: \"Mindwise — 制作の地図\", URL: \"http://127.0.0.1:4317/\".\nThere has been no change in the accessibility tree.\nThe focused UI element is 5 button 閉じる, ID: closeRecovery"
+    },
+    {
+      "stage": "record-repaired",
+      "at": "2026-10-26T06:56:23.660Z",
+      "ax": "Browser tab: 4, Title: \"Mindwise — 制作の地図\", URL: \"http://127.0.0.1:4317/\".\nThere has been no change in the accessibility tree.\nThe focused UI element is 1 AXWebArea Mindwise — 制作の地図, URL: 127.0.0.1:4317/"
+    },
+    {
+      "stage": "loss-done-preview",
+      "at": "2026-10-26T06:56:38.667Z",
+      "ax": "Browser tab: 4, Title: \"Mindwise — 制作の地図\", URL: \"http://127.0.0.1:4317/\".\nThere has been no change in the accessibility tree.\nThe focused UI element is 5 button 閉じる, ID: closeRecovery"
+    },
+    {
+      "stage": "loss-done",
+      "at": "2026-10-26T06:56:39.001Z",
+      "ax": "Browser tab: 4, Title: \"Mindwise — 制作の地図\", URL: \"http://127.0.0.1:4317/\".\nThere has been no change in the accessibility tree.\nThe focused UI element is 1 AXWebArea Mindwise — 制作の地図, URL: 127.0.0.1:4317/"
+    },
+    {
+      "stage": "preserved-later-edit",
+      "at": "2026-10-26T06:57:05.374Z",
+      "ax": "Browser tab: 4, Title: \"Mindwise — 制作の地図\", URL: \"http://127.0.0.1:4317/\".\nThere has been no change in the accessibility tree.\nThe focused UI element is 80 button 対象の詳細, ID: detailTab"
+    },
+    {
+      "stage": "restarted-status",
+      "at": "2026-10-26T06:57:39.326Z",
+      "ax": "Browser tab: 4, Title: \"Mindwise — 制作の地図\", URL: \"http://127.0.0.1:4317/\".\nThere has been no change in the accessibility tree.\nThe focused UI element is 81 button Codexと制作 ✧, ID: aiTab"
+    },
+    {
+      "stage": "final-status",
+      "at": "2026-10-26T06:57:47.446Z",
+      "ax": "Browser tab: 4, Title: \"Mindwise — 制作の地図\", URL: \"http://127.0.0.1:4317/\".\nThere has been no change in the accessibility tree.\nThe focused UI element is 1 AXWebArea Mindwise — 制作の地図, URL: 127.0.0.1:4317/"
+    },
+    {
+      "stage": "restarted-done",
+      "at": "2026-10-26T06:57:47.831Z",
+      "ax": "Browser tab: 4, Title: \"Mindwise — 制作の地図\", URL: \"http://127.0.0.1:4317/\".\nThere has been no change in the accessibility tree.\nThe focused UI element is 5 button 閉じる, ID: closeRecovery"
+    },
+    {
+      "stage": "previous-error-separated",
+      "at": "2026-10-26T06:58:40.152Z",
+      "ax": "Browser tab: 4, Title: \"Mindwise — 制作の地図\", URL: \"http://127.0.0.1:4317/\".\nThere has been no change in the accessibility tree.\nThe focused UI element is 1 AXWebArea Mindwise — 制作の地図, URL: 127.0.0.1:4317/"
+    },
+    {
+      "stage": "final-full",
+      "at": "2026-10-26T06:59:08.268Z",
+      "ax": "Browser tab: 4, Title: \"Mindwise — 制作の地図\", URL: \"http://127.0.0.1:4317/\".\n1 AXWebArea Mindwise — 制作の地図, URL: 127.0.0.1:4317/\n\t2 container\n\t\t3 text m · mindwise 制作の地図  PERSONAL WORKSPACE\n\t\t4 button ◈ プロジェクト全体, ID: allDomains\n\t\t\t5 text ◈\n\t\t\t6 text プロジェクト全体\n\t\t7 text 完成に必要な領域\n\t\t8 container Description: 領域, ID: domains\n\t\t\t9 button 回復UIの架空試験 7\n\t\t\t\t10 text 回復UIの架空試験\n\t\t\t\t11 text 7\n\t\t12 text 探す・つなぐ\n\t\t13 button ▧ 契約と判断の出所, ID: contractsButton\n\t\t14 text field (settable) Description: 枝を検索, ID: search\n\t\t15 text  ローカル保存\n\t\t16 text このPCの作業データへ接続中\n\t\t17 button バックアップ, ID: backup\n\t\t18 button 書き出す, ID: export\n\t\t19 button 読み込む（JSON / .mmap）, ID: import\n\t\t20 button 保管した出所, ID: exchangeSources\n\t21 container\n\t\t22 container\n\t\t\t23 text WORKSPACE  /  MINDWISE REBUILD\n\t\t24 heading 構想から、完成まで。, Value: 1\n\t\t\t25 text 構想から、完成まで。\n\t\t26 text ● 保存済み\n\t\t27 button ↶ 取り消す, Help: モデルの最後の変更を取り消す, ID: undo\n\t\t28 button ＋ 枝をつくる, ID: addNode\n\t\t29 tab group 表示方法\n\t\t\t30 tab (selectable, settable, boolean) ◈ 地図, Value: 0\n\t\t\t31 tab (selectable, settable, boolean) ☷ 階層, Value: 0\n\t\t\t32 tab (selectable, settable, boolean) ▥ 領域, Value: 0\n\t\t\t33 tab (selectable, settable, boolean) ⇢ プロセス, Value: 0\n\t\t\t34 tab (selected, settable, boolean) ▤ タスク, Value: 1\n\t\t\t35 tab (selectable, settable, boolean) ▰ ガント, Value: 0\n\t\t\t36 tab (selectable, settable, boolean) ＃ 数値, Value: 0\n\t\t37 text 全領域\n\t\t38 text いま取り組むこと\n\t\t39 text 作業状態と成果物の確認結果を分けて扱います。\n\t\t40 container Description: 作業画面, ID: view\n\t\t\t41 heading 作業の状態と、成果の確認を分ける, Value: 2\n\t\t\t\t42 text 作業の状態と、成果の確認を分ける\n\t\t\t43 text 「作業完了」でも、受入条件と現物の確認が済むまでは確認済み成果にはなりません。\n\t\t\t44 heading 未着手 7, Value: 3\n\t\t\t\t45 text 未着手 7\n\t\t\t46 button 回復画面試験：通常の接続 回復UIの架空試験 · 未着手 · 受入は未確認\n\t\t\t\t47 text 回復画面試験：通常の接続\n\t\t\t\t48 container\n\t\t\t\t\t49 text 回復UIの架空試験 · 未着手  · 受入は未確認\n\t\t\t50 button 回復画面試験：取消と後続編集を保つ 回復UIの架空試験 · 未着手\n\t\t\t\t51 text 回復画面試験：取消と後続編集を保つ\n\t\t\t\t52 text 回復UIの架空試験 · 未着手\n\t\t\t53 button 回復画面試験：接続受領後に応答失敗 回復UIの架空試験 · 未着手 · 受入は未確認\n\t\t\t\t54 text 回復画面試験：接続受領後に応答失敗\n\t\t\t\t55 container\n\t\t\t\t\t56 text 回復UIの架空試験 · 未着手  · 受入は未確認\n\t\t\t57 button 回復画面試験：回復記録保存後に応答失敗 回復UIの架空試験 · 未着手 · 受入は未確認\n\t\t\t\t58 text 回復画面試験：回復記録保存後に応答失敗\n\t\t\t\t59 container\n\t\t\t\t\t60 text 回復UIの架空試験 · 未着手  · 受入は未確認\n\t\t\t61 button 架空の資料メモ：connect 回復UIの架空試験 · 未着手\n\t\t\t\t62 text 架空の資料メモ：connect\n\t\t\t\t63 text 回復UIの架空試験 · 未着手\n\t\t\t64 button 架空の資料メモ：loss-record 回復UIの架空試験 · 未着手\n\t\t\t\t65 text 架空の資料メモ：loss-record\n\t\t\t\t66 text 回復UIの架空試験 · 未着手\n\t\t\t67 button 架空の資料メモ：loss-done 回復UIの架空試験 · 未着手\n\t\t\t\t68 text 架空の資料メモ：loss-done\n\t\t\t\t69 text 回復UIの架空試験 · 未着手\n\t\t\t70 heading 制作中 0, Value: 3\n\t\t\t\t71 text 制作中 0\n\t\t\t72 heading 再確認待ち 0, Value: 3\n\t\t\t\t73 text 再確認待ち 0\n\t\t\t74 heading 作業完了 0, Value: 3\n\t\t\t\t75 text 作業完了 0\n\t\t76 container\n\t\t\t77 text 表示 7 対象 / 全 7 対象 · 保存版 7\n\t\t\t78 text 同じ対象を、異なる見方で。\n\t\t79 container\n\t\t\t80 button 対象の詳細, ID: detailTab\n\t\t\t81 button Codexと制作 ✧, ID: aiTab\n\t\t\t\t82 text Codexと制作 \n\t\t\t\t83 text ✧\n\t\t84 container aiPanel\n\t\t\t85 text ✧\n\t\t\t86 text 選んだ枝から制作へ\n\t\t\t126 text 回復画面試験：回復記録保存後に応答失敗 · 版 3\n\t\t\t88 text 実行開始時の対象と版を保持します。制作の終了と、成果物の確認済みは別に扱います。\n\t\t\t127 text 現在の有効設定と出所を使って制作します。\n\t\t\t128 text 回復画面試験：回復記録保存後に応答失敗 · 制作結果を保存しました。内容の受入は未確認です。\n\t\t\t91 container aiMessages\n\t\t\t\t129 text status · 15:53:52\n\t\t\t\t130 text 回復画面試験：回復記録保存後に応答失敗 の制作を開始\n\t\t\t\t131 text error · 15:53:52\n\t\t\t\t132 text 架空試験：現物保存後、モデル接続前に停止\n\t\t\t\t133 text 制作判断の理由：A5/A9の保存境界を固定応答で調べるための架空資料。\n\t\t\t\t134 button 回復画面試験：通常の接続 の照合済み結果を確認\n\t\t\t\t135 button 回復画面試験：取消と後続編集を保つ の照合済み結果を確認\n\t\t\t\t136 button 回復画面試験：接続受領後に応答失敗 の照合済み結果を確認\n\t\t\t\t137 button 回復画面試験：回復記録保存後に応答失敗 の照合済み結果を確認\n\t\t\t\t138 text この実行は故障試験用の保存応答です。Codexの実制作ではありません。\n\t\t\t\t139 text 保存済みの応答と現物を照合し、モデルへの接続を回復しました。Codexの再実行・ファイルの再作成はしていません。受入確認は別です。\n\t\t\t\t140 text 回復前の停止記録：架空試験：現物保存後、モデル接続前に停止\n\t\t\t\t141 button 成果物を読む：recovery-ui.md\n\t\t\t105 container aiForm\n\t\t\t\t106 container\n\t\t\t\t\t107 text Codexに依頼すること\n\t\t\t\t\t108 pop up button (collapsed, settable) Codexに依頼すること, Value: この仕様で制作・相談, ID: aiMode, Secondary Actions: Expand\n\t\t\t\t\t\t109 menu\n\t\t\t\t\t\t\t110 (selected) この仕様で制作・相談\n\t\t\t\t\t\t\t111 本文から設定案を作る\n\t\t\t\t112 text この対象で取り組むこと\n\t\t\t\t113 text entry area (settable) この対象で取り組むこと, ID: aiPrompt\n\t\t\t\t114 button (disabled) 中断, ID: interrupt\n\t\t\t\t115 button 制作を始める ↗, ID: sendAi\n\t\t\t116 button 新しい会話で続ける, ID: newConversation\n\t\t117 text 成果の見通し\n\t\t142 text 見積り済み範囲 未見積り · 確認済み重み 0 / 0\n\t\t143 text 全体完成は未判定 · 重み未定 0 件 · 未見積り領域 1 件 · 同じ成果物は全体で一度だけ集計\n\t\t120 container recentRun\n\t\t\t144 text セッションをつなぐ\n\t\t\t145 text 回復画面試験：回復記録保存後に応答失敗 · completed\n\t\t\t146 text 故障試験の固定応答。実Codexの制作ではありません。\n\t\t124 button 領域別の進捗 ↗, ID: progressButton\n\t\t125 button 変更履歴を見る ↗, ID: historyButton\n\nThe focused UI element is 1 AXWebArea Mindwise — 制作の地図, URL: 127.0.0.1:4317/"
+    },
+    {
+      "stage": "restarted-full",
+      "at": "2026-10-26T06:59:08.624Z",
+      "ax": "Browser tab: 4, Title: \"Mindwise — 制作の地図\", URL: \"http://127.0.0.1:4317/\".\n1 AXWebArea Mindwise — 制作の地図, URL: 127.0.0.1:4317/\n\t2 container recoveryDialog\n\t\t3 heading 部分結果と現物を照合, Value: 2\n\t\t\t4 text 部分結果と現物を照合\n\t\t5 button 閉じる, ID: closeRecovery\n\t\t6 container recoveryDetails\n\t\t\t7 heading 回復画面試験：回復記録保存後に応答失敗, Value: 3\n\t\t\t\t8 text 回復画面試験：回復記録保存後に応答失敗\n\t\t\t9 text 保存版 7 のモデルと現物を照合しました。現物の再作成・上書きやCodexの再実行は行いません。\n\t\t\t10 text 故障試験用の保存応答です。Codexの実制作の証拠ではありません。\n\t\t\t11 text この実行は照合済みです。現物の受入確認は別です。\n\t\t\t12 text 接続の受領：保存版 7。\n\t\t\t13 container\n\t\t\t\t14 text recovery-ui.md · 現物一致 artifacts/9455a17d-57f9-4264-ad28-6b4167f333d8/recovery-ui.md\n\t\t\t\t15 button (collapsed) 指紋と現物の本文, Secondary Actions: Expand\n\t\t\t\t\t16 text 指紋と現物の本文\n\t\t17 button (disabled) この結果を地図へ接続, ID: recoverResult\n\nThe focused UI element is 5 button 閉じる, ID: closeRecovery"
+    }
+  ],
+  "note": "初期AXは差分形式で空の段階があります。各PNGを画面原証拠とし、以下のfinal-full/restarted-fullは全文スナップショットです。"
+}

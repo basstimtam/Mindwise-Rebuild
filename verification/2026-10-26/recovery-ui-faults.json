@@ -1,0 +1,23 @@
+[
+  {
+    "at": "2026-10-26T06:55:42.038Z",
+    "kind": "terminal-record-failure",
+    "request": {
+      "runId": "6e3fc551-ed2a-4f53-8ec0-b09f755bb7ba",
+      "signature": "b834e7adb02fc52215f268ac685b601fff22a0b2452f4c95c23eeacb16220610"
+    },
+    "revision": 6,
+    "realCodexCalls": 0
+  },
+  {
+    "at": "2026-10-26T06:56:38.760Z",
+    "kind": "http500-after-recovery-record",
+    "request": {
+      "runId": "9455a17d-57f9-4264-ad28-6b4167f333d8",
+      "baseRevision": 6,
+      "signature": "f1aeb04efcc29e5ee344eeee011fd4c2b33a3778a761ff9be415b9fdb58f349f"
+    },
+    "revision": 7,
+    "realCodexCalls": 0
+  }
+]

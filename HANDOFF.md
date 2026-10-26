@@ -1,41 +1,39 @@
 # HANDOFF — Mindwise Rebuild
 
 - 参照契約: Mindwise Rebuild Rev 2 / ACTIVE
-- 更新: 2026-10-26 15:03 JST
-- 現在地: 有限.mmap読込と原ZIP/対応表/未対応の保管を実装。架空モデルの実画面を読込〜原本取出し/取消/再読込/再起動まで確認。全製品未完成。
-- GitHub: https://github.com/basstimtam/Mindwise-Rebuild （origin / codex/rebuild）。今回開始点8f26394。最新commitはGit logとoriginを照合。新情報は16と新版GitHubへ保存。旧15のDB/設定/履歴/未完作業は未使用。
+- 更新: 2026-10-26 16:00 JST
+- 現在地: 部分制作の回復適用UIを隔離した架空モデルで一巡。通常接続/取消後の記録だけ回復/接続受領後と回復記録保存後のHTTP500→再照合/通常server再起動後を確認。回復済みの状態と過去の停止記録を分離表示。全製品未完成。
+- GitHub: https://github.com/basstimtam/Mindwise-Rebuild （origin / codex/rebuild）。今回開始点49d0cbb。最新commitはGit logとoriginを照合。新情報は16と新版GitHubへ保存。旧15のDB/設定/履歴/未完作業は未使用。
 - セッション: 変更不要。同じチャットで継続できる。オーナーは切替が適切な区切りなら指定し終了を明示するよう指示。上限やセッション変更後も本書とGit/現物を照合して再開する。
 
 ## 今回の差分
 
-- Push済み8f26394/cleanと確認画面4316の保存版48/14対象を照合。HANDOFFのA9有限.mmap読込を継続した。GOAL/DESIGNは変更なし、全Aを維持。
-- referencesの入口から形式資料を確認。許可済みのMindManagerインストール先JPN/Mindjet.mmapとJPN/Whats New.mmapを読取専用で選定し、31/40 Topic・各1関係・前者の浮動1を独立調査/.NET ZIP/XMLとも照合。両方notes/tasksは0。原ZIP/全文をGitへ再配布せず、オーナー実案件の受入へ換算しない。
-- Node標準だけで有限なZIP/XML profile 1を実装。1MiB/256項目/総展開16MiB/Document4MiB/XML要素5万・深さ128/Topic500・関係1000。暗号化/分割/ZIP64/未知方式/越境/重複/リンク/境界・CRC・実展開長不一致/DTD/ENTITY等を拒否し、ディスクへ展開しない。
-- 表示親子/表題/ノート文字列/TaskPercentageの計画進捗を対応。元Map/Topic OIdから安定IDを生成。浮動枝は独立し元所属を記録。領域/具体化/状態/成果受入を推定せず、線は「関連」として依存/工程/適用へしない。日付/時刻/タイムゾーン/式/テーマ/書式/添付等は未対応として全原ZIPと一覧に保管する。
-- 既存の全置換preview・保存版/内容/run照合・原子保存・再送・取消を共用。公開形式2に閲覧専用sourceDocumentを追加し、原ZIP bytes/指紋/対応表/未対応を保つ。枝の出所に元Topic IDを表示し、保管した原.mmapを指紋照合して取り出せる。外部参照の取得/実行はしない。
-- 独立レビューでノート内のRelationshipを実際の線にする反例を確認。オーナーへ事前報告してMap/Relationships/Relationshipだけを対象へ補正。XML閉じタグ/非XML空白/コメントの反例も拒否。限定再レビューに残る具体的なP1/P2なし。全製品の受入ではない。
-- 架空モデル4317でpreview→読込2→本文/階層/浮動枝/計画進捗42と出所→原.mmap取出し→越境拒否→取消3→取出した原本を再読込4→再起動後4を実画面/APIで照合。原bytes/hash/mtimeを保ち、保管4件/稼働run0。試験後4317は停止した。
-- 元4316は最新版で再起動し、保存版48/14対象/4800円/元の現物hash不変を確認。実Codex呼出0、追加費用/購入/認証/PC設定・権限変更なし。
+- Push済み49d0cbb/cleanと確認画面4316の保存版48/14対象を照合。HANDOFFのA5/A9回復適用UIを継続した。GOAL/DESIGNは変更なし、全Aを維持。
+- 新しい `.runtime/recovery-ui-workflow` に4件の固定応答/専用現物を用意し、制作の保存境界で停止した状態を再現。通常の実画面から差分/影響/現物を見て接続し、版4→5。受領2を取消して後続編集した別対象は、記録だけの回復で版5/本文/子0をそのまま保持。
+- モデル接続受領後・回復記録保存前に故障を注入。画面がHTTP500後に受領6を再照合し「実行記録だけを回復」へ変更。操作しても版6/子と受領各1件を保持。回復記録保存後にもHTTP500を返し、画面の再照合が版7/done/再適用無効へ収束した。
+- 回復成功後の現在状態に過去のrun.errorが連結される表示を発見し、オーナーへ事前に報告。保存記録とeventsは変更せず、completed/reconciledかつ回復済みのときだけ「回復前の停止記録」へ分離。失敗中のエラー表示は維持した。製品の変更はpublic/app.jsの表示2行で、回復保存方式は変更していない。
+- 故障serverを停止し通常serverで再起動。実画面と別API/実bytesで版7/7対象/各受領1件/取消対象の子0/他3件の子各1/全文と原hash/mtime不変を照合。過去エラー分離とdone操作無効も再確認。初期AX記録は空差分の段階があり、一次PNGと最終全文snapshotで範囲を明記した。
+- 限定した独立レビューで具体的な残るP1/P2なし。96試験中95成功/1skip/失敗0。可逆的な表示修正の実証は実画面で行い、試験件数を増やすためのテストは加えていない。
+- 元4316の保存版48/14対象/4800円/元の現物hashを全段階で保持。既存missing-check.mdは作り直していない。実Codex呼出0、追加費用/購入/認証/PC設定・権限変更なし。試験4317は照合後停止した。
 
 ## 証拠
 
 | 証拠 | 確認した範囲 |
 |---|---|
-| verification/2026-10-26/mmap-tests.txt | 最新96件中95成功/1skip/失敗0。skipは従来のWindowsファイルsymlink権限なし、権限変更なし |
-| tests/mmap.test.mjs・tests/fixtures/mmap.mjs | 架空の本文/階層/計画進捗/浮動/未解決線、元ID、XML/ZIP拒否、ノート内の構造偽装、原本不変/再送/取消/再交換/再起動、HTTP認可/データ限定。新規8件 |
-| references/MMAP_IMPORT_PROFILE.md | 形式対応/未対応、上限、保管範囲、原本と参考標本の区別 |
-| verification/2026-10-26/mmap-installed-samples.mjs・json | 許可済みの正確な2原本だけを読取。bytes/hash/mtimeと件数を照合。原ZIP/全文を含まず、notes/tasks/実案件の受入は未実証 |
-| verification/2026-10-26/mmap-fixture.mjs・json | 専用架空書籍。実Codex呼出0/実案件・契約承認ではない。原ファイルは.runtime/mmap-evidence |
-| verification/2026-10-26/mmap-ui.json・mmap-*-ui.png | preview/本文/階層/計画進捗42/出所/原ZIP取出し/越境拒否/取消/再読込/再起動後の画面原証拠 |
-| verification/2026-10-26/mmap-check.mjs・mmap-workflow.json | 読込2/取消3/再読込4/再起動4、原ZIP/hash/mtime/出所保管と元4316版48/14対象/現物の保持を別APIから照合 |
-| verification/2026-10-26/mmap-final-check.mjs・json | 最終コードの変換APIは保存を伴わず、元4316版48/14対象/4800円/契約approvedと現物hashを保持。製品ソース指紋も記録 |
+| verification/2026-10-26/recovery-ui-tests.txt | 最終の96件中95成功/1skip/失敗0。skipは従来のWindowsファイルsymlink権限なし、権限変更なし |
+| verification/2026-10-26/recovery-ui-fixture.mjs・json | 新規隔離DB/4件の固定応答。既存DBのreset拒否、実Codex呼出0。原ファイルのbytes/hash/mtimeと取消後の全文を固定 |
+| verification/2026-10-26/recovery-ui-server.mjs・faults.json | 故障専用/実AI開始拒否。接続受領後terminal前とterminal保存後HTTP500の2境界。通常起動に使わない |
+| verification/2026-10-26/recovery-ui-*.png・observations.json | 画面原証拠。通常preview/接続、取消済み受領/記録回復、500後のrecord-only/done無効、後続本文、再起動、過去エラー分離。初期AXは差分、final-full/restarted-fullは全文 |
+| verification/2026-10-26/recovery-ui-check.mjs・workflow.json | 版4→5→5→6→6→7→再起動7を独立APIと現物で照合。受領重複/子重複なし、取消と後続編集、原bytes/hash/mtime、元4316の版48/4800円/契約approvedを保持 |
 
-前の公開交換と保存後HTTP500のUI再確認はexchange-*、回復UIの保留/回復済み受領はrecovery-observation-ui.json、構造の実画面一巡はstructure-completion-ui.json、実Codex制作はnumbers-*と2026-10-25を参照。今回の架空素材/付属形式標本を実Codex制作・オーナー成果受入へ換算しない。
+前の有限.mmap読込/原ZIP保持はmmap-*とreferences/MMAP_IMPORT_PROFILE.md、公開交換と保存後HTTP500はexchange-*、欠落保留はrecovery-observation-ui.json、構造一巡はstructure-completion-ui.json、実Codex制作はnumbers-*と2026-10-25を参照。今回の固定応答を実Codexの制作/故障からの全回復・オーナー成果受入へ換算しない。
 
 ## 起動・継続地点
 
-- 通常の確認URL: http://127.0.0.1:4316 、保存先 `.runtime/spec-progress-workflow`。保存版48/14対象。今回は最新版で再起動し到達確認済み。次回も到達を確認し、必要ならREADMEどおり起動。
-- 今回の.mmap試験: ポート4317、保存先 `.runtime/mmap-workflow`。保存版4/3対象/関連1/保管4件/稼働run0。照合後停止済み。PowerShellでPORT=4317/MINDWISE_DATA_DIRを上記へ指定し `node src/server.mjs` で再開。元の4316モデルへ試験を上書きしていない。
+- 通常の確認URL: http://127.0.0.1:4316 、保存先 `.runtime/spec-progress-workflow`。保存版48/14対象。到達と最新画面を確認済み。次回も到達を確認し、必要ならREADMEどおり起動。
+- 今回の回復UI試験: ポート4317、保存先 `.runtime/recovery-ui-workflow`。保存版7/7対象/4runs。照合後停止済み。PowerShellでPORT=4317/MINDWISE_DATA_DIRを上記へ指定し `node src/server.mjs` で通常再開。recovery-ui-server.mjsは故障専用で通常起動に使わない。fixture再実行は既存DBをresetせず拒否する。
+- 試験run: 通常4a6780bf-811d-413c-9891-85880a10417a、取消後の記録だけa1dbd513-0711-46a7-807b-120738e57a44、接続受領後失敗6e3fc551-ed2a-4f53-8ec0-b09f755bb7ba、回復記録保存後失敗9455a17d-57f9-4264-ad28-6b4167f333d8。専用recovery-ui.md各1件。各モデル受領は1件、取消ケースの子は0、他は各1。全て架空素材/会話IDなし。
+- 前の.mmap試験 `.runtime/mmap-workflow` は保存版4/3対象/関連1/保管4件/稼働run0で保持。元の4316や前の4317試験DBへ上書きしていない。
 - 架空原本/拒否試料/ブラウザ取出コピーは `.runtime/mmap-evidence`。原本fictional.mmapのSHA-256は `5d8075eb810c6f5cd87c1a74945671e04d49f99d9665b8a431126cc8a6d43d87`。取出コピーdownloaded.mmapも同bytes。ファイル名の違いにより別の変換記録として保管されるが、Topic IDは不変。
 - 前の交換試験データ `.runtime/exchange-workflow` は版5/2対象/保管5件のまま。4317を今回の保存先と共用しただけで、旧試験DBを上書きしない。exchange-ui-server.mjsは故障専用で通常起動に使わない。
 - 元数値タスク: fa2f7bcf-ef72-4b39-af97-9c68b0c25e84。資料子2af665d2-8eb8-448c-aeb2-00a6b510b605、sharedとrelates_toを保持。式hours * rateは4時間×1200円/時間=4800円。
@@ -51,18 +49,18 @@
 | A2 | 資料/タスク/数値付き追加〜削除/取消/復元下書き保存の実画面、交換取消 | 自由配置の実操作と実用確認 |
 | A3 | 共有/局所例外/衝突/影響、AI設定採用、数値参照と回復の事前影響 | AIの関係/例外編集、実案件一巡 |
 | A4 | 共通7表示、対象保持、数値式と元値への往復、階層ボタン、取込対象も階層/タスク共通 | 全編集操作、実用規模 |
-| A5 | 実制作/再開/中断、設定/出所/計算値の実利用、部分結果の実API回復と状態の実画面 | 回復適用のUI、制作口拡張と実案件反復 |
+| A5 | 実制作/再開/中断、設定/出所/計算値の実利用、部分結果の照合/回復適用と受領後500の実画面 | 制作口拡張と実案件反復、実Codex故障からの全連鎖 |
 | A6 | 出所/入力/理由/差分と再開、交換で原記録保全/再閲覧、原.mmapへ戻れる | 知識訂正・未整理の主題化、保管判断を現在制作へ採用する一般運用 |
 | A7 | 必須成果/重み/現物確認/重複除去/未見積り/数値鮮度 | 実案件の範囲固定・通常運用照合 |
 | A8 | 関連失効/競合/中断、受領後停止と取消/後続編集、交換の原子性/競合 | 広い実案件の故障/例外一巡 |
-| A9 | backup/空先復元、中断/再起動保持、専用テキスト回復、交換の出所保全と故障UI、有限.mmap読込/原ZIP保持 | 回復適用UI、媒体喪失、実原本受入、日時/式等の未対応、書戻し/マージ |
+| A9 | backup/空先復元、中断/再起動保持、専用テキスト回復適用/受領後失敗のUI、交換の出所保全と故障UI、有限.mmap読込/原ZIP保持 | 媒体喪失、実原本受入、日時/式等の未対応、書戻し/マージ |
 | A10 | ゲーム型/短編型/数値/回復/交換の架空検証 | 三分野表現・許可実案件の全連鎖 |
-| A11 | 有限な実制作・構造/交換/読込の実画面と回復実API | 通常手順の基準線・規模・負担/性能比較 |
+| A11 | 有限な実制作・構造/交換/読込/回復の実画面 | 通常手順の基準線・規模・負担/性能比較 |
 | A12 | root/HTTP/成果物/契約/交換/原ZIPの境界、独立Git | 最終の案件登録/導入/停止確認 |
 
 ## 次の一手
 
-A5/A9に残る部分制作回復の適用UIを、隔離した架空データで一巡する。通常の接続回復、元の受領がある記録だけの回復、保存後HTTP失敗→受領照合を実画面で確認し、モデル/現物/受領が二重にならないことを別APIでも照合する。既存4316の保留用missing-check.mdを作り直さず、新しい専用の試験保存先と架空ファイルで行う。固定応答と実Codex、試験操作とオーナー受入を分ける。
+A3/A5のAIによる明示関係/局所例外の編集を、現在の設定案と同様に未採用案→差分/影響確認→共通変更口の採用/取消へ接続する。対象範囲・関係の意味/方向・理由と出所を固定し、表示親子から優先を推定せず、未解決の衝突/循環と非対象を保つ。実Codex/実画面の確認は隔離した新版素材で行い、費用/権限を広げない。今回済んだ回復UIを再度最初から試すことを次作業にしない。
 
 その後もAIの関係/例外編集、知識訂正/未整理の主題化、三分野/許可実案件/通常手順と規模比較を全Aから落とさない。.mmapのオーナー選定実原本は未登録で、付属標本を代用した受入にはしない。親/兄弟フォルダを探さない。
 

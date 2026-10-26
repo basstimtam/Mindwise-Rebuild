@@ -281,7 +281,7 @@ function renderAiTarget() {
  $('#interrupt').disabled = !executing;
  if(numbersUnresolved&&$('#aiMode').value!=='settings')$('#aiSpecStatus').textContent='関連する数値が未解決です。数値表示で欠損・単位・出所・鮮度を確認してください。';
  if($('#aiMode').value==='settings'&&!unresolved)$('#aiSpecStatus').textContent='選択中の本文と設定から案を作ります。差分と影響を確認してから採用できます。';
- if (aiRun) $('#aiStatus').textContent = `${title(aiRun.targetId)} · ` + ({connecting:'Codexへ接続中',running:'制作中',applying:'制作結果を保存中',completed:'制作結果を保存しました。内容の受入は未確認です。',failed:'制作に失敗しました',interrupted:'前回の制作は中断しています。自動再送していません。',needs_review:'対象が更新されたため、元の版への提案として保存しています。',partial:'部分結果があります。自動再送していません。',reconciled:'モデルの受領を照合し、実行記録を回復しました。現物の受入は別です。'}[aiRun.status] || aiRun.status) + (aiRun.error ? `：${aiRun.error}` : '');
+ if (aiRun) $('#aiStatus').textContent = `${title(aiRun.targetId)} · ` + ({connecting:'Codexへ接続中',running:'制作中',applying:'制作結果を保存中',completed:'制作結果を保存しました。内容の受入は未確認です。',failed:'制作に失敗しました',interrupted:'前回の制作は中断しています。自動再送していません。',needs_review:'対象が更新されたため、元の版への提案として保存しています。',partial:'部分結果があります。自動再送していません。',reconciled:'モデルの受領を照合し、実行記録を回復しました。現物の受入は別です。'}[aiRun.status] || aiRun.status) + (aiRun.error && !(aiRun.resultRecovery&&['completed','reconciled'].includes(aiRun.status)) ? `：${aiRun.error}` : '');
  if(aiRun?.status==='proposed')$('#aiStatus').textContent=`${title(aiRun.targetId)} · 設定案は未採用です。差分と影響を確認できます。`;
  if(aiRun?.status==='adopted')$('#aiStatus').textContent=`${title(aiRun.targetId)} · 設定案を採用しました。制作と成果確認はこれからです。`;
 }
@@ -363,6 +363,7 @@ async function pollAi() {
   for(const item of state.runs.filter(r=>r.mode!=='settings'&&(['partial','interrupted','failed','reconciled'].includes(r.status)||r.resultRecovery)))box.append(button(`${item.inputs?.find(n=>n.id===item.targetId)?.title||title(item.targetId)} の${item.resultRecovery?'照合済み結果を確認':'部分結果を照合'}`,()=>recoveryUi.open(item.id),'artifact-button'));
   if(aiRun?.fixture)box.append(el('p','conflict-note','この実行は故障試験用の保存応答です。Codexの実制作ではありません。'));
   if (aiRun?.recovery) box.append(el('p', 'small-note', aiRun.recovery));
+  if (aiRun?.resultRecovery&&['completed','reconciled'].includes(aiRun.status)&&aiRun.error) box.append(el('p','small-note',`回復前の停止記録：${aiRun.error}`));
   aiRun?.artifacts?.forEach((artifact,index)=>box.append(button(`成果物を読む：${artifact.path.split('/').at(-1)}`,()=>openArtifact(aiRun.id,index),'artifact-button')));
   if (oldScroll) box.scrollTop = box.scrollHeight;
   if(!currentAnalysis() || Date.now()-analysisAt > 5000)await refreshAnalysis();

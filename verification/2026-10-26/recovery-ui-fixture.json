@@ -1,0 +1,193 @@
+{
+  "fixture": true,
+  "realCodexCalls": 0,
+  "createdAt": "2026-10-26T06:53:52.293Z",
+  "dataDir": ".runtime/recovery-ui-workflow",
+  "port": 4317,
+  "revision": 4,
+  "cases": [
+    {
+      "kind": "connect",
+      "title": "回復画面試験：通常の接続",
+      "targetId": "recovery-ui-connect",
+      "runId": "4a6780bf-811d-413c-9891-85880a10417a",
+      "expectedChildId": "4a6780bf-811d-413c-9891-85880a10417a:child:0",
+      "expectedBody": "回復で接続する架空の本文。現物の受入確認は別です。",
+      "files": [
+        {
+          "path": "artifacts/4a6780bf-811d-413c-9891-85880a10417a/recovery-ui.md",
+          "sha256": "3f66bdb9f717499c191af442c996b2dfc2ed8c1cdd96f931b3bb47f9d58eae04",
+          "bytes": 180,
+          "mtimeMs": 1792997632243.9958
+        }
+      ]
+    },
+    {
+      "kind": "record-only",
+      "title": "回復画面試験：取消と後続編集を保つ",
+      "targetId": "recovery-ui-record-only",
+      "runId": "a1dbd513-0711-46a7-807b-120738e57a44",
+      "expectedChildId": "a1dbd513-0711-46a7-807b-120738e57a44:child:0",
+      "expectedBody": "回復で接続する架空の本文。現物の受入確認は別です。",
+      "files": [
+        {
+          "path": "artifacts/a1dbd513-0711-46a7-807b-120738e57a44/recovery-ui.md",
+          "sha256": "69379905400f50e70304132b3b9c3e6fb94a1dbda1606b231d1bbdeed583a833",
+          "bytes": 184,
+          "mtimeMs": 1792997632260.1685
+        }
+      ],
+      "originalReceiptRevision": 2
+    },
+    {
+      "kind": "loss-record",
+      "title": "回復画面試験：接続受領後に応答失敗",
+      "targetId": "recovery-ui-loss-record",
+      "runId": "6e3fc551-ed2a-4f53-8ec0-b09f755bb7ba",
+      "expectedChildId": "6e3fc551-ed2a-4f53-8ec0-b09f755bb7ba:child:0",
+      "expectedBody": "回復で接続する架空の本文。現物の受入確認は別です。",
+      "files": [
+        {
+          "path": "artifacts/6e3fc551-ed2a-4f53-8ec0-b09f755bb7ba/recovery-ui.md",
+          "sha256": "3e9432937d940ef10577d36f6a0a35ecc5e6184d061f94ab048dda9f211333c1",
+          "bytes": 184,
+          "mtimeMs": 1792997632278.5945
+        }
+      ]
+    },
+    {
+      "kind": "loss-done",
+      "title": "回復画面試験：回復記録保存後に応答失敗",
+      "targetId": "recovery-ui-loss-done",
+      "runId": "9455a17d-57f9-4264-ad28-6b4167f333d8",
+      "expectedChildId": "9455a17d-57f9-4264-ad28-6b4167f333d8:child:0",
+      "expectedBody": "回復で接続する架空の本文。現物の受入確認は別です。",
+      "files": [
+        {
+          "path": "artifacts/9455a17d-57f9-4264-ad28-6b4167f333d8/recovery-ui.md",
+          "sha256": "a757271d004201f5160698b8f16364eb43864333f9d69704ff10034e210a676c",
+          "bytes": 182,
+          "mtimeMs": 1792997632292.5334
+        }
+      ]
+    }
+  ],
+  "initialNodes": [
+    {
+      "id": "recovery-ui-connect",
+      "parentId": null,
+      "title": "回復画面試験：通常の接続",
+      "body": "回復画面の故障試験用の架空資料。固定応答であり実Codex制作やオーナー受入の証拠ではありません。",
+      "domain": "回復UIの架空試験",
+      "depth": 0,
+      "status": "planned",
+      "progress": 0,
+      "start": "",
+      "due": "",
+      "x": 80,
+      "y": 80,
+      "kind": "concept",
+      "unit": "",
+      "value": null,
+      "formula": "",
+      "artifact": "",
+      "criteria": "",
+      "verified": false,
+      "version": 2,
+      "specs": [],
+      "required": false,
+      "weight": null,
+      "sourceRefs": [],
+      "metricInputs": [],
+      "metricSource": "",
+      "metricFreshness": "unknown"
+    },
+    {
+      "id": "recovery-ui-record-only",
+      "parentId": null,
+      "title": "回復画面試験：取消と後続編集を保つ",
+      "body": "保護する後続編集：接続は取り消した。この本文と、追加し直していない子の状態を保持する。",
+      "domain": "回復UIの架空試験",
+      "depth": 0,
+      "status": "planned",
+      "progress": 0,
+      "start": "",
+      "due": "",
+      "x": 80,
+      "y": 210,
+      "kind": "concept",
+      "unit": "",
+      "value": null,
+      "formula": "",
+      "artifact": "",
+      "criteria": "",
+      "verified": false,
+      "version": 4,
+      "specs": [],
+      "required": false,
+      "weight": null,
+      "sourceRefs": [],
+      "metricInputs": [],
+      "metricSource": "",
+      "metricFreshness": "unknown"
+    },
+    {
+      "id": "recovery-ui-loss-record",
+      "parentId": null,
+      "title": "回復画面試験：接続受領後に応答失敗",
+      "body": "回復画面の故障試験用の架空資料。固定応答であり実Codex制作やオーナー受入の証拠ではありません。",
+      "domain": "回復UIの架空試験",
+      "depth": 0,
+      "status": "planned",
+      "progress": 0,
+      "start": "",
+      "due": "",
+      "x": 80,
+      "y": 340,
+      "kind": "concept",
+      "unit": "",
+      "value": null,
+      "formula": "",
+      "artifact": "",
+      "criteria": "",
+      "verified": false,
+      "version": 2,
+      "specs": [],
+      "required": false,
+      "weight": null,
+      "sourceRefs": [],
+      "metricInputs": [],
+      "metricSource": "",
+      "metricFreshness": "unknown"
+    },
+    {
+      "id": "recovery-ui-loss-done",
+      "parentId": null,
+      "title": "回復画面試験：回復記録保存後に応答失敗",
+      "body": "回復画面の故障試験用の架空資料。固定応答であり実Codex制作やオーナー受入の証拠ではありません。",
+      "domain": "回復UIの架空試験",
+      "depth": 0,
+      "status": "planned",
+      "progress": 0,
+      "start": "",
+      "due": "",
+      "x": 80,
+      "y": 470,
+      "kind": "concept",
+      "unit": "",
+      "value": null,
+      "formula": "",
+      "artifact": "",
+      "criteria": "",
+      "verified": false,
+      "version": 2,
+      "specs": [],
+      "required": false,
+      "weight": null,
+      "sourceRefs": [],
+      "metricInputs": [],
+      "metricSource": "",
+      "metricFreshness": "unknown"
+    }
+  ]
+}
